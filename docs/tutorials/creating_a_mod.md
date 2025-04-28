@@ -8,6 +8,7 @@ tags:
     - Repentance+
 authors:
     - catinsurance
+comments: true
 ---
 
 # Creating a mod

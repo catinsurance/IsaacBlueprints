@@ -1,6 +1,9 @@
 site_name: Library of Isaac
 theme:
   name: material
+  custom_dir: overrides
+  palette:
+    scheme: slate
 markdown_extensions:
   - toc:
       permalink: ⚓︎
