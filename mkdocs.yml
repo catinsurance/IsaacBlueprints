@@ -1,0 +1,49 @@
+site_name: Library of Isaac
+theme:
+  name: material
+markdown_extensions:
+  - toc:
+      permalink: ⚓︎
+      toc_depth: 3
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      check_paths: true
+      url_download: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+plugins:
+  - search:
+      separator: '[\s\-\.\_\·]+'
+  - git-revision-date-localized:
+      fallback_to_build_date: true
+      type: date
+  - tags:
+      enabled: true
+      tags: true
+      tags_allowed:
+        - Beginner friendly
+        - Intermediate
+        - Advanced
+        - Code snippet
+        - Tutorial
+        - Video
+        - Lua
+        - No Lua
+        - Sprites
+        - XML
+        - Repentance
+        - Repentance+
+        - REPENTOGON

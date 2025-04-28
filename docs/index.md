@@ -1,0 +1,19 @@
+---
+search:
+    boost: -999
+---
+# Home - Library of Isaac
+___
+Modding The Binding of Isaac can be fun, but it can also be complicated and esoteric. While the community documentation is an invaluable resource, there are some hidden bits of knowledge that simply don't have a place there that are still incredibly useful to know. The goal of Library of Isaac is to create a single resource with tutorials on numerous topics, from the nichest interactions to the most common questions. Curated by the community, anyone can contribute: even you!
+
+## Resources
+
+* [wofsauge's community documentation](https://wofsauge.github.io/IsaacDocs/rep/index.html) is the cornerstone of Isaac modding. If you're ever unsure about something, this is a good place to look.
+* [catinsurance's tutorial series](https://www.youtube.com/playlist?list=PLkIbky8_pFUpqAF9l7dh_YsEV-zpJ4q50) covers the basics and not much else. Written versions of these tutorials can be found on this website.
+
+## Project layout
+
+    mkdocs.yml    # The configuration file.
+    docs/
+        index.md  # The documentation homepage.
+        ...       # Other markdown pages, images and other files.
