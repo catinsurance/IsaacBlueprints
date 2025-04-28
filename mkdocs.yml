@@ -3,7 +3,17 @@ theme:
   name: material
   custom_dir: overrides
   palette:
-    scheme: slate
+    # Palette toggle for light mode
+    - scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
 markdown_extensions:
   - toc:
       permalink: ⚓︎
@@ -33,6 +43,8 @@ plugins:
   - git-revision-date-localized:
       fallback_to_build_date: true
       type: date
+  - git-authors:
+      show_email_address: false
   - tags:
       enabled: true
       tags: true
@@ -40,7 +52,6 @@ plugins:
         - Beginner friendly
         - Intermediate
         - Advanced
-        - Code snippet
         - Tutorial
         - Video
         - Lua

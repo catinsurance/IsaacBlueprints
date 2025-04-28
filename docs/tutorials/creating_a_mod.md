@@ -1,4 +1,5 @@
 ---
+comments: true
 tags:
     - Tutorial
     - Beginner friendly
@@ -6,9 +7,6 @@ tags:
     - Video
     - Repentance
     - Repentance+
-authors:
-    - catinsurance
-comments: true
 ---
 
 # Creating a mod
