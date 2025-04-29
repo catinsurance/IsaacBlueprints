@@ -5,7 +5,7 @@ tags:
     - Beginner friendly
     - Repentance
     - Repentance+
-    - Lua
+    - No Lua
 ---
 
 # Dirt color
