@@ -1,4 +1,5 @@
 ---
+article: Dirt color
 comments: true
 tags:
     - Tutorial
@@ -8,7 +9,6 @@ tags:
     - No Lua
 ---
 
-# Dirt color
 Dirt color is the the system which enables a layer in an enemy's `.anm2` to be colored differenlty depending on the color of the ground under it. This is how enemies like Nightcrawlers are able to blend in with the environment. Dirt color is only configured to work automatically for [EntityNPCs](https://wofsauge.github.io/IsaacDocs/rep/EntityNPC.html) and [EntityFamiliars](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html). This tutorial will focus on an enemy, but the process is the exact same for familiars.
 
 ## Making a dirt layer

@@ -1,4 +1,5 @@
 ---
+article: Creating a mod
 comments: true
 tags:
     - Tutorial
@@ -9,7 +10,6 @@ tags:
     - Repentance+
 ---
 
-# Creating a mod
 This tutorial will cover the creation of a basic Isaac mod that replaces a sprite. This tutorial assumes you're using Windows, although the process is largely the same on Linux machines.
 
 ## Video tutorial

@@ -1,4 +1,5 @@
 ---
+article: Controller input
 comments: true
 tags:
     - Tutorial
@@ -8,7 +9,6 @@ tags:
     - Lua
 ---
 
-# Controller input
 Game controllers can complicate detecting arbitrary button presses.
 
 ## Controller detection

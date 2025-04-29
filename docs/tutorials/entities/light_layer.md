@@ -1,4 +1,5 @@
 ---
+article: Light layers
 comments: true
 tags:
     - Tutorial
@@ -8,7 +9,6 @@ tags:
     - No Lua
 ---
 
-# Light layers
 Certain entities make light in the darkness. This is most visible in Mines dark rooms, and with Curse of Darkness. The way this is done is with a **null layer** in the `.anm2` of your Entity.
 
 ## Creating a light layer

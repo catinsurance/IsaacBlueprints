@@ -15,7 +15,8 @@ theme:
         name: Switch to light mode
   features:
   - content.code.copy
-
+extra_css:
+  - stylesheets/extra.css
 markdown_extensions:
   - toc:
       permalink: ⚓︎
@@ -47,6 +48,7 @@ plugins:
       type: date
   - git-authors:
       show_email_address: false
+      sort_authors_by: contribution
   - tags:
       enabled: true
       tags: true
