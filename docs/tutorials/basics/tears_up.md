@@ -16,7 +16,7 @@ Making a simple item like Sad Onion is actually a bit complicated, because the t
 
 The game uses something called [MaxFireDelay](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#maxfiredelay), or tear delay, which is the minimum amount of game updates (30 game updates per second) before another tear can be fired. You can find more information about it [here, on the wiki](https://bindingofisaacrebirth.wiki.gg/wiki/Tears#Tear_Delay_Calculation).
 
-The in-game display of the tears stat is your **tears per second**, or your fire rate. To get the the tears per second from the MaxFireDelay, use the following:
+The in-game display of the tears stat is your **tears per second**, or your fire rate. To get the tears per second from the MaxFireDelay, use the following:
 ```lua
 local function toTearsPerSecond(maxFireDelay)
   return 30 / (maxFireDelay + 1)

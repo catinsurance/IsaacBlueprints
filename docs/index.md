@@ -2,9 +2,9 @@
 search:
     boost: -999
 ---
-# Home - Library of Isaac
+# Home
 ___
-Modding The Binding of Isaac can be fun, but it can also be complicated and esoteric. While the community documentation is an invaluable resource, there are some hidden bits of knowledge that simply don't have a place there that are still incredibly useful to know. The goal of Library of Isaac is to create a single resource with tutorials on numerous topics, from the nichest interactions to the most common questions. Curated by the community, anyone can contribute: even you!
+Modding The Binding of Isaac can be fun, but it can also be complicated and esoteric. While the community documentation is an invaluable resource, there are some hidden bits of knowledge that simply don't have a place there that are still incredibly useful to know. The goal of Isaac Blueprints is to create a single resource with tutorials on numerous topics, from the nichest interactions to the most common questions. Curated by the community, anyone can contribute: even you!
 
 ## Resources
 
