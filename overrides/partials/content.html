@@ -1,9 +1,8 @@
 {% if page.meta.article %}
     <h1>{{page.meta.article}}</h1>
     <small>
-        <div class="md-source-date">
-            <i class="fa-solid fa-user-group"></i> Contributors: <i>{{ git_page_authors | default('enable mkdocs-git-authors-plugin') }}</i>
-        </div>
+        Authors: {{page.meta.authors}}
+        <br/>
         Tags: {% include "partials/tags.html" %}
     </small>
     <hr/>

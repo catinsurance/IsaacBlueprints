@@ -1,5 +1,6 @@
 ---
 article: Creating a mod
+authors: catinsurance
 comments: true
 tags:
     - Tutorial

@@ -1,4 +1,6 @@
 ---
+article: Changing the tears stat
+authors: catinsurance
 comments: true
 tags:
     - Tutorial
@@ -8,7 +10,6 @@ tags:
     - Lua
 ---
 
-# Changing the tears stat
 Creating an item that gives a simple tears up or down is more complex than it may appear.
 
 ## Explanation

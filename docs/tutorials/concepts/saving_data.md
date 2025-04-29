@@ -1,4 +1,6 @@
 ---
+article: Saving data
+authors: catinsurance
 comments: true
 tags:
     - Tutorial
@@ -8,7 +10,6 @@ tags:
     - Lua
 ---
 
-# Saving data
 Storing and loading data is surprisingly simple, but how you structure your mod's save data leaves a lot to consider.
 
 ## Saving and loading

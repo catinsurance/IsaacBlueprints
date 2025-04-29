@@ -1,5 +1,6 @@
 ---
 article: Controller input
+authors: catinsurance
 comments: true
 tags:
     - Tutorial
