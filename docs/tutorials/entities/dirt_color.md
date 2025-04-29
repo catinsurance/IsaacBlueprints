@@ -14,7 +14,7 @@ Dirt color is the the system which enables a layer in an enemy's `.anm2` to be c
 ## Making a dirt layer
 In the `.anm2` of your enemy, create a layer named `dirt`. This layer should have the part of your spritesheet that should be colored depending on the environment. Make sure that the pixels you want to be differenly colored are different shades of gray, with the lightness depending on how dark you want the color to be.
 
-![The dirt layer in an anm2](../images/dirt_color/dirt_color.png)
+![The dirt layer in an anm2](../assets/dirt_color/dirt_color.png)
 
 As long as the layer is named `dirt`, it will automatically be updated.
 
