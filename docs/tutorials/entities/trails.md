@@ -27,7 +27,7 @@ trail.SpriteScale = Vector.One
 ```
 
 ???+ warning "Warning"
-    Setting the trail's color to black will make it invisible. This is because the trail's sprite is set to blend additively. The blending mode cannot be changed without :modding-repentogon: REPENTOGON.
+    Setting the trail's color to black will make it invisible. This is because the trail's sprite is set to blend additively. The blending mode cannot be changed without :modding-repentogon: [REPENTOGON](https://repentogon.com/).
 
     ```lua
     -- REPENTOGON example to change the blending mode.
