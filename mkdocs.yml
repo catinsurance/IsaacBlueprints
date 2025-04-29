@@ -44,8 +44,11 @@ markdown_extensions:
       alternate_style: true
   - attr_list
 plugins:
+  - include-markdown
   - search:
       separator: '[\s\-\.\_\·]+'
+  - literate-nav:
+      nav_file: summary.md
   - git-revision-date-localized:
       fallback_to_build_date: true
       type: date
