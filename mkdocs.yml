@@ -48,7 +48,7 @@ plugins:
   - search:
       separator: '[\s\-\.\_\·]+'
   - literate-nav:
-      nav_file: summary.md
+      nav_file: navigation.md
   - git-revision-date-localized:
       fallback_to_build_date: true
       type: date

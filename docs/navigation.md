@@ -1,0 +1,14 @@
+- [Home](index.md)
+- Crash course
+    - [Creating a mod](./tutorials/crash_course/creating_a_mod.md)
+    - [Uploading a mod](./tutorials/crash_course/uploading_a_mod.md)
+    - [Passive items](./tutorials/crash_course/passive_item.md)
+- Concepts
+    - ./tutorials/concepts/*
+- Entities
+    - ./tutorials/entities/*
+- Miscellaneous
+    - ./tutorials/miscellaneous/*
+- Shaders
+    - [Shader basics](./tutorials/shaders/shader_basics.md)
+    - [Shader resources](./tutorials/shaders/shader_resources.md)
