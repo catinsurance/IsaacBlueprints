@@ -13,7 +13,7 @@
         3. Creating a familiar.
         4. Creating a projectile variant.
         5. Creating a tear variant.
-    9. Creating a passive item.
+    9. Creating a familiar.
     10. Adding sounds.
     11. Adding music.
     12. Making pocket items.
