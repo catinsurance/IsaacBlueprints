@@ -75,42 +75,42 @@ To add modded entities to Basement Renovator, create a `basementrenovator` folde
 </p>
 
 ???- warning "Mod path info"
-  Basement Renovator will attempt to automatically locate your mods folder, where it'll import every entity configured to show up in Basement Renovator from your active mods. **Before launching Basement Renovator, make sure the mods with the entities you want to make rooms with are enabled.** Afterwards, if those entities still are not appearing anywhere in the Entity Palette (even if you search for their name), it may be because the `InstallFolder` is not set up to point to your mods folder.
+    Basement Renovator will attempt to automatically locate your mods folder, where it'll import every entity configured to show up in Basement Renovator from your active mods. **Before launching Basement Renovator, make sure the mods with the entities you want to make rooms with are enabled.** Afterwards, if those entities still are not appearing anywhere in the Entity Palette (even if you search for their name), it may be because the `InstallFolder` is not set up to point to your mods folder.
 
-  In the same directory as Basement Renovator, you should see a file called `settings.ini` that is generated upon launching the application for the first time. It's a text file containing a few settings.
+    In the same directory as Basement Renovator, you should see a file called `settings.ini` that is generated upon launching the application for the first time. It's a text file containing a few settings.
 
-  You can look into this file to see if the `InstallFolder` setting is equal to the path to your mods folder. Here's how to check:
+    You can look into this file to see if the `InstallFolder` setting is equal to the path to your mods folder. Here's how to check:
 
-  1. Open up `settings.ini` in a text editor like Notepad.
-  2. Look for the `InstallFolder=` setting, and see if the the file path is correct. It should similar to this if it is (though your mods folder path is likely different from mine):
+    1. Open up `settings.ini` in a text editor like Notepad.
+    2. Look for the `InstallFolder=` setting, and see if the the file path is correct. It should similar to this if it is (though your mods folder path is likely different from mine):
 
-  <p align="center">
-    <img src="../../assets/basement_renovator/install_folder_in_options_ini.png" alt="An open settings.ini with the InstallFolder line highlighted" />
-    <br>
-    <i>Note that there should be an extra backslash before every backslash in the file path!</i>
-  </p>
+    <p align="center">
+      <img src="../../assets/basement_renovator/install_folder_in_options_ini.png" alt="An open settings.ini with the InstallFolder line highlighted" />
+      <br>
+      <i>Note that there should be an extra backslash before every backslash in the file path!</i>
+    </p>
 
-  3. **If the file path does not look right,** you must navigate to it and type in the file path.
-      1. Open the game's directory (click the gear on the game in your Library in Steam, hover over Manage, then Browse Local Files).
-      2. Click on the `mods` folder.
-      3. Click on the box holding the file path to copy it as text.
-      4. Paste it after `InstallFolder=` in `settings.ini`, but make sure to add an extra backslash behind every backslash!
+    3. **If the file path does not look right,** you must navigate to it and type in the file path.
+        1. Open the game's directory (click the gear on the game in your Library in Steam, hover over Manage, then Browse Local Files).
+        2. Click on the `mods` folder.
+        3. Click on the box holding the file path to copy it as text.
+        4. Paste it after `InstallFolder=` in `settings.ini`, but make sure to add an extra backslash behind every backslash!
 
-  <p align="center">
-    <img src="../../assets/basement_renovator/install_folder_set.gif" alt="Browse Local Files on steam to get the game directory, then paste that after InstallFolder= and add an extra backslash for every backslash" />
-  </p>
+    <p align="center">
+      <img src="../../assets/basement_renovator/install_folder_set.gif" alt="Browse Local Files on steam to get the game directory, then paste that after InstallFolder= and add an extra backslash for every backslash" />
+    </p>
 
 ???- warning "DLC support"
-  **When Basement Renovator added support for Repentance+, the default DLC that Basement Renovator targets changed.** Some mods decide what versions their entities can show up in manually using a file named `VersionsMod.xml`.
+    **When Basement Renovator added support for Repentance+, the default DLC that Basement Renovator targets changed.** Some mods decide what versions their entities can show up in manually using a file named `VersionsMod.xml`.
 
-  If you're trying to make rooms for a mod that has done this but hasn't added support for Repentance+, **you can manually specify which DLC Basement Renovator is making rooms for by editing your `settings.ini` file.**
+    If you're trying to make rooms for a mod that has done this but hasn't added support for Repentance+, **you can manually specify which DLC Basement Renovator is making rooms for by editing your `settings.ini` file.**
 
-  1. **Navigate to the directory Basement Renovator is in and open the `settings.ini` file in a text editor such as Notepad.** This file is generated upon launching Basement Renovator for the first time.
-  2. **Then, add a new line at the bottom with the text "CompatibilityMode=", and then the name of the DLC you want to target.** In most cases where you're switching off of Repentance+, this should just be "Repentance".
+    1. **Navigate to the directory Basement Renovator is in and open the `settings.ini` file in a text editor such as Notepad.** This file is generated upon launching Basement Renovator for the first time.
+    2. **Then, add a new line at the bottom with the text "CompatibilityMode=", and then the name of the DLC you want to target.** In most cases where you're switching off of Repentance+, this should just be "Repentance".
 
-  <p align="center">
-    <img src="../../assets/basement_renovator/dlc_info.png" alt="CompatibilityMode=Repentance" />
-  </p>
+    <p align="center">
+      <img src="../../assets/basement_renovator/dlc_info.png" alt="CompatibilityMode=Repentance" />
+    </p>
 
 ### Room Editor
 **Select an entity from the Entity Palette and right-click anywhere in the room to place it.** You can press CTRL + G to toggle the grid visuals. You can also left-click and drag to select multiple entities at once.
