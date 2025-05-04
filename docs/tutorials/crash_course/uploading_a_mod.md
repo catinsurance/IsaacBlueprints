@@ -11,6 +11,8 @@ tags:
     - Repentance+
 ---
 
+{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
+
 This tutorial will cover uploading a mod to the Steam Workshop. This tutorial was created with Windows, but there will be instructions for Linux users.
 
 ## Video tutorial

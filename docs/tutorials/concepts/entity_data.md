@@ -10,6 +10,8 @@ tags:
     - Lua
 ---
 
+{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
+
 You may have read the guide on [saving and storing data](./saving_data.md), which covers how to export data to a save file and have it persist between runs. This tutorial covers a similar concept that can be combined with the knowledge of saving data: creating data associated with objects.
 
 ## ``GetData`` and its drawbacks

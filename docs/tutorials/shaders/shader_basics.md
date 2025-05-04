@@ -10,7 +10,9 @@ tags:
     - XML
 ---
 
-Shaders are powerful tools that allow for the creation of many visual effects that would otherwise either not be possible, or be much harder and more tedious to implement.
+{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
+
+Shaders are powerful tools that allow for the creation of many visual effects that would otherwise be much harder or even impossible to implement.
 
 This tutorial covers some shader basics to help you understand what shaders are actually doing under the hood.
 
