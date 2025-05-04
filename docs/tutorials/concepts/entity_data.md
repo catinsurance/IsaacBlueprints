@@ -60,7 +60,7 @@ function dataHolder:GetEntityData(entity)
     -- Here we instantiate the data if it doesn't exist
     if not dataHolder.Data[ptrHash] then
         dataHolder.Data[ptrHash] = {}
-        local entityData = zposData.Data[ptrHash]
+        local entityData = dataHolder.Data[ptrHash]
 
         --[[
             We provide a default value of the entity's pointer to the data.
@@ -70,7 +70,7 @@ function dataHolder:GetEntityData(entity)
             if this is the case, making another table to store the pointer
             may be preferable. 
         --]] 
-        entityData.Pointer - EntityPtr(entity)
+        entityData.Pointer = EntityPtr(entity)
 
         -- You may also add additional initialization steps here
         -- This may include defining default variables for your data:
