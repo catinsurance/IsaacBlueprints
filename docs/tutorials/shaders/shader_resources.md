@@ -5,6 +5,7 @@ comments: true
 tags:
     - Advanced
 ---
+{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 
 A collection of resources helpful for learning shaders.
 

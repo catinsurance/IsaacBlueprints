@@ -3,13 +3,15 @@ search:
     boost: -999
 ---
 # Home
-___
-Modding The Binding of Isaac can be fun, but it can also be complicated and esoteric. While the community documentation is an invaluable resource, there are some hidden bits of knowledge that simply don't have a place there that are still incredibly useful to know. The goal of Isaac Blueprints is to create a single resource with tutorials on numerous topics, from the nichest interactions to the most common questions. Curated by the community, anyone can contribute: even you!
+<img align="right" src="./tutorials/assets/isaacsblueprints.png" />
+Modding The Binding of Isaac can be fun, but it can also be complicated and esoteric. While the community documentation is an invaluable resource, there are some hidden bits of knowledge that simply don't have a place there that are still incredibly useful to know. The goal of Isaac Blueprints is to create a single resource with tutorials on numerous topics, from the nichest interactions to the most common questions.
+
+Curated by the community, anyone can contribute: even you!
 
 ## Crash course
 Isaac Blueprints offers a full series of tutorials to get started with modding. Below is a table of contents:
 
-{% include-markdown "hidden/crash_course_toc.md" %}
+{% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
 
 ## Resources
 
