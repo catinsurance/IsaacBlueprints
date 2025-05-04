@@ -11,11 +11,7 @@ Curated by the community, anyone can contribute: even you!
 ## Crash course
 Isaac Blueprints offers a full series of tutorials to get started with modding. Below is a table of contents:
 
-{%
-    include-markdown "hidden/crash_course_toc.md"
-    start="<!--toc-start-->"
-    end="<!--toc-end-->"
-%}
+{% include-markdown "hidden/crash_course_toc.md" start="<!--toc-start-->" end="<!--toc-end-->" %}
 
 ## Resources
 
