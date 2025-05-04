@@ -1,3 +1,4 @@
+<!--toc-start-->
 ???- info "Crash course table of contents"
     1. Creating a mod.
         1. [Creating the mod.](./tutorials/creating_a_mod.md/)
@@ -28,3 +29,4 @@
     17. Creating a new bomb variant.
     18. Structing your mod.
     19. Conclusion.
+<!--toc-end-->
