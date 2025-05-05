@@ -52,6 +52,11 @@ If two costumes that occupy the same layer are added onto Isaac, only the one wi
 
 If a costume with more than one layer has one of its layers conflicting with another costume and is of the lower priority, the other layers will still be rendered, allowing for a unique mismatch of different sprites on multiple layers.
 
+### Animated costumes
+Animated costumes can be done by adding `_Idle` after the animation name. The animation restarts from the first frame when switching to a different animation (e.g. `HeadRight_Idle` to `HeadDown_Idle`). Make sure to check the *loop* box at the bottom of the animation editor in order for your animation to loop. Standard layer rendering priority still applies, so you can have an animated `head0` layer while having a static `head4` layer.
+
+You can also add `_Overlay` after the animation name to animate on top of the player's animation instead of replacing it. For example, `HeadDown_Overlay` animates on top of the player's `HeadDown` animation, while `HeadDown_Idle` *replaces* the player's `HeadDown` animation.
+
 ## Adding a costume
 All costumes entries are defined in a [costumes2.xml](https://wofsauge.github.io/IsaacDocs/rep/xml/costumes2.html) file, located in the `content` folder at the root of your mod folder. In this folder, there must be a root `costumes` tag. This tag has an `anm2root` property, which should point to the root directory of where your costumes are stored, usually `gfx/characters/`.
 
@@ -104,12 +109,7 @@ There are some additional properties you can add to your `costume` tag for extra
 - `forceBodyColor` defines if a costume will always force the body color to be the defined skin color.
 - `forceHeadColor` defines if a costume will always force the head color to be the defined skin color.
 - `isFlying` defines if the costume is meant for something that grants flight.
-- `hasOverlay` defines is a costume is using an **overlay effect**. Overlay effects let you animate costumes.
-
-???- info "Overlay effects"
-	Overlay effects are for animated costumes. A great example of how to set this up can be found by looking at the second form of the Wavy Cap costume (`resources/gfx/characters/029x_wavycap2.anm2`). This has `_Overlay` animations for animations that should overlay over the head, and `_Idle` animations that should play in place of the head when Isaac is not shooting.
-
-	![Overlay and idle animations](../assets/costumes/overlays.png)
+- `hasOverlay` defines is a costume is using an **overlay effect**, also known as an [animated costume](#animated-costumes).
 
 ### Adding a character-specific costume replacement
 Some characters have unique head shapes or faces, and may require alternate spritesheets for certain costumes in order to make them look natural. These character-specific variants are added through **costume suffix folders**.
