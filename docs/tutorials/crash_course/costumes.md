@@ -57,6 +57,12 @@ Animated costumes can be done by adding `_Idle` after the animation name. The an
 
 You can also add `_Overlay` after the animation name to animate on top of the player's animation instead of replacing it. For example, `HeadDown_Overlay` animates on top of the player's `HeadDown` animation, while `HeadDown_Idle` *replaces* the player's `HeadDown` animation.
 
+Some costumes, like the second form of the Wavy Cap costume (`resources/gfx/characters/029x_wavycap2.anm2`), have both an overlay *and* an idle animation.
+
+<p align="center">
+  <img src="../../assets/costumes/overlays.png" alt="Different animations of the Wavy Cap costume" />
+</p>
+
 ## Adding a costume
 All costumes entries are defined in a [costumes2.xml](https://wofsauge.github.io/IsaacDocs/rep/xml/costumes2.html) file, located in the `content` folder at the root of your mod folder. In this folder, there must be a root `costumes` tag. This tag has an `anm2root` property, which should point to the root directory of where your costumes are stored, usually `gfx/characters/`.
 
