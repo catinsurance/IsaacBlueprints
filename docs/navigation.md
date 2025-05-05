@@ -7,6 +7,7 @@ search:
 - Crash course
     - [Creating a mod](./tutorials/crash_course/creating_a_mod.md)
     - [Uploading a mod](./tutorials/crash_course/uploading_a_mod.md)
+    - [Costumes](./tutorials/crash_course/costumes.md)
     - [Passive items](./tutorials/crash_course/passive_item.md)
 - Basics
     - ./tutorials/basics/*
