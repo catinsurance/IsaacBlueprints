@@ -4,6 +4,8 @@ search:
 ---
 <!-- start -->
 ???- info "Crash course table of contents"
+    The crash course is still a work in progress!
+
     1. Creating a mod.
         1. [Creating the mod.](../tutorials/crash_course/creating_a_mod.md/)
         2. [Uploading a mod.](../tutorials/crash_course/uploading_a_mod.md)
@@ -11,7 +13,7 @@ search:
         4. [Creating a passive item.](../tutorials/crash_course/passive_item.md)
     3. Creating an active item.
     5. Adding to item pools.
-    6. Making costumes.
+    6. [Making costumes.](../tutorials/crash_course/costumes.md)
     7. Making a new character.
     8. Creating entities.
         1. Creating effects.

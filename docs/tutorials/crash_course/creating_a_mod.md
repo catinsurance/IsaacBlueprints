@@ -11,6 +11,8 @@ tags:
     - Repentance+
 ---
 
+{% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
+
 This tutorial will cover the creation of a basic Isaac mod that replaces a sprite. This tutorial assumes you're using Windows, although the process is largely the same on Linux machines.
 
 ## Video tutorial

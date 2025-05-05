@@ -1,6 +1,6 @@
 ---
 article: Costumes
-authors: benevolusgoat
+authors: benevolusgoat, catinsurance
 comments: true
 tags:
     - Tutorial
@@ -11,43 +11,110 @@ tags:
     - REPENTOGON
 ---
 
-Costumes are the extra layers of sprites that are added onto Isaac to change his looks. These can be seen from passive collctibles, on a character such as their hair or other accessories, and other sources. This tutorial will cover how to create and add your own custom costumes
+{% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
+
+Costumes are the extra layers of sprites that are added onto Isaac to change his appearance. Costumes can be given from items, characters, and even directly under some circumstances. This tutorial will cover how to create and add your own custom costumes.
 
 ## Creating a costume
-All costumes require an `.anm2` file. You can learn how to create one here (TODO: ANM2s definitely need their own dedicated crash course page).
+All costumes require a `.anm2` file. When creating your costume, it is easiest to reference, copy, or modify an existing costume from the game, as it will already have all the layers and frames laid out for you. For example, if you're trying to make a costume that gives Isaac a hat, you could reference something like Black Candle's costume (located in `resources/gfx/characters/260_blackcandle.anm2`). You can find costume `.anm2` files inside `resources/gfx/characters/` after [extracting the game's resources](creating_a_mod.md/#extracting-the-games-resources).
 
-When creating your costume, it is best to reference, copy, and/or modify an existing costume from the game as it will already have all the animations and frames laid out for you. You can find them after [extracting the game's resources](creating_a_mod.md/#extracting-the-games-resources) inside `resources/gfx/characters/`.
+Each animation in a costume corresponds to an animation in the player `.anm2` file (`resources/gfx/001.000_player.anm2`). Each keyframe in this animation corresponds to that keyframe of the player. For example, if creating a costume that affects Isaac's body, you will want to create animations for each directional walk animation in the player `.anm2` file, and copy the keyframes from those.
 
-## Costume layers
-All of the game's costumes work by layers. A costume can occupy one or more layers, but each layer can only hold one costume. There are a total of **15 layers**. Below is the list of costumes, their displayed priority in order of top to bottom:
+![An anm2 file set up correctly](../assets/costumes/animation.png)
 
-| Layer-Name | Description |
-|:--|:--|
-|ghost|Reversed for displaying Isaac's ghost upon death|
-|extra|Exclusively used by Mega Mush for the transformation animations, displaying Isaac's regular sprite before growing/after shrinking|
-|top0|Used for wing costumes when walking upwards. Attached to the body's direction, but renders above the head|
-|head(5,4,3,2,1)|Item costumes for the head|
-|head0|Character-specific costumes (e.g. Magdelene's hair)|
-|head|Directly replaces Isaac's head
-|body(0,1)|Item costumes for the body|
-|body|Directly replaces Isaac's body|
-|back|Attached to the head. Exclusively used by the Venus costume for the back view of the hair. Is best seen with a costume that removes the body|
-|glow|Attached to the head. Used for glowing auras behind Isaac's head|
+### Costume layers
+All of the game's costumes work via **layers**. A costume can occupy one or more layers, though each layer can only hold one spritesheet at a time. There are a total of **15 layers**, although mods can only use 13 of these. Additionally, there is a set order of when each layer is rendered. Below is the list of layers that mods can use in order of render priority, from being rendered first to last (layers rendered first will appear *behind* layers rendered last):
+
+![Costume layer render priority chart](../assets/costumes/layer_priority.png)
+
+???- info "Layer render priority"
+	| Layer name | Description |
+	|:--|:--|
+	|glow|Rendered behind the head. Used for glowing auras, such as with items like Mysterious Liquid|
+	|body|Directly replaces Isaac's body|
+	|body0|Rendered over the body|
+	|body1|Rendered over the body|
+	|head|Directly replaces Isaac's head|
+	|head0|Usually character-specific costumes (e.g. Magdalene's hair)|
+	|head1|Rendered over the head|
+	|head2|Rendered over the head|
+	|head3|Rendered over the head|
+	|head4|Rendered over the head|
+	|head5|Rendered over the head|
+	|top0|Used for wing costumes when walking upwards. Attached to the body's direction, but renders above the head|
+	|back|Attached to the head. Exclusively used by the Venus costume for the back view of the hair. Best seen with a costume that removes the body|
+
+[You can find a spreadsheet documenting every costume and the layers they occupy by clicking here.](https://docs.google.com/spreadsheets/d/1NGa3IARRSvs5XF9lxbYWFnbI77xO1m2YYaKEoB6OyVI/edit?gid=0#gid=0)
 
 A costume can have any combinations of these layers. Any layers not a part of this list will not appear on Isaac.
 
-If two costumes that occupy the same layer are added onto Isaac, the one with the highest priority will show. Otherwise, if equal priority, the one that was added most recently will show. Priorities are defined in the `costumes.xml` file.
+If two costumes that occupy the same layer are added onto Isaac, only the one with the highest `priority` will be rendered. If two costumes of equal priority occupy the same layer, then only the one that was added most recently will render. Priorities are defined in the `costumes2.xml` file.
 
-If a costume with more than one layer has one of their layers conflicting with another costume, and the other costumes is prioritized, the other layers will still remain on Isaac, allowing a unique mismatch of different costumes on multiple layers.
+If a costume with more than one layer has one of its layers conflicting with another costume and is of the lower priority, the other layers will still be rendered, allowing for a unique mismatch of different sprites on multiple layers.
 
 ## Adding a costume
-All costumes entries are defined in a [costumes2.xml](https://wofsauge.github.io/IsaacDocs/rep/xml/costumes2.html) file, located in the `content` folder at the root of your mod folder. A tutorial on adding your own costumes are covered [here](https://wofsauge.github.io/IsaacDocs/rep/tutorials/AddingCostumesWithoutLUA.html).
+All costumes entries are defined in a [costumes2.xml](https://wofsauge.github.io/IsaacDocs/rep/xml/costumes2.html) file, located in the `content` folder at the root of your mod folder. In this folder, there must be a root `costumes` tag. This tag has an `anm2root` property, which should point to the root directory of where your costumes are stored, usually `gfx/characters/`.
 
-???+ warning
-    In regards to adding Null costumes via Lua in the tutorial linked above, is it VERY easy to accidentally crash the game. `Isaac.GetCostumeIdByPath` will return `-1` if the costume's path isn't defined in `costumes.xml`. If you attempt to add a costume with an ID of -1 or any ID that doesn't correlate to an existing costume, the game will always crash.
+```xml
+<costumes anm2root="gfx/characters/">
 
-## Adding character-specific costume replacements
-Some characters have unique head shapes or faces, and as such require special variants of a costume in order for it to look more natural on that character. These are added through costume suffix folders. Inside the `resources/gfx/characters/` path, you can have folders named `costumes_` follwed by a defined suffix. Either define `costumeSuffix` in your character's [players.xml](https://wofsauge.github.io/IsaacDocs/rep/xml/players.html?) entry (e.g. `costumeSuffix="mycharacter"`) or use an existing suffix from the vanilla characters. The complete folder name should look something like `costumes_mycharacter`. For reference, the existing vanilla suffixes are:
+</costumes>
+```
+
+When defining a costume inside of a `costumes` root tag, your `costume` is required to have at least a `anm2path` property and a `type` property.
+
+- The `anm2path` tag holds the path to your costume, starting from the `anm2root` property in the root `costumes` tag.
+- The `type` tag tells the game what type of costume you're creating. There are 5 types of costumes:
+	- `passive` costumes will be added when a passive item is added to Isaac's inventory (after Isaac is done holding it over his head), and will be removed automatically if the passive item is lost.
+	- `familiar` costumes function the same as `passive` costumes, but for items defined as familiars in `items.xml`.
+	- `active` costumes will be added when an active item is used, and will be removed automatically upon entering a new room.
+	- `trinket` costumes will be added when a trinket is added to Isaac's inventory (after Isaac is done holding it over his head), and will be removed automatically if the trinket is dropped.
+	- `none` costumes are known as "null costumes", and must be applied manually through code.
+
+```xml
+<costumes anm2root="gfx/characters/">
+    <costume anm2path="some_passive_costume.anm2" type="passive" />
+    <costume anm2path="some_familiar_costume.anm2" type="familiar" />
+    <costume anm2path="some_active_costume.anm2" type="active" />
+    <costume anm2path="some_trinket_costume.anm2" type="trinket" />
+    <costume anm2path="some_null_costume.anm2" type="none" />
+</costumes>
+```
+
+???- info "Applying null costumes"
+	To apply a null costume, you must get its ID using [`Isaac.GetCostumeIdByPath("filePath")`](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getcostumeidbypath), and apply it on the player with [`EntityPlayer:AddNullCostume(costumeId)`](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#addnullcostume).
+
+	**Additionally, `Isaac.GetCostumeIdByPath` will return `-1` if the costume's path isn't defined in `costumes2.xml`. Attempting to add a costume with an ID of -1 or any ID that doesn't correlate to an existing costume will cause the game to crash.**
+
+	```lua
+	-- At the top of your Lua file...
+	local costumeId = Isaac.GetCostumeIdByPath("gfx/characters/some_null_costume.anm2")
+
+	-- Somewhere else in your code...
+	local player = Isaac.GetPlayer(0)
+	player:AddNullCostume(costumeId)
+	```
+
+There are some additional properties you can add to your `costume` tag for extra customization.
+
+- `priority` defines the priority of the costume if it were to have a layer than conflicts with a different costume's layer (see [costume layers](#costume-layers)).
+- `overwriteColor` defines if a costume should override the player's **skin color** with the `skinColor` property.
+- `skinColor` defines [the id](https://wofsauge.github.io/IsaacDocs/rep/enums/SkinColor.html) of the skin color that the player's skin will be changed to.
+- `hasSkinAlt` defines if a costume has alternate spritesheets depending on the **skin color** of the player. These spritesheets should be in the same folder as the original spritesheet, but with a different suffix to its file name. This suffix correspond to the skin color the spritesheet is for. The skin colors are `_black`, `_blue`, `_green`, `_grey`, `_red`, and `_white` (example: a spritesheet at `gfx/characters/costumes/face.png`, with an alternate spritesheet for the red skin color at `gfx/characters/costumes/face_red.png`).
+- `forceBodyColor` defines if a costume will always force the body color to be the defined skin color.
+- `forceHeadColor` defines if a costume will always force the head color to be the defined skin color.
+- `isFlying` defines if the costume is meant for something that grants flight.
+- `hasOverlay` defines is a costume is using an **overlay effect**. Overlay effects let you animate costumes.
+
+???- info "Overlay effects"
+	Overlay effects are for animated costumes. A great example of how to set this up can be found by looking at the second form of the Wavy Cap costume (`resources/gfx/characters/029x_wavycap2.anm2`). This has `_Overlay` animations for animations that should overlay over the head, and `_Idle` animations that should play in place of the head when Isaac is not shooting.
+
+	![Overlay and idle animations](../assets/costumes/overlays.png)
+
+### Adding a character-specific costume replacement
+Some characters have unique head shapes or faces, and may require alternate spritesheets for certain costumes in order to make them look natural. These character-specific variants are added through **costume suffix folders**.
+
+Inside your costumes folder (usually `resources/gfx/characters/`), you can create a folder that houses these costumes for your character. The folder should start with the name `"costume_"`, and end with a suffix defined in [`players.xml`](https://wofsauge.github.io/IsaacDocs/rep/xml/players.html?). Either define `costumeSuffix` in your character's `players.xml` entry (e.g. `costumeSuffix="mycharacter"`), or use an existing suffix from the vanilla characters. The complete folder name should look something like "`costumes_mycharacter`". For reference, the existing vanilla suffixes are:
 
 - shadow (Dark Judas, Tainted Judas)
 - lilith
@@ -57,13 +124,18 @@ Some characters have unique head shapes or faces, and as such require special va
 - forgottensoul
 - lilithb
 
-Within your costume suffix folder, simply place your costume .png file with the exact same name as the costume you wish to replace. The game will automatically handle using this costume sprite instead of the default one for the desired character.
+Within your costume suffix folder, place your alternate `.png` file with the exact same name as the spritesheet you wish to replace. The game will automatically use this spritesheet instead of the default one.
+
+![Alternate spritesheets for costumes](../assets/costumes/alternates.png)
 
 ## Adding a character-specific costume
-There are 3 ways to add a costume such that it will only appear on your own custom character.
+Custom characters use a costume in order to have a different default appearance than Isaac. For example, Cain has a costume for his eyepatch. There are 3 ways to add a costume such that it will only appear on your own custom character.
 
 ### Lua
-This method technically works, but it is not advised, as it can easily be removed by means such as the Mother's Shadow chase/Knife Piece 2 sequence and items that reroll all your items, such as D4. You can add your costume under the `MC_POST_PLAYER_INIT` callback for when your player initializes, and for extra safety, on `MC_POST_NEW_ROOM` in case it was accidentally removed. You may see older mods use this method.
+[As mentioned earlier](#adding-a-costume), you can set up your costume to be a null costume and add it through code. You can add your costume under the `MC_POST_PLAYER_INIT` callback for when your player initializes, and for extra safety, on `MC_POST_NEW_ROOM` in case it was accidentally removed.
+
+???+ warning "Warning"
+	Costumes added this way are not protected from being removed by the Mother's Shadow escape sequence, or by things which reroll your items, such as the D4.
 
 ```lua
 local mod = RegisterMod("My Mod", 1)
@@ -94,9 +166,11 @@ mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.AddCostumeOnNewRoom)
 ```
 
 ### XML (Non-REPENTOGON)
-Defining and adding a costume to a character with this method will ensure that the costume is never removed under any normal circumstances. As there is no method to define our own custom costumes in the [players.xml](https://wofsauge.github.io/IsaacDocs/rep/xml/players.html?) file, we can make do with adding an existing costume and replacing its sprite only if its on our character.
+Using XML to add a costume will ensure it will never be removed by rerolls, or by the Mother's Shadow escape sequence. Vanilla characters get around this by adding a `costume` property with the ID of the costume that the character should have. Because modded costumes do not have IDs, the only solution to this is to use one of vanilla game's player-specific costumes that has the appropriate layers we need, and to replace its spritesheet in our character's [costume suffix folder](#adding-character-specific-costume-replacements).
 
-Inside the `players.xml` file where you have your custom character defined, add the `costume` variable and set it to an existing vanilla null costume. You can get a good idea of the IDs of each null costume through the [NullItemID](https://wofsauge.github.io/IsaacDocs/rep/enums/NullItemID.html) enumeration, or looking in the `costumes2.xml` folder inside the game's extracted resources. In this case, we'll be using Dead Tainted Lazarus' costume.
+Inside the `players.xml` file where you have your custom character defined, add the `costume` property and set it to an existing vanilla null costume. You can get a good idea of the IDs of each null costume through the [NullItemID](https://wofsauge.github.io/IsaacDocs/rep/enums/NullItemID.html) enumeration, or by looking in the `costumes2.xml` folder inside the game's extracted resources.
+
+In this example, we will make a custom costume for our character's hair that uses Flipped Tainted Lazarus' costume as a base, as this costume is never added to other characters in the game through normal means.
 
 ```xml
 <players root="gfx/characters/costumes/"
@@ -109,24 +183,24 @@ Inside the `players.xml` file where you have your custom character defined, add 
 </players>
 ```
 
-From here, you'll want a costumeSuffix folder for your character. Follow the tutorial above for [character-specific costume replacements](costumes.md#adding-character-specific-costume-replacements) for reference, and your costume sprite should be an edit of `character_009b_lazarus2hair.png`.
+Next, we'd create an alternate spritesheet based off of `resources/gfx/characters/character_009b_lazarus2hair.png`, and put that in our costumes suffix files (e.g. `costumes_mycharacter`).
 
 ### XML (REPENTOGON)
-REPENTOGON adds a method to add your own costume through the `modcostume` variable you can put in inside `players.xml`.
+:modding-repentogon: REPENTOGON adds a method to add your own costume through the `modcostume` property you can add to your character inside `players.xml`.
 
-### :fontawesome-solid-code: costumes2.xml {: .subHeader .example_code}
-Define a null costume in `costumes2.xml` by setting the type to "none". Unlike normal circumstances, you'll need to set an ID! This will not overlap with IDs from costumes of other types (passive, familar, active, trinket) or from other mods.
+First, define a null costume in `costumes2.xml`. **Unlike for normal null costumes, you'll need to set an ID!** This will not overlap with IDs from costumes of other types (passive, familar, active, trinket), or from other mods.
 
 ```xml
+<!-- costumes2.xml -->
 <costumes anm2root="gfx/">
     <costume id="0" anm2path="characters/some_null_costume.anm2" type="none" />
 </costumes>
 ```
 
-### :fontawesome-solid-code: players.xml {: .subHeader .example_code}
-Add `modcostume` to your character's `players.xml` entry and set it to the ID you defined for it.
+Then, add `modcostume` to your character's `players.xml` entry, and set it to the ID you defined for the costume.
 
 ```xml
+<!-- players.xml -->
 <players root="gfx/characters/costumes/"
          portraitroot="gfx/ui/stage/"
          nameimageroot="gfx/ui/boss/">
