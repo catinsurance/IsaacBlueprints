@@ -52,6 +52,13 @@ If two costumes that occupy the same layer are added onto Isaac, only the one wi
 
 If a costume with more than one layer has one of its layers conflicting with another costume and is of the lower priority, the other layers will still be rendered, allowing for a unique mismatch of different sprites on multiple layers.
 
+If a costume contains multiple layers with the same name, only one of those layers will be rendered.
+
+## Animated costumes
+Animated head costumes can be done by adding `_Idle` after the animation name. The animation starts from the first frame when switching to a different animation (e.g. HeadRight_Idle to HeadDown_Idle). Make sure to check the *loop* box at the bottom of the program in order for your animation to loop. Standard layer rendering priority still applies, so you can have an animated `head0` layer while having a static `head4` layer.
+
+If you prefer an animated face costume without requiring or replacing Isaac's head, add `_Overlay` after the animation name instead.
+
 ## Adding a costume
 All costumes entries are defined in a [costumes2.xml](https://wofsauge.github.io/IsaacDocs/rep/xml/costumes2.html) file, located in the `content` folder at the root of your mod folder. In this folder, there must be a root `costumes` tag. This tag has an `anm2root` property, which should point to the root directory of where your costumes are stored, usually `gfx/characters/`.
 
