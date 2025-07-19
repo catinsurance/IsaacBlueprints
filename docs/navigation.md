@@ -9,6 +9,7 @@ search:
     - [Uploading a mod](./tutorials/crash_course/uploading_a_mod.md)
     - [Costumes](./tutorials/crash_course/costumes.md)
     - [Passive items](./tutorials/crash_course/passive_item.md)
+	- [Characters](./tutorials/crash_course/character.md)
 - Basics
     - ./tutorials/basics/*
 - Concepts

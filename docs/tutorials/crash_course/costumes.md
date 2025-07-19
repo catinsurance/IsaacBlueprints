@@ -182,9 +182,12 @@ In this example, we will make a custom costume for our character's hair that use
 <players root="gfx/characters/costumes/"
          portraitroot="gfx/ui/stage/"
          nameimageroot="gfx/ui/boss/">
-	<player name="My Character" skin="character_mycharacter.png" hp="6"
+	<player name="My Character" skin="character_mycharacter.png"
+			hp="6"
 			nameimage="playername_mycharacter.png"
-			portrait="playerportrait_mycharacter.png" costume="34" costumeSuffix="mycharacter"
+			portrait="playerportrait_mycharacter.png"
+			costume="34"
+			costumeSuffix="mycharacter"
 			birthright="???" />
 </players>
 ```

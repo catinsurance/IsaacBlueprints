@@ -14,7 +14,7 @@ search:
     3. Creating an active item.
     5. Adding to item pools.
     6. [Making costumes.](../tutorials/crash_course/costumes.md)
-    7. Making a new character.
+    7. [Making a new character.](../tutorials/crash_course/character.md)
     8. Creating entities.
         1. Creating effects.
         2. Creating enemies.
