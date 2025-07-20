@@ -28,24 +28,24 @@ The very first step in creating a character is making an entry for your characte
 
 ![The players.xml of your mod](../assets/characters/players_xml.png)
 
-For every XML file, there is a tag that goes from the start of the file to the end of the file, and multiple "child tags" that act as the individual entries. In this instance, players.xml entries will start with `<players>` and end with `</players>`, while individual character entries are the same but start and end with the `player` tag. Below are explanations of each variable contained within each of these tags
+For every XML file, there is a tag that goes from the start of the file to the end of the file, and multiple "child tags" that act as the individual entries. In this instance, players.xml entries will start with `<players>` and end with `</players>`, while individual character entries are the same but start and end with the `player` tag. Below are explanations of each variable contained within each of these tags.
 
 ???- info "root `players` tag variables"
 	???+ note
-		The variables in the players tag can be changed but should never be removed
+		The variables in the players tag can be changed but should never be removed.
 	| Variable Name | Possible Values | Description |
 	|:--|:--|:--|
-	|root|string|Root path of the character spritesheet. Used with the `skin` variable,|
-	|portraitroot|string|Root path of the character portrait for the vs. screen and stage transition screen. Used with the `portrait` variable,|
-	|nameimageroot|string|Root path of the character's name for the vs. screen. Used with the `nameimage` variable,|
+	|root|string|Root path of the character spritesheet. Used with the `skin` variable.|
+	|portraitroot|string|Root path of the character portrait for the vs. screen and stage transition screen. Used with the `portrait` variable.|
+	|nameimageroot|string|Root path of the character's name for the vs. screen. Used with the `nameimage` variable.|
 
 ???- info "`player` tag variables"
 	???+ note
 		The bare essential variables for creating a character are `name`, `hp`, `skin`, `skinColor`, `nameimage`, and `portrait`. All other variables are optional.
 	| Variable Name | Possible Values | Description |
 	|:--|:--|:--|
-	|name|string|Name of the character (has to match the one in `CharacterMenu.anm2`),|
-	|skin|string|Path of the character spritesheet,|
+	|name|string|Name of the character (has to match the one in `CharacterMenu.anm2`).|
+	|skin|string|Path of the character spritesheet.|
 	|skinColor|int|Default skin color of the character (-1 = all, 0 = white, 1 = black, 2 = blue, 3 = red, 4 = green, 5 = grey).|
 	|nameimage|string|Name for vs. screen.|
 	|portrait|string|Portrait for the vs. screen and for the stage transition screen.|
@@ -75,7 +75,7 @@ For every XML file, there is a tag that goes from the start of the file to the e
 ???- info ":modding-repentogon: REPENTOGON-exclusive `player` tag variables"
 	| Variable Name | Possible Values | Description |
 	|:--|:--|:--|
-	|items|string|This now supports modded items by using the names of the items instead of the ids. Same format as in vanilla, a comma separated list of values (e.g. `items="My Cool Item,My Second Cool Item"`)|
+	|items|string|This now supports modded items by using the names of the items instead of the ids. Same format as in vanilla, a comma separated list of values (e.g. `items="My Cool Item,My Second Cool Item"`).|
 	|heartcontainers|int|Starting empty heart containers (1 = half container, half heart containers can only be filled halfway).|
 	|redhearts|int|Starting red hearts (1 = half heart).|
 	|soulhearts|int|Starting soul hearts (1 = half soul heart).|
@@ -86,7 +86,7 @@ For every XML file, there is a tag that goes from the start of the file to the e
 	|brokenhearts|int|Starting broken hearts (1 = 1 broken heart).|
 	|rottenhearts|int|Starting rotten hearts (1 = 1 rotten heart).|
 	|healthtype|int|The health type the player should start with. The integer corresponds to the [HealthType](https://repentogon.com/xml/achievements.html) enumerator.|
-	|healthlimit|int|The maximum amount of HP the character should be able to have. `1 = 1/2 heart`|
+	|healthlimit|int|The maximum amount of HP the character should be able to have. `1 = 1/2 heart`.|
 	|speedmodifier|float|An inherent offset to the speed stat the character should start with. Base this offset off of Isaac's stats.|
 	|firedelaymodifier|float|An inherent offset to the fire delay stat the character should start with. Base this offset off of Isaac's stats.|
 	|damagemodifier|float|An inherent offset to the damage stat the character should start with. Base this offset off of Isaac's stats.|
