@@ -81,7 +81,7 @@ Your item now exists in the game, but is unobtainable through any legitimate mea
 ### Non-REPENTOGON
 Without REPENTOGON, using the debug console is slightly tedious to enable and use.
 
-1. Open the debug console. It can be opened with the tilde (~) key. If it's not enabled, you can navigate to `Documents/My Games/Binding of Isaac Repentance` (or `Binding of Isaac Repentance+` for Repentance+ users) and open options.ini<br>
+1. Open the debug console. It can be opened with the tilde (~) key. If it's not enabled, you can navigate to `Documents/My Games/Binding of Isaac Repentance` (or `Binding of Isaac Repentance+` for Repentance+ users) and open options.ini. Find EnableDebugConsole and change the 0 to 1 and save the file.<br>
 ![Location of options.ini](../assets/passive_item/options_ini.png)
 ![options.ini opened](../assets/passive_item/options_ini_opened.png)
 2. With the debug console open, type `g` followed by a space, then the name of your item. All collectibles start with the letter `c`, followed by their internal ID number, then their name. Once it appears as the first option in the list, hit ENTER. Hitting ENTER again or ESC will close the debug console. Isaac should now have your new item.<br>
