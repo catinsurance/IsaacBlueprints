@@ -9,6 +9,7 @@ tags:
     - Repentance
     - Repentance+
     - REPENTOGON
+    - XML
 ---
 
 {% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
