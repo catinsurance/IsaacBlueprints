@@ -1,6 +1,6 @@
 ---
-article: Making rooms
-authors: catinsurance
+article: Temporary effects
+authors: benevolusgoat
 comments: true
 tags:
     - Tutorial
@@ -14,7 +14,7 @@ tags:
 TemporaryEffects are an excellent tool to utilize per-player effects that also double as save data handled automatically by the game.
 
 ## Introduction
-The [TemporaryEffects](https://wofsauge.github.io/IsaacDocs/rep/TemporaryEffects.html) class gives access to what is effectively an arbitrary boolean/integer unique to every player that is tied to a collectible, trinket, or null item that can be used for any desired purpose. They can be mistaken for "innate" collectibles or trinkets, which are invisible additions to Isaac's inventory of items, but they are entirely separate things. A `TemporaryEffect` exists for every collectible, trinket, and null item automatically, but do not do anything on their own.
+The [TemporaryEffects](https://wofsauge.github.io/IsaacDocs/rep/TemporaryEffects.html) class gives access to what is effectively an arbitrary boolean/integer unique to every player that is tied to a collectible, trinket, or null item that can be used for any desired purpose. They can be mistaken for "innate" collectibles or trinkets, which are invisible additions to Isaac's inventory of items, but they are entirely separate things. A `TemporaryEffect` exists for every collectible, trinket, and null item automatically, but do not do anything on their own. While booleans and integers and other value types can be assigned to players just fine through [entity data](../concepts/entity_data.md), the unique attribute worth taking advantage of is their ability to be persistent across exiting and continuing the run, meaning **freely accessible run-lasting save data handled entirely by the game**.
 
 ## Viewing TemporaryEffects
 Open the debug console using the tilde (`~`) key and type `debug 12` then ENTER. This will enable the "Player Item Info" debug flag which is helpful for displaying various information on the first player, but this tutorial will be focusing on one specific section to view TemporaryEffects active on the player.
