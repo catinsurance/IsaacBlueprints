@@ -12,7 +12,7 @@ search:
         3. [Costumes.](../tutorials/crash_course/costumes.md)
         4. [Creating a passive item.](../tutorials/crash_course/passive_item.md)
     3. Creating an active item.
-    5. Adding to item pools.
+    5. [Adding to item pools](../tutorials/crash_course/item_pools.md).
     6. [Making costumes.](../tutorials/crash_course/costumes.md)
     7. [Making a new character.](../tutorials/crash_course/character.md)
     8. Creating entities.
