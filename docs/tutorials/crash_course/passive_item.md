@@ -20,7 +20,11 @@ Items are an integral part of the gameplay of The Binding of Isaac. They modify 
 ## Creating your item
 Creating an item is relatively simple. You need only an `items.xml` file and an entry for your item within it.
 
-![The items.xml of your mod](../assets/passive_item/items_xml.png)
+```XML
+<items gfxroot="gfx/items/" version="1">
+    <passive id="1" name="Damage Potion" gfx="damage_potion_item.png" description="It smells like ashes and anger" quality="1" cache="damage" />
+</items>
+```
 
 For every XML file, there is a tag that goes from the start of the file to the end of the file, and multiple "child tags" that act as the individual entries. In this instance, items.xml entries will start with `<items>` and end with `</items>`, while individual item entries have multiple different options depending on the type of item you're creating. The available tag types are `passive`, `active`, `familiar`, and `trinket`. For the purposes of this tutorial, we will be covering using `passive`:
 
