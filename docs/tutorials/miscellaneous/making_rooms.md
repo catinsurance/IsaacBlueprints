@@ -13,7 +13,8 @@ tags:
 ## Introduction
 To create rooms for Isaac, it is standard to use an unofficial room editor application named "Basement Renovator". Although there's an official room editor in the game files, it doesn't work with Repentance or Repentance+, and is much harder to use compared to Basement Renovator. Even the Repentance developers used a modified version of Basement Renovator to make rooms!
 
-Please note that this guide is written for Windows users. There might be extra steps not listed here for Mac or Linux systems.
+???+ warning "Note"
+    This guide is written for Windows users. There might be extra steps not listed here for Mac or Linux systems.
 
 ## Basement Renovator Usage
 
