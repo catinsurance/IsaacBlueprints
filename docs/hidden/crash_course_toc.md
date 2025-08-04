@@ -30,10 +30,7 @@ search:
         3. Creating custom runes.
         4. Creating custom objects.
     13. Creating challenges.
-    14. Creating item wisps.
-    15. Creating abyss locusts.
-    16. Creating new curses.
-    17. Creating a new bomb variant.
-    18. Structing your mod.
-    19. Conclusion.
+    14. Creating new curses.
+    15. Structuring your mod.
+    16. Conclusion.
 <!-- end -->
