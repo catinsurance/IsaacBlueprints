@@ -14,6 +14,10 @@ tags:
 
 Item Pools are the primary method of finding and obtaining your custom collectibles within a run.
 
+## Video tutorial
+(This tutorial covers both Item Pools and Active Items)
+[![Active Items and Item Pools | Youtube Tutorial](https://img.youtube.com/vi/MwsdlW7ZyQ8/0.jpg)](https://youtu.be/MwsdlW7ZyQ8 "Video tutorial")
+
 ## itempools.xml
 Once you have [items defined in an `items.xml` file](../crash_course/passive_item.md) within your mod's `content` folder, you will need to create an [itempools.xml](https://wofsauge.github.io/IsaacDocs/rep/xml/itempools.html) file in the same folder in order to add your collectibles into various item pools.
 

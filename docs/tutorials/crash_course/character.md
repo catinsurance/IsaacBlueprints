@@ -27,7 +27,20 @@ If you wish to reference and use existing files on each character in the vanilla
 ## Creating your character
 The very first step in creating a character is making an entry for your character in the `players.xml` file. This defines everything about the character such as their name, starting items, health, and spritesheets, as well as many other properties.
 
-![The players.xml of your mod](../assets/characters/players_xml.png)
+```XML
+<players root="gfx/characters/costumes/" portraitroot="gfx/ui/stage/" nameimageroot="gfx/ui/boss/">
+    <player name="Gabriel"
+        skin="character_gabriel.png"
+        nameimage="playername_gabriel.png"
+        hp="4"
+        armor="2"
+        keys="1"
+        portrait="playerportrait_gabriel.png"
+        skinColor="-1"
+        items="178"
+    />
+</players>
+```
 
 For every XML file, there is a tag that goes from the start of the file to the end of the file, and multiple "child tags" that act as the individual entries. In this instance, players.xml entries will start with `<players>` and end with `</players>`, while individual character entries are the same but start and end with the `player` tag. Below are explanations of each variable contained within each of these tags.
 
@@ -145,9 +158,37 @@ Tainted characters are "B-Side" versions of an existing character. These are opt
 
 ### `players.xml` changes
 When creating a tainted character, the only change you must make to your new character entry is the addition of the `bSkinParent` variable, usually right next to your character's `name`. Here you put the name of normal character you wish to link to your tainted character.
+
 ???+ note
 	It is recommended to keep your tainted character's name the same as it's normal side. So, if your normal character's name is Gabriel, your tainted version's name should also be Gabriel. This is how it's done in vanilla.
-![The full players.xml of your mod](../assets/characters/players_xml_tainted.png)
+
+```XML
+<players root="gfx/characters/costumes/" portraitroot="gfx/ui/stage/" nameimageroot="gfx/ui/boss/">
+    <player name="Gabriel"
+        skin="character_gabriel.png"
+        nameimage="playername_gabriel.png"
+        hp="4"
+        armor="2"
+        keys="1"
+        portrait="playerportrait_gabriel.png"
+        skinColor="-1"
+        items="178"
+    />
+
+    <player name="Gabriel"
+        skin="character_gabriel_b.png"
+        nameimage="playername_gabriel.png"
+        hp="4"
+        armor="2"
+        keys="1"
+        portrait="playerportrait_gabriel_b.png"
+        skinColor="-1"
+        bSkinParent="Gabriel"
+        costumeSuffix="gabrielb"
+        costume="104"
+    />
+</players>
+```
 
 ### Content anm2 files
 Inside `content/gfx`, when making a tainted character, you will need to copy and rename several anm2s so that the game knows they're for tainted characters. Below is a list of all the available files you can rename and edit:
