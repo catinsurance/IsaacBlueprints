@@ -12,6 +12,8 @@ tags:
     - REPENTOGON
 ---
 
+{% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
+
 Item Pools are the primary method of finding and obtaining your custom collectibles within a run.
 
 ## Video tutorial
