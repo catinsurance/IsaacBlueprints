@@ -43,7 +43,7 @@ For every XML file, there is a tag that goes from the start of the file to the e
 	| name | string | Name of the item. Also used as an identifier for your item. |
 	| description | string | Description of the item as it appears when collected by Isaac. |
 	| gfx | string | Path to the item image. Must be a .png saved at a bit-depth of 32 bits. |
-	| tags | string | Multiple tags must be separated with a space; see below for possible values and descriptions. |
+	| tags | string | Multiple tags must be separated with a space; see [here](https://wofsauge.github.io/IsaacDocs/rep/xml/items.html#tags-documentation) for possible values and descriptions. |
 	| bombs | int | Number of added bombs upon pickup. |
 	| keys | int | Number of added keys upon pickup. |
 	| coins | int | Number of added coins upon pickup. |
@@ -51,12 +51,8 @@ For every XML file, there is a tag that goes from the start of the file to the e
 	| soulhearts | int | Number of added soul hearts upon pickup. |
 	| blackhearts | int | Number of added black hearts upon pickup. |
 	| maxhearts | int | Number of added empty heart containers upon pickup. |
-	| maxcharges | int | When chargetype is set to `timed`, this attribute is used to define the cooldown of the item in frames. |
-	| chargetype | string | Possible values: [normal, timed, special]|
 	| cooldown | int | Number of frames until this item's associated CollectibleEffect is auto-removed if granted. CollectibleEffects are automatically granted by active items on use. |
-	| passivecache | bool | Calls a cache evaluation when picked up (used for acive items, e.g. Mom's Box). |
 	| special | bool | Retired mechanic since Repentance. Used to mark the item as "special", which would have a chance of being rerolled if you saw another special item earlier in the run. |
-	| initcharge | int | How many charges should this active item have when first picked up (e.g. Everything Jar[ ](#){: .reporplus .tooltip .badge }). |
 	| devilprice | int | Heart container cost of the item to purchase in a devil deal. Possible values: ['1','2'] |
 	| shopprice | int | Cent cost of the item to purchase in a shop. |
 	| addcostumeonpickup | bool | True if your item adds a costume upon pickup. This is set automatically if you attach a costume to your item. |
