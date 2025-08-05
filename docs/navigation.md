@@ -8,6 +8,7 @@ search:
     - [Creating a mod](./tutorials/crash_course/creating_a_mod.md)
     - [Uploading a mod](./tutorials/crash_course/uploading_a_mod.md)
     - [Passive items](./tutorials/crash_course/passive_item.md)
+    - [Active items](./tutorials/crash_course/active_item.md)
     - [Item pools](./tutorials/crash_course/item_pools.md)
     - [Costumes](./tutorials/crash_course/costumes.md)
 	- [Characters](./tutorials/crash_course/character.md)
