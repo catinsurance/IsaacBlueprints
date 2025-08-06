@@ -7,14 +7,14 @@ tags:
     - No Lua
 ---
 
-Thanks for showing interest in contributing to the Isaac Blueprints! This guide will serve as a quick start to creating articles, as well as a good formatting example itself.
+Thanks for showing interest in contributing to Isaac Blueprints! This guide will serve as a quick start to creating articles, as well as a good formatting example itself.
 
 ## Contributing
 To get started, **create a fork** of [the Isaac Blueprints repository on Github](https://github.com/catinsurance/IsaacBlueprints). Then, clone this respository to your desktop.
 
 ![Fork repository button](../tutorials/assets/contribution_guide/fork.png)
 
-To start writing an article or making an edit to an existing one, you should first create a branch that contains the changes you'll be making. After that, create a **Markdown file** in an appropriate subfolder within `docs/tutorials`. Isaac Blueprints is built on [Markdown](https://www.markdownguide.org/cheat-sheet/) and [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
+To start writing an article or making an edit to an existing one, you should first create a branch that contains the changes you'll be making. After that, create a **Markdown file** in an appropriate subfolder within `docs/tutorials`. Isaac Blueprints is built using [Markdown](https://www.markdownguide.org/cheat-sheet/) and [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 
 If you want to add images, gifs, or other files to your article, create a new folder within `docs/tutorials/assets` named after your article's name. Use snake_case for naming any new files.
 
