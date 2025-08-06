@@ -30,19 +30,19 @@ tags:
 
 - [ThrowableItemLib](https://github.com/drpandacat/ThrowableItemLib)<br>
 	- Creator: kerkel<br>
-	- Description: Easily create active items and consumables that follow the lift, hide, and throw behavior of items like Bob’s Rotten Head or The Candle.
+	- Description: Easily create active items and consumables that follow the lift, hide, and throw behavior of items like Bob's Rotten Head or The Candle.
 
 ## Videos
 
 - [catinsurance's Repentance Modding Tutorials](https://youtu.be/rukHB48olG8?si=NJYemDUW5CT3eQkp)<br>
 	- Creator: catinsurance<br>
-	- Description: A video tutorial series on modding The Binding of Isaac: Repentance.
+	- Description: A video tutorial series on modding The Binding of Isaac: Repentance. Still applicable for Repentance+.
 
 ## Tools
 
 - [Basement Renovator](https://github.com/Basement-Renovator/basement-renovator)<br>
 	- Creators: budjmt, Zamiel, Tempus<br>
-	- Description: The unofficial room and level editor, making it easy to create rooms and is even used by the game's official staff.
+	- Description: An unofficial room editor, making it easy to create rooms. It was even used to make all base Repentance rooms.
 
 - [Anm2ed](https://github.com/ShweetsStuff/anm2ed)<br>
 	- Creator: ShweetsStuff<br>
@@ -66,8 +66,6 @@ tags:
 
 ## Mods
 
-- [Cat Mod Tools](https://steamcommunity.com/workshop/filedetails/?id=3190954288)<br>
+- :modding-repentogon: [Cat Mod Tools](https://steamcommunity.com/workshop/filedetails/?id=3190954288)<br>
 	- Creator: catinsurance<br>
-	- Description: A collection of mods created with REPENTOGON's ImGui feature to assist with
-	???+ note
-		:modding-repentogon: REPENTOGON-exclusive
+	- Description: A collection of mods created with REPENTOGON's ImGui feature to assist with.
