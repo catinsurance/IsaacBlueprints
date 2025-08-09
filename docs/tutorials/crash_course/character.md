@@ -16,8 +16,9 @@ tags:
 
 Characters are a core element and main attraction of the Binding of Isaac as a whole. This tutorial will cover how to create your own character and how to play as them yourself.
 
-## Video tutorial
+## Video tutorials
 [![Characters | Youtube Tutorial](https://img.youtube.com/vi/y38xp-Hw1H0/0.jpg)](https://youtu.be/y38xp-Hw1H0 "Video tutorial")
+[![Tainted Characters | Youtube Tutorial](https://img.youtube.com/vi/9cDIxoW2XBE/0.jpg)](https://youtu.be/9cDIxoW2XBE "Video tutorial")
 
 ## Getting the required files
 A single character involves numerous files scattered across different folders in your mod. You can download [this template](https://github.com/catinsurance/isaac-character-template) that will have all the required files, which will be referenced throughout this tutorial.
@@ -200,3 +201,69 @@ Inside `content/gfx`, when making a tainted character, you will need to copy and
 |controls.anm2|controls alt.anm2|
 |coop menu.anm2|coop menu alt.anm2|
 |death screen.anm2|death screen alt.anm2|
+
+### Pocket actives
+Tainted characters are commonly associated with having pocket actives, which are active items in Isaac's pocket slot, where cards, pills, and more are stored. If you want to add one to your character, :modding-repentogon: REPENTOGON allows you to use the `pocketActive` variable with a name instead of an item ID, allowing you to put the name of a custom modded item. Without REPENTOGON, it must be added through Lua. This section of the tutorial will follow the
+
+The process of adding the pocket active can be broken down into three easy steps:<br>
+1. Only grant it once when they are first initialized, as it is not necessary otherwise.
+```Lua
+local mod = RegisterMod("Gabriel Character Mod", 1)
+
+--MC_POST_PLAYER_INIT will provide the player as the first and only argument, so we define it here in our function.
+function mod:OnPlayerInit(player)
+
+end
+
+--Triggers when starting a run, a co-op player spawns, when entering the Genesis room, or when continuing a run.
+--The extra `0` at the end is so that it only triggers for regular players, as a variant of 1 is for co-op babies.
+mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, mod.OnPlayerInit, 0)
+```
+2. Getting the IDs needed to check that its our character and that we don't already have the item in our pocket slot.
+```Lua
+local mod = RegisterMod("Gabriel Character Mod", 1)
+
+--Each character has a unique ID, refered to as "PlayerType".
+--This function fetches our character's PlayerType. The `true` at the end is for if this is a tainted character. It's false by default for non-tainteds.
+local TAINTED_GABRIEL = Isaac.GetPlayerTypeByName("Gabriel", true)
+
+--This function returns the ID for our item.
+local HOLY_OUTBURST = Isaac.GetItemIdByName("Holy Outburst")
+
+function mod:OnPlayerInit(player)
+	--EntityPlayer:GetPlayerType() returns the player's PlayerType. Check that it matches our character's PlayerType.
+	if player:GetPlayerType() == TAINTED_GABRIEL
+		--EntityPlayer:GetActiveItem() returns the item ID available in a specific active item slot. Check that it DOES NOT match our item's ID to trigger our code.
+		and player:GetActiveItem(ActiveSlot.SLOT_POCKET) ~= HOLY_OUTBURST
+	then
+
+	end
+end
+
+mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, mod.OnPlayerInit, 0)
+```
+3. Add the active item to the pocket slot, and some extra setup.
+```Lua
+local mod = RegisterMod("Gabriel Character Mod", 1)
+
+local TAINTED_GABRIEL = Isaac.GetPlayerTypeByName("Gabriel", true)
+local HOLY_OUTBURST = Isaac.GetItemIdByName("Holy Outburst")
+--We only ever need to call this once, so we save it here for later.
+local game = Game()
+
+function mod:TaintedGabrielInit(player)
+	if player:GetPlayerType() == TAINTED_GABRIEL
+		and player:GetActiveItem(ActiveSlot.SLOT_POCKET) ~= HOLY_OUTBURST
+	then
+		--EntityPlayer:SetPocketActiveItem(CollectibleType ItemID, integer ActiveSlot, boolean KeepInPools)
+		--We would normally want to set KeepInPools to `false`, but due to a bug, doing so and exiting & continuing your run will crash the game.
+		player:SetPocketActiveItem(HOLY_OUTBURST, ActiveSlot.SLOT_POCKET, true)
+
+		--Since we don't want the item to reappear inside any item pools, we remove it manually.
+		local itemPool = game:GetItemPool()
+		itemPool:RemoveCollectible(HOLY_OUTBURST)
+	end
+end
+
+mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, mod.TaintedGabrielInit, 0)
+```
