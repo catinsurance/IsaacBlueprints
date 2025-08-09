@@ -39,7 +39,7 @@ Below is a brief explanation on the different types of TemporaryEffects that you
 - **<span style="color:rgba(0, 255, 255);">Cyan</span>** text with the `[R]` symbol indicates a TemporaryEffect applied to the room instead of the player. There is no visible difference between a persistent and non-persistent TemporaryEffect for rooms. They function identically to those added to players and exist for the purposes of easier accessibility, however this data cannot be accessed without :modding-repentogon: REPENTOGON.
 - The name of the TemporaryEffect is self-explanatory: They display the name of their respective collectible, trinket, or null item.
 - The number after the `x` is the amount of the TemporaryEffect on the player. This can be any positive or negative integer.
-- The number after the `:` is the cooldown of the effect. It will have no special traits if undefined, thus showing `0`. If a cooldown above zero is defined, the number will be reduced at a rate of 30 per second (once per game tick). Upon reaching zero, the TemporaryEffect will be removed entirely, ignoring the amount of that item's effect added.
+- The number after the `:` is the cooldown of the effect. It will have no special traits if undefined, thus showing `0`. If a cooldown above zero is defined, the number will be reduced by 1 at a rate of 30 per second (once per game tick). Upon reaching zero, the TemporaryEffect will be removed entirely, ignoring the amount of that item's effect that was present.
 
 ### Adding persistence or cooldowns to your items
 For making your item's effect persistent or to add a cooldown, you will need to add the appropriate variable to your item's `items.xml` entry.
