@@ -13,7 +13,7 @@ tags:
 
 {% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
 
-Active items are the only other type of collectible in Isaac apart from passive items. Isaac can usually only hold one active item at a time and they require charges to be activated. This tutorial will branch off of the [passve items page](../crash_course/passive_item.md), so be sure to read that first.
+Active items are items held in the active slot and usually require charge to be used. This tutorial will branch off of the [passive items page](../crash_course/passive_item.md), so be sure to read that first.
 
 ## Video tutorial
 (This tutorial covers both Item Pools and Active Items)
@@ -34,21 +34,21 @@ The process of creating an active item is identical to that of a passive item, r
 		All tags are optional.
 	| Variable Name | Possible Values | Description |
 	|:--|:--|:--|
-	| maxcharges | int | `0` by default. When chargetype is set to `timed`, this attribute is used to define the cooldown of the item in frames. 30 = 1 second. |
-	| chargetype | string | Possible values: [`normal`, `timed`, `special`]. `normal` by default.|
-	| passivecache | bool | `false` by default. Calls a cache evaluation when picked up, as the `cache` flag for active items will only trigger upon item activation. |
+	| maxcharges | int | `0` by default. When chargetype is set to `timed`, this attribute is used to define the cooldown of the item in game ticks. 30 = 1 second. |
+	| chargetype | string | `normal` by default. Possible values: [`normal`, `timed`, `special`].|
+	| passivecache | bool | `false` by default. Calls a cache evaluation when picked up similar to passive items, as typically the `cache` flag for active items will only trigger upon item activation. |
 
 ## Explaining charge types
-There are **three** types of charge an active item can have that affect its method of being charged.
+There are three charge types an active item can have that affect its charging behavior.
 
-- `normal`: The standard, default method of charging. Charges through room clears, battery pickups, and other conventional methods. It's recommended to stick to one of the following charge amounts: [`0`, `1`, `2`, `3`, `4`, `6`, `8`, `12`].<br>![normal active](../assets/active_item/active_normal.gif)
+- `normal`: The standard, default method of charging. Charges through room clears, battery pickups, and other conventional methods. Vanilla only uses max charges of [`0`, `1`, `2`, `3`, `4`, `6`, `8`, `12`], but there is support for any number from 0 to 12.<br>![normal active](../assets/active_item/active_normal.gif)
 - `timed`: Can charge all the same ways `normal` charge type items do. Will automatically fill its chargebar over time.<br>![timed active](../assets/active_item/active_timed.gif)
-- `special`: Cannot be charged through any conventional means. Requires Lua code to charge manually.<br>![special active](../assets/active_item/active_special.gif)
+- `special`: Cannot be charged through any conventional means, and must be charged manually with Lua code.<br>![special active](../assets/active_item/active_special.gif)
 
 ## Coding the active item
 The active item now exists, but does not do anything on its own upon activation. This will require Lua code in order to give it an effect when used. The crucial callback for active items is [ModCallbacks.MC_USE_ITEM](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_use_item).
 
-Inside your `main.lua`, get your active item's ID and create a function attached to a `MC_USE_ITEM` callback.
+Inside your `main.lua`, get your active item's ID and create a function attached to the `MC_USE_ITEM` callback.
 ```Lua
 local mod = RegisterMod("My Mod", 1)
 
@@ -59,7 +59,7 @@ function mod:RedButtonUse(item)
 end
 
 --Will call the mod:RedButtonUse function upon activating our active item.
---Our item's ID is inserted at the end of the AddCallback function as this callback accepts an optional argument
+--Our item's ID is inserted at the end of the AddCallback function, as this callback accepts an optional argument
 --to specify which active item should trigger our code.
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.RedButtonUse, bigRedButton)
 ```
@@ -99,7 +99,7 @@ mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.RedButtonUse, bigRedButton)
 ### Adding charges manually
 If you have a `chargetype` of `special`, you will require the use of [EntityPlayer:SetActiveCharge](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#setactivecharge). If you have :modding-repentogon: REPENTOGON, you can also use [EntityPlayer:AddActiveCharge](https://repentogon.com/EntityPlayer.html#addactivecharge) and set the `Force` argument to `true`.
 
-This snippet of code will loop through the player's inventory of active items, as they can appear in multiple different slots, and increases its charge by 1 every 10 seconds.
+This snippet of code will loop through the player's inventory of active items (active items can appear in [multiple different slots](https://wofsauge.github.io/IsaacDocs/rep/enums/ActiveSlot.html)) and increase each item's charge by 1 every 10 seconds.
 
 ```Lua
 local mod = RegisterMod("My Mod", 1)
