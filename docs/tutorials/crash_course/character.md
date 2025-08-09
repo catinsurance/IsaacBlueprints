@@ -203,7 +203,7 @@ Inside `content/gfx`, when making a tainted character, you will need to copy and
 |death screen.anm2|death screen alt.anm2|
 
 ### Pocket actives
-Tainted characters are commonly associated with having pocket actives, which are active items in Isaac's pocket slot, where cards, pills, and more are stored. If you want to add one to your character, :modding-repentogon: REPENTOGON allows you to use the `pocketActive` variable with a name instead of an item ID, allowing you to put the name of a custom modded item. Without REPENTOGON, it must be added through Lua. This section of the tutorial will follow the
+Tainted characters are commonly associated with having pocket actives, which are active items in Isaac's pocket slot, where cards, pills, and more are stored. If you want to add one to your character, :modding-repentogon: REPENTOGON allows you to use the `pocketActive` variable with a name instead of an item ID, allowing you to put the name of a custom modded item. Without REPENTOGON, it must be added through Lua.
 
 The process of adding the pocket active can be broken down into three easy steps:<br>
 1. Only grant it once when they are first initialized, as it is not necessary otherwise.
