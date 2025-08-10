@@ -42,10 +42,11 @@ Within the mod uploader, you can edit your mod's metadata, which is the data tha
 - **<span style="color: #5f20ff;">1:</span>** This area holds the "Upload Mod" and "View Mod" buttons. "Upload Mod" will upload it to the Steam Workshop with all of your settings, while "View Mod" let's you open the Workshop page in your browser.
 - **<span style="color: #3cf23c;">2:</span>** This allows you to edit the change notes for your release. You can edit this field for both uploads and updates.
 - **<span style="color: #20fffc;">3:</span>** This holds information about the name of the mod, the version (how many updates the mod has had, also editable in the `metadata.xml`), and which tags to apply to the Workshop page.
-    - Version doesn't actually appear on the Workshop page or in game.
+    - **If you upload the mod with a version that is not higher than the previous upload, the mod won't properly update for people.**
+    - Version is automatically incremented and doesn't appear on the Workshop page or in game.
     - Tags are not editable on the Workshop page.
 - **<span style="color: #fffc00;">4:</span>** This is the mod's thumbnail. Clicking "Change" allows you to change it to any image. This is blanked out every time you open the mod uploader, but **you do not need to reselect your mod's thumbnail whenever updating the mod.**
-    - **Note:** For Windows users, File Explorer will only let you choose png, jpeg, and bmp files. You can work around this by typing an asterisk (*) into the file name bar at the bottom and pressing enter, which allows you to select any file type.
+    - **Note:** For Windows users, File Explorer will only let you choose png, jpeg, and bmp files. Despite this, it's common to see gif thumbnails on the Workshop. You can work around the limitation and upload a gif as the thumbnail by typing an asterisk (*) into the file name bar at the bottom and pressing enter, which allows you to select any file type.
     - Your mod's thumbnail is not editable on the Workshop page.
 - **<span style="color: #ff00ea;">5:</span>** You can set the visibility of your mod to Public, Friends Only, or Private.
 - **<span style="color: #ff9000;">6:</span>** The mod description supports Steam's version of BBCode, allowing you to add headers, hyperlinks, bolded text, and more. You can learn how to format your description by clicking [here](https://steamcommunity.com/comment/Guide/formattinghelp).

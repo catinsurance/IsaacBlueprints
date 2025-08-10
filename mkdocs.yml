@@ -2,6 +2,9 @@ site_name: Isaac Blueprints
 theme:
   name: material
   custom_dir: overrides
+  favicon: tutorials/assets/favicon.png
+  icon:
+    logo: material/home
   palette:
     # Palette toggle for light mode
     - scheme: default
