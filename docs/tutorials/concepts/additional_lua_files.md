@@ -1,6 +1,7 @@
 ---
 article: Additional Lua files
 authors: benevolusgoat
+blurb: Learn how to split up your project into multiple files.
 comments: true
 tags:
     - Tutorial

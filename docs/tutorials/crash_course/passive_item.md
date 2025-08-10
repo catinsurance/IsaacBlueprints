@@ -1,6 +1,7 @@
 ---
 article: Items - Passives
 authors: benevolusgoat
+blurb: Learn how to create passive custom items.
 comments: true
 tags:
     - Tutorial

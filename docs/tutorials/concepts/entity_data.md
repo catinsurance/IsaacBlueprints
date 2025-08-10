@@ -1,6 +1,7 @@
 ---
 article: Entity data
 authors: Lizzie
+blurb: Learn ways to store data specific to entities.
 comments: true
 tags:
     - Tutorial

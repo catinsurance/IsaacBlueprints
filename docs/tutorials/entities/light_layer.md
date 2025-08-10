@@ -1,6 +1,7 @@
 ---
 article: Light layers
 authors: catinsurance
+blurb: Learn how to create custom light sources.
 comments: true
 tags:
     - Tutorial

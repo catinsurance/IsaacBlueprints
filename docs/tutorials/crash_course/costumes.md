@@ -1,6 +1,7 @@
 ---
 article: Costumes
 authors: benevolusgoat, catinsurance
+blurb: Learn how to create custom costumes that alter Isaac's appearance.
 comments: true
 tags:
     - Tutorial

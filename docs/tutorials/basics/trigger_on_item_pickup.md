@@ -1,6 +1,7 @@
 ---
 article: Triggering an effect upon item pickup
 authors: benevolusgoat
+blurb: Learn how to trigger an effect whenever a player collects and item.
 comments: true
 tags:
     - Tutorial

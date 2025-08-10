@@ -1,6 +1,7 @@
 ---
 article: Characters
 authors: benevolusgoat
+blurb: Learn how to create custom characters.
 comments: true
 tags:
     - Tutorial

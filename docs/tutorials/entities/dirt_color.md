@@ -1,6 +1,7 @@
 ---
 article: Dirt color
 authors: catinsurance
+blurb: Learn about dirt colors and layers.
 comments: true
 tags:
     - Tutorial

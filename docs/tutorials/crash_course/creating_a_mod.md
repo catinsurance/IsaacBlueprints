@@ -1,6 +1,7 @@
 ---
 article: Creating a mod
 authors: catinsurance
+blurb: Learn the basics to creating your first mod.
 comments: true
 tags:
     - Tutorial

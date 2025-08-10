@@ -1,6 +1,7 @@
 ---
 article: Resources
 authors: benevolusgoat
+blurb: Discover libraries, tools, and more to help with modding the game.
 comments: true
 tags:
     - No Lua

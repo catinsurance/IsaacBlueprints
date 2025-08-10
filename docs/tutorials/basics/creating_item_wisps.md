@@ -1,6 +1,7 @@
 ---
 article: Creating item wisps
 authors: Aeronaut
+blurb: Learn how to create custom Book of Virtues item wisps.
 comments: true
 tags:
     - Tutorial

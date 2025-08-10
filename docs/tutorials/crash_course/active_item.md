@@ -1,6 +1,7 @@
 ---
 article: Items - Active
 authors: benevolusgoat
+blurb: Learn how to create custom active items.
 comments: true
 tags:
     - Tutorial

@@ -1,6 +1,7 @@
 ---
 article: Shader Resources
 authors: Lizzie
+blurb: Discover further resources to shaders.
 comments: true
 tags:
     - Advanced

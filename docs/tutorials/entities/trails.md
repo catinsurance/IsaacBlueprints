@@ -1,6 +1,7 @@
 ---
 article: Trails
 authors: catinsurance
+blurb: Learn how to add a trail to your enemy as they move.
 comments: true
 tags:
     - Tutorial

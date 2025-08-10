@@ -1,6 +1,7 @@
 ---
 article: Changing the tears stat
 authors: catinsurance
+blurb: Learn the nuances behind changing the tears stat.
 comments: true
 tags:
     - Tutorial

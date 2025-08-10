@@ -1,6 +1,7 @@
 ---
 article: Temporary effects
 authors: benevolusgoat
+blurb: Learn about how to use the temporary effect system within Isaac.
 comments: true
 tags:
     - Tutorial

@@ -1,6 +1,7 @@
 ---
 article: Shader Basics
 authors: Lizzie
+blurb: Learn the basics to shaders in Isaac.
 comments: true
 tags:
     - Tutorial

@@ -1,6 +1,7 @@
 ---
 article: Controller input
 authors: catinsurance
+blurb: Learn about detecting game controller input.
 comments: true
 tags:
     - Tutorial

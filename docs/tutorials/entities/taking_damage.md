@@ -1,6 +1,7 @@
 ---
 article: Taking damage
 authors: benevolusgoat
+blurb: Learn how to use the "MC_ENTITY_TAKE_DMG" callback to respond to plaeyr or entity damage.
 comments: true
 tags:
     - Tutorial

@@ -1,6 +1,7 @@
 ---
 article: Uploading a mod
 authors: catinsurance
+blurb: Learn how to upload or update your mod.
 comments: true
 tags:
     - Tutorial

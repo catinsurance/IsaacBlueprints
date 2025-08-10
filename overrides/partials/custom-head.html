@@ -1,7 +1,11 @@
-<meta content="Isaac Blueprints" property="og:site_name" />
-<meta content="Isaac Blueprints" property="twitter:site" />
-<meta content="https://isaacblueprints.com/" property="og:url" />
-<meta content='View Binding of Isaac modding tutorials on numerous topics, from the nichest interactions to the most common questions.' property="og:description" />
-<meta content='View Binding of Isaac modding tutorials on numerous topics, from the nichest interactions to the most common questions.' property="twitter:description" />
-<meta content="https://isaacblueprints.com/tutorials/assets/isaacsblueprints.png" property="og:image" />
-<meta content="#566c8a" data-react-helmet="true" name="theme-color" />
+<meta property="og:site_name" content="Isaac Blueprints"  />
+<meta property="og:image" content="https://isaacblueprints.com/tutorials/assets/isaacsblueprints.png" />
+{% if page.meta %}
+    <meta property="og:title" content="{{page.meta.article}}" />
+    <meta property="og:description" content="{{page.meta.blurb}} More Binding of Isaac modding tutorials on numerous topics can be found on Isaac Blueprints." />
+{% else %}
+    <meta property="og:title" content="Isaac Blueprints" />
+    <meta property="og:description" content="View Binding of Isaac modding tutorials on numerous topics, from niche interactions to the most common questions." />
+{% endif %}
+<meta property="og:url" content="{{page.canonical_url}}" />
+<meta name="theme-color" content="#566c8a" />

@@ -1,6 +1,7 @@
 ---
 article: Contribution guide
 authors: catinsurance
+blurb: Learn how to contribute to Isaac Blueprints!
 comments: true
 tags:
     - Tutorial
@@ -22,6 +23,7 @@ If you want to add images, gifs, or other files to your article, create a new fo
 
 - An `article` property with the name of the article. This appears in the primary header.
 - An `authors` property with the creator(s) of article. Separate multiple authors with commas (i.e. `authors: joe, bob`).
+- A `blurb` property with a short blurb to appear in external embeds (such as on Discord). This should usually be just a single sentence stating what the article covers. We usually have blurbs for tutorials start with the word "learn", but this is not required. `More Binding of Isaac modding tutorials on numerous topics can be found on Isaac Blueprints.` is appended at the end of your blurb, so there's no need to add this yourself.
 - A `comments` property for if you want comments to be enabled. This should be `true` or `false`, and should be left as `true` under most circumstances.
 - A `tags` property with a list of tags.
 

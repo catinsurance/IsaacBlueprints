@@ -1,6 +1,7 @@
 ---
 article: Stat system basics
 authors: Monwil
+blurb: Learn how to understand and manipulate player stats.
 comments: true
 tags:
     - Tutorial

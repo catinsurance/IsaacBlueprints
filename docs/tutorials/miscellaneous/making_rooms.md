@@ -1,6 +1,7 @@
 ---
 article: Making rooms
 authors: catinsurance
+blurb: Learn how to make Isaac rooms for your mod, as well as some room making tips.
 comments: true
 tags:
     - Tutorial

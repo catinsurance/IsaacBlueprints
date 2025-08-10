@@ -1,6 +1,7 @@
 ---
 article: Item Pools
 authors: benevolusgoat
+blurb: Learn how to add items to item pools.
 comments: true
 tags:
     - Tutorial
