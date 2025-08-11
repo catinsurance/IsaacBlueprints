@@ -35,7 +35,7 @@ For every XML file, there is a tag that goes from the start of the file to the e
 	| Variable Name | Possible Values | Description |
 	|:--|:--|:--|
 	|gfxroot|string|Root path of all item sprites, set to `gfx/items/` by default. The game will automatically use the appropriate subdirectory at this location based on the type of item it is. Passive and active items will be located in the `collectibles` folder (ex: `gfx/items/collectibles/`). Used with the `gfx` variable.|
-	|version|string|The version of the `items.xml` format. **This must always stay equal to 1**.|
+	|version|int|The version of the `items.xml` format. **This must always stay equal to 1**.|
 	|deathanm2|string|Optional. Root path of the anm2 file used for the miniature sketch sprites (sometimes known as "death portraits") of the item seen in Isaac's Last Will, the Collection Page on the main menu, and on the pause menu. Items without a death portrait will be represented with a question mark inside of a box.|
 
 ???- info "`passive` tag variables"

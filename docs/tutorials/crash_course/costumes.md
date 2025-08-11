@@ -18,7 +18,7 @@ tags:
 Costumes are the extra layers of sprites that are added onto Isaac to change his appearance. Costumes can be given from items, characters, and even directly under some circumstances. This tutorial will cover how to create and add your own custom costumes.
 
 ## Video tutorial
-[![Costuems | Youtube Tutorial](https://img.youtube.com/vi/2cKjHutPIBk/0.jpg)](https://youtu.be/2cKjHutPIBk "Video tutorial")
+[![Costumes | Youtube Tutorial](https://img.youtube.com/vi/2cKjHutPIBk/0.jpg)](https://youtu.be/2cKjHutPIBk "Video tutorial")
 
 ## Creating a costume
 All costumes require a `.anm2` file. When creating your costume, it is easiest to reference, copy, or modify an existing costume from the game, as it will already have all the layers and frames laid out for you. For example, if you're trying to make a costume that gives Isaac a hat, you could reference something like Black Candle's costume (located in `resources/gfx/characters/260_blackcandle.anm2`). You can find costume `.anm2` files inside `resources/gfx/characters/` after [extracting the game's resources](creating_a_mod.md/#extracting-the-games-resources).
