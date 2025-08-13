@@ -14,7 +14,7 @@ search:
     5. [Adding to item pools.](../tutorials/crash_course/item_pools.md)
     6. [Making costumes.](../tutorials/crash_course/costumes.md)
     7. [Making a new character.](../tutorials/crash_course/character.md)
-    8. Creating entities.
+    8. [Creating entities](../tutorials/crash_course/entities.md).
         1. Creating effects.
         2. Creating enemies.
         3. Creating a familiar.
