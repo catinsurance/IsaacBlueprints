@@ -97,6 +97,8 @@ Depending on the type of entitiy you're creating, you will want to refer to the 
 - IDs 10-999 are for enemies.
 - IDs 1000+ are for custom effects. It is not recommended to set entity IDs past 1000.
 
+(Insert	stuff about how you can insert higher numbers despite the aforementioned cap)
+
 ## Tags explanation
 
 The `tag` variable is used to define specific behavior for the entity that varies depending on the tag. You can define one or more tags from the list below:
@@ -116,6 +118,8 @@ The `tag` variable is used to define specific behavior for the entity that varie
 ## entity child tags
 
 The `entity` tag has numerous child tags to help define additional information about the entity that's used for different situations depending on tag. All of these tags are optional to include.
+
+(devolve and bestiary can probably be moved to an enemy page)
 
 ### `gibs` tag
 
@@ -137,9 +141,27 @@ The `gibs` tag is used to define the gibs that are spawned when an entity is kil
 | rock | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
 
 ### `preload` tag
+Fill me!
 
 ### `preload-snd` tag
+Fill me!
 
 ### `devolve` tag
 
+When this entity is devolved through the [D10](https://bindingofisaacrebirth.wiki.gg/wiki/D10) collectible or :modding-repentogon: [Game:DevolveEnemy](https://repentogon.com/Game.html#void-devolveenemy-entity), this tag is used to determine what entity it should be devolved into. This tag can be specified multiple times for multiple different outcomes
+
+| Variable-Name | Possible Values | Description |
+|:--|:--|:--|
+| id | string | The entity to devolve into. This variable is unique where the ID, variant, and subtype are all combined into one string separated by periods in the format of `Type.Variant.Subtype` (e.g. A regular Gaper would be defined as `10.1.0`).|
+| weight | float | Relative "likelyhood" that this entity will be chosen for devolving into. Default = `1`.
+
 ### `bestiary` tag
+
+Used for changing how the enemy is viewed inside the Bestiary. Any animations that play will automatically loop, even if not defined as a looping animation in the anm2 file.
+
+| Variable-Name | Possible Values | Description |
+|:--|:--|:--|
+| anim | string | Animation to play for the entity. |
+| overlay | string | Overlay animation to play for the entity. This will play a separate animation that renders over the `anim` sprite animation. |
+| anm2path | string | A separate anm2 file to use exclusively for the Bestiary. |
+| transform | string | A comma-separated string of X and Y coordinate position offsets and custom scale, defined as `"X,Y,Scale"`. Default = `0,0,1`. |
