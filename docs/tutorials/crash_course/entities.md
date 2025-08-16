@@ -69,12 +69,12 @@ This is the tag used to define an entity.
 	| reroll | bool | Sets whether or not this entity can be rerolled. Used for enemies. |
 	| shutdoors | bool | Determines whether this entity will prevent doors from staying closed. Only used for enemies. Default = `true`. |
 	| shieldStrength | int | Entity takes less damage relative to Isaac's DPS, known primarily as "armor". The higher the number, the less damage is taken. Default = `0`.<br>See [this page](https://bindingofisaacrebirth.wiki.gg/wiki/Damage_Scaling) for more information on the mechanic. |
-	| gibAmount | int | The amount of gibs the entity will drop upon death. Suggestion default is `5`. |
-	| gibFlags | string | Used values: ['poop']. |
-	| bestiaryAnim | string | The animation to play when viewing this entity in the [Bestiary](https://bindingofisaacrebirth.wiki.gg/wiki/Bestiary_(Repentance)). |
+	| gibAmount | int | The amount of gibs the entity will drop upon death. Used for dip familiars. For adding gibs for the majority of scenarios, use the  |
+	| gibFlags | string | Used values: ['poop']. Used for dip familiars. |
+	| bestiaryAnim | string | The animation to play when viewing this entity in the [Bestiary](https://bindingofisaacrebirth.wiki.gg/wiki/Bestiary_(Repentance)). Only used once for the Blurb enemy |
 	| bestiaryOverlay | string | The animation to play when viewing this entity in the Bestiary. |
 
-The very first entry inside the vanilla `entities2.xml` file, defining the player. **Do not actually define player entities using this method.**
+The very first entry inside the vanilla `entities2.xml` file, defining the player. **Do not actually define new player entities yourself.**
 ```XML
 <entities anm2root="gfx/" version="5">
 	<entity anm2path="001.000_Player.anm2" baseHP="10" boss="0" champion="0" collisionDamage="0" collisionMass="5" collisionRadius="10" friction="1" id="1" name="Player" numGridCollisionPoints="40" shadowSize="16" stageHP="0" variant="0">
@@ -91,6 +91,12 @@ The very first entry inside the vanilla `entities2.xml` file, defining the playe
 | customtags | string | Space-separated list of strings. See [CustomTags](https://repentogon.com/xml/entities.html#customtags) section on the REPENTOGON Docs. |
 | nosplit | boolean | Allows preventing this NPC from being split by Meat Cleaver. |
 
+### What to set for `id`/`variant`/`subtype`
+Depending on the type of entitiy you're creating, you will want to refer to the [EntityType](https://wofsauge.github.io/IsaacDocs/rep/enums/EntityType.html) enum.
+- IDs 1-9 are preset entity types. `variant` and `subtype` should be utilized.
+- IDs 10-999 are for enemies.
+- IDs 1000+ are for custom effects. It is not recommended to set entity IDs past 1000.
+
 ## Tags explanation
 
 The `tag` variable is used to define specific behavior for the entity that varies depending on the tag. You can define one or more tags from the list below:
@@ -106,3 +112,34 @@ The `tag` variable is used to define specific behavior for the entity that varie
 |brimstone_soul| Friendly Ball wisps created by this enemy will fire Brimstone lasers|
 |explosive_soul| Friendly Ball wisps created by this enemy will fire explosive tears|
 |homing_soul| Friendly Ball wisps created by this enemy will fire homing tears|
+
+## entity child tags
+
+The `entity` tag has numerous child tags to help define additional information about the entity that's used for different situations depending on tag. All of these tags are optional to include.
+
+### `gibs` tag
+
+The `gibs` tag is used to define the gibs that are spawned when an entity is killed or destroyed. The entity will spawn an amount of gibs based on the `amount` variable and randomly select between one of the other gib variables that are set to `1`.
+
+| Variable-Name | Possible Values | Description |
+|:--|:--|:--|
+| amount | int | How many gibs should be spawned.|
+| blood | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| bone | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| chain | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| colorblood | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| dust | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| eye | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| gut | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| huge | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| large | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| poop | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| rock | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+
+### `preload` tag
+
+### `preload-snd` tag
+
+### `devolve` tag
+
+### `bestiary` tag
