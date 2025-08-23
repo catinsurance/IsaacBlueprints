@@ -13,6 +13,7 @@ search:
     - [Item pools](./tutorials/crash_course/item_pools.md)
     - [Costumes](./tutorials/crash_course/costumes.md)
 	- [Characters](./tutorials/crash_course/character.md)
+    - [Challenges](./tutorials/crash_course/challenges.md)
 - Basics
     - ./tutorials/basics/*
 - Concepts
