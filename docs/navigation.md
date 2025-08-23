@@ -14,6 +14,7 @@ search:
     - [Costumes](./tutorials/crash_course/costumes.md)
 	- [Characters](./tutorials/crash_course/character.md)
 	- [Entities](./tutorials/crash_course/entities.md)
+    - [Challenges](./tutorials/crash_course/challenges.md)
 - Basics
     - ./tutorials/basics/*
 - Concepts
