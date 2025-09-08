@@ -27,7 +27,7 @@ search:
         2. Creating custom cards.
         3. Creating custom runes.
         4. Creating custom objects.
-    12. Creating challenges.
+    12. [Creating challenges.](../tutorials/crash_course/challenges.md)
     13. Creating new curses.
     14. Structuring your mod.
     15. Conclusion.
