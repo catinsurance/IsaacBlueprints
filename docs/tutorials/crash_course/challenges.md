@@ -52,7 +52,7 @@ Creating a challenge requires a [challenges.xml](https://wofsauge.github.io/Isaa
 	|maxdamage|bool|If set to `true`, damage cannot go above `100`.|
 	|adddamage|float|Adds damage to the player.|
 	|minfirerate|float|Sets starting fire delay (not the same as the in-game tears stat, [see here](../basics/tears_up.md)).|
-	|minshotspeed|bool|Unknown|
+	|minshotspeed|bool|Sets the maximum shot speed to `1.00`.|
 	|bigrange|bool|Grants an additional 10 range.|
 	|difficulty|int|[Game difficulty](../enums/Difficulty.md) (0: normal (default), 1: hard, 2: Greed, 3: Greedier)<br>Greed and greedier mode work, but when killing Ultra Greed, the big Chest spawns, instead of a trophy.|
 	|megasatan|bool|Last boss is Mega Satan. Adds both key pieces to the player.|
