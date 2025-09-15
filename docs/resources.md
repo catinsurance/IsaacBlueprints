@@ -48,8 +48,6 @@ tags:
 - [Anm2ed](https://github.com/ShweetsStuff/anm2ed)<br>
 	- Creator: ShweetsStuff<br>
 	- Description: A reimplementation of The Binding of Isaac: Rebirth's proprietary animation editor. Manipulates the XML-based ".anm2" format, used for in-game tweened animations.
-	???+ warning
-		Anm2ed is a work-in-progress. It is primarily for Linux and has an unstable Windows pre-release.
 
 - [Binding of Isaac Lua API](https://marketplace.visualstudio.com/items?itemName=Filloax.isaac-lua-api-vscode)<br>
 	- Creators: fillioax, benevolusgoat<br>
