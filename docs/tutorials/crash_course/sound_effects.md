@@ -20,7 +20,7 @@ While the game has a massive catalog of sound effects to use, custom sound effec
 [![Sound and Music | Youtube Tutorial](https://img.youtube.com/vi/qJB74iaRCf8/0.jpg)](https://youtu.be/qJB74iaRCf8 "Video tutorial")
 
 ## Vanilla sounds
-Isaac has a massive catalog of over 1000 sound effects as of Repentance+. All sounds have a numerical id, with the ids for vanilla sounds being found under the [`SoundEffect enumerator`](https://wofsauge.github.io/IsaacDocs/rep/enums/SoundEffect.html). The docs page for this enumerator also allows you to quickly preview any sound. Sounds tend to be the largest contributor to file size in a mod, so make sure to look through the list of vanilla sounds before implementing your own.
+Isaac has a massive catalog of over 1000 sound effects as of Repentance+. All sounds have a numerical id, with the ids for vanilla sounds being found under the [`SoundEffect`](https://wofsauge.github.io/IsaacDocs/rep/enums/SoundEffect.html) enumerator. The docs page for this enumerator also allows you to quickly preview any sound. Sounds tend to be the largest contributor to file size in a mod, so make sure to look through the list of vanilla sounds before implementing your own.
 
 ## Encoding custom sounds
 Before you add your sound to the game using XML, it's very important to ensure it is encoded correctly. The game expects all sounds to be in `.wav` format and encoded in 16-bit. **Any sound that is incorrectly encoded will instead be a very loud, high-pitched static noise!** There is no restriction on bitrate or audio channel options.
