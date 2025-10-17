@@ -20,7 +20,7 @@ search:
         3. Creating a familiar.
         4. Creating a projectile variant.
         5. Creating a tear variant.
-    9. Adding sounds.
+    9. [Adding sounds.](../tutorials/crash_course/sound_effects.md)
     10. Adding music.
     11. Making pocket items.
         1. Creating custom pills.
