@@ -16,6 +16,7 @@ search:
     - [Challenges](./tutorials/crash_course/challenges.md)
     - [Sounds](./tutorials/crash_course/sound_effects.md)
 	- [Entity Basics](./tutorials/crash_course/entity_basics.md)
+	- [Creating enemies](./tutorials/crash_course/enemies.md)
 - Basics
     - ./tutorials/basics/*
 - Concepts

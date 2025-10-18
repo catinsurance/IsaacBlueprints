@@ -6,6 +6,7 @@ comments: true
 tags:
     - Tutorial
     - Beginner friendly
+    - Video
     - No Lua
     - XML
     - Repentance
@@ -16,7 +17,10 @@ tags:
 {% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 {% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
 
-Entities make up the majority of anything that moves inside the Binding of Isaac, from tears to enemies to Isaac himself. This tutorial will cover the basics on creating a custom entity.
+Entities make up the majority of anything that moves inside The Binding of Isaac, from tears to enemies to Isaac himself. This tutorial will cover the basics on creating a custom entity.
+
+## Video tutorial
+[![Entities and Effects | Youtube Tutorial](https://img.youtube.com/vi/sxgf2SH6ZGs/0.jpg)](https://youtu.be/sxgf2SH6ZGs "Video tutorial")
 
 ## Creating an entity
 To create an entity, you will only need an [entities2.xml](https://wofsauge.github.io/IsaacDocs/rep/xml/entities2.html) file located within your mod's content folder. There is a lot of content involved with each of the XML's available tags, so this tutorial will cover over them in individual sections.
@@ -38,20 +42,16 @@ This is the tag used to define an entity.
 	???+ note
 		The majority of variables, for most intensive purposes, are optional. The vanilla `entities2.xml` file contains more than necessary for every entry.
 
-		- `name` and `id` are fully required.
-		- `variant` `anm2path`, `friction`, and `shadowSize` are recommended to be treated as required for all entities.
+		- `name`, `id`, `variant`, `anm2path`, `friction`, and `shadowSize` are baseline variables for any entity.
 		- `collisionRadius`, `collisionMass`, and `numGridCollisionPoints` should be included for entities with collision.
 	| Variable-Name | Possible Values | Description |
 	|:--|:--|:--|
 	| name | str | Name of the entity. |
 	| id | int | Type of the entity. Max Value: `4095` |
-	| variant | int | Variant of the entity. The maximum value is `4095`. If you leave this blank, then the game will automatically chose the next available number. However, the first available number is commonly `0`, so this is not recommended. |
+	| variant | int | Variant of the entity. The maximum value is `4095`. If you leave this blank, then the game will automatically chose the next available number. However, the first available number is commonly `0`, so this is not recommended as it may cause issues. |
 	| subtype | int | SubType of the entity. The maximum value is `255`. (The reason for this is that the hash map generator of the .stb format expects a specific bit-depth.) |
 	| anm2path | string | Path to the `.anm2` file, relative to the given anm2root. Example: `001.000_Player.anm2` |
 	| baseHP | int | Base number of hit points the entity starts with. Usually only relevant for enemies, but can be used on other entities. |
-	| boss | int | Entity is a boss. Possible values: [`0`, `1`]. |
-	| bossID | int | The unique boss ID associated with the entity, used for other things such as entries inside `bosspools.xml`. Custom entities cannot take advantage of this. |
-	| champion | int | Allow champion variants of this entity. Possible values: [`0`, `1`]. |
 	| collisionDamage | float | Amount of damage an entity will take when colliding with this entity. |
 	| collisionMass | float | The weight of the entity to determine how far it is pushed when another entity collides against it. The higher the number, the heavier they are. |
 	| collisionRadius | float | Radius of the collision circle. This value is used for both entity <--> entity and entity <--> grid collisions. This changes the `Entity.Size` field. |
@@ -61,18 +61,10 @@ This is the tag used to define an entity.
 	| numGridCollisionPoints | int | Number of points along the edge of the collision circle, which are used to detect collisions with grid entities. |
 	| friction | float | "Slippyness" of the entity. Default = `1`. Lower values make them slide more, similar as they would standing on ice. Higher values make them slide less. A value of `0` makes them unable to move. |
 	| shadowSize | float | The size of the shadow underneath the entity. |
-	| stageHP | int | A multiplier for how much additional health the enemy gains with each stage. Read [here](https://bindingofisaacrebirth.wiki.gg/wiki/Stage_HP) for more information. |
 	| tags | string | Possible values: ['nodelirium', 'spider', 'explosive_soul', 'cansacrifice', 'ghost', 'brimstone_soul', 'homing_soul', 'fly', 'noreroll'].<br>See Chapter below for in depth explanations of the tags. |
 	| gridCollision | string | Possible values: ['nopits', 'ground', 'none', 'walls', 'floor']. |
-	| portrait | int | Used for enemies in conjunction with the entities `deathanm2` tag to determine what portrait to show on [Isaac's Last Will](https://bindingofisaacrebirth.wiki.gg/wiki/Isaac%27s_Last_Will). The number correlates to the frame in the anm2 file, starting from `0`. |
-	| hasFloorAlts | bool | If set to `true`, floor specific sprites should be used for this entity if they exist. See the chapter below for more informations |
-	| reroll | bool | Sets whether or not this entity can be rerolled. Used for enemies. |
-	| shutdoors | bool | Determines whether this entity will prevent doors from staying closed. Only used for enemies. Default = `true`. |
-	| shieldStrength | int | Entity takes less damage relative to Isaac's DPS, known primarily as "armor". The higher the number, the less damage is taken. Default = `0`.<br>See [this page](https://bindingofisaacrebirth.wiki.gg/wiki/Damage_Scaling) for more information on the mechanic. |
-	| gibAmount | int | The amount of gibs the entity will drop upon death. Used for dip familiars. For adding gibs for the majority of scenarios, use the  |
+	| gibAmount | int | The amount of gibs the entity will drop upon death. Used for dip familiars. The main method of applying gibs and its amount is used with the [gibs tag](entity_basics.md#gibs-tag)  |
 	| gibFlags | string | Used values: ['poop']. Used for dip familiars. |
-	| bestiaryAnim | string | The animation to play when viewing this entity in the [Bestiary](https://bindingofisaacrebirth.wiki.gg/wiki/Bestiary_(Repentance)). Only used once for the Blurb enemy |
-	| bestiaryOverlay | string | The animation to play when viewing this entity in the Bestiary. |
 
 The very first entry inside the vanilla `entities2.xml` file, defining the player. **Do not actually define new player entities yourself.**
 ```XML
@@ -92,12 +84,33 @@ The very first entry inside the vanilla `entities2.xml` file, defining the playe
 | nosplit | boolean | Allows preventing this NPC from being split by Meat Cleaver. |
 
 ### What to set for `id`/`variant`/`subtype`
-Depending on the type of entitiy you're creating, you will want to refer to the [EntityType](https://wofsauge.github.io/IsaacDocs/rep/enums/EntityType.html) enum.
-- IDs 1-9 are preset entity types. `variant` and `subtype` should be utilized.
-- IDs 10-999 are for enemies.
-- IDs 1000+ are for custom effects. It is not recommended to set entity IDs past 1000.
 
-(Insert	stuff about how you can insert higher numbers despite the aforementioned cap)
+Firstly, the `id`, or "type" of the enemy, should be set anywhere from 1 to 1000. Depending on the type of entitiy you're creating, you will want to refer to the [EntityType](https://wofsauge.github.io/IsaacDocs/rep/enums/EntityType.html) enum.
+- IDs 1-9 are preset entity types.
+- IDs 10-999 are for enemies.
+- ID 1000 is custom effects.
+- IDs beyond 1000 will be defined as effects, but may cause issues for not being the standard ID of 1000.
+
+`variant` and `subtype` are for defining different types of the same entity, which have differing rules dependent on what vanilla entries already exist.
+- If an entity already has a defined `variant` and you use that `variant`, your entity may take on some of the properties of that entity `variant`.
+- For custom variants, simply define a number not taken up by existing vanilla entries.
+- `subtype` should always be a number not taken up by existing vanilla entries.
+
+This entity entry defines a new tear variant by having its `id` set to `2`. It starts from variant `39` as the last defined vanilla tear variant is `38`.
+```xml
+	<entity anm2path="my_new_tear_variant.anm2" collisionMass="8" collisionRadius="7" friction="1" id="2" name="My New Tear" numGridCollisionPoints="8" shadowSize="8" variant="39">
+    </entity>
+```
+
+The maximum number you can set `id` and `variant` to is `4095`, while `subtype` is only `255`. The number can technically be set higher than these caps, but the game internally condences all 3 values into a 32-bit integer with a limited amount of space for each variable. Amounts higher than the intended cap can cause an overflow to occur, which leads to unintended issues, such as game crashes.
+
+### Fetching the ID/variant/subtype of your entity with Lua
+Your defined `id`/`variant` combination may overlap with other mods that happen to define the exact same combination. The game may assign new variants or new subtypes to compensate for the overlap. As such, it is good practice to fetch them with the following functions:
+- [Isaac.GetEntityTypeByName](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getentitytypebyname)
+- [Isaac.GetEntityVariantByName](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getentityvariantbyname)
+
+For `subtype`, you must either note down the subtype manually, or use REPENTOGON, which introduces [Isaac.GetEntitySubTypeByName](https://repentogon.com/Isaac.html#int-getentitysubtypebyname-string-name)
+- :modding-repentogon: Isaac.GetEntitySubTypeByName("Entity Name Here")
 
 ## Tags explanation
 
@@ -105,21 +118,19 @@ The `tag` variable is used to define specific behavior for the entity that varie
 
 | Tag-Name | Suffix |
 |:--|:--|
-|cansacrifice| Marks familiars on which sacrificial altar can be used on|
-|nodelirium| Blacklists a boss from being used by Delirium|
-|fly|Indicates enemies which should be neutralized by Skatole (does NOT affect Beelzebub)|
-|spider|Indicates enemies which should be neutralized by Bursting Sack|
-|ghost|Indicates enemies which Vade Retro can kill at <50% HP as a special interaction|
-|noreroll| Immunity from D10 rerolls and the Ace cards|
-|brimstone_soul| Friendly Ball wisps created by this enemy will fire Brimstone lasers|
-|explosive_soul| Friendly Ball wisps created by this enemy will fire explosive tears|
-|homing_soul| Friendly Ball wisps created by this enemy will fire homing tears|
+| cansacrifice | Marks familiars on which sacrificial altar can be used on.|
+| nodelirium | Blacklists a boss from being used by Delirium.|
+| fly | Indicates enemies which should be neutralized by Skatole (does NOT affect Beelzebub).|
+| spider | Indicates enemies which should be neutralized by Bursting Sack.|
+| ghost | Indicates enemies which Vade Retro can kill at <50% HP as a special interaction.|
+| noreroll | Immunity to Ace cards that turn enemies into pickups. If a `devolve` tag is defined on the enemy, will prevent rerolls from D10 wisps.|
+| brimstone_soul | Friendly Ball wisps created by this enemy will fire Brimstone lasers.|
+| explosive_soul | Friendly Ball wisps created by this enemy will fire explosive tears.|
+| homing_soul | Friendly Ball wisps created by this enemy will fire homing tears.|
 
 ## entity child tags
 
-The `entity` tag has numerous child tags to help define additional information about the entity that's used for different situations depending on tag. All of these tags are optional to include.
-
-(devolve and bestiary can probably be moved to an enemy page)
+The `entity` tag has numerous child tags to help define additional information about the entity that's used for different situations depending on tag. Only a few are mentioned here while the others are explained in [Creating enemies](enemies.md#devolve-child-tag).
 
 ### `gibs` tag
 
@@ -129,39 +140,30 @@ The `gibs` tag is used to define the gibs that are spawned when an entity is kil
 |:--|:--|:--|
 | amount | int | How many gibs should be spawned.|
 | blood | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
-| bone | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
-| chain | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
-| colorblood | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
-| dust | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
-| eye | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
-| gut | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
-| huge | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
-| large | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
-| poop | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
-| rock | int |Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| bone | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| chain | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| colorblood | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| dust | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| eye | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| gut | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| huge | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| large | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| poop | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
+| rock | int | Possible values: [`0`,`1`] where `0` is off and `1` is on.|
 
-### `preload` tag
-Fill me!
+### `preload` and `preload-snd` tags
 
-### `preload-snd` tag
-Fill me!
+Both of these tags are old remnants of Isaac's code for preloading other entities or sounds when the entity is spawned for smoother loading times when it is spawned/played later by said entity. `preload-snd` serves no purpose for the PC version of Isaac as all sounds in the game are preloaded when the game launches. It is not known if `preload` has any useful applications.
 
-### `devolve` tag
+???- info "`preload` tag variables"
+	| Variable-Name | Possible Values | Description |
+	|:--|:--|:--|
+	| name | str | Name of the entity. |
+	| id | int | Type of the entity. Max Value: `4095` |
+	| variant | int | Variant of the entity. The maximum value is `4095`. If you leave this blank, then the game will automatically chose the next available number. However, the first available number is commonly `0`, so this is not recommended as it may cause issues. |
+	| subtype | int | SubType of the entity. The maximum value is `255`. (The reason for this is that the hash map generator of the .stb format expects a specific bit-depth.) |
 
-When this entity is devolved through the [D10](https://bindingofisaacrebirth.wiki.gg/wiki/D10) collectible or :modding-repentogon: [Game:DevolveEnemy](https://repentogon.com/Game.html#void-devolveenemy-entity), this tag is used to determine what entity it should be devolved into. This tag can be specified multiple times for multiple different outcomes
-
-| Variable-Name | Possible Values | Description |
-|:--|:--|:--|
-| id | string | The entity to devolve into. This variable is unique where the ID, variant, and subtype are all combined into one string separated by periods in the format of `Type.Variant.Subtype` (e.g. A regular Gaper would be defined as `10.1.0`).|
-| weight | float | Relative "likelyhood" that this entity will be chosen for devolving into. Default = `1`.
-
-### `bestiary` tag
-
-Used for changing how the enemy is viewed inside the Bestiary. Any animations that play will automatically loop, even if not defined as a looping animation in the anm2 file.
-
-| Variable-Name | Possible Values | Description |
-|:--|:--|:--|
-| anim | string | Animation to play for the entity. |
-| overlay | string | Overlay animation to play for the entity. This will play a separate animation that renders over the `anim` sprite animation. |
-| anm2path | string | A separate anm2 file to use exclusively for the Bestiary. |
-| transform | string | A comma-separated string of X and Y coordinate position offsets and custom scale, defined as `"X,Y,Scale"`. Default = `0,0,1`. |
+???- info "`preload-snd` tag variables"
+	| Variable-Name | Possible Values | Description |
+	|:--|:--|:--|
+	| id | int | ID of the sound effect. |
