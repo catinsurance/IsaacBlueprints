@@ -15,9 +15,9 @@ search:
     6. [Making costumes.](../tutorials/crash_course/costumes.md)
     7. [Making a new character.](../tutorials/crash_course/character.md)
     8. Creating entities.
-        1. Entity basics.
+        1. [Entity basics.](../tutorials/crash_course/entity_basics.md)
         2. Creating effects.
-        3. Creating enemies.
+        3. [Creating enemies.](../tutorials/crash_course/enemies.md)
         4. Creating a familiar.
     9. [Adding sounds.](../tutorials/crash_course/sound_effects.md)
     10. Adding music.
