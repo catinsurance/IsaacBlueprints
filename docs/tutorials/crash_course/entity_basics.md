@@ -1,5 +1,5 @@
 ---
-article: Resources
+article: Entity basics
 authors: benevolusgoat
 blurb: Learn how to create custom entities.
 comments: true

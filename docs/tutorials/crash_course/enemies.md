@@ -1,5 +1,5 @@
 ---
-article: Resources
+article: Enemies
 authors: benevolusgoat
 blurb: Learn how to create custom enemies.
 comments: true
