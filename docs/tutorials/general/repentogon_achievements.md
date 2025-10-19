@@ -58,10 +58,10 @@ For the debug console, there's two commands: `achievement` and `lockachievement`
 
 ### Lua
 
-Through Lua, your first step should be using [Isaac.GetAchievementIdByName](https://repentogon.com/Isaac.html#getachievementidbyname) in order to obtain the ID for your achievement. Then, when you wish to unlock your acheivement, there are two functions located under [PersistentGameData](https://repentogon.com/PersistentGameData.html): [TryUnlock](https://repentogon.com/PersistentGameData.html#tryunlock) and [Unlocked](https://repentogon.com/PersistentGameData.html#unlocked). You can use the `Unlocked` function to check if the achievement is unlocked or not, and `TryUnlock` to unlock the achievement. Locking achievements can be done through [Isaac.ExecuteCommand](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#executecommand) and using the `lockachievement` command.
+Through Lua, your first step should be using [Isaac.GetAchievementIdByName](https://repentogon.com/Isaac.html#getachievementidbyname) in order to obtain the ID for your achievement. Then, when you wish to unlock your achievement, using `Isaac.GetPersistentGameData()` will return a [PersistentGameData](https://repentogon.com/PersistentGameData.html) object. Two of its functions will be used in this tutorial: [TryUnlock](https://repentogon.com/PersistentGameData.html#tryunlock) and [Unlocked](https://repentogon.com/PersistentGameData.html#unlocked). You can use the `Unlocked` function to check if the achievement is unlocked or not, and `TryUnlock` to unlock the achievement. Locking achievements can be done through [Isaac.ExecuteCommand](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#executecommand) and using the `lockachievement` command.
 
 ???+ note "Loading achievements before a file is selected"
-	Attempting to unlock achievements before the game is loaded will show the achievement unlocking, but will not unlock for any save files. Checking if the achievement is unlocked will always return false. Restrict to using these functions under callbacks that would run after the game is fully loaded.
+	Using `PersistentGameData`'s functions before the game is loaded will modify a non-existent save file. `TryUnlock` will show the achievement unlocking, but will not unlock for any save files. `Unlocked` will always return `false`. Restrict to using these functions under callbacks that would run after the game is fully loaded.
 
 This `main.lua` code will unlock the new achievement after collecting Sad Onion.
 ```Lua
@@ -76,5 +76,39 @@ function mod:OnSadOnionPickup()
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_ADD_COLLECTIBLE, mod.OnSadOnionPickup, CollectibleType.COLLECTIBLE_SAD_ONION)
+
+--Locking achievements are usually reserved for debugging purposes, but this is present merely for the purposes of this tutorial.
+function mod:OnSadOnionLose()
+	if persistGameData:Unlocked(MY_ACHIEVEMENT) then
+		Isaac.ExecuteCommand("lockachievement " .. MY_ACHIEVEMENT)
+	end
+end
+mod:AddCalback(ModCallbacks.MC_POST_TRIGGER_COLLECTIBLE_REMOVED, mod.OnSadOnionLose, CollectibleType.COLLECTIBLE_SAD_ONION)
 ```
 ![Unlocking achievement example](../assets/achievements/achievement_get.gif)
+
+## Locking content behind achievements
+
+The most powerful utility of achievements is naturally locking modded content behind achievements. For any XML files that have an `achievement` variable available, you can insert the name of your achievement to lock that content in normal gameplay.
+
+The following XML files have an achievement variable available to utilize:
+
+- [items.xml](https://repentogon.com/xml/items.html) for locking items and trinket.
+- [pocketitems.xml](https://repentogon.com/xml/pocketitems.html) for locking cards, runes, objects, and pills.
+- [challenges.xml](https://repentogon.com/xml/challenges.html) for locking challenges.
+- [players.xml](https://repentogon.com/xml/players.html) for locking characters.
+
+???- "`challenges.xml` achievement variables"
+	`challenges.xml` is a special case with multiple achievement-related variables.
+
+	- `achievements` instead of `achievement` for a comma-separated list of achievements, so that multiple can be required to unlock it.
+	- `unlockachievement` will unlock the assigned achievement after the challenge is completed.
+	- `lockeddesc` can be used to show a special message while the achievement is locked instead of the default "LOCKED :("
+
+This `items.xml` code will prevent this custom item from appearing in item pools until our achievement is unlocked.
+
+```xml
+<items gfxroot="gfx/items/" version="1" deathanm2="gfx/death items.anm2">
+	<passive id="0" name="The Placeholder" description="He placeholds!" gfx="placeholder.png" achievement="My new Achievement" />
+</items>
+```
