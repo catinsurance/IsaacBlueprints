@@ -74,7 +74,7 @@ mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.OnPeffectUpdate)
 
 ### :modding-repentogon: REPENTOGON additions
 
-REPENTOGON adds [AddCollectibleEffect](https://repentogon.com/EntityPlayer.html#addcollectibleeffect) and [AddNullEffect](https://repentogon.com/EntityPlayer.html#addnulleffect) directly to the EntityPlayer class as a shortcut for their respective functions under `TemporaryEffects`.
+REPENTOGON adds [AddCollectibleEffect](https://repentogon.com/EntityPlayer.html#addcollectibleeffect), [AddNullItemEffect](https://repentogon.com/EntityPlayer.html#addnullitemeffect) and [AddTrinketEffect](https://repentogon.com/EntityPlayer.html#addtrinketeffect) directly to the EntityPlayer class as a shortcut for their respective functions under `TemporaryEffects`.
 
 It also adds the ability to access the `TemporaryEffects` object tied to rooms. It can be accessed through `Game():GetRoom():GetEffects()`.
 
