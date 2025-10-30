@@ -19,9 +19,9 @@ search:
     - [Sounds](./tutorials/crash_course/sound_effects.md)
 - Basics
     - ./tutorials/basics/*
+- General
+    - ./tutorials/general/*
 - Concepts
     - ./tutorials/concepts/*
 - Entities
     - ./tutorials/entities/*
-- Miscellaneous
-    - ./tutorials/miscellaneous/*

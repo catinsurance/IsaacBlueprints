@@ -74,3 +74,8 @@ plugins:
         - Repentance
         - Repentance+
         - REPENTOGON
+  - redirects:
+      redirect_maps:
+        'tutorials/miscellaneous/controller_input.md': 'tutorials/general/controller_input.md'
+        'tutorials/miscellaneous/making_rooms.md': 'tutorials/general/making_rooms.md'
+        'tutorials/miscellaneous/temporary_effects.md': 'tutorials/general/temporary_effects.md'
