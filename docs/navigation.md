@@ -25,3 +25,5 @@ search:
     - ./tutorials/concepts/*
 - Entities
     - ./tutorials/entities/*
+- REPENTOGON
+    - ./tutorials/repentogon/*
