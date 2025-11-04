@@ -13,7 +13,7 @@ Thanks for showing interest in contributing to Isaac Blueprints! This guide will
 ## Contributing
 To get started, **create a fork** of [the Isaac Blueprints repository on Github](https://github.com/catinsurance/IsaacBlueprints). Then, clone this respository to your desktop.
 
-![Fork repository button](../tutorials/assets/contribution_guide/fork.png)
+![Fork repository button](./tutorials/assets/contribution_guide/fork.png)
 
 To start writing an article or making an edit to an existing one, you should first create a branch that contains the changes you'll be making. After that, create a **Markdown file** in an appropriate subfolder within `docs/tutorials`. Isaac Blueprints is built using [Markdown](https://www.markdownguide.org/cheat-sheet/) and [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 
@@ -27,7 +27,7 @@ If you want to add images, gifs, or other files to your article, create a new fo
 - A `comments` property for if you want comments to be enabled. This should be `true` or `false`, and should be left as `true` under most circumstances.
 - A `tags` property with a list of tags.
 
-![Metadata example, with an article property, authors property, comments property, and tags property](../tutorials/assets/contribution_guide/metadata.png)
+![Metadata example, with an article property, authors property, comments property, and tags property](./tutorials/assets/contribution_guide/metadata.png)
 
 ???- info "List of tags"
     The following are the allowed tags:
@@ -55,7 +55,7 @@ It is recommended to host the docs locally before creating a pull request with y
 ```
 py -m pip install ./requirements.txt
 ```
-![Gif of installing python packages from the requirements.txt file](../tutorials/assets/contribution_guide/pip.gif)
+![Gif of installing python packages from the requirements.txt file](./tutorials/assets/contribution_guide/pip.gif)
 3. While still in the directory in command prompt, type `mkdocs serve` to host the site.
 4. Visit `localhost:8000` in your browser to see the site!
 
@@ -109,4 +109,4 @@ Additionally, try and avoid redundancy. There is a delicate balance to find betw
 
 Additionally, try and avoid creating very large paragraphs. How people read online is different than with a book, and your article becomes a lot more approachable when paragraphs are split up efficiently.
 
-![Paragraphs split up vs paragraphs not split up](../tutorials/assets/contribution_guide/paragraphs.png)
+![Paragraphs split up vs paragraphs not split up](./tutorials/assets/contribution_guide/paragraphs.png)

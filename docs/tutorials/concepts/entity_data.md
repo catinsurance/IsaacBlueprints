@@ -133,3 +133,16 @@ MOD_REFERENCE:AddCallback(ModCallbacks.MC_POST_ENTITY_REMOVE, MOD_REFERENCE.Clea
 -- Alternatively clear it when the NPC_DEATH callback is run
 -- MOD_REFERENCE:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, MOD_REFERENCE.ClearDataOnRemoveOrDeath)
 ```
+
+If trying to mimic the behavior of `GetData`, your data should also clear when the run is exited in order to prevent any data leaks.
+
+```lua
+-- Provide your data holder to be able to clear it
+local dataHolder = require("path.to.data_holder")
+
+function MOD_REFERENCE:ClearDataOnExit()
+    -- Clear data fully.
+    dataHolder.Data = {}
+end
+MOD_REFERENCE:AddCallback(ModCallbacks.MC_PRE_GAME_EXIT, MOD_REFERENCE.ClearDataOnExit)
+```

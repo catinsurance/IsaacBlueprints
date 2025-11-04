@@ -78,7 +78,7 @@ tags:
 
 ## Websites
 
-- [Wofsauge's Community Documentation](wofsauge.github.io/IsaacDocs/rep/index.html)<br>
+- [Wofsauge's Community Documentation](https://wofsauge.github.io/IsaacDocs/rep/index.html)<br>
 	- Creator: wofsauge<br>
 	- Description: A community project centered around documenting the vanilla API, as the official documentation found in the files is outdated and has very few descriptions.
 

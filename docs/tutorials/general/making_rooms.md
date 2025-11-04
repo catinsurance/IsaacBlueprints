@@ -59,7 +59,7 @@ On the right of the screen, you should see your room list. **At the bottom of th
 
 At the bottom of the rooms list, you can **press "Delete" to delete the room**, and **"Duplicate" to create a copy of the room.** Hold ALT to change "Duplicate" to "Mirror X", which duplicates the room and flips it on the x-axis. Hold ALT *and* SHIFT to change "Duplicate" to "Mirror Y", which duplicates the room and flips it on the y-axis. **If the text ever gets stuck as "Mirror X" or "Mirror Y" (usually as a result of using the ALT + TAB shortcut on Windows), simply press ALT again to set it back to normal.**
 
-**The "Copy to File" button allows you to copy a room from your room list to a different `.xml` file, or into a brand new `.xml` file.** [Click here](#saving-and-loading) to read more about how rooms are saved.
+**The "Copy to File" button allows you to copy a room from your room list to a different `.xml` file, or into a brand new `.xml` file.** [Click here](#adding-rooms-to-your-mod) to read more about how rooms are saved.
 
 Finally, the top of the rooms list has many tools that you can use to filter through your rooms. You can filter by numerical ID or room name, search for rooms with the currently selected entity, search by room type, search by room size, or right-click the final box to the right to view an expanded filter menu. **The red box under any of these filter buttons lets you know that the filter is currently enabled. Click this red box to disable the filter.**
 
@@ -182,12 +182,14 @@ There is no "correct" way to design rooms, therefore this section is ultimately 
 Additionally, **avoid situations where the player takes damage and has no means of avoiding it.** This can happen for many reasons, such as the way the tiles are laid out, or the placement of the enemies. Consider playtesting your room with low speed or low knockback item combinations to ensure that it remains fair during most runs. **As a general rule of thumb, if *YOU* cannot clear the room without taking damage, then the room is too hard.**
 
 ### Use entities appropriate for the stage
-Make sure that the entity you're placing actually appears on the stage you're using it in. Basement Renovator includes some enemies that only appear in one or two rooms on a stage in that stage's category in the Entity Palette, so it may become useful to double-check how many rooms an enemy is included in on a stage in vanilla before using it.
+Make sure that the entity you're placing actually appears on the stage you're using it in. Some enemies appear very rarely and should either never be used, or only on special occasion when it makes sense.
+
+Basement Renovator includes some enemies that only appear in one or two rooms on a stage in that stage's category in the Entity Palette, so it may become useful to double-check how many rooms an enemy is included in on a stage in vanilla before using it.
 
 This can be done by selecting the entity in the Entity Palette, then sorting by that entity in the room list by clicking its icon next to the search bar.
 
 <p align="center">
   <img src="../../assets/basement_renovator/enemy_sort.png" alt="Sorting Nightcrawlers in Cellar to show they're only in 3 rooms" />
   <br>
-  <i>There are only 3 rooms in Cellar in vanilla that contain a Nightcrawler. Because of this, this enemy shouldn't be used, even though it's listed under "Cellar" in the Entity Palette.</i>
+  <i>There are only 3 rooms in Cellar in vanilla that contain a Nightcrawler, so consider its rarity before using it in a room.</i>
 </p>

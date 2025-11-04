@@ -81,7 +81,7 @@ mod:AddCallback(ModCallbacks.MC_ENTITY_TAKE_DMG, mod.OnEntityTakeDmg, EntityType
 ```
 
 ### REPENTOGON
-Referring back to the [Return type](taking_damage.md#callback_breakdown) section, you can return a table of values to modify attributes of the damage taken and it'll be passed along to the remaining callbacks.
+Referring back to the [Return type](taking_damage.md#callback-breakdown) section, you can return a table of values to modify attributes of the damage taken and it'll be passed along to the remaining callbacks.
 
 ```Lua
 --All enemies take half the amount of damage they would've normally taken.

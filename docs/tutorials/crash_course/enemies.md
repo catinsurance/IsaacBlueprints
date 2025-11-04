@@ -119,7 +119,7 @@ When this entity is devolved through the [D10](https://bindingofisaacrebirth.wik
 | id | string | The entity to devolve into. This variable is unique where the ID, variant, and subtype are all combined into one string separated by periods in the format of `Type.Variant.Subtype` (e.g. A regular Gaper would be defined as `10.1.0`). Effect entities should use the type of 999 instead of 1000, as 1000 is reserved for rocks (used by Stone Grimaces). For rocks, the variant and subtype is ignored. |
 | weight | float | Completely ignored by the game, but would likely be used to determine the relative likelihood of this devolution be chosen. Default = `1`.
 
-[Level 2 Roundy](enemies.md#entities-entry) has the following definition for their `devolve` tag, which devolves into a [Roundy](https://bindingofisaacrebirth.wiki.gg/wiki/Round_Worm#Roundy):
+[Level 2 Roundy](enemies.md#entities2xml-entry) has the following definition for their `devolve` tag, which devolves into a [Roundy](https://bindingofisaacrebirth.wiki.gg/wiki/Round_Worm#Roundy):
 ```xml
 <devolve id="276.0.0" weight="1" />
 ```
@@ -144,7 +144,7 @@ The `bestiary` child tag has a few variables to specify how the enemy is display
 
 For the `portrait` variable, you will need an anm2 file defined in the `deathanm2` variable within the `entities2` root tag and placed within your mod's `content/gfx/` folder. There must be one animation and one layer that contains frames for every single portrait. The first frame is frame `0`, so your portrait variable should start from `0`.
 
-[Level 2 Roundy](enemies.md#entities-entry) has their portrait set to `0`, alongside the following definition for their `bestiary` tag:
+[Level 2 Roundy](enemies.md#entities2xml-entry) has their portrait set to `0`, alongside the following definition for their `bestiary` tag:
 ```xml
 <bestiary anim="Idle" transform="0,0,1" />
 ```

@@ -71,7 +71,7 @@ This is the tag used to define an entity.
 ???- info ":modding-repentogon: REPENTOGON-only `entity` tag variables"
 	| Variable Name | Possible Values | Description |
 	|:--|:--|:--|
-	| coinvalue | int | How much this coin pickup is worth when using [GetCoinValue](wofsauge.github.io/IsaacDocs/rep/EntityPickup.html#getcoinvalue) (either by the game or a lua call). |
+	| coinvalue | int | How much this coin pickup is worth when using [GetCoinValue](https://wofsauge.github.io/IsaacDocs/rep/EntityPickup.html#getcoinvalue) (either by the game or a lua call). |
 	| customtags | string | Space-separated list of tags added by REPENTOGON which determine certain properties and behaviors. See [CustomTags](https://repentogon.com/xml/entities.html#customtags) section on the REPENTOGON Docs. |
 	| nosplit | boolean | Allows preventing this NPC from being split by Meat Cleaver. |
 

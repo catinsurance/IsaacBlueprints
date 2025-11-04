@@ -23,3 +23,13 @@ To create a light layer in an entity's `.anm2`, create a new layer. Make sure yo
 - Edit the `Tint Alpha` property to edit the brightness of the light.
 
 ![A diagram showing the different properties of the light in the anm2 editor](../assets/light_layer/light_layer.png)
+
+## Sprites only visible in the dark
+You can make a normal sprite layer (orange in the editor) only visible in the darkness by adding an asterisk (`*`) at the start of the layer's name. This is used by enemies such as [One Tooths](https://bindingofisaacrebirth.wiki.gg/wiki/One_Tooth) to have a layer over their eyes that is visible in the dark.
+
+Note that this does not affect surrounding lighting and only makes the layer visible in the dark.
+
+<p style="vertical-align: middle;">
+<img align="left" src="../../assets/light_layer/one_tooth_anm2.jpg" alt="The anm2 file of a One Tooth" />
+<img align="right" src="../../assets/light_layer/one_tooth.jpg" alt="The eyes of a One Tooth are visible in the dark" />
+</p>

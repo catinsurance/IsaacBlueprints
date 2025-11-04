@@ -177,7 +177,7 @@ mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.AddCostumeOnNewRoom)
 ```
 
 ### XML (Non-REPENTOGON)
-Using XML to add a costume will ensure it will never be removed by rerolls, or by the Mother's Shadow escape sequence. Vanilla characters get around this by adding a `costume` property with the ID of the costume that the character should have. Because modded costumes do not have IDs, the only solution to this is to use one of vanilla game's player-specific costumes that has the appropriate layers we need, and to replace its spritesheet in our character's [costume suffix folder](#adding-character-specific-costume-replacements).
+Using XML to add a costume will ensure it will never be removed by rerolls, or by the Mother's Shadow escape sequence. Vanilla characters get around this by adding a `costume` property with the ID of the costume that the character should have. Because modded costumes do not have IDs, the only solution to this is to use one of vanilla game's player-specific costumes that has the appropriate layers we need, and to replace its spritesheet in our character's [costume suffix folder](#adding-a-character-specific-costume).
 
 Inside the `players.xml` file where you have your custom character defined, add the `costume` property and set it to an existing vanilla null costume. You can get a good idea of the IDs of each null costume through the [NullItemID](https://wofsauge.github.io/IsaacDocs/rep/enums/NullItemID.html) enumeration, or by looking in the `costumes2.xml` folder inside the game's extracted resources.
 
