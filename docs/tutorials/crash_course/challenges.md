@@ -146,7 +146,7 @@ function mod:OnPlayerInit(player)
 		)
 	then
 		--Genesis' default behavior does not enforce the starting character
-		if not isGenesisRoom then
+		if not inGenesisRoom then
 			player:ChangePlayerType(PLAYER_GABRIEL)
 		end
 		player:AddCollectible(DAMAGE_POTION)
