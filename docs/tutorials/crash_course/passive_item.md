@@ -1,5 +1,5 @@
 ---
-article: Items - Passives
+article: Items - Passive
 authors: benevolusgoat
 blurb: Learn how to create passive custom items.
 comments: true
