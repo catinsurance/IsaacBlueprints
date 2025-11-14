@@ -131,18 +131,19 @@ For `subtype`, you must either note down the subtype manually, or use REPENTOGON
 
 The `tag` variable is used to define specific behavior for the entity that varies depending on the tag. You can define one or more tags from the list below:
 
-| Tag-Name | Suffix |
-|:--|:--|
-| cansacrifice | Marks familiars that [Sacrificial Altar](https://bindingofisaacrebirth.wiki.gg/wiki/Sacrificial_Altar) can be used on.|
-| nodelirium | Blacklists a boss from being used by Delirium.|
-| fly | Indicates enemies which should be neutralized by Skatole. Does not affect Beelzebub.|
-| spider | Indicates enemies which should be neutralized by Bursting Sack.|
-| ghost | Indicates enemies which Vade Retro can kill at <50% HP.|
-| noreroll | Immunity to Ace cards that turn enemies into pickups. If a `devolve` tag is defined on the enemy, will prevent rerolls from D10 wisps.|
-| brimstone_soul | Friendly Ball wisps created by this enemy will fire Brimstone lasers.|
-| explosive_soul | Friendly Ball wisps created by this enemy will fire explosive tears.|
-| homing_soul | Friendly Ball wisps created by this enemy will fire homing tears.|
-| devilsacrifice | Repentance+ exclusive tag that allows your item to be paid for with damage instead of heart containers.|
+???- info "`tag` list"
+	| Tag-Name | Suffix |
+	|:--|:--|
+	| cansacrifice | Marks familiars that [Sacrificial Altar](https://bindingofisaacrebirth.wiki.gg/wiki/Sacrificial_Altar) can be used on.|
+	| nodelirium | Blacklists a boss from being used by Delirium.|
+	| fly | Indicates enemies which should be neutralized by Skatole. Does not affect Beelzebub.|
+	| spider | Indicates enemies which should be neutralized by Bursting Sack.|
+	| ghost | Indicates enemies which Vade Retro can kill at <50% HP.|
+	| noreroll | Immunity to Ace cards that turn enemies into pickups. If a `devolve` tag is defined on the enemy, will prevent rerolls from D10 wisps.|
+	| brimstone_soul | Friendly Ball wisps created by this enemy will fire Brimstone lasers.|
+	| explosive_soul | Friendly Ball wisps created by this enemy will fire explosive tears.|
+	| homing_soul | Friendly Ball wisps created by this enemy will fire homing tears.|
+	| devilsacrifice | Repentance+ exclusive tag that allows your item to be paid for with damage instead of heart containers.|
 
 ## `entity` child tags
 
@@ -152,20 +153,21 @@ The `entity` tag has numerous child tags to help define additional information a
 
 The `gibs` tag is used to define the gibs that are spawned when an entity is killed or destroyed. The entity will spawn an amount of gibs based on the `amount` variable and randomly select between one of the other gib variables that are set to `1`. The default for the other gib variables is 0 (disabled).
 
-| Variable Name | Possible Values | Description |
-|:--|:--|:--|
-| amount | int | How many gibs should be spawned.|
-| blood | int | Red meat/muscle particles. |
-| bone | int | Bone particles. |
-| chain | int | Chain gibs. Only used by [The Visage](https://bindingofisaacrebirth.wiki.gg/wiki/The_Visage) in vanilla. |
-| colorblood | int | Colors blood particles to be colored by the entity's [SplatColor](https://wofsauge.github.io/IsaacDocs/rep/Entity.html#splatcolor). |
-| dust | int | Dust particles. |
-| eye | int | Small eyeball particles. |
-| gut | int | Gut particles (e.g. intestines). |
-| huge | int | Used by the Ultra Horsemen. Causes the screen to shake when the entity is killed and plays a meatier death sound. |
-| large | int | Plays a meatier death sound. |
-| poop | int | Poop particles. |
-| rock | int | Small rock particles. |
+???- info "`gibs` list"
+	| Variable Name | Possible Values | Description |
+	|:--|:--|:--|
+	| amount | int | How many gibs should be spawned.|
+	| blood | int | Red meat/muscle particles. |
+	| bone | int | Bone particles. |
+	| chain | int | Chain gibs. Only used by [The Visage](https://bindingofisaacrebirth.wiki.gg/wiki/The_Visage) in vanilla. |
+	| colorblood | int | Colors blood particles to be colored by the entity's [SplatColor](https://wofsauge.github.io/IsaacDocs/rep/Entity.html#splatcolor). |
+	| dust | int | Dust particles. |
+	| eye | int | Small eyeball particles. |
+	| gut | int | Gut particles (e.g. intestines). |
+	| huge | int | Used by the Ultra Horsemen. Causes the screen to shake when the entity is killed and plays a meatier death sound. |
+	| large | int | Plays a meatier death sound. |
+	| poop | int | Poop particles. |
+	| rock | int | Small rock particles. |
 
 ### `preload` and `preload-snd` tags
 
