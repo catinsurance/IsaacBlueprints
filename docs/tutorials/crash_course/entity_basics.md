@@ -129,9 +129,9 @@ For `subtype`, you must either note down the subtype manually, or use REPENTOGON
 
 ## Tags explanation
 
-The `tag` variable is used to define specific behavior for the entity that varies depending on the tag. You can define one or more tags from the list below:
+The `tags` variable is used to define specific behavior for the entity that varies depending on the tag. You can define one or more tags from the list below:
 
-???- info "`tag` list"
+???- info "`tags` list"
 	| Tag-Name | Suffix |
 	|:--|:--|
 	| cansacrifice | Marks familiars that [Sacrificial Altar](https://bindingofisaacrebirth.wiki.gg/wiki/Sacrificial_Altar) can be used on.|
