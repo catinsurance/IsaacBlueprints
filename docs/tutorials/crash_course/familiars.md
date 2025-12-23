@@ -14,11 +14,10 @@ tags:
 
 {% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
 
-Familiars are small companions Isaac obtains, normally through passive items, that follow and assist Isaac. This tutorial will cover the basics of creating a familiar.
+Familiars are small companions Isaac obtains, normally through passive items, that follow and assist Isaac. This tutorial will cover the basics of creating a familiar that can shoot tears.
 
 ## Video tutorial
 
-Although the video tutorial covers how to create a shooter familiar, this tutorial will only cover the essentials to creating an item that summons a familiar. A more advanced tutorial on creating different familiar variants can be found here (article not made yet!).
 [![Familiars | Youtube Tutorial](https://img.youtube.com/vi/kJoTeVR8tAA/0.jpg)](https://youtu.be/kJoTeVR8tAA "Video tutorial")
 
 ## Creating your familiar
@@ -145,8 +144,109 @@ function mod:EvaluateCache(player)
 
 	player:CheckFamiliar(FAMILIAR_VARIANT, count, rng, CONFIG_FRANKIE)
 end
-
+count
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.EvaluateCache, CacheFlag.CACHE_FAMILIARS)
 ```
 
-With that, your familiar should now spawn when collecting your item and through other scenarios such as Box of Friends! For checking out what more can be done with a familiar, see the [EntityFamiliar](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html) docs page, or read the article on familiar variations (article not made yet!).
+With that, your familiar should now spawn when collecting your item and through other scenarios such as Box of Friends!
+
+## Creating a shooter familiar
+
+Your familiar exists, but at the current moment will do nothing when spawned in. Let's have it follow the player.
+
+This code will automatically make the familiar a "follower" familiar, being inserted into the familiar line and following the player/the familiar in front of them in line
+
+(code snippets from hereon are in the context of being placed below the previous code snippets)
+```Lua
+--MC_FAMILIAR_UPDATE passes the familiar its updating.
+function mod:FamiliarUpdate(familiar)
+	familiar:FollowParent()
+end
+
+--MC_FAMILIAR_UPDATE is the UPDATE callback for familiars. It accepts an optional argument to only run for your familiar variant.
+mod:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, mod.FamiliarUpdate, FAMILIAR_VARIANT)
+```
+
+A shooter familiar is a familiar that fires tears alongside Isaac. Thankfully there is an extremely simple function that will handle the vast majority of work involved: [EntityFamiliar:Shoot](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html#shoot).
+
+```Lua
+function mod:FamiliarUpdate(familiar)
+	familiar:Shoot()
+	familiar:FollowParent()
+end
+
+mod:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, mod.FamiliarUpdate, FAMILIAR_VARIANT)
+```
+
+This function, when ran on `MC_FAMILIAR_UPDATE`, will make your familiar fire regular tears 1.36 times a second dealing 3.5 damage per shot. It will automatically synergize with shooter familiar modifiers such as Baby-Bender, BFFS!, and Forgotten Lullaby, and firing direction overrides like King Baby and Marked. It will also automatically handle playing the appropriate animations for a shooter familiar. You can copy/reference `003.001_brother bobby.anm2` inside the game's [extracted resources](creating_a_mod.md#extracting-the-games-resources).
+
+If you wish to modify the firing speed and attributes of the tear, there are methods for doing so. Without REPENTOGON, you will need to some manual checks inside `MC_FAMILIAR_UPDATE`. This code will alter the firerate of the familiar so that it fires 1 tear per second, do double the normal damage, and slow enemies.
+
+```Lua
+function mod:FamiliarUpdate(familiar)
+	local player = familiar.Player
+	local fireDir = player:GetFireDirection()
+	--We check FireCooldown before :Shoot() as we know familiars can only fire if its 0
+	local canFire = familiar.FireCooldown == 0
+
+	familiar:Shoot()
+
+	--Checking FireCooldown, we know :Shoot() successfully fired something if FireCooldown is now above 0.
+	if canFire and familiar.FireCooldown > 0 then
+		--Callback runs at 30 fps and FireCooldown decreases by 1 every frame
+		--30 = 1 second
+		local newCooldown = 30
+
+		--Account for Forgotten Lullaby that halves the cooldown
+		if player:HasTrinket(TrinketType.TRINKET_FORGOTTEN_LULLABY) then
+			--math.floor is to remove decimals and make it an integer instead of a float
+			newCooldown = math.floor(familiar.FireCooldown / 2)
+		end
+
+		--Set new cooldown
+		familiar.FireCooldown = newCooldown
+
+		--:Shoot() will already have spawned the tear and made tear effects/damage modifiers, so we can search for it and make modifications here.
+		--MC_POST_TEAR_INIT can be used, but tear effects/damage is overridden afterwards
+		for _, ent in ipairs(Isaac.FindByType(EntityType.ENTITY_TEAR, TearVariant.BLUE, 0)) do
+			--Check its only from our familiar by checking the Type and Variant of what spawned it
+			if ent.SpawnerType == EntityType.ENTITY_FAMILIAR
+				and ent.SpawnerVariant == FAMILIAR_VARIANT
+				--Check that it just spawned
+				and tear.FrameCount == 0
+			then
+				--Isaac.FindByType always passes an Entity object. Make it an EntityFamiliar to access :AddTearFlags()
+				local tear = ent:ToTear()
+				--Add tear modifiers
+				tear:AddTearFlags(TearFlags.TEAR_SLOW)
+				tear.CollisionDamage = tear.CollisionDamage * 2
+			end
+		end
+	end
+
+	familiar:FollowParent()
+end
+
+mod:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, mod.FamiliarUpdate, FAMILIAR_VARIANT)
+```
+
+If instead using :modding-repentogon: REPENTOGON, there is a callback named [MC_POST_FAMILIAR_FIRE_PROJECTILE](https://repentogon.com/enums/ModCallbacks.html#mc_post_familiar_fire_projectile) that triggers when `EntityFamiliar:Shoot` is called and a tear is fired.
+
+```Lua
+--Callback only passes the fired tear
+function mod:FamiliarShoot(tear)
+	local familiar = tear.SpawnerEntity and tear.SpawnerEntity:ToFamiliar()
+	local newCooldown = 30
+
+	if player:HasTrinket(TrinketType.TRINKET_FORGOTTEN_LULLABY) then
+		newCooldown = math.floor(familiar.FireCooldown / 2)
+	end
+
+	familiar.FireCooldown = newCooldown
+	tear:AddTearFlags(TearFlags.TEAR_SLOW)
+	tear.CollisionDamage = tear.CollisionDamage * 2
+end
+
+--Callback accepts an optional argument to only run for your familiar variant.
+mod:AddCallback(ModCallbacks.MC_POST_FAMILIAR_FIRE_PROJECTILE, mod.FamiliarShoot, FAMILIAR_VARIANT)
+```
