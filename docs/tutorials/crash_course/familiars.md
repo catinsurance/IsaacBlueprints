@@ -13,6 +13,7 @@ tags:
 ---
 
 {% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
+{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 
 Familiars are small companions Isaac obtains, normally through passive items, that follow and assist Isaac. This tutorial will cover the basics of creating a familiar that can shoot tears.
 
