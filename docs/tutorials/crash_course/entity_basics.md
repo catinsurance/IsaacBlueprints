@@ -136,8 +136,8 @@ The `tag` variable is used to define specific behavior for the entity that varie
 	|:--|:--|
 	| cansacrifice | Marks familiars that [Sacrificial Altar](https://bindingofisaacrebirth.wiki.gg/wiki/Sacrificial_Altar) can be used on.|
 	| nodelirium | Blacklists a boss from being used by Delirium.|
-	| fly | Indicates enemies which should be neutralized by Skatole. Does not affect Beelzebub.|
-	| spider | Indicates enemies which should be neutralized by Bursting Sack.|
+	| fly | Indicates enemies which should be neutralized by Skatole. Does not affect Beelzebub. On a familiar, they'll have a BFFS!-like effect with Hive Mind.|
+	| spider | Indicates enemies which should be neutralized by Bursting Sack. On a familiar, they'll have a BFFS!-like effect with Hive Mind.|
 	| ghost | Indicates enemies which Vade Retro can kill at <50% HP.|
 	| noreroll | Immunity to Ace cards that turn enemies into pickups. If a `devolve` tag is defined on the enemy, will prevent rerolls from D10 wisps.|
 	| brimstone_soul | Friendly Ball wisps created by this enemy will fire Brimstone lasers.|
