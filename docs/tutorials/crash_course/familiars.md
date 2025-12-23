@@ -46,11 +46,9 @@ This `items.xml` entry will add an item named "Friend Frankie", a Quality 1 item
 
 In conjunction with your item, the familiar must exist as an entity. The `id` variable must be equal to `3` to define it as a familiar.
 
-This `entities2.xml` entry will add a familiar entity, also aptly named "Friend Frankie", with some simple attributes. Note that the `items.xml` entry and the `entities2.xml` entry do NOT need to have the same name. It is only for convenience.
+This `entities2.xml` entry will add a familiar entity, also aptly named "Friend Frankie", with some simple attributes. Note that the `items.xml` entry and the `entities2.xml` entry do not need to have the same name; it is only for convenience.
 
 For the variant, it can be any arbitrary value not taken up by an existing vanilla familiar. Available variants are `131`-`199`, `244`-`899`, and `901`-`4095`. More information on why the variant must be defined within these boundaries can be found [here](entity_basics.md#what-to-set-for-idvariantsubtype).
-
-It has one tag named `cansacrifice`, meaning the familiar can be removed by [Sacrificial Altar](https://bindingofisaacrebirth.wiki.gg/wiki/Sacrificial_Altar).
 
 ```XML
 <entities anm2root="gfx/" version="5">
@@ -58,6 +56,27 @@ It has one tag named `cansacrifice`, meaning the familiar can be removed by [Sac
     tags="cansacrifice" shadowSize="11" friction="1" />
 </entities>
 ```
+
+### familiar-relevant tags
+
+The `tags` variable has several options available that are exclusive to or relevant for familiars.
+
+???- info "`tags` list"
+	| Tag-Name | Suffix |
+	|:--|:--|
+	| cansacrifice | Marks familiars that [Sacrificial Altar](https://bindingofisaacrebirth.wiki.gg/wiki/Sacrificial_Altar) can be used on. |
+	| fly | Increases familiar size and damage if their player has Hive Mind, similarly to [BFFS!](https://bindingofisaacrebirth.wiki.gg/wiki/BFFS!). |
+	| spider | Increases familiar size and damage if their player has Hive Mind, similarly to [BFFS!](https://bindingofisaacrebirth.wiki.gg/wiki/BFFS!). |
+
+:modding-repentogon: REPENTOGON also has a `customtags` variable intended to expand upon the `tags` list.
+
+???- info "`customtags` list"
+	| Tag-Name | Suffix |
+	|:--|:--|
+	| familiarignorebffs | The [BFFS!](https://bindingofisaacrebirth.wiki.gg/wiki/BFFS!) item will no longer affect this familiar. |
+	| familiarcantakedamage | Familiars with `baseHP` above `0` will be able to take damage and die, such as from enemy contact, lasers or explosions. Note that they will only take damage from projectiles if they also have the `familiarblockprojectiles` tag. |
+	| familiarblockprojectiles | The familiar automatically destroys enemy projectiles on contact. |
+	| nocharm | Makes the familiar not be charmed by [Siren](https://bindingofisaacrebirth.wiki.gg/wiki/The_Siren). |
 
 ## Linking the familiar to the item
 
