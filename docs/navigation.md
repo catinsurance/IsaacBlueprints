@@ -14,6 +14,7 @@ search:
     - [Costumes](./tutorials/crash_course/costumes.md)
 	- [Characters](./tutorials/crash_course/character.md)
 	- [Entity Basics](./tutorials/crash_course/entity_basics.md)
+    - [Effects](./tutorials/crash_course/effects.md)
 	- [Creating enemies](./tutorials/crash_course/enemies.md)
     - [Challenges](./tutorials/crash_course/challenges.md)
     - [Sounds](./tutorials/crash_course/sound_effects.md)
