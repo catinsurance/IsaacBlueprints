@@ -91,7 +91,7 @@ local mod = RegisterMod("My Mod", 1)
 local ITEM_ID = Isaac.GetItemIdByName("Friend Frankie")
 local FAMILIAR_VARIANT = Isaac.GetEntityVariantByName("Friend Frankie")
 
----The player who's cache is being evaluated is the first argument passed into the function
+---The player who's cache is being evaluated is the first argument passed into the function.
 function mod:EvaluateCache(player)
 
 end
@@ -121,19 +121,19 @@ local mod = RegisterMod("My Mod", 1)
 
 local ITEM_ID = Isaac.GetItemIdByName("Friend Frankie")
 local FAMILIAR_VARIANT = Isaac.GetEntityVariantByName("Friend Frankie")
---Storing constant variable here for convenience
+--Storing constant variable here for convenience.
 local RNG_SHIFT_INDEX = 35
---Access the ItemConfigClass
+--Access the ItemConfigClass.
 local itemConfig = Isaac.GetItemConfig()
---Obtain the ItemConfigItem object for our item
+--Obtain the ItemConfigItem object for our item.
 local CONFIG_FRANKIE = itemConfig:GetCollectible(ITEM_ID)
 
 function mod:EvaluateCache(player)
-	--Access the TemporaryEffects class
+	--Access the TemporaryEffects class.
 	local effects = player:GetEffects()
-	--Get how many familiars should be spawned
+	--Get how many familiars should be spawned.
 	local count = player:GetCollectibleNum(ITEM_ID) + effects:GetCollectibleEffectNum(ITEM_ID)
-	--Create a new RNG object
+	--Create a new RNG object.
 	local rng = RNG()
 	--Get a random seed via Random(), which returns any number from 0 to 2^32, inclusive
 	--RNG objects with a seed of 0 will crash the game, so we use math.max will ensure its always at least 1 or above.
@@ -186,20 +186,20 @@ If you wish to modify the firing speed and attributes of the tear, there are met
 function mod:FamiliarUpdate(familiar)
 	local player = familiar.Player
 	local fireDir = player:GetFireDirection()
-	--We check FireCooldown before :Shoot() as we know familiars can only fire if its 0
+	--We check FireCooldown before :Shoot() as we know familiars can only fire if its 0.
 	local canFire = familiar.FireCooldown == 0
 
 	familiar:Shoot()
 
 	--Checking FireCooldown, we know :Shoot() successfully fired something if FireCooldown is now above 0.
 	if canFire and familiar.FireCooldown > 0 then
-		--Callback runs at 30 fps and FireCooldown decreases by 1 every frame
-		--30 = 1 second
+		--Callback runs at 30 fps and FireCooldown decreases by 1 every frame.
+		--30 = 1 second.
 		local newCooldown = 30
 
-		--Account for Forgotten Lullaby that halves the cooldown
+		--Account for Forgotten Lullaby that halves the cooldown.
 		if player:HasTrinket(TrinketType.TRINKET_FORGOTTEN_LULLABY) then
-			--math.floor is to remove decimals and make it an integer instead of a float
+			--math.floor is to remove decimals and make it an integer instead of a float.
 			newCooldown = math.floor(familiar.FireCooldown / 2)
 		end
 
@@ -207,17 +207,17 @@ function mod:FamiliarUpdate(familiar)
 		familiar.FireCooldown = newCooldown
 
 		--:Shoot() will already have spawned the tear and made tear effects/damage modifiers, so we can search for it and make modifications here.
-		--MC_POST_TEAR_INIT can be used, but tear effects/damage is overridden afterwards
+		--MC_POST_TEAR_INIT can be used, but tear effects/damage is overridden afterwards.
 		for _, ent in ipairs(Isaac.FindByType(EntityType.ENTITY_TEAR, TearVariant.BLUE, 0)) do
-			--Check its only from our familiar by checking the Type and Variant of what spawned it
+			--Check its only from our familiar by checking the Type and Variant of what spawned it.
 			if ent.SpawnerType == EntityType.ENTITY_FAMILIAR
 				and ent.SpawnerVariant == FAMILIAR_VARIANT
-				--Check that it just spawned
+				--Check that it just spawned.
 				and tear.FrameCount == 0
 			then
 				--Isaac.FindByType always passes an Entity object. Make it an EntityFamiliar to access :AddTearFlags()
 				local tear = ent:ToTear()
-				--Add tear modifiers
+				--Add tear modifiers.
 				tear:AddTearFlags(TearFlags.TEAR_SLOW)
 				tear.CollisionDamage = tear.CollisionDamage * 2
 			end
@@ -249,4 +249,16 @@ end
 
 --Callback accepts an optional argument to only run for your familiar variant.
 mod:AddCallback(ModCallbacks.MC_POST_FAMILIAR_FIRE_PROJECTILE, mod.FamiliarShoot, FAMILIAR_VARIANT)
+```
+
+As a final touch, :modding-repentogon: REPENTOGON also allows you to assign the priority of a familiar through [MC_GET_FOLLOWER_PRIORITY](https://repentogon.com/enums/ModCallbacks.html#mc_get_follower_priority). With [FollowerPriority.SHOOTER](https://repentogon.com/enums/FollowerPriority.html), the familiar is further back in the line, but is in front of any other familiars without an assigned priority. It also affects how the familiar is treated for Lilith and Tainted Lilith's birthright.
+
+```Lua
+--Don't need to do anything other than return the new priority as it only runs for our familiar.
+function mod:FamilarPriority()
+	return FollowerPriority.SHOOTER
+end
+
+--Callback accepts an optional argument to only run for your familiar variant.
+mod:AddCallback(ModCallbacks.MC_GET_FOLLOWER_PRIORITY, mod.FamiliarPriority, FAMILIAR_VARIANT)
 ```
