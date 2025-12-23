@@ -1,5 +1,5 @@
 ---
-article: Enemies
+article: Effects
 authors: benevolusgoat
 blurb: Learn how to create custom effects.
 comments: true
@@ -19,6 +19,7 @@ tags:
 Effects are miscellaneous special effect entities that can be used for arbitrary purposes. The poof of an enemy spawning, the devil and angel statues, the splatter of a tear, and many more are all effect entities. This tutorial will cover how to create one of your own.
 
 ## Video tutorial
+
 [![Entities and Effects | Youtube Tutorial](https://img.youtube.com/vi/sxgf2SH6ZGs/0.jpg)](https://youtu.be/sxgf2SH6ZGs "Video tutorial")
 
 ## entities2.xml entry
