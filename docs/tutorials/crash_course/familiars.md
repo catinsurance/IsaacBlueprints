@@ -184,31 +184,31 @@ This function, when ran on `MC_FAMILIAR_UPDATE`, will make your familiar fire re
 If you wish to modify the firing speed and attributes of the tear, there are methods for doing so. Without REPENTOGON, you will need to some manual checks inside `MC_FAMILIAR_UPDATE`. This code will alter the firerate of the familiar so that it fires 1 tear per second, do double the normal damage, and slow enemies.
 
 ```Lua
+--Define what we want our familiar's new FireCooldown to be.
+--30 is equivalent to 1 second.
+local NEW_COOLDOWN = 30
+--By default, FireCooldown is set to 22 when firing a tear.
+local DEFAULT_COOLDOWN = 22
+--This is kept as a "percentage" of how much we want to adjust the cooldown by
+--so that we can account for Forgotten Lullaby's adjustment to the default cooldown.
+local COOLDOWN_MULT = NEW_COOLDOWN / DEFAULT_COOLDOWN
+
 function mod:FamiliarUpdate(familiar)
 	local player = familiar.Player
 	local fireDir = player:GetFireDirection()
 	--We check FireCooldown before :Shoot() as we know familiars can only fire if its 0.
-	local canFire = familiar.FireCooldown == 0
+	--It's <= 1 specifically because :Shoot() will subtract FireCooldown on its own, check if its 0, then fire again if so.
+	local canFire = familiar.FireCooldown <= 1
 
 	familiar:Shoot()
 
-	--Checking FireCooldown, we know :Shoot() successfully fired something if FireCooldown is now above 0.
+	--Checking FireCooldown > 0, we know :Shoot() successfully fired something.
 	if canFire and familiar.FireCooldown > 0 then
-		--Callback runs at 30 fps and FireCooldown decreases by 1 every frame.
-		--30 = 1 second.
-		local newCooldown = 30
+		--Set new cooldown. It's under math.floor to turn it into an integer, as FireCooldown doesn't accept floats.
+		familiar.FireCooldown = math.floor(familiar.FireCooldown * COOLDOWN_MULT)
 
-		--Account for Forgotten Lullaby that halves the cooldown.
-		if player:HasTrinket(TrinketType.TRINKET_FORGOTTEN_LULLABY) then
-			--math.floor is to remove decimals and make it an integer instead of a float.
-			newCooldown = math.floor(familiar.FireCooldown / 2)
-		end
-
-		--Set new cooldown
-		familiar.FireCooldown = newCooldown
-
-		--:Shoot() will already have spawned the tear and made tear effects/damage modifiers, so we can search for it and make modifications here.
-		--MC_POST_TEAR_INIT can be used, but tear effects/damage is overridden afterwards.
+		--:Shoot() will already have spawned the tear and made its modifications to it, so we can search for it and make our own modifications here.
+		--MC_POST_TEAR_INIT isn't reliable as tear effects/damage are overridden afterwards.
 		for _, ent in ipairs(Isaac.FindByType(EntityType.ENTITY_TEAR, TearVariant.BLUE, 0)) do
 			--Check its only from our familiar by checking the Type and Variant of what spawned it.
 			if ent.SpawnerType == EntityType.ENTITY_FAMILIAR
@@ -216,7 +216,7 @@ function mod:FamiliarUpdate(familiar)
 				--Check that it just spawned.
 				and tear.FrameCount == 0
 			then
-				--Isaac.FindByType always passes an Entity object. Make it an EntityFamiliar to access :AddTearFlags()
+				--Isaac.FindByType always passes an Entity object. Make it an EntityFamiliar to access :AddTearFlags().
 				local tear = ent:ToTear()
 				--Add tear modifiers.
 				tear:AddTearFlags(TearFlags.TEAR_SLOW)
@@ -231,19 +231,11 @@ end
 mod:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, mod.FamiliarUpdate, FAMILIAR_VARIANT)
 ```
 
-If instead using :modding-repentogon: REPENTOGON, there is a callback named [MC_POST_FAMILIAR_FIRE_PROJECTILE](https://repentogon.com/enums/ModCallbacks.html#mc_post_familiar_fire_projectile) that triggers when `EntityFamiliar:Shoot` is called and a tear is fired.
+If instead using :modding-repentogon: REPENTOGON, there is a callback named [MC_POST_FAMILIAR_FIRE_PROJECTILE](https://repentogon.com/enums/ModCallbacks.html#mc_post_familiar_fire_projectile) that triggers when `EntityFamiliar:Shoot` is called and a tear is fired. You can adjust properties of the tear there yourself.
 
 ```Lua
 --Callback only passes the fired tear
 function mod:FamiliarShoot(tear)
-	local familiar = tear.SpawnerEntity and tear.SpawnerEntity:ToFamiliar()
-	local newCooldown = 30
-
-	if player:HasTrinket(TrinketType.TRINKET_FORGOTTEN_LULLABY) then
-		newCooldown = math.floor(familiar.FireCooldown / 2)
-	end
-
-	familiar.FireCooldown = newCooldown
 	tear:AddTearFlags(TearFlags.TEAR_SLOW)
 	tear.CollisionDamage = tear.CollisionDamage * 2
 end
