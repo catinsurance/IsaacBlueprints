@@ -25,30 +25,30 @@ Familiars are small companions Isaac obtains, normally through passive items, th
 
 Creating your familiar involves entries within two different files: [items.xml](passive_item.md) and [entities2.xml](entity_basics.md). Adjustments are needed to cater these entries towards familiars specifically.
 
-**items.xml**
+### items.xml
 
 When defining your item, instead of the `passive` tag, use `familiar`. This will categorize the item as a familiar item. Normally, an item that summons a familiar should have `cache="familiars"` present, but items that are defined as a familiar item will automatically handle this.
 
-This `items.xml` entry will add an item named "Friend Frankie", a Quality 1 item, with four tags present.
+This `items.xml` entry will add an item named "Friend Frankie", a quality 1 item with four tags present.
 
-- `baby` will have the item contribute to the [Conjoined](https://bindingofisaacrebirth.wiki.gg/wiki/Conjoined) transformation
-- `offensive` makes this item available to Tainted Lost
-- `summonable` allows the item to be summoned by Lemegeton
-- `monstermanual` allows the item's familiar to be summoned by Monster Manual
+- `baby` will have the item contribute to the [Conjoined](https://bindingofisaacrebirth.wiki.gg/wiki/Conjoined) transformation.
+- `offensive` makes this item available to Tainted Lost.
+- `summonable` allows the item to be summoned by [Lemegeton](https://bindingofisaacrebirth.wiki.gg/wiki/Lemegeton).
+- `monstermanual` allows the item's familiar to be summoned by [Monster Manual](https://bindingofisaacrebirth.wiki.gg/wiki/Monster_Manual).
 
 ```XML
 <items gfxroot="gfx/items/" version="1">
-        <familiar name="Friend Frankie" description="Friends 'till the end" quality="1" tags="baby offensive summonable monstermanual" />
+	<familiar name="Friend Frankie" description="Friends 'till the end" quality="1" tags="baby offensive summonable monstermanual" />
 </items>
 ```
 
-**entities2.xml**
+### entities2.xml
 
 In conjunction with your item, the familiar must exist as an entity. The `id` variable must be equal to `3` to define it as a familiar.
 
-This `entities2.xml` entry will add a familiar entity, also aptly named "Friend Frankie", with some simple attributes. Note that the `items.xml` entry and the `entities2.xml` entry do not need to have the same name; it is only for convenience.
+This `entities2.xml` entry will add a familiar entity, aptly named "Friend Frankie", with some simple attributes. Note that the `items.xml` entry and the `entities2.xml` entry do not need to have the same name; it is only for convenience.
 
-For the variant, it can be any arbitrary value not taken up by an existing vanilla familiar. Available variants are `131`-`199`, `244`-`899`, and `901`-`4095`. More information on why the variant must be defined within these boundaries can be found [here](entity_basics.md#what-to-set-for-idvariantsubtype).
+For the variant, it can be any arbitrary value not taken up by an existing vanilla familiar. Available variants are `131`-`199`, `244`-`899`, and `901`-`4095`. You can also omit the variant entirely to have it auto-assign an available variant.
 
 ```XML
 <entities anm2root="gfx/" version="5">
@@ -82,7 +82,7 @@ The `tags` variable has several options available that are exclusive to or relev
 
 Although you have created your item and your entity, there is nothing that automatically links the two together. This must be done manually through Lua code through the use of the [MC_EVALUATE_CACHE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_evaluate_cache) callback.
 
-First, setting up the `main.lua` file at the root of your mod folder, fetching the necessary variables needed and the callback:
+Firstly, set up the `main.lua` file at the root of your mod folder, and fetch the necessary variables needed and the callback.
 
 ```Lua
 local mod = RegisterMod("My Mod", 1)
@@ -102,20 +102,22 @@ end
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.EvaluateCache, CacheFlag.CACHE_FAMILIARS)
 ```
 
-Next, to fill the function. Checking what familiars should spawn, adding familiars, or removing them is all handled through the [EntityPlayer:CheckFamiliar](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#checkfamiliar) function. It is not 100% required, but is convenient for most use-cases. The function takes the following arguments:
+Checking what familiars should spawn, adding familiars, or removing them is all handled through the [EntityPlayer:CheckFamiliar](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#checkfamiliar) function. It is not necessarily required, but is convenient for most use-cases. The function takes the following arguments:
 
-- What familiar variant to spawn.
-- How many familiars are expected to be present.
-- An [RNG](https://wofsauge.github.io/IsaacDocs/rep/RNG.html) object for determining its InitSeed.
-- An [ItemConfigItem](https://wofsauge.github.io/IsaacDocs/rep/ItemConfig_Item.html) object for linking an item to the spawned familiar. This is optional to include, but will be used for this tutorial.
-- An integer to spawn a specific `SubType` of familiar. This is optional, and by default spawns familiars with a subtype of `0`.
+1. What familiar variant to spawn.
+2. How many familiars are expected to be present.
+3. An [RNG](https://wofsauge.github.io/IsaacDocs/rep/RNG.html) object for determining its `InitSeed`.
+4. An [ItemConfigItem](https://wofsauge.github.io/IsaacDocs/rep/ItemConfig_Item.html) object for linking an item to the spawned familiar. This is necessary for [Sacrifical Altar](https://bindingofisaacrebirth.wiki.gg/wiki/Sacrificial_Altar) to function properly, but is technically optional.
+5. An integer to spawn a specific `SubType` of familiar. This is optional, and by default spawns familiars with a subtype of `0`.
 
 The familiar variant is already stored earlier in the lua file. For the number of familiars to spawn, this can be any number you'd like, but the most common example is how many copies of the item Isaac has combined with the number of [TemporaryEffects](../general/temporary_effects.md) of the item. The purpose of the latter is for items such as Box of Friends, where it will add a `TemporaryEffect` of your familiar item to spawn a copy of your familiar without needing to own the item.
 
-For the RNG, it's a bit more complicated. The `RNG` object passed into `CheckFamiliar` is used for the familiar's InitSeed, which is often used by modders as a unique identifier for each individual familiar. `CheckFamiliar` is bugged in the sense that it will not advance the `RNG` object's seed, meaning multiple of the same familiar would spawn with the exact same InitSeed, potentially disrupting other mods. The only reliable way to fix this is to pass a completely random RNG seed every time the function is called. This won't cause any issues as, once a familiar is spawned, it will keep its InitSeed until it is removed from the player entirely.
+???+ bug "CheckFamiliar and RNG"
+	The `RNG` object passed into `CheckFamiliar` is used for the familiar's `InitSeed`, which is often used by modders as a unique identifier for each individual familiar.
 
-???- note "rng:Next()"
-	Calling `:Next()` on a persistent RNG such as `EntityPlayer:GetCollectibleRNG` will technically resolve the aforementioned issue, however if more than one familiar is added simultaneously, it will "invisibly" advance the RNG object for the other familiars after the first one. This can be accomplished with adding more than one TemporaryEffect for your familiar's item at the same time. Paired with the bug of it not updating the passed RNG object, this will make it so the next time a new version of your familiar spawns, it will have the same InitSeed as one of the extra copies.
+	`CheckFamiliar` is bugged in that it will get new seeds from the RNG object provided *without* actually changing the object. This means that if you use `CheckFamiliar` to spawn 3 new familiars at once, they will all have different seeds, but the RNG object will still have the seed it started with. However, if you use `CheckFamiliar` to spawn one familiar 3 separate times (like Box of Friends), they'll all have the same seed.
+
+	A simple way to fix this is to either advance the RNG object manually for each familiar spawned, or to just provide a unique RNG object to `CheckFamiliar` every time you use it. This tutorial will use the latter solution for simplicity.
 
 ```Lua
 local mod = RegisterMod("My Mod", 1)
@@ -124,7 +126,7 @@ local ITEM_ID = Isaac.GetItemIdByName("Friend Frankie")
 local FAMILIAR_VARIANT = Isaac.GetEntityVariantByName("Friend Frankie")
 --Storing constant variable here for convenience.
 local RNG_SHIFT_INDEX = 35
---Access the ItemConfigClass.
+--Access the ItemConfig class.
 local itemConfig = Isaac.GetItemConfig()
 --Obtain the ItemConfigItem object for our item.
 local CONFIG_FRANKIE = itemConfig:GetCollectible(ITEM_ID)
@@ -140,24 +142,24 @@ function mod:EvaluateCache(player)
 	--RNG objects with a seed of 0 will crash the game, so math.max is used to ensure it's always at least 1 or above.
 	local seed = math.max(Random(), 1)
 	--When setting a seed, you must set the "Shift Index", which essentially determines the sequence of numbers the RNG object will have.
-	--The default Shift Index, revealed by one of the game's developers, is 35.
+	--The most commonly used Shift Index in vanilla was revealed to be 35 by one of the game's developers.
 	rng:SetSeed(seed, RNG_SHIFT_INDEX)
 
 	player:CheckFamiliar(FAMILIAR_VARIANT, count, rng, CONFIG_FRANKIE)
 end
-count
+
 mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.EvaluateCache, CacheFlag.CACHE_FAMILIARS)
 ```
 
 With that, your familiar should now spawn when collecting your item and through other scenarios such as Box of Friends!
 
-## Creating a shooter familiar
+## Creating a follower familiar
 
 Your familiar exists, but at the current moment will do nothing when spawned in. Let's have it follow the player.
 
-This code will automatically make the familiar a "follower" familiar, being inserted into the familiar line and following the player/the familiar in front of them in line
+This code will automatically make the familiar a "follower" familiar, being inserted into the familiar line and following the player/the familiar in front of them in line.
 
-(code snippets from hereon are in the context of being placed below the previous code snippets)
+Code snippets from here on are in the context of being placed below the previous code snippets.
 ```Lua
 --MC_FAMILIAR_UPDATE passes the familiar its updating.
 function mod:FamiliarUpdate(familiar)
@@ -168,7 +170,7 @@ end
 mod:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, mod.FamiliarUpdate, FAMILIAR_VARIANT)
 ```
 
-A shooter familiar is a familiar that fires tears alongside Isaac. Thankfully there is an extremely simple function that will handle the vast majority of work involved: [EntityFamiliar:Shoot](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html#shoot).
+A shooter familiar is a familiar that fires tears alongside Isaac. Thankfully there is an extremely simple function that will handle the vast majority of work involved: [EntityFamiliar:Shoot()](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html#shoot).
 
 ```Lua
 function mod:FamiliarUpdate(familiar)
@@ -179,7 +181,7 @@ end
 mod:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, mod.FamiliarUpdate, FAMILIAR_VARIANT)
 ```
 
-This function, when ran on `MC_FAMILIAR_UPDATE`, will make your familiar fire regular tears 1.36 times a second dealing 3.5 damage per shot. It will automatically synergize with shooter familiar modifiers such as Baby-Bender, BFFS!, and Forgotten Lullaby, and firing direction overrides like King Baby and Marked. It will also automatically handle playing the appropriate animations for a shooter familiar. You can copy/reference `003.001_brother bobby.anm2` inside the game's [extracted resources](creating_a_mod.md#extracting-the-games-resources).
+This function, when ran on `MC_FAMILIAR_UPDATE`, will make your familiar fire regular tears 1.36 times a second dealing 3.5 damage per shot. It will automatically synergize with shooter familiar modifiers such as Baby-Bender, BFFS!, and Forgotten Lullaby, and firing direction overrides like King Baby and Marked. It will also automatically handle playing the appropriate animations for a shooter familiar. You can view `003.001_brother bobby.anm2` inside the game's [extracted resources](creating_a_mod.md#extracting-the-games-resources) for reference.
 
 If you wish to modify the firing speed and attributes of the tear, there are methods for doing so. Without REPENTOGON, you will need to some manual checks inside `MC_FAMILIAR_UPDATE`. This code will alter the firerate of the familiar so that it fires 1 tear per second, do double the normal damage, and slow enemies.
 
@@ -231,7 +233,7 @@ end
 mod:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, mod.FamiliarUpdate, FAMILIAR_VARIANT)
 ```
 
-If instead using :modding-repentogon: REPENTOGON, there is a callback named [MC_POST_FAMILIAR_FIRE_PROJECTILE](https://repentogon.com/enums/ModCallbacks.html#mc_post_familiar_fire_projectile) that triggers when `EntityFamiliar:Shoot` is called and a tear is fired. You can adjust properties of the tear there yourself.
+If using :modding-repentogon: REPENTOGON, you can instead use a callback named [MC_POST_FAMILIAR_FIRE_PROJECTILE](https://repentogon.com/enums/ModCallbacks.html#mc_post_familiar_fire_projectile) that triggers when `EntityFamiliar:Shoot` is called and a tear is fired. You can adjust properties of the tear there yourself.
 
 ```Lua
 --Callback only passes the fired tear
