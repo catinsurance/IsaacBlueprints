@@ -18,7 +18,7 @@ search:
         1. [Entity basics.](../tutorials/crash_course/entity_basics.md)
         2. Creating effects.
         3. [Creating enemies.](../tutorials/crash_course/enemies.md)
-        4. Creating a familiar.
+        4. [Creating a familiar](../tutorials/crash_course/familiars.md).
     9. [Adding sounds.](../tutorials/crash_course/sound_effects.md)
     10. Adding music.
     11. Making pocket items.
