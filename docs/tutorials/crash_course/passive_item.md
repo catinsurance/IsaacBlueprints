@@ -7,6 +7,8 @@ tags:
     - Tutorial
     - Beginner friendly
     - Video
+    - Lua
+    - XML
     - Repentance
     - Repentance+
 ---
