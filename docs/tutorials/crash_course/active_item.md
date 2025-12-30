@@ -54,16 +54,17 @@ Inside your `main.lua`, get your active item's ID and create a function attached
 ```Lua
 local mod = RegisterMod("My Mod", 1)
 
-local bigRedButton = Isaac.GetItemIdByName("Big Red Button")
+local BIG_RED_BUTTON = Isaac.GetItemIdByName("Big Red Button")
 
-function mod:RedButtonUse(item)
+--MC_USE_ITEM passes 5 arguments: the item ID, collectible RNG, the player using it, UseFlags, and the slot it was used from.
+function mod:RedButtonUse(item, rng, player, useFlags, activeSlot)
 
 end
 
 --Will call the mod:RedButtonUse function upon activating our active item.
 --Our item's ID is inserted at the end of the AddCallback function, as this callback accepts an optional argument
 --to specify which active item should trigger our code.
-mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.RedButtonUse, bigRedButton)
+mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.RedButtonUse, BIG_RED_BUTTON)
 ```
 
 For this example, this item will kill every enemy in the room upon use.
@@ -71,9 +72,9 @@ For this example, this item will kill every enemy in the room upon use.
 ```Lua
 local mod = RegisterMod("My Mod", 1)
 
-local bigRedButton = Isaac.GetItemIdByName("Big Red Button")
+local BIG_RED_BUTTON = Isaac.GetItemIdByName("Big Red Button")
 
-function mod:RedButtonUse(item)
+function mod:RedButtonUse(item, rng, player, useFlags, activeSlot)
 	--Gets every entity in the room, as there are no specialized methods of getting only enemies.
 	local roomEntities = Isaac.GetRoomEntities()
 	--Loop through the list of entities.
@@ -95,7 +96,21 @@ function mod:RedButtonUse(item)
 	--return true
 end
 
-mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.RedButtonUse, bigRedButton)
+mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.RedButtonUse, BIG_RED_BUTTON)
+```
+
+### Use Flags
+
+[UseFlags](https://wofsauge.github.io/IsaacDocs/rep/enums/UseFlag.html) are a [bit field](https://en.wikipedia.org/wiki/Bit_field) used to determine certain attributes when activating an active item, card, or pill. This allows a single variable, passed as `useFlags` through the `MC_USE_ITEM` callback, to store multiple attributes at the same time. Explaining bitwise operations is beyond the scope of this tutorial, but know that `useFlags & desiredFlag == desiredFlag` is an effective way to check if it contains a specific flag.
+
+As an example, the following code can be used to stop Car Battery from activating your item a second time:
+
+```Lua
+function mod:RedButtonUse(item, rng, player, useFlags, activeSlot)
+    if useFlags & UseFlag.USE_CARBATTERY == UseFlag.CAR_BATTERY then
+        return
+    end
+end
 ```
 
 ### Adding charges manually
@@ -108,16 +123,16 @@ local mod = RegisterMod("My Mod", 1)
 
 local game = Game()
 
-local bigRedButton = Isaac.GetItemIdByName("Big Red Button")
+local BIG_RED_BUTTON = Isaac.GetItemIdByName("Big Red Button")
 
 local ONE_SECOND = 30
 local TEN_SECONDS = ONE_SECOND * 10
 --Will need to compare against the maximum amount of charges later to see if the active needs to be charged.
-local MAX_CHARGE = Isaac.GetItemConfig():GetCollectible(bigRedButton).MaxCharges
+local MAX_CHARGE = Isaac.GetItemConfig():GetCollectible(BIG_RED_BUTTON).MaxCharges
 
 function mod:ChargeActiveItem(player)
 	--Only run this code if we have our active item and that the game's timer has hit an interval of ten seconds.
-	if player:HasCollectible(bigRedButton) and game:GetFrameCount() % TEN_SECONDS == 0 then
+	if player:HasCollectible(BIG_RED_BUTTON) and game:GetFrameCount() % TEN_SECONDS == 0 then
 		--Will loop through the primary, secondary (from Schoolbag), and pocket item slot for active items.
 		for slot = ActiveSlot.SLOT_PRIMARY, ActiveSlot.SLOT_POCKET do
 			local maxCharge = MAX_CHARGE
@@ -128,7 +143,7 @@ function mod:ChargeActiveItem(player)
 			end
 			--Check that it's our active item and it needs to be charged.
 			--There is an EntityPlayer:NeedsCharge() function, but it will always return `false` for `special` chargetype actives.
-			if player:GetActiveItem(slot) == bigRedButton and player:GetActiveCharge(slot) < maxCharge then
+			if player:GetActiveItem(slot) == BIG_RED_BUTTON and player:GetActiveCharge(slot) < maxCharge then
 				--Will use the REPENTOGON-exclusive method of adding charges to the item, if available. Otherwise, uses the traditional method.
 				if REPENTOGON then
 					player:AddActiveCharge(1, slot, true, false, true)
