@@ -64,7 +64,7 @@ The info tag contains the text to display as a bullet point and can be set to di
 	|notplayer|int|Comma-separated list of [PlayerTypes](https://wofsauge.github.io/IsaacDocs/rep/enums/PlayerType.html). `text` will only be visible if the first player is NOT any of the listed PlayerTypes.|
 	|tag|int|For use with trinkets and pills for golden trinkets and Horse Pills respectively. See [Synergies](internal_item_descriptions.md#synergies) for more information.|
 
-Below is an example of multiple lines of text for our item. The first line is always present, the second line requires you have Sad Onion, and the last line requires you don't.
+Below is an example of multiple lines of text for our item. The first line is always present, the second line requires you don't have Sad Onion, and the last line requires you do.
 ```xml
 <collectible id="0">
 	<info text="+1 Epic Point"/>
