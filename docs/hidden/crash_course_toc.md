@@ -22,7 +22,7 @@ search:
     9. [Adding sounds.](../tutorials/crash_course/sound_effects.md)
     10. Adding music.
     11. Making pocket items.
-        1. Creating custom cards, runes, and objects.
+        1. [Creating custom cards, runes, and objects.](../tutorials/crash_course/pocket_item_card.md)
         2. Creating custom pills.
     12. [Creating challenges.](../tutorials/crash_course/challenges.md)
     13. Structuring your mod.
