@@ -7,6 +7,8 @@ tags:
     - Tutorial
     - Beginner friendly
     - Video
+    - Lua
+    - XML
     - Repentance
     - Repentance+
 ---
@@ -40,7 +42,7 @@ For every XML file, there is a tag that goes from the start of the file to the e
 
 ???- info "`passive` tag variables"
 	???+ note
-		Only a `name` is required to create an item, but all items should be created with a `description`, `gfx`, and `quality`.
+		Only the `name` variable is required to create an item, but `description`, `gfx`, and `quality` should be populated for a typical item. All other variables are optional.
 	| Variable Name | Possible Values | Description |
 	|:--|:--|:--|
 	| id | int | Used for associating [costumes](./costumes.md) and death portrait/collection page sprites with an item. |
