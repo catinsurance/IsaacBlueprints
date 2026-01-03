@@ -16,7 +16,7 @@ tags:
 
 {% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
 
-Effects are miscellaneous special effect entities that can be used for arbitrary purposes. The poof of an enemy spawning, the devil and angel statues, the splatter of a tear, and many more are all effect entities. This tutorial will cover how to create one of your own.
+Effects are special miscellaneous entities that can be used for any purpose. The poof of an enemy spawning, the devil and angel statues, the splatter of a tear, and many more are all effect entities.
 
 ## Video tutorial
 
@@ -34,7 +34,7 @@ The code below is an entities2.xml entry for an effect named "Sad Rain Cloud". E
 </entities>
 ```
 
-Once in-game, you can spawn your effect using the debug console. Type `spawn rain cloud` and, so long as its the first option available, press ENTER and it will spawn in the middle of the room. Alternatively, typing `1000.2096` to spawn it using its ID and variant will also do.
+Once in-game, you can spawn your effect using the debug console. Type `spawn rain cloud` and, so long as its the first option available, press ENTER to spawn it in the middle of the room. Alternatively, type `1000.2096` to spawn it using its ID and variant.
 
 ![Debug console](../assets/effects/raincloud_console.png)
 
@@ -47,7 +47,7 @@ The entity now exists in the game, but it does nothing on its own. This is where
 Start by setting up your `main.lua` with the essentials. Create a function and attach it to the [MC_POST_EFFECT_INIT](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_effect_init) callback, which passes the [EntityEffect](https://wofsauge.github.io/IsaacDocs/rep/EntityEffect.html) object being initialized.
 
 ```Lua
---Define our mod reference as per usual
+--Define our mod reference as per usual.
 local mod = RegisterMod("My Mod", 1)
 
 --The variant of your effect may change if it conflicts with another effect of the same variant.
@@ -67,7 +67,7 @@ mod:AddCallback(ModCallbacks.MC_POST_EFFECT_INIT, mod.OnRainCloudInit, RAIN_CLOU
 
 The remaining code for our desired action is straightforward:
 
-1. To follow the position of any desired entity, the `EntityEffect` class has a simple function that allows it to automatically: [EntityEffect:FollowParent](https://wofsauge.github.io/IsaacDocs/rep/EntityEffect.html#followparent).
+1. To follow the position of any desired entity, you can use a simple function that's part of the `EntityEffect` class: [EntityEffect:FollowParent](https://wofsauge.github.io/IsaacDocs/rep/EntityEffect.html#followparent).
 2. The cloud will visually be on the same level as the player instead of above them, so it needs a [SpriteOffset](https://wofsauge.github.io/IsaacDocs/rep/Entity.html#spriteoffset) to be positioned above the player while still following their exact position.
 
 ```Lua
@@ -76,15 +76,15 @@ local mod = RegisterMod("My Mod", 1)
 local RAIN_CLOUD_VARIANT = Isaac.GetEntityVariantByName("Sad Rain Cloud")
 
 function mod:OnRainCloudInit(cloud)
-	--The player can be acquired by more efficient means, but for the purposes of this tutorial it will always look to the first player when spawned in.
+	--The player can be acquired by any means, but for the purposes of this tutorial it will always look to the first player when spawned in.
 	local player = Isaac.GetPlayer(0)
 
-	--Cloud is visually positioned 20 pixels higher than normal
+	--Cloud is visually positioned 20 units higher than normal.
 	cloud.SpriteOffset = Vector(0, -20)
 
-	--When spawned in, it will immediately go to the player's positioned
+	--When spawned in, it will immediately go to the player's position.
 	cloud.Position = player.Position
-	--Have the effect track the player's position
+	--Have the effect track the player's position.
 	cloud:FollowParent(player)
 end
 
