@@ -1,7 +1,7 @@
 ---
 article: Pocket Items - Cards, Runes, and Objects
 authors: benevolusgoat
-blurb: Learn how to create cards, runes, and object pocket items.
+blurb: Learn how to create custom cards, runes, and object pocket items.
 comments: true
 tags:
     - Tutorial
@@ -45,20 +45,20 @@ To start, create a [pocketitems.xml](https://wofsauge.github.io/IsaacDocs/rep/xm
     |achievement|int|Ties the card to a vanilla achievement.|
     |greedmode|bool|Is the pocketitem available in greedmode. Default = `true`|
 
-:modding-repentogon: REPENTOGON expands `pocketitems.xml` with the following variables:
+:modding-repentogon: REPENTOGON expands `pocketitems.xml` with the following variables for cards:
 
 ???- info ":modding-repentogon: REPENTOGON-exclusive `card` tag variables"
 	| Variable Name | Possible Values | Description |
 	|:--|:--|:--|
     |hidden|string|Prevents the card from being randomly chosen by the game or when using the [ItemPool:GetCard](https://wofsauge.github.io/IsaacDocs/rep/ItemPool.html#getcard) and [ItemPool:GetCardEx](https://repentogon.com/ItemPool.html#getcardex) functions. Default = `false`|
     |weight|string|Relative "likelihood" for this card to be chosen over others of the same card type pool. Does not alter the chance for the specific card type pool to be chosen. Default = `1.0`|
-    |achievement|int or string|Ties the card/pill-effect to be unlocked by an achievement. For modded ones, use the provided achievement name xml attribute(define one if it doesn't have one already).|
+    |achievement|int or string|Ties the card to be unlocked by an achievement. For modded ones, use the provided achievement name xml attribute(define one if it doesn't have one already).|
 
 Below is an example of a basic card entry:
 
 ```XML
 <pocketitems>
-    <card type="tarot" name="Custom Card" description="It's custom!" hud="Custom Card" pickup="40"/>
+    <card type="tarot" name="Card of Healing" description="Heals you" hud="Healing Card" pickup="40" mimiccharge="4"/>
 </pocketitems>
 ```
 
@@ -94,11 +94,11 @@ A custom `entities2.xml` entry is only necessary if you wish to give the card a 
 ???+ warning
     The game does not properly handle conflicting subtypes with card entities across different mods. In this scenario, it will increase the `variant` by 1 until a non-conflicting type-variant-subtype combination is found, likely landing on variant `301`. This new pickup entity will have no functionality. Your card can still be spawned, but it will take on the appearance from the mod that loaded the subtype first.
 
-Below is an example of a custom card entity. Detailed information on creating a custom entity can be found [here](entity_basics.md). `name` does not have to match the name of the pocket item as it is unused, but should still be filled.
+Below is an example of a custom card entity. Detailed information on creating entities can be found [here](entity_basics.md). `name` does not have to match the name of the pocket item as it is unused, but should still be filled.
 
 ```XML
 <entities anm2root="gfx/" version="5">
-	<entity id="5" variant="300" name="Custom Card" anm2path="custom_card.anm2" subtype="40"
+	<entity id="5" variant="300" name="Card of Healing" anm2path="card_healing.anm2" subtype="40"
 		collisionMass="3" collisionRadius="12" friction="1" numGridCollisionPoints="24" shadowSize="16">
 	</entity>
 </entities>
@@ -120,18 +120,18 @@ Create a `main.lua` file. Register your mod, use [Isaac.GetCardIdByName](https:/
 local mod = RegisterMod("My Mod", 1)
 
 --Fetch the ID of your card using the name assigned to `hud`, not `name`.
-local CUSTOM_CARD = Isaac.GetCardIdByName("Custom Card")
+local HEALING_CARD = Isaac.GetCardIdByName("Healing Card")
 
---MC_USE_ITEM passes 3 arguments: The card Id, the player using it, and use flags.
+--MC_USE_ITEM passes 3 arguments: The card Id, the player using it, and UseFlags.
 function mod:OnUseCard(card, player, useFlags)
 
 end
 
 --MC_USE_ITEM accepts an optional argument to only run for a specific card.
-mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.OnUseCard, CUSTOM_CARD)
+mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.OnUseCard, HEALING_CARD)
 ```
 
-For our card, we'll do three simple things that utilizes all three arguments:
+For this card, the following effects will utilize all three arguments:
 
 1. Heal two hearts when used, achieved with [EntityPlayer:AddHearts](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#addhearts).
 2. Check if it's used by Blank Card to only heal one heart instead. Just like [active items](active_item.md#use-flags), cards also use [UseFlag](https://wofsauge.github.io/IsaacDocs/rep/enums/UseFlag.html). Check against `UseFlag.USE_MIMIC` if the card was used via Blank Card.
@@ -140,14 +140,14 @@ For our card, we'll do three simple things that utilizes all three arguments:
 ```Lua
 local mod = RegisterMod("My Mod", 1)
 
-local CUSTOM_CARD = Isaac.GetCardIdByName("Custom Card")
+local HEALING_CARD = Isaac.GetCardIdByName("Healing Card")
 
 function mod:OnUseCard(card, player, useFlags)
     --1 unit is 1/2 a heart, so 4 = 2 red hearts.
     local addHearts = 4
     local rng = player:GetCardRNG(card)
     --Check Blank Card usage
-    if useFlags & UseFlag.USE_MIMIC then
+    if useFlags & UseFlag.USE_MIMIC == UseFlag.USE_MIMIC then
         addHearts = 2
     end
     --Generates a random decimal number between 0 and 1. Useful for chance-based effects.
@@ -158,7 +158,7 @@ function mod:OnUseCard(card, player, useFlags)
     player:AddHearts(addHearts)
 end
 
-mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.OnUseCard, CUSTOM_CARD)
+mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.OnUseCard, HEALING_CARD)
 ```
 
 ### Announcer Voiceline
@@ -174,9 +174,9 @@ The following code follows the steps described below:
 ```Lua
 local mod = RegisterMod("My Mod", 1)
 
-local CUSTOM_CARD = Isaac.GetCardIdByName("Custom Card")
+local HEALING_CARD = Isaac.GetCardIdByName("Healing Card")
 --Get the ID for the announcer SFX
-local CARD_ANNOUNCER_SFX = Isaac.GetSoundIdByName("Custom Announcer Sound")
+local CARD_ANNOUNCER_SFX = Isaac.GetSoundIdByName("Healing Card Announcer")
 --For increased readability, create an enum for the different values
 --This is not necessary with REPENTOGON as it already has this enum exposed globally.
 local AnnouncerVoiceMode = {
@@ -187,7 +187,7 @@ local AnnouncerVoiceMode = {
 --Two variables will be used. One for the static value of how long the delay is, and one for counting down to 0.
 local ANNOUNCER_DELAY = 60
 local announcerDelay = 0
---Store SFXManager as we only need it once for playing our sound.
+--Store SFXManager as we only need it once for playing the sound.
 local sfxman = SFXManager()
 
 local function tryPlayAnnouncer()
@@ -207,7 +207,7 @@ end
 function mod:OnUseCard(card, player, useFlags)
     local addHearts = 4
     local rng = player:GetCardRNG(card)
-    if useFlags & UseFlag.USE_MIMIC then
+    if useFlags & UseFlag.USE_MIMIC == UseFlag.USE_MIMIC then
         addHearts = 2
     end
     if rng:RandomFloat() < 0.5 then
@@ -218,7 +218,7 @@ function mod:OnUseCard(card, player, useFlags)
     tryPlayAnnouncer()
 end
 
-mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.OnUseCard, CUSTOM_CARD)
+mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.OnUseCard, HEALING_CARD)
 
 function mod:PlayAnnouncerOnDelay()
     --Delay needs to be above 0 to start running
