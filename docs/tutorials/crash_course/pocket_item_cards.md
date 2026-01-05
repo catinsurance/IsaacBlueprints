@@ -18,7 +18,7 @@ Pocket items are consumable one-time-use items that Isaac can collect and store 
 
 ## Introduction
 
-When boiling pocket items down to their base essentials and how they are coded within the game, there are only truly two categories of pocket items: pills and cards. "Cards" make up everything that isn't a pill, notably anything that visually looks like a card, runes, and miscellaneous objects. This tutorial will cover the essentials to creating a card, which can be applied to runes and objects as well. If you wish to create a pill, see the next article in the crash course.
+When boiling pocket items down to their base essentials and how they are coded within the game, there are only truly two categories of pocket items: pills and cards. "Cards" make up everything that isn't a pill, notably anything that visually looks like a card, runes, and miscellaneous objects. This tutorial will cover the essentials to creating a card, which can be applied to runes and objects as well. If you wish to create a pill, see the [next article](pocket_item_pills.md) in the crash course.
 
 ## pocketitems.xml
 
@@ -106,7 +106,7 @@ Below is an example of a custom card entity. Detailed information on creating en
 
 ### Anm2 file
 
-The animation file of a pocket item must have the "HUDSmall" animation alongside general pickups animations "Collect", "Appear", "Idle", and "Sparkle". Vanilla card anm2 files have the "HUD" animation, but is unused for modded card in favor of the [ui_cardfronts.anm2](pocket_item_card.md#ui_cardfrontsanm2) file.
+The animation file of a pocket item must have the "HUDSmall" animation alongside general pickups animations "Collect", "Appear", "Idle", and "Sparkle". Vanilla card anm2 files have the "HUD" animation, but is unused for modded card in favor of the [ui_cardfronts.anm2](pocket_item_cards.md#ui_cardfrontsanm2) file.
 
 It is recommended to copy an existing pocket item anm2 file and edit it to use your own spritesheets. You can grab `005.301_tarot card.anm2` for a card or `005.303_rune1.anm2` for a rune, for example, from the game's [extracted resources](creating_a_mod.md#extracting-the-games-resources).
 

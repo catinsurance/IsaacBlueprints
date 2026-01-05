@@ -17,7 +17,8 @@ search:
 	- [Enemies](./tutorials/crash_course/enemies.md)
 	- [Familiars](./tutorials/crash_course/familiars.md)
     - [Sounds](./tutorials/crash_course/sound_effects.md)
-    - [Cards, Runes, and Objects](./tutorials/crash_course/pocket_item_card.md)
+    - [Cards, Runes, and Objects](./tutorials/crash_course/pocket_item_cards.md)
+    - [Pills](./tutorials/crash_course/pocket_item_pills.md)
     - [Challenges](./tutorials/crash_course/challenges.md)
 - Basics
     - ./tutorials/basics/*
