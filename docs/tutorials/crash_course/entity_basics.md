@@ -95,9 +95,6 @@ Firstly, the `id`, or "type" of the enemy, should be set anywhere from 1 to 1000
 
 `variant` and `subtype` are for defining different types of the same entity, which have differing rules dependent on what vanilla entries already exist.
 
-???+ bug "Variant auto-filling"
-	Due to a bug, allowing the variant to auto-fill for Effect entities can have it use the variant for the "star flash" effect. This will cause unexpected behavior for your effect, and can make it not show up or be removed after a short period of time.
-
 If an entity already has a defined `variant` and you use that `variant`, your entity may take on some of the properties of that entity `variant`. For custom variants, simply define a number not taken up by existing vanilla entries.
 
 `subtype` should always be a number not taken up by existing vanilla entries.
@@ -118,14 +115,24 @@ This entity entry defines a new tear variant by having its `id` set to `2`. It s
 <entity anm2path="my_new_tear_variant.anm2" collisionMass="8" collisionRadius="7" friction="1" id="2" name="My New Tear" numGridCollisionPoints="8" shadowSize="8" variant="39" />
 ```
 
-### Fetching the ID/variant/subtype of your entity with Lua
-Your defined `id`/`variant` combination may overlap with other mods that happen to define the exact same combination. The game may assign new variants or new subtypes to compensate for the overlap. As such, it is good practice to fetch them with the following functions instead of directly using the numbers you provided:
+### Auto-filling logic and fetching the ID/variant/subtype of your entity with Lua
+
+The game cannot have two entities with the exact same type-variant-subtype combination, so it has several measures in place to create unique IDs for every modded entity. The rules below are followed in order:
+
+1. If `variant` or `subtype` is not defined, the variable will be assigned `0` by default.
+2. If there's a conflicting id-variant-subtype hash and `id` is `1000` (effects), `9001` (text entity), or below 10, then it will increment `variant` by 1 until it no longer conflicts.
+3. If there's a conflicting id-variant-subtype hash and `id` doesn't match the condition mentioned previously, it will instead increment `id` by 1 until it no longer conflicts. It will skip over id `1000` and `9001`.
+
+Separate mods that happen to have overlapping IDs may have a different `id` or `variant` than what was defined in their `entities2.xml`. As such, it is good practice to fetch them with the following functions instead of directly using the numbers you provided:
 
 - [Isaac.GetEntityTypeByName](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getentitytypebyname)
 - [Isaac.GetEntityVariantByName](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getentityvariantbyname)
 - :modding-repentogon: [Isaac.GetEntitySubTypeByName](https://repentogon.com/Isaac.html#getentitysubtypebyname)
 
 For `subtype`, you must either note down the subtype manually, or use REPENTOGON.
+
+???+ bug "Variant auto-filling"
+	Due to a bug, allowing the variant to auto-fill for Effect entities can have it use the variant for the "star flash" effect. This will cause unexpected behavior for your effect, and can make it not show up or be removed after a short period of time.
 
 ## Tags explanation
 
