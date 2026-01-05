@@ -19,14 +19,14 @@ tags:
 Next to cards, runes, and objects, are the other major type of pocket item available in Isaac: Pills. They come in random colors with random pill effects each run, giving positive, negative, or neutral effects. This tutorial covers how to create a custom pill effect.
 
 ???+ bug "Custom Pill Colors"
-	As a brief mention, unlike cards, custom pill colors are not naturally supported. If created through `entities2.xml`, they are unable to spawn naturally in a run and do not come assigned with a random pill effect, showing no text and not activating any effect when used. Other mods that add them force their own manual implementation.
+	Custom pill colors are not naturally supported. If created through `entities2.xml`, they are unable to spawn naturally in a run and do not come assigned with a random pill effect, showing no text and not activating any effect when used. Other mods that add them force their own manual implementation.
 
 ## pocketitems.xml
 
-Pill effects are created in the same way as cards; through the [pocketitems.xml](https://wofsauge.github.io/IsaacDocs/rep/xml/pocketitems.html) file inside your mod's content folder. Unlike cards, they are marginally easier to create thanks to just being effects, while the visuals are handled by the randomized pill colors. They require the `pill` tag instead of `card`, which comes with its own unique set of variables.
+Pill effects are created in the same way as cards; through the [pocketitems.xml](https://wofsauge.github.io/IsaacDocs/rep/xml/pocketitems.html) file inside your mod's content folder. Unlike cards, they are marginally easier to create thanks to just being effects, while the visuals are handled by the randomized pill colors. Creating pills requires the `pill` child tag. Below are all the variables available to build your pill effect entry:
 
 ???- info "`pill` tag variables"
-	 ???+ note
+	???+ note
 		`name` is the only required variable. All others are optional.
 	| Variable-Name | Possible Values | Description |
 	|:--|:--|:--|
@@ -51,107 +51,112 @@ Below is an example of a basic pill effect entry:
 
 ```XML
 <pocketitems>
-    <pill name="Balls of Obsidian" class="2+"/>
+    <pill name="Regular Fly" class="0"/>
 </pocketitems>
 ```
 
 ## Lua code
 
-With the pill effect created, only a short amount of Lua code is required to give it an effect. Create a `main.lua` file. Register your mod, use [Isaac.GetPillEffectByName](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getpilleffectbyname) to fetch the ID of your pill, and create a single function attached to the [MC_USE_PILL](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_use_pill) callback. For this pill effect, add 2 black hearts:
+With the pill effect created, only a short amount of Lua code is required to give it an effect. Create a `main.lua` file. Register your mod, use [Isaac.GetPillEffectByName](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getpilleffectbyname) to fetch the ID of your pill, and create a single function attached to the [MC_USE_PILL](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_use_pill) callback.
+
+The following code will have the pill spawn an enemy fly:
 
 ```Lua
 local mod = RegisterMod("My Mod", 1)
 
-local BALLS_OF_OBSIDIAN = Isaac.GetPillEffectByName("Balls of Obsidian")
+local REGULAR_FLY = Isaac.GetPillEffectByName("Regular Fly")
 
 --MC_USE_PILL passes 3 arguments: The pill effect Id, the player using it, and UseFlags.
 function mod:OnUsePill(pillEffect, player, useFlags)
-    --1 unit is 1/2 a heart, so 4 = 2 black hearts.
-    player:AddBlackHearts(4)
+	--Game:Spawn(EntityType, Variant, Position, Velocity, Spawner Entity, SubType, Seed)
+    Game():Spawn(EntityType.ENTITY_FLY, 0, player.Position, Vector.Zero, player, 0, Random())
 end
 
 --MC_USE_PILL accepts an optional argument to only run for a specific pill.
-mod:AddCallback(ModCallbacks.MC_USE_PILL, mod.OnUsePill, BALLS_OF_OBSIDIAN)
+mod:AddCallback(ModCallbacks.MC_USE_PILL, mod.OnUsePill, REGULAR_FLY)
 ```
 
-When using the pill, it does not came with any animation by default. Positive pills are accompanied by [EntityPlayer:AnimateHappy](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html?#animatehappy), negative pills accompanied by [EntityPlayer:AnimateSad](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html?#animatesad), while neutral pills hold the pill above the player's head using [EntityPlayer:AnimatePill](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html?#animatepill), which requires a pill color.
+When using the pill, it does not play an animation by default. Positive pills are accompanied by [EntityPlayer:AnimateHappy](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html?#animatehappy), negative pills accompanied by [EntityPlayer:AnimateSad](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html?#animatesad), while neutral pills hold the pill above the player's head using [EntityPlayer:AnimatePill](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html?#animatepill), which requires a pill color.
 
 ### Pill Color On Use
 
 Unfortuantely, `MC_USE_PILL` does not provide any method of detecting what pill color was involved in the pill effect's activation, so you will need to manually track what pill the player is holding before the pill is used.
 
-Track the player's currently held pill color every player update using [MC_POST_PEFFECT_UPDATE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_peffect_update) and store the pill inside custom [entity data](../concepts/entity_data.md). This data can later be checked inside `MC_USE_PILL`.
+[EntityPlayer:GetPill](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#getpill) returns the currently held pill color in the primary pocket slot, but it will not return the desired pill color inside `MC_USE_PILL` as the pill is already used by then. Instead, use the function every player update using [MC_POST_PEFFECT_UPDATE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_peffect_update) and store the result inside custom [entity data](../concepts/entity_data.md) attached to the player. This data can later be checked inside `MC_USE_PILL`.
 
 ???+ info ":modding-repentogon: REPENTOGON MC_USE_PILL PillColor Arg"
     With REPENTOGON, [MC_USE_PILL](https://repentogon.com/enums/ModCallbacks.html#mc_use_pill) passes a fourth argument that contains the pill color used in the pill effect use.
 
 	```Lua
 	function mod:OnUsePill(pillEffect, player, useFlags, pillColor)
-		player:AddBlackHearts(4)
-		player:AnimatePill(pillColor)
+		Game():Spawn(EntityType.ENTITY_FLY, 0, player.Position, Vector.Zero, player, 0, Random())
+		--The second argument takes an animation found in the player's anm2 file.
+		--The default animation is "Pickup", which is for collecting items and takes a long time. "UseItem" is more natural for using active items, cards, and pills.
+		player:AnimatePill(pillColor, "UseItem")
 	end
 
-	mod:AddCallback(ModCallbacks.MC_USE_PILL, mod.OnUsePill, BALLS_OF_OBSIDIAN)
+	mod:AddCallback(ModCallbacks.MC_USE_PILL, mod.OnUsePill, REGULAR_FLY)
 	```
 
 ```Lua
 local mod = RegisterMod("My Mod", 1)
 
-local BALLS_OF_OBSIDIAN = Isaac.GetPillEffectByName("Balls of Obsidian")
+local REGULAR_FLY = Isaac.GetPillEffectByName("Regular Fly")
 
 function mod:OnUsePill(pillEffect, player, useFlags)
-	--Get the data that tracks the pill color, or if the data doesn't exist yet, get the currently held pill as a failsafe.
-	local pillColor = data.MYMOD_HeldPillColor or player:GetPill(0)
-	--A null pill color cannot be passed. Resort to another pill color by default.
-	if pillColor == PillColor.PILL_NULL then
-		pillColor = PillColor.PILL_BLUE_BLUE
-	end
-	player:AddBlackHearts(4)
-	player:AnimatePill(pillColor)
+    local data = player:GetData()
+    --Get the data that tracks the pill color, or if the data doesn't exist yet, get the currently held pill as a failsafe.
+    local pillColor = data.MYMOD_HeldPillColor or player:GetPill(0)
+    --A null pill color cannot be passed. Resort to another pill color by default.
+    if pillColor == PillColor.PILL_NULL then
+        pillColor = PillColor.PILL_BLUE_BLUE
+    end
+    Game():Spawn(EntityType.ENTITY_FLY, 0, player.Position, Vector.Zero, player, 0, Random())
+    --The second argument takes an animation found in the player's anm2 file.
+    --The default animation is "Pickup", which is for collecting items and takes a long time. "UseItem" is more natural for using active items, cards, and pills.
+    player:AnimatePill(pillColor, "UseItem")
 end
 
 --MC_USE_PILL accepts an optional argument to only run for a specific pill.
-mod:AddCallback(ModCallbacks.MC_USE_PILL, mod.OnUsePill, BALLS_OF_OBSIDIAN)
+mod:AddCallback(ModCallbacks.MC_USE_PILL, mod.OnUsePill, REGULAR_FLY)
 
 function mod:TrackPillColor(player)
-	local data = player:GetData()
-	--Will check 30 frames a second what the pill color in the player's primary pocket slot is.
-	--If no pill is in the primary slot, will be pill `0`.
-	data.MYMOD_HeldPillColor = player:GetPill(0)
+    local data = player:GetData()
+    --Will check 30 frames a second what the pill color in the player's primary pocket slot is.
+    --If no pill is in the primary slot, will be pill `0`.
+    data.MYMOD_HeldPillColor = player:GetPill(0)
 end
 
-mod:AddCallback(MC_POST_PEFFECT_UPDATE, mod.TrackPillColor)
+mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.TrackPillColor)
 ```
 
 ### Horse Pills
 
 Horse Pills were introduced in Repentance, being a powered up version of all existing pill effects. These are not new pill effects on their own, and as such do not require their own separate entry, but instead classified as pill colors.
 
-To enact different behaviour for horse pills on the custom pill effect, you need to know if the used pill was from a horse pill color. They can be identified by their large number, being the normal pill color id + `PillColor.PILL_GIANT_FLAG`, being `1 << 11` which equates to `2048`. Unfortuantely, `MC_USE_PILL` does not provide any method of detecting what pill color was involved in the pill effect's activation, so you will need to manually track what pill the player is holding before the pill is used.
-
-Track the player's currently held pill color every player update using [MC_POST_PEFFECT_UPDATE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_peffect_update) and store the pill inside custom [entity data](../concepts/entity_data.md). This data can later be checked inside `MC_USE_PILL`.
+To enact different behaviour for horse pills on the custom pill effect, you need to know if the used pill was from a horse pill color. They can be identified by their large number, being the normal pill color id + `PillColor.PILL_GIANT_FLAG`, being `1 << 11` which equates to `2048`. Referencing the previous section, get the player's current pill color and use it to determine if the pill is a horse pill.
 
 ???+ info ":modding-repentogon: REPENTOGON MC_USE_PILL PillColor Arg"
     As with the previous section, REPENTOGON has the callback pass the pill color.
 
 	```Lua
 	function mod:OnUsePill(pillEffect, player, useFlags, pillColor)
-		local blackHearts = 4
+		local flyType = EntityType.ENTITY_FLY
 		local isHorse = pillColor & PillColor.PILL_GIANT_FLAG == PillColor.PILL_GIANT_FLAG
 		if isHorse then
-			blackHearts = blackHearts * 2
+			flyType = EntityType.ENTITY_ATTACKFLY
 		end
-		player:AddBlackHearts(blackHearts)
+		Game():Spawn(flyType, 0, player.Position, Vector.Zero, player, 0, Random())
 		player:AnimatePill(pillColor)
 	end
 
-	mod:AddCallback(ModCallbacks.MC_USE_PILL, mod.OnUsePill, BALLS_OF_OBSIDIAN)
+	mod:AddCallback(ModCallbacks.MC_USE_PILL, mod.OnUsePill, REGULAR_FLY)
 	```
 
 ```Lua
 local mod = RegisterMod("My Mod", 1)
 
-local BALLS_OF_OBSIDIAN = Isaac.GetPillEffectByName("Balls of Obsidian")
+local REGULAR_FLY = Isaac.GetPillEffectByName("Regular Fly")
 
 --Pass the player and the UseFlags from the pill activation.
 --Credit to this code goes to Xalum, who developed this for Fiend Folio.
@@ -169,16 +174,17 @@ local function isUsingHorsePill(player, useFlags)
 end
 
 function mod:OnUsePill(pillEffect, player, useFlags)
-	local blackHearts = 4
+	local flyType = EntityType.ENTITY_FLY
 	local isHorse = isUsingHorsePill(player, useFlags)
 	if isHorse then
-		blackHearts = blackHearts * 2
+		flyType = EntityType.ENTITY_ATTACKFLY
 	end
-	player:AddBlackHearts(blackHearts)
+	Game():Spawn(flyType, 0, player.Position, Vector.Zero, player, 0, Random())
+	player:AnimatePill(pillColor)
 end
 
 --MC_USE_PILL accepts an optional argument to only run for a specific pill.
-mod:AddCallback(ModCallbacks.MC_USE_PILL, mod.OnUsePill, BALLS_OF_OBSIDIAN)
+mod:AddCallback(ModCallbacks.MC_USE_PILL, mod.OnUsePill, REGULAR_FLY)
 
 function mod:TrackPillColor(player)
 	local data = player:GetData()
@@ -186,14 +192,16 @@ function mod:TrackPillColor(player)
 	data.MYMOD_HeldPillColor = player:GetPill(0)
 end
 
-mod:AddCallback(MC_POST_PEFFECT_UPDATE, mod.TrackPillColor)
+mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.TrackPillColor)
 ```
 
 ### Positive/Negative Effect Counterparts
 
-With items like [PHD](https://bindingofisaacrebirth.wiki.gg/wiki/PHD) and [False PHD](https://bindingofisaacrebirth.wiki.gg/wiki/False_PHD), pill effects may have an assigned counterpart and be forced to turn into said counterparts. For example, False PHD will turn a Tears Up Pill into a Tears Down Pill, while PHD will do the opposite. To achieve this with custom pills, [MC_GET_PILL_EFFECT](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_get_pill_effect) can be used. The player will need to be checked if they meet the requirements for positive or negative pills. Without REPENTOGON, the callback does not pass the player involved. This means the only option is to check **all players** to affect what to change the pill effect into.
+With items like [PHD](https://bindingofisaacrebirth.wiki.gg/wiki/PHD) and [False PHD](https://bindingofisaacrebirth.wiki.gg/wiki/False_PHD), pill effects may have an assigned counterpart and be forced to turn into said counterparts. For example, False PHD will turn a Tears Up Pill into a Tears Down Pill, while PHD will do the opposite. To achieve this with custom pills, [MC_GET_PILL_EFFECT](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_get_pill_effect) can be used. The player will need to be checked if they meet the requirements for positive or negative pills. REPENTOGON adds a third argument to the callback that passes the player holding the pill effect. Without REPENTOGON, the callback does not pass the player, meaning the only option is to check **all players** to affect what to change the pill effect into.
 
-For this example, a counterpart will be created to `Balls of Obsidian` named `Balls of Paper`. Define the new pill effect and a duplicate callback to give it functionality:
+For this example, two new pill effects will be created: `Balls of Obsidian` and `Balls of Paper`, which grant and remove black hearts respectively using [EntityPlayer:AddBlackHearts](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#addblackhearts). Define the new pill effects and new callbacks to give them functionality:
+
+`pocketitems.xml`:
 
 ```XML
 <pocketitems>
@@ -202,14 +210,15 @@ For this example, a counterpart will be created to `Balls of Obsidian` named `Ba
 </pocketitems>
 ```
 
-```Lua
-local mod = RegisterMod("My Mod", 1)
+`main.lua`:
 
+```Lua
 local BALLS_OF_OBSIDIAN = Isaac.GetPillEffectByName("Balls of Obsidian")
 local BALLS_OF_PAPER = Isaac.GetPillEffectByName("Balls of Paper")
 
 function mod:OnPillUse(pillEffect, player, useFlags)
 	if pillEffect == BALLS_OF_OBSIDIAN then
+		--1 unit is 1/2 a heart, so 4 = 2 hearts
 		player:AddBlackHearts(4)
 		player:AnimateHappy()
 	elseif pillEffect == BALLS_OF_PAPER then
@@ -234,13 +243,12 @@ local PillEffectSubClass = {
 }
 
 local function getPillEffectSubClass()
-	local players = Isaac.FindByType(EntityType.ENTITY_PLAYER)
 	local shouldBePositive = false
 	local shouldBeNegative = false
 
 	--Loop through all players in the room using Isaac.FindByType.
 	for _, ent in ipairs(Isaac.FindByType(EntityType.ENTITY_PLAYER)) do
-		--It passes an Entity object by default. Cast to EntityPlayer to use player-related functions.
+		--Isaac.FindByType passes an Entity object by default. Cast to EntityPlayer to use player-related functions.
 		local player = ent:ToPlayer()
 		--All vanilla methods that enforce positive pills.
 		if player:HasCollectible(CollectibleType.COLLECTIBLE_LUCKY_FOOT)
@@ -270,7 +278,7 @@ local function getPillEffectSubClass()
 end
 ```
 
-:modding-repentogon: The REPENTOGON method involves already having the player, so the function can be shortened:
+:modding-repentogon: The REPENTOGON method involves already having the player passed through the callback, so the function can be shortened:
 
 ```Lua
 --Define an enum for readability
