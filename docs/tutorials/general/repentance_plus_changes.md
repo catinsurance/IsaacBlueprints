@@ -13,7 +13,7 @@ With the addition of the Repentance+ DLC, there have been a few updates to the m
 
 ## [Entity](https://wofsauge.github.io/IsaacDocs/rep/Entity.html)
 
-The following functions have had an additional argument `IgnoreBosses` added at the end of the arguments, which will ignore the boss status effect cooldown that normally prevents bosses from gaining more status effects:
+The following functions now have an additional argument: `IgnoreBosses`. When set to `true`, the status effect will ignore the boss status effect cooldown that normally prevents bosses from gaining more status effects:
 
 - [Entity:AddBurn](https://wofsauge.github.io/IsaacDocs/rep/Entity.html#addburn)
 - [Entity:AddCharmed](https://wofsauge.github.io/IsaacDocs/rep/Entity.html#addcharmed)
@@ -26,22 +26,84 @@ The following functions have had an additional argument `IgnoreBosses` added at 
 
 There is one new addition to the Entity class:
 
-- [Entity:KillWithSource](https://wofsauge.github.io/IsaacDocs/rep/Entity.html#killwithsource)
+- [Entity:KillWithSource](https://wofsauge.github.io/IsaacDocs/rep/Entity.html#killwithsource) is identical to [Entity:Kill](https://wofsauge.github.io/IsaacDocs/rep/Entity.html#kill), but you can define an [EntityRef](https://wofsauge.github.io/IsaacDocs/rep/EntityRef.html) as a source.
 
 ## [EntityPlayer](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html)
 
-- [EntityPlayer:AddCollectible](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#addcollectible) has an additional argument: `ItemPoolType`. This allows you to manually define what item pool the item came from
+- [EntityPlayer:AddCollectible](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#addcollectible) has an additional argument: `ItemPoolType`. This allows you to manually define what item pool the item came from.
 
 ## [Font](https://wofsauge.github.io/IsaacDocs/rep/Font.html)
 
+- Three new fonts were added under `gfx/font/teammeatex/`: `teammeatex10`, `teammeatex12`, and `teammeatex16`.
+
+Below is an example render of each size of font, first rendered with their regular version, followed by their EX version:
+
+![Team Meat fonts with EX versions](../assets/repentance_plus_changes/teammeatex.png)
+
 - A new override to the [Font:DrawString](https://wofsauge.github.io/IsaacDocs/rep/Font.html#drawstring) function has been added that allows you to pass different sizes similarly to [Font:DrawStringScaled](https://wofsauge.github.io/IsaacDocs/rep/Font.html#drawstringscaled) as well as a brand new game object named [FontRenderSettings](https://wofsauge.github.io/IsaacDocs/rep/FontRenderSettings.html), allowing more precise control over how the font is rendered.
 
-(TODO: Maybe insert some cool looking thing as an example of the new capabilities?? I am simply too lazy at the moment!!!)
+Below are 5 different examples of text being rendered in different locations under different font settings:
+
+```Lua
+local TestMod = RegisterMod("Font Render Test", 1)
+
+local font = Font("font/teammeatex/teammeatex10.fnt")
+
+--Enables Auto Wrap with a box width of 100. If a string's width reaches past the box width, the string will be cut before the width limit with the remainder of the string being put on a new line.
+--The placement of the new line and previous lines is determined by the current alignment.
+--Auto Wrap is disabled by default.
+local fontSettings1 = FontRenderSettings()
+fontSettings1:EnableAutoWrap(100)
+
+--Enables Auto Wrap with a box width of 100 with a MIDDLE_CENTER alignment. Text will be centered at the render point and lines will be pushed upwards with each new line.
+--Default alignment is DrawStringAlignment.TOP_LEFT (0).
+local fontSettings2 = FontRenderSettings()
+fontSettings2:SetAlignment(DrawStringAlignment.MIDDLE_CENTER)
+fontSettings2:EnableAutoWrap(100)
+
+--Enables truncation with a box width of 100. If a string's width reeaches past the box width, the string will be cut before the width limit and append a "..." at the end.
+--Truncation is disabled by default. Has no effect if Auto Wrap is enabled.
+local fontSettings3 = FontRenderSettings()
+fontSettings3:EnableTruncation(100)
+
+--Sets a maximum amount of characters that can be rendered on the string to 18. If a string's width reaches past the box width, the remaining characters will not be rendered.
+--Default character limit is 65535.
+local fontSettings4 = FontRenderSettings()
+fontSettings4:SetMaxCharacters(18)
+
+--Enables Auto Wrap with a box width of 100 with a Line Height modifier of 0.5. The distance between lines can be made smaller or larger.
+--Default line height is 1.0. Has no effect if Auto Wrap isn't enabled.
+local fontSettings5 = FontRenderSettings()
+fontSettings5:EnableAutoWrap(100)
+fontSettings5:SetLineHeightModifier(0.5)
+
+function TestMod:OnRender()
+	local centerPos = Vector(Isaac.GetScreenWidth() / 2, Isaac.GetScreenHeight() / 2)
+	font:DrawString("1. I have an auto wrap of limit of 100!", centerPos.X - 180, centerPos.Y, 1, 1, KColor(1,1,1,1), fontSettings1)
+	font:DrawString("2. I'm centered in the middle with multiple lines!", centerPos.X, centerPos.Y, 1, 1, KColor(1,1,1,1), fontSettings2)
+	font:DrawString("3. Supercalifragilisticexpialidocious", centerPos.X + 100, centerPos.Y, 1, 1, KColor(1,1,1,1), fontSettings3)
+	font:DrawString("4. Character limit stops most of this from rendering...", centerPos.X, centerPos.Y + 50, 1, 1, KColor(1,1,1,1), fontSettings4)
+	font:DrawString("5. So many lines bunched up together. I feel cramped in here!", centerPos.X, centerPos.Y - 100, 1, 1, KColor(1,1,1,1), fontSettings5)
+end
+
+TestMod:AddCallback(ModCallbacks.MC_POST_RENDER, TestMod.OnRender)
+```
+
+![Font examples](../assets/repentance_plus_changes/font_render_settings.png)
 
 ## [Game](https://wofsauge.github.io/IsaacDocs/rep/Game.html)
 
 - [Game:Fadein](https://wofsauge.github.io/IsaacDocs/rep/Game.html#fadein) has two new arguments: `ShowIcon` and `KColor`. `ShowIcon` appears to be non-functional. `KColor` will change the color of the screen as it fades back into the view of the game.
+
+Demonstration using `Game():Fadein(0.025, true, KColor(0.5, 0.5, 0.5, 1))`:
+
+![Fadein example](../assets/repentance_plus_changes/fadein.gif)
+
 - [Game:Fadeout](https://wofsauge.github.io/IsaacDocs/rep/Game.html#fadeout) has one new argument: `KColor`. It will change the color of the screen that it will fade out into.
+
+Demonstration using `Game():Fadeout(0.025, 2, KColor(0.5, 0.5, 0.5, 1))`:
+
+![Fadeout example](../assets/repentance_plus_changes/fadeout.gif)
 
 ## [GridEntity](https://wofsauge.github.io/IsaacDocs/rep/GridEntity.html)
 
@@ -73,6 +135,9 @@ Game():GetHUD():ShowItemText("foo", "bar", false, false)
 ## [ItemPool](https://wofsauge.github.io/IsaacDocs/rep/ItemPool.html)
 
 [ItemPool:GetCollectible](https://wofsauge.github.io/IsaacDocs/rep/ItemPool.html#getcollectible) has an additional argument: `BackupPoolType`. Accepts an [ItemPoolType] such that if the regular pool in `PoolType` is empty and `DefaultItem` is set to `CollectibleType.COLLECTIBLE_NULL`, it will draw from `BackupPoolType` instead of `ItemPoolType.POOL_TREASURE`.
+
+???+ info "Not available with REPENTOGON"
+	This addition was added in a later update to Repentance+ after v1.9.7.12, so it is not available to REPENTOGON users.
 
 Example:
 
