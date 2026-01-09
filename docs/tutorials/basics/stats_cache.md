@@ -73,6 +73,26 @@ It might be desirable to make modded stat-ups be affected by those formulas (suc
 
 Unfortunately, the API only allows interaction with stats after all vanilla calculations have been applied. This makes full consistency with vanilla impossible without completely recreating the stat system.
 
+## CacheFlag to Player variable
+
+Each cache flag is typically associated with a specific variable in the `EntityPlayer` class that's expected to be changed within the `MC_EVALUATE_CACHE` callback. Below is a list of cache flags and their associated player variables:
+
+???+ info "CacheFlag to Player variable"
+	|:--|:--|
+	|CACHE_DAMAGE|[EntityPlayer.Damage](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#damage)|
+	|CACHE_FIREDELAY| [EntityPlayer.MaxFireDelay](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#maxfiredelay)|
+	|CACHE_SHOTSPEED|[EntityPlayer.ShotSpeed](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#shotspeed)|
+	|CACHE_RANGE|[EntityPlayer.TearRange](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#tearrange). Can also adjust [EntityPlayer.TearHeight](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#tearfallingheight) and [EntityPlayer.TearAcceleration](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#tearfallingacceleration) for handling arc shots.|
+	|CACHE_SPEED|[EntityPlayer.MoveSpeed](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#movespeed)|
+	|CACHE_TEARFLAG|[EntityPlayer.TearFlags](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#tearflags)|
+	|CACHE_TEARCOLOR|[EntityPlayer.TearColor](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#tearcolor) and [EntityPlayer.LaserColor](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#lasercolor)|
+	|CACHE_FLYING|[EntityPlayer.CanFly](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#canfly)|
+	|CACHE_WEAPON|N/A|
+	|CACHE_FAMILIARS|[EntityPlayer:CheckFamiliar](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#checkfamiliar)|
+	|CACHE_LUCK|[EntityPlayer.Luck](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#luck)|
+	|CACHE_SIZE|[Entity.SpriteScale](https://wofsauge.github.io/IsaacDocs/rep/Entity.html#spritescale)|
+	|CACHE_COLOR|[Entity.Color](https://wofsauge.github.io/IsaacDocs/rep/Entity.html#color)|
+
 ## Example code
 The following examples showcase how to work with stat caches in practice. The mod adds a custom passive item, which gives +1 Luck for each bone heart owned, at the cost of losing a bit of speed.
 

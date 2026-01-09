@@ -1,7 +1,7 @@
 ---
-article: Taking damage
+article: Players and entities taking damage
 authors: benevolusgoat
-blurb: Learn how to use the "MC_ENTITY_TAKE_DMG" callback to respond to plaeyr or entity damage.
+blurb: Learn how to use the "MC_ENTITY_TAKE_DMG" callback to respond to player or entity damage.
 comments: true
 tags:
     - Tutorial
@@ -11,7 +11,7 @@ tags:
     - Lua
 ---
 
-The `MC_ENTITY_TAKE_DMG` callback has a number of useful applications for scenarios involving taking damage, namely as the player.
+The `MC_ENTITY_TAKE_DMG` callback has a number of useful applications for scenarios involving taking damage. This applies to enemies, players, and more. This tutorial will specifically focus on handling damage taken by the player.
 
 ## Callback breakdown
 [MC_ENTITY_TAKE_DMG](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_entity_take_dmg) triggers when an entity takes damage, but **before the damage is subtracted from the entity's health**. It has 5 parameters, an optional argument, and a return type.
@@ -20,7 +20,7 @@ __Parameters__
 
 - `ent` ([Entity](https://wofsauge.github.io/IsaacDocs/rep/Entity.html)): The entity taking damage.
 - `amount` (`integer`): If the player took damage, represents how many half-hearts of damage they're taking. If an enemy, it will return a `float` for the exact amount of Hit Points to be subtracted from the enemy.
-- `flags` ([DamageFlag](https://wofsauge.github.io/IsaacDocs/rep/enums/DamageFlag.html)): A bitflag containing extra information about the how the damage was dealt and how it should be handled.
+- `flags` ([DamageFlag](https://wofsauge.github.io/IsaacDocs/rep/enums/DamageFlag.html)): A bitflag containing extra information about the how the damage was dealt and how it should be handled. This flag can be `0` if there are no unique attributes.
 - `source` ([EntityRef](https://wofsauge.github.io/IsaacDocs/rep/EntityRef.html)): The source of the damage. The entity that dealt the damage can be accessed through its `Entity` variable, **but this may return `nil`** such as if the damage came from spikes. In these instances, you can check the `Type` and `Variant` variables, where `Type` will be `0` and `Variant` will be the [`GridEntityType`](https://wofsauge.github.io/IsaacDocs/rep/enums/GridEntityType.html).
 - `countdown` (`integer`): Will initiate a "damage countdown" if not already active. Any damage sources that deal damage with the `DamageFlag.DAMAGE_COUNTDOWN` flag, such as The Nail, Gamekid, and My Little Unicorn, will not deal damage while the countdown is active.
 

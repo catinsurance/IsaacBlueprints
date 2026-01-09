@@ -48,7 +48,10 @@ In conjunction with your item, the familiar must exist as an entity. The `id` va
 
 This `entities2.xml` entry will add a familiar entity, aptly named "Friend Frankie", with some simple attributes. Note that the `items.xml` entry and the `entities2.xml` entry do not need to have the same name; it is only for convenience.
 
-For the variant, it can be any arbitrary value not taken up by an existing vanilla familiar. Available variants are `131`-`199`, `244`-`899`, and `901`-`4095`. You can also omit the variant entirely to have it auto-assign an available variant.
+For the variant, it can be any arbitrary value not taken up by an existing vanilla familiar. Available variants are `131`-`199`, `244`-`899`, and `901`-`4095`. You can also omit the variant entirely to have the game auto-assign an available variant.
+
+???+ note "Auto-assigning variant"
+	If your familiar variant is automatically assigned by having it omitted from your entry, and your familiar is the first to load before other mods that do the same, it will be assigned a variant of `0` as there is no vanilla familiar with that variant. When the game attempts to spawn an entity with an invalid variant, it will try to spawn it with a variant of `0`. If no entity of that variant exists, the game will crash. Other mods that may attempt to spawn an invalid familiar will spawn your familiar instead of causing a game crash, which may lead to unwanted bug reports, but there is no technical downside to this method.
 
 ```XML
 <entities anm2root="gfx/" version="5">
@@ -215,8 +218,7 @@ function mod:FamiliarUpdate(familiar)
 			--Check its only from our familiar by checking the Type and Variant of what spawned it.
 			if ent.SpawnerType == EntityType.ENTITY_FAMILIAR
 				and ent.SpawnerVariant == FAMILIAR_VARIANT
-				--Check that it just spawned.
-				and tear.FrameCount == 0
+				and tear.FrameCount == 0 --Check that it just spawned.
 			then
 				--Isaac.FindByType always passes an Entity object. Make it an EntityFamiliar to access :AddTearFlags().
 				local tear = ent:ToTear()

@@ -60,15 +60,18 @@ To add a TemporaryEffect to a player, first use `:GetEffects()` on an [`EntityPl
 This code will add "The Sad Onion" collectible effect on the first possible frame of the player spawning into the run.
 ```Lua
 local mod = RegisterMod("My Effects Mod", 1)
+local game = Game()
 
 function mod:OnPeffectUpdate(player)
-	local effects = player:GetEffects()
-	--This will add 1 TemporaryEffect of Sad Onion. It will add the associated costume by default while the game manually accounts for increasing your tears stat if you have the effect.
-	effects:AddCollectibleEffect(CollectibleType.COLLECTIBLE_SAD_ONION)
+	if game:GetFrameCount() == 1 then
+		local effects = player:GetEffects()
+		--This will add 1 TemporaryEffect of Sad Onion. It will add the associated costume by default while the game manually accounts for increasing your tears stat if you have the effect.
+		effects:AddCollectibleEffect(CollectibleType.COLLECTIBLE_SAD_ONION)
+	end
 end
 
---MC_POST_PLAYER_INIT is one of the earliest callbacks that run when first starting or continuing a run, so most others run after it.
---The callback that removes non-persistent TemporaryEffects upon entering a new room is one of them, meaning we must add it afterwards.
+--MC_POST_PLAYER_INIT is one of the earliest callbacks that run when first starting or continuing a run, so lots of other processes run after it.
+--The step of Isaac's code that removes non-persistent TemporaryEffects upon entering a new room is one of them, meaning we must add it afterwards.
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.OnPeffectUpdate)
 ```
 
