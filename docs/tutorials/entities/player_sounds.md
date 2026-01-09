@@ -22,7 +22,7 @@ As this tutorial will be covering usage of a custom character and sound effect, 
 Without REPENTOGON, replacing sounds for individual characters must be done with Lua code. The best method of replacing the sounds for only select characters are knowing when they will play and playing your new sound afterwards.
 
 ???+ note
-    Due to the limitations of the vanilla API that created this method of replacing the player sounds, you may hear a split second of the original sound before it stops and your new sound plays. There are more "hackier" methods that involve replacing the original sound files, but they will not be covered in this tutorial.
+    Due to the limitations of the vanilla API, you may hear a split second of the original sound before it stops and your new sound plays. There are more "hacky" methods that involve replacing the original sound files, but they will not be covered in this tutorial.
 
 ### Hurt sound detection
 
@@ -63,7 +63,7 @@ The death sound effect plays when the "DeathSound" event is triggered. You can v
 
 ![Player Anm2 file](../assets/player_sounds/player_anm2.png)
 
-[MC_POST_PEFFECT_UPDATE](wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_peffect_update) will be used to constantly check when the `DeathSound` event triggers on the player's sprite in order to play the death sound effect. Both the callback and the game's logic runs at 30 frames per second, it will work just fine as opposed to [MC_POST_PLAYER_UPDATE](wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_player_update), which runs at 60 frames per second.
+[MC_POST_PEFFECT_UPDATE](wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_peffect_update) will be used to constantly check when the `DeathSound` event triggers on the player's sprite in order to play the death sound effect. Both this callback and the game's logic run at 30 frames per second, as opposed to [MC_POST_PLAYER_UPDATE](wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_player_update) which runs at 60 frames per second. Since we only need to check once every game update, MC_POST_PEFFECT_UPDATE is preferrable.
 
 ```Lua
 function mod:ReplaceDeathSoundOnPeffectUpdate(player)
@@ -78,7 +78,7 @@ end
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.ReplaceDeathSoundOnPeffectUpdate, MY_CHAR)
 ```
 
-There's another entity that is expected to play Isaac's death sound: The dead body left behind by the "Lost Curse" effect triggered by the [White Fireplace](https://bindingofisaacrebirth.wiki.gg/wiki/Fire_Places#White_Fire_Place) and [Soul of the Lost](https://bindingofisaacrebirth.wiki.gg/wiki/Soul_of_the_Lost). They will leave behind a devil statue effect (`EffectVariant.DEVIL`), replace its anm2 file with your character's anm2 file, and play the `Death` animation. As such, an additional callback is needed to account for this.
+The body left behind by the "Lost Curse" effect, triggered by the [White Fireplace](https://bindingofisaacrebirth.wiki.gg/wiki/Fire_Places#White_Fire_Place) and [Soul of the Lost](https://bindingofisaacrebirth.wiki.gg/wiki/Soul_of_the_Lost), is a separate entity that will also play the sound. It will leave behind a devil statue effect (`EffectVariant.DEVIL`), replace its anm2 file with your character's anm2 file, and play the `Death` animation. As such, an additional callback is needed to account for this.
 
 ```Lua
 function mod:ReplaceDeathSoundFromDeadBody(effect)
@@ -101,13 +101,15 @@ mod:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, mod.ReplaceDeathSoundFromDea
 
 ### Replacing the sounds
 
-With the code setup to detect when the sound should play for your character, the `replacePlayerSound` function from earlier can now be populated. The `oldSound` argument will be used for both stopping the old sound and knowing what new sound to play. However, there are a few quirks to make note of:
+Now that the code to detect when the sound should play for your character is operating, we must write the `replacePlayerSound` function from earlier. The `oldSound` argument will be used for both stopping the old sound and knowing what new sound to play. However, there are a few quirks to make note of:
 
 1. `MC_ENTITY_TAKE_DMG` runs before the entity sustains the damage, and thus the hurt sound effect has not played yet.
 2. The death sound effect for when the player dies (not for the Lost Curse) plays twice for an unknown reason, so stopping it once will not stop it fully.
 3. For both the player and dead player body's death sounds, by the time the DeathSound sprite event is triggered, the death sound should be already playing.
 
-For all of these cases, the `FrameDelay` and `Volume` parameters for [SFXManager():Play](https://wofsauge.github.io/IsaacDocs/rep/SFXManager.html#play) will be utilized. `FrameDelay` will stop the sound from playing again for however many frames it is set to, and `Volume` will of course adjust the volume of the sound. `FrameDelay` by default is already `2`, and by setting the `Volume` to `0`, a silent sound effect can be played that cannot be overridden on the next game update. This will be used to stop the vanilla hurt and death sounds from playing.
+For all of these cases, the `FrameDelay` and `Volume` parameters for [SFXManager():Play](https://wofsauge.github.io/IsaacDocs/rep/SFXManager.html#play) will be utilized. `FrameDelay` will stop the sound from playing again for however many frames it is set to, and `Volume` will adjust the volume of the sound.
+
+`FrameDelay` by default is already `2`, and by setting the `Volume` to `0`, a silent sound effect can be played that cannot be overridden on the next game update. This will be used to stop the vanilla hurt and death sounds from playing.
 
 ```Lua
 --Store SFXManager() for later use
@@ -132,7 +134,7 @@ end
 
 ## :modding-repentogon: REPENTOGON method
 
-Before diving into this tutorial, note that if you are using REPENTOGON on Repentance+, there is an extremely simple method of adding sounds to your custom character that involves zero Lua code. Within the `players.xml` file, you can define two new variables:
+REPENTOGON on Repentance+ users can use a much simpler method of adding sounds to your custom character that involves zero Lua code. Within the `players.xml` file, you can define two new variables:
 
 | Variable Name | Value | Comment |
 |:--|:--|:--|
