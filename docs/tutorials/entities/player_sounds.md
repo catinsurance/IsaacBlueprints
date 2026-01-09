@@ -1,7 +1,7 @@
 ---
 article: Player sounds
 authors: benevolusgoat
-blurb: Learn how to create custom hurt and death sounds for the player
+blurb: Learn how to create custom hurt and death sounds for the player.
 comments: true
 tags:
     - Tutorial
