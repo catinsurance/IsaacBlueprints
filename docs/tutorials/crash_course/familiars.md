@@ -218,8 +218,7 @@ function mod:FamiliarUpdate(familiar)
 			--Check its only from our familiar by checking the Type and Variant of what spawned it.
 			if ent.SpawnerType == EntityType.ENTITY_FAMILIAR
 				and ent.SpawnerVariant == FAMILIAR_VARIANT
-				--Check that it just spawned.
-				and tear.FrameCount == 0
+				and tear.FrameCount == 0 --Check that it just spawned.
 			then
 				--Isaac.FindByType always passes an Entity object. Make it an EntityFamiliar to access :AddTearFlags().
 				local tear = ent:ToTear()
