@@ -95,7 +95,7 @@ local MY_CHALLENGE = Isaac.GetChallengeIdByName("My new challenge")
 function mod:OnGameStart(wasContinued)
 	--Fetch the current challenge ID
 	local challenge = Isaac.GetChallenge()
-	--Checks that the challenge is our challenge, and is not from a continued run.
+	--Checks that the challenge is your challenge, and is not from a continued run.
 	if challenge == MY_CHALLENGE and not wasContinued then
 		--Whatever you'd like here.
 	end

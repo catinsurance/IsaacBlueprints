@@ -42,12 +42,12 @@ Once in-game, you can spawn your effect using the debug console. Type `spawn rai
 
 ## Lua code
 
-The entity now exists in the game, but it does nothing on its own. This is where the Lua half of the tutorial comes in, where we will have the rain cloud hover above and follow the player.
+The entity now exists in the game, but it does nothing on its own. This is where the Lua half of the tutorial comes in, where we'll have the rain cloud hover above and follow the player.
 
 Start by setting up your `main.lua` with the essentials. Create a function and attach it to the [MC_POST_EFFECT_INIT](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_effect_init) callback, which passes the [EntityEffect](https://wofsauge.github.io/IsaacDocs/rep/EntityEffect.html) object being initialized.
 
 ```Lua
---Define our mod reference as per usual.
+--Define your mod reference as per usual.
 local mod = RegisterMod("My Mod", 1)
 
 --The variant of your effect may change if it conflicts with another effect of the same variant.
@@ -61,7 +61,7 @@ function mod:OnRainCloudInit(cloud)
 end
 
 --This callback will run when the effect is first spawned/initialized.
---MC_POST_EFFECT_INIT also accepts an optional argument to only run for our effect variant, hence inserting RAIN_CLOUD_VARIANT at the end.
+--MC_POST_EFFECT_INIT also accepts an optional argument to only run for your effect variant, hence inserting RAIN_CLOUD_VARIANT at the end.
 mod:AddCallback(ModCallbacks.MC_POST_EFFECT_INIT, mod.OnRainCloudInit, RAIN_CLOUD_VARIANT)
 ```
 

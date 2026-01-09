@@ -37,7 +37,7 @@ This is technically all you need to do to create a mod. The rest of the tutorial
 ## Extracting the game's resources
 To replace a sprite (or any asset in the game), you must place a file in your mods folder that mirrors the file path of what you're trying to replace, whether that be an item sprite or a sound. In this tutorial, we'll be focusing on replacing the D6, but first we need to know where the D6 is stored in the game's file structure in order to replicate that within our mod.
 
-Open the game's directory as we did before, and open the `tools` folder. Within the `tools` folder, open the `ResourceExtractor` folder. Double-clicking `ResourceExtractor.exe` will run the resource extraction program. This may take a while, so wait for it to complete its process.
+Open the game's directory as you did before, and open the `tools` folder. Within the `tools` folder, open the `ResourceExtractor` folder. Double-clicking `ResourceExtractor.exe` will run the resource extraction program. This may take a while, so wait for it to complete its process.
 
 ![The resource extractor](../assets/creating_a_mod/resource_extractor.png)
 
@@ -48,16 +48,16 @@ The place the game's files will extract to depend on what DLC of the game you ha
 **For Repentance+ users,** find the new `extracted-resources` folder within the game's directory. Here you will find a `resources` folder, as well as other `resources` folders for different translations of the game. In Repentance+, the `resources-dlc3` and `resources` folders were merged, meaning most assets in the game can now be found in the `resources` folder.
 
 ## Replacing assets with your mod
-Now that we have extracted the game files, we can get to replacing the D6's sprite in our mod.
+Now that the game files have been extracted, we can get to replacing the D6's sprite in our mod.
 
-First, we must find where the D6's sprite is located in the game's file structure. It can be found at this path within the `resources` folder:
+First, find where the D6's sprite is located in the game's file structure. It can be found at this path within the `resources` folder:
 `gfx/items/collectibles/collectibles_105_dice.png`
 
-Now we must mimic this same file structure within our mod. Go back to your mod's folder and create a folder named `resources`. Within this folder, create a folder name `gfx`, then within that a folder named `items`, then `collectibles`, then finally place the sprite in there with the exact same name as the sprite you're replacing (in this case, `collectibles_105_dice.png`). **Keep in mind that this is cAsE-sEnSiTiVe!**
+Now mimic this same file structure within our mod. Go back to your mod's folder and create a folder named `resources`. Within this folder, create a folder name `gfx`, then within that a folder named `items`, then `collectibles`, then finally place the sprite in there with the exact same name as the sprite you're replacing (in this case, `collectibles_105_dice.png`). **Keep in mind that this is cAsE-sEnSiTiVe!**
 
 ???+ warning "Warning"
-    When replacing images, you must make sure your image is encoded in 32-bit, and is a PNG. [Aseprite](https://www.aseprite.org/) handles this by default. Otherwise, you must find out how to configure this in the art progarm of your choice.
+    When replacing images, make sure your image is encoded in 32-bit, and is a PNG. [Aseprite](https://www.aseprite.org/) handles this by default. Otherwise, you must find out how to configure this in the art progarm of your choice.
 
-![The file path we place our sprite in](../assets/creating_a_mod/sprite_replacement.gif)
+![The file path you place your sprite in](../assets/creating_a_mod/sprite_replacement.gif)
 
 After adding new resources to your mod, make sure you restart your game to see the changes.

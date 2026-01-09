@@ -154,19 +154,19 @@ local MY_PLAYER = Isaac.GetPlayerTypeByName("My Character", false)
 local MY_COSTUME = Isaac.GetCostumeIdByPath("gfx/characters/my_costume.anm2")
 
 function mod:AddPlayerCostume(player)
-	--Check by PlayerType, not name, to ensure it's our character
+	--Check by PlayerType, not name, to ensure it's your character.
 	if player:GetPlayerType() == MY_PLAYER then
-		--Add the costume
+		--Add the costume.
 		player:AddNullCostume(MY_COSTUME)
 	end
 end
 
 function mod:AddCostumeOnNewRoom()
-	--Most reliable way to search through players in the room
+	--Most reliable way to search through players in the room.
 	for _, ent in ipairs(Isaac.FindByType(EntityType.ENTITY_PLAYER)) do
-		--Isaac.FindByType passes an Entity. Turn it into an EntityPlayer to use player-specific functions
+		--Isaac.FindByType passes an Entity. Turn it into an EntityPlayer to use player-specific functions.
 		local player = ent:ToPlayer()
-		--Call the function above that already has the code we want
+		--Call the function above that already has the desired code.
 		mod:AddPlayerCostume(player)
 	end
 end
@@ -177,11 +177,11 @@ mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.AddCostumeOnNewRoom)
 ```
 
 ### XML (Non-REPENTOGON)
-Using XML to add a costume will ensure it will never be removed by rerolls, or by the Mother's Shadow escape sequence. Vanilla characters get around this by adding a `costume` property with the ID of the costume that the character should have. Because modded costumes do not have IDs, the only solution to this is to use one of vanilla game's player-specific costumes that has the appropriate layers we need, and to replace its spritesheet in our character's [costume suffix folder](#adding-a-character-specific-costume).
+Using XML to add a costume will ensure it will never be removed by rerolls, or by the Mother's Shadow escape sequence. Vanilla characters get around this by adding a `costume` property with the ID of the costume that the character should have. Because modded costumes do not have IDs, the only solution to this is to use one of vanilla game's player-specific costumes that has the appropriate layers you need, and to replace its spritesheet in your character's [costume suffix folder](#adding-a-character-specific-costume).
 
 Inside the `players.xml` file where you have your custom character defined, add the `costume` property and set it to an existing vanilla null costume. You can get a good idea of the IDs of each null costume through the [NullItemID](https://wofsauge.github.io/IsaacDocs/rep/enums/NullItemID.html) enumeration, or by looking in the `costumes2.xml` folder inside the game's extracted resources.
 
-In this example, we will make a custom costume for our character's hair that uses Flipped Tainted Lazarus' costume as a base, as this costume is never added to other characters in the game through normal means.
+For this example, Flipped Tainted Lazarus' hair is used as the character's costume. This costume is never added to other characters in the game through normal means, so it can be used reliably for character-specific costumes.
 
 ```xml
 <players root="gfx/characters/costumes/"
@@ -197,7 +197,7 @@ In this example, we will make a custom costume for our character's hair that use
 </players>
 ```
 
-Next, we'd create an alternate spritesheet based off of `resources/gfx/characters/character_009b_lazarus2hair.png`, and put that in our costumes suffix files (e.g. `costumes_mycharacter`).
+Next, create an alternate spritesheet based off of `resources/gfx/characters/character_009b_lazarus2hair.png`, and put that in your costumes suffix files (e.g. `costumes_mycharacter`).
 
 ### XML (REPENTOGON)
 :modding-repentogon: REPENTOGON adds a method to add your own costume through the `modcostume` property you can add to your character inside `players.xml`.

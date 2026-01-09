@@ -65,7 +65,7 @@ local game = Game()
 
 function mod:OnPeffectUpdate(player)
 	local data = player:GetData()
-	--We store the variable here for ease of access; don't have to type it out every time you need it.
+	--Store the variable here for ease of access; don't have to type it out every time you need it.
 	local heldItem = player.QueuedItem.Item
 	local numItem = player:GetCollectibleNum(MY_ITEM)
 
