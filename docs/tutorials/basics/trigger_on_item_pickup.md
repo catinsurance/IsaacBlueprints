@@ -26,7 +26,7 @@ If you're not looking to add any complex effect to your item on first pickup, yo
 ## Detecting item pickup with Lua
 
 ### Without REPENTOGON
-The main goal of this tutorial is to assist with non-REPENTOGON users, given the lack of convenient tools to work with. Thankfully, there is a variable that can be accessed on players to see what item they're holding before it's put into their inventory. This variable is called [`QueuedItem`](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#queueditem), which gives access to a [`QueuedItemData`](https://wofsauge.github.io/IsaacDocs/rep/QueueItemData.html) object. Utilizing this variable, we can know when we've picked up a specific item, and when the animation has finished so that we can trigger our desired effect.
+The main goal of this tutorial is to assist with non-REPENTOGON users, given the lack of convenient tools to work with. Thankfully, there is a variable that can be accessed on players to see what item they're holding before it's put into their inventory. This variable is called [`QueuedItem`](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#queueditem), which gives access to a [`QueuedItemData`](https://wofsauge.github.io/IsaacDocs/rep/QueueItemData.html) object. Utilizing this variable, you can know when the player has picked up a specific item, and when the animation has finished so that you can trigger your desired effect.
 
 Firstly, you'll need your item's ID:
 
@@ -44,19 +44,19 @@ local MY_ITEM = Isaac.GetItemIdByName("My Item")
 local game = Game()
 
 function mod:OnPeffectUpdate(player)
-	--We'll put our code in here
+	--Code will be put here later
 end
 
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.OnPeffectUpdate)
 ```
 
-Now we'll use `QueuedItem` to read what item the player is holding above their head, and if they're holding any item at all. `QueuedItem` has three variables: `Charge`, `Item`, and `Touched`.
+Now use `QueuedItem` to read what item the player is holding above their head, and if they're holding any item at all. `QueuedItem` has three variables: `Charge`, `Item`, and `Touched`.
 
 - `Charge` is only relevant to active items. It gives you the current charge of the active item.
 - `Item` is the [ItemConfigItem](https://wofsauge.github.io/IsaacDocs/rep/ItemConfig_Item.html) object that stores every piece of information on an item you could ask for, and as such is important for identifying what item it is. `QueuedItem` will always be available, but `Item` can return `nil` if Isaac is not holding any items above his head. **Remember that this can also have information on trinkets, not just collectibles**.
 - `Touched` is the key to accomplishing the goal of this tutorial, indicating if this particular copy of the item has been picked up before or not. It will return `false` if not, and `true` otherwise.
 
-Additionally, we will make use of `GetData()`. This is a function available for every entity in the game which returns a table that's unique to that entity that can be used to store arbitrary data. It's recommended to read the article on [Entity Data](../concepts/entity_data.md) for detailed information about its many drawbacks.
+Once its confirmed the player is holding your item, [entity data](../concepts/entity_data.md) must be used to create custom data that to act as a queue for the item pickup code. Store the number of the item the player currently has within this data. When the player is no longer holding an item, check the item actually makes it into the player's inventory by checking if the number of the item the player has is more than the previously stored amount.
 
 ```Lua
 local mod = RegisterMod("My Mod", 1)
@@ -65,8 +65,9 @@ local game = Game()
 
 function mod:OnPeffectUpdate(player)
 	local data = player:GetData()
-	--We store the variable here for ease of access; don't have to type it out every time you need it
+	--We store the variable here for ease of access; don't have to type it out every time you need it.
 	local heldItem = player.QueuedItem.Item
+	local numItem = player:GetCollectibleNum(MY_ITEM)
 
 	--An "if variable" check will check if the variable exists (not `nil`) or is equal to `true`. This check will pass if Isaac is holding an item!
 	if heldItem
@@ -74,16 +75,19 @@ function mod:OnPeffectUpdate(player)
 		and heldItem.ID == MY_ITEM
 		--Important to check that it's a collectible, not a trinket! There's also :IsTrinket() if you wish to check the inverse.
 		and heldItem:IsCollectible()
+		--To stop it from triggering multiple times from something like Tainted Isaac's item swapping.
 		and not heldItem.Touched
-		-- Store that this was our item so that we can run the rest of code only if it is
+		-- Check that custom data hasn't already been set to check against later.
 		and not data.QueueMyItemPickup
 	then
-		data.QueueMyItemPickup = true
-	--Check that we're no longer holding an item and for if the item was our item.
+		data.QueueMyItemPickup = numItem
+	--Check that the player is no longer holding an item and that the queue for.
 	elseif not heldItem and data.QueueMyItemPickup then
-		--Execute code here
-
-		--Set it to `nil` or `false` so that this code doesn't trigger again right away.
+		--Double-check the item actually made it into Isaac's inventory.
+		if numItem > data.QueueMyItemPickup then
+			--Execute pickup code here
+		end
+		--Set it to `nil` or `false` so that this code doesn't trigger again the player update.
 		data.QueueMyItemPickup = nil
 	end
 end
@@ -91,7 +95,7 @@ end
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.OnPeffectUpdate)
 ```
 
-Finally, we will spawn a random heart on first-time pickup.
+That finishes the basic setup for a first-time pickup effect for any item. For this tutorial, the item will spawn a random heart.
 
 ```Lua
 local mod = RegisterMod("My Mod", 1)
@@ -101,24 +105,24 @@ local game = Game()
 function mod:OnPeffectUpdate(player)
 	local data = player:GetData()
 	local heldItem = player.QueuedItem.Item
+	local numItem = player:GetCollectibleNum(MY_ITEM)
 
 	if heldItem
 		and heldItem.ID == MY_ITEM
 		and heldItem:IsCollectible()
 		and not data.QueueMyItemPickup
 	then
-		data.QueueMyItemPickup = true
+		data.QueueMyItemPickup = numItem
 	elseif not heldItem and data.QueueMyItemPickup then
-		--Double-check the item actually made it into Isaac's inventory!
-		if player:HasCollectible(MY_ITEM) then
+		if numItem > data.QueueMyItemPickup then
 			--Will find a free spot to spawn a pickup at least one tile away from Isaac. 40 = 1 tile.
 			local pos = game:GetRoom():FindFreePickupSpawnPosition(player.Position, 40)
-			--As we will be spawning pickups with Game():Spawn, it requires a seed to determine any RNG factors involved.
-			--We can use GetCollectibleRNG as an easy way to get an RNG object to provide a seed for us that's specific to a collectible!
+			--Spawning anything with Game():Spawn requires a seed to determine any RNG factors involved.
+			--GetCollectibleRNG can be used as an easy way to get an RNG object to provide a seed that's specific to a collectible!
 			local rng = player:GetCollectibleRNG(MY_ITEM)
 			--Game():Spawn(Entity type, Entity variant, position, velocity, Entity who spawned it, Entity subtype, RNG seed)
 			--The entity's SubType here is 0 to allow the game to determine what kind of heart pickup is spawned. Handy for hearts, keys, coins, bombs, trinkets, and collectibles.
-			--rng:Next() will "advance" (change) the seed of the RNG object, returning that new seed
+			--rng:Next() will "advance" (change) the seed of the RNG object, returning that new seed.
 			game:Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, pos, Vector.Zero, player, 0, rng:Next())
 		end
 
@@ -133,13 +137,13 @@ mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.OnPeffectUpdate)
 	This method will only cover if Isaac has an item queued to be put into his inventory, such as collecting them from pedestals, and not from any methods that involve directly adding the item into Isaac's inventory such as the debug console.
 
 ### :modding-repentogon: Using REPENTOGON
-REPENTOGON adds a new callback named `MC_POST_ADD_COLLECTIBLE`. It will trigger whenever an item is added to Isaac's inventory through any means, with a parameter to see if it's a first-time pickup or not. This is the perfect callback for the purposes of this tutorial and simplifies our code tremendously.
+REPENTOGON adds a new callback named `MC_POST_ADD_COLLECTIBLE`. It will trigger whenever an item is added to Isaac's inventory through any means, with a parameter to see if it's a first-time pickup or not. This is the perfect callback for the purposes of this tutorial and simplifies the code tremendously.
 
 ```Lua
 local mod = RegisterMod("My Mod", 1)
 local MY_ITEM = Isaac.GetItemIdByName("My Item")
 
---The variable we're looking to use is "firstTime", which tells us if it's a first-time pickup or not.
+--Only "firstTime" is needed here, which tells if it's a first-time pickup or not.
 function mod:OnPostAddCollectible(itemID, charge, firstTime, activeSlot, varData, player)
 	if firstTime then
 		--Execute code here
