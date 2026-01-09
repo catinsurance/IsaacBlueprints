@@ -24,7 +24,7 @@ If a modder wishes to add stats to the player for any purpose without REPENTOGON
 
 First on the list of REPENTOGON's additions is the ability to set base stats to custom characters within the [players.xml](https://repentogon.com/xml/players.html) file. These stats will be applied before all other stat changes. Below is the list of available stats that can be applied:
 
-???+ info "`players.xml` stat variables
+???+ info "`players.xml` stat variables"
 	| Variable Name | Value | Comment |
 	|:--|:--|:--|
 	|speedmodifier|float|An inherent offset to the speed stat the character should start with. Base this offset off of Isaac's stats.|
@@ -35,7 +35,7 @@ First on the list of REPENTOGON's additions is the ability to set base stats to 
 	|luckmodifier|float|An inherent offset to the luck stat the character should start with. Base this offset off of Isaac's stats.|
 
 ???+ note "Adding negative tears stat"
-	The implementation for the players.xml stat additions was based off of how Eden gets their stats. For fire delay, if the number is ever rolled as a negative, it gets multiplied by `0.686655` as to not be too severe.
+	The implementation for the players.xml stat additions was based off of how Eden gets their stats. For fire delay, if a negative number is set, it gets multiplied by `0.686655` as to not be too severe.
 
 Example XML entry:
 
@@ -55,21 +55,21 @@ Stats can now be directly added to items in the [items.xml](https://repentogon.c
 
 Below are most of the available variables that can be added to any `items.xml` entries. There are more that are covered in the next section:
 
-???+ info "`items.xml` stat variables
+???+ info "`items.xml` stat variables"
 	???+ note "Automatic cache"
 		When adding any of these variables, the associated `cache` for the stat is automatically added to the item, so there's no need to add it yourself.
 	| Variable Name | Value | Comment |
 	|:--|:--|:--|
-	|tears|Offset's Isaac's tears stat before flat and mult modifiers. `0.7` is equivalent to Sad Onion.|
-	|flattears|Offset's Isaac's tears stat additively; after regular tears ups but before multipliers. `0.5` is equivalent to Pisces.|
-	|tearsmult|Offset's Isaac's tears stat multiplicatively; after regular and flat tears ups.|
-	|damage|Offset's Isaac's damage stat before flat and mult modifiers stat. `1` is equivalent to Pentagram.|
-	|flatdamage|Offset's Isaac's damage additively; after regular damage ups but before multipliers. `2` is equivalent to Curved Horn.|
-	|damagemult|Offset's Isaac's damage mulltiplicatively; after regular and flat damage ups.|
-	|shotspeed|Offset's Isaac's shot speed stat.|
-	|speed|Offset's Isaac's speed stat.|
-	|range|Offset's Isaac's range stat. `40` = +1 range.|
-	|luck|Offset's Isaac's luck stat.|
+	|tears|float|Offset's Isaac's tears stat before flat and mult modifiers. `0.7` is equivalent to Sad Onion.|
+	|flattears|float|Offset's Isaac's tears stat additively; after regular tears ups but before multipliers. `0.5` is equivalent to Pisces.|
+	|tearsmult|float|Offset's Isaac's tears stat multiplicatively; after regular and flat tears ups.|
+	|damage|float|Offset's Isaac's damage stat before flat and mult modifiers stat. `1` is equivalent to Pentagram.|
+	|flatdamage|float|Offset's Isaac's damage additively; after regular damage ups but before multipliers. `2` is equivalent to Curved Horn.|
+	|damagemult|float|Offset's Isaac's damage mulltiplicatively; after regular and flat damage ups.|
+	|shotspeed|float|Offset's Isaac's shot speed stat.|
+	|speed|float|Offset's Isaac's speed stat.|
+	|range|float|Offset's Isaac's range stat. `40` = +1 range.|
+	|luck|float|Offset's Isaac's luck stat.|
 
 Example XML entry:
 
@@ -127,7 +127,7 @@ For any calculations that don't fit into what is provided by the XML additions, 
 Below is an example that adds a small damage up for each black heart Isaac has:
 
 ???+ note "XML Preference"
-	The below example can still be achieved through XML additions. Due to how XML stats are implemented compared to the Lua callback, **it is strongly recommended that you use the new XML item stats features instead of this callback!
+	The below example can still be achieved through XML additions and temporary effects. The XML stats are implemented in a way for better accuracy to vanilla stats compared to the Lua callback, **so it is strongly recommended that you use the new XML item stats features instead of this callback whenever possible!**
 
 ```Lua
 local mod = RegisterMod("Demon Locket Mod", 1)
