@@ -79,7 +79,7 @@ For every XML file, there is a tag that goes from the start of the file to the e
 	| customtags | string | Defines an arbitrary tag, or set of tags, that can be used in a similar fashion to the vanilla game's item tags. Explanation on how to use them can be found [here](https://repentogon.com/xml/items.html#customtags). |
 
 ## Obtaining your item through the debug console
-Your item now exists in the game, but is unobtainable through any legitimate means. You must give yourself the item through the debug console, either by granting it to Isaac directly or spawning a pedestal. We will cover how to do both methods.
+Your item now exists in the game, but is unobtainable through any legitimate means. You must give yourself the item through the debug console, either by granting it to Isaac directly or spawning a pedestal. Both methods will be covered in this tutorial.
 
 ### Non-REPENTOGON
 The debug console is not enabled by default without REPENTOGON.

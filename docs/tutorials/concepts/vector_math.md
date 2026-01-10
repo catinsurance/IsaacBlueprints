@@ -60,7 +60,7 @@ local renderPosition = Isaac.WorldToRenderPosition(worldPosition)
 
 ## Manipulating vectors
 
-Now that we know what vectors are and how the game handles them, we can now start to manipulate them. In Isaac, there is a [`Vector`](https://wofsauge.github.io/IsaacDocs/rep/Vector.html) object which holds many useful functions for manipulating vectors.
+Now that you know what vectors are and how the game handles them, you can now start to manipulate them. In Isaac, there is a [`Vector`](https://wofsauge.github.io/IsaacDocs/rep/Vector.html) object which holds many useful functions for manipulating vectors.
 
 Let's start with basic arithmetic.
 
@@ -94,7 +94,7 @@ print(vec) -- Vector(0, 2)
 Lastly, there's also a **static function** that's a part of the `Vector` class that lets you create a unit vector from a specific angle in degrees. The way you call this function works a little differently than normal. Observe the following example:
 ```lua
 local angle = 90
-local v1 = Vector.FromAngle(angle) -- Notice how we use a period (.) instead of a colon (:) here!
+local v1 = Vector.FromAngle(angle) -- Notice how a period (.) is used instead of a colon (:) here!
 
 print(v1) -- Vector(0, 1)
 ```
@@ -117,11 +117,11 @@ local halfWay = lerp(0, 2, 0.5)
 print(halfWay) -- 1
 ```
 
-With the above code, we have used the linear interpolation formula calculated with the `lerp()` function. This formula takes the starting number `a`, the ending number `b`, and a target percentage between the two numbers. Remember that percentages are represented with a decimal multiplied by 100, so 0.5 is the same as 50%. 50% of the way from 0 to 2 is 1, and that's what we got from the function.
+The above code stores the linear interpolation formula within the `lerp()` function, which is then called upon to caluclate a result. This formula takes the starting number `a`, the ending number `b`, and a target percentage between the two numbers. Remember that percentages are represented with a decimal multiplied by 100, so 0.5 is the same as 50%. 50% of the way from 0 to 2 is 1, and that's what was returned by the function.
 
 ![Number line from 0 to 2](../assets/vector_math/number_line.png)
 
-Linear interpolation is a very important concept to understand for lots of math in programming, but how do we apply it to vectors? The modding API provides a `Lerp()` function we can call on a vector. **This changes the vector it's used on** and does *not* provide a new, altered version of the vector.
+Linear interpolation is a very important concept to understand for lots of math in programming, but how is it applied to vectors? The modding API provides a `Lerp()` function can be called on a vector. **This changes the vector it's used on** and does *not* provide a new, altered version of the vector.
 ```lua
 local v1 = Vector(0, 0)
 local v2 = Vector(1, 1)
