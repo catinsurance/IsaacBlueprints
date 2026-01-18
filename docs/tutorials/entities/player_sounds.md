@@ -132,6 +132,49 @@ local function replacePlayerSound(oldSound)
 end
 ```
 
+### Multiple characters
+
+If wishing to use this method for more than one character, you can optimize the code to look up if the character is listed within a table that maps their PlayerType to hurt and death sounds. This list can be expanded with ease to allow support for more characters. The following modifications should be made to accomplish this:
+- `replacePlayerSound` should now pass the player alongside the sound being replaced.
+- Remove `player:GetPlayerType() == MY_CHAR` from `ReplaceDeathSoundFromDeadBody`
+- Remove the `MY_CHAR` optional argument from the `MC_POST_PEFFECT_UPDATE` callback.
+- Replace the definitions of HURT_SOUND and DEATH_SOUND to a map of player types to hurt and death sounds
+- Within `replacePlayerSound`, try and fetch the player's sound table using their player type. If not found, stop the rest of the function from running by returning early.
+- To accurately reflect the utility of the function, `replacePlayerSound` can be renamed to `tryReplacePlayerSound`.
+
+```Lua
+--This is a map, where you use a table to assign a number or string to a value. This is a map of player types to yet another table, which contains the hurt and death sound associated with that character.
+local PLAYER_SOUNDS = {
+    [PlayerType.PLAYER_MAGDALENE] = {
+        HurtSound = Isaac.GetSoundIdByName("Maggy Hurt"),
+        DeathSound = Isaac.GetSoundIdByName("Maggy Death")
+    },
+    [MY_CHAR] = {
+        HurtSound = Isaac.GetSoundIdByName("My Char Hurt"),
+        DeathSound = Isaac.GetSoundIdByName("My Char Death")
+    },
+    --etc
+}
+
+--Pass the player having their sound replaced and the old sound being replaced
+local function tryReplacePlayerSound(player, oldSound)
+    --Get the player's sound table
+    local sound_table = PLAYER_SOUNDS[player:GetPlayerType()]
+    --If it couldn't be found, stop the rest of the code.
+    if not sound_table then return end
+    --Play the appropriate sound based on what is passed into `oldSound`.
+    if oldSound == SoundEffect.SOUND_ISAAC_HURT_GRUNT then
+        sfxman:Play(sound_table.HurtSound)
+    elseif oldSound == SoundEffect.SOUND_ISAACDIES then
+        sfxman:Play(sound_table.DeathSound)
+        --For death sounds, the vanilla sound should already be playing. Stop the sound effect.
+        sfxman:Stop(oldSound)
+    end
+    --Playing the sound at 0 volume will stop the sound from playing on the next game update.
+    sfxman:Play(oldSound, 0)
+end
+```
+
 ## :modding-repentogon: REPENTOGON method
 
 REPENTOGON on Repentance+ users can use a much simpler method of adding sounds to your custom character that involves zero Lua code. Within the `players.xml` file, you can define two new variables:
