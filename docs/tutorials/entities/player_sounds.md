@@ -137,9 +137,9 @@ end
 If wishing to use this method for more than one character, you can optimize the code to look up if the character is listed within a table that maps their PlayerType to hurt and death sounds. This list can be expanded with ease to allow support for more characters. The following modifications should be made to accomplish this:
 
 - `replacePlayerSound` should now pass the player alongside the sound being replaced.
-- Remove `player:GetPlayerType() == MY_CHAR` from `ReplaceDeathSoundFromDeadBody`
+- Remove `player:GetPlayerType() == MY_CHAR` from `ReplaceDeathSoundFromDeadBody`.
 - Remove the `MY_CHAR` optional argument from the `MC_POST_PEFFECT_UPDATE` callback.
-- Replace the definitions of HURT_SOUND and DEATH_SOUND to a map of player types to hurt and death sounds
+- Replace the definitions of HURT_SOUND and DEATH_SOUND to a map of player types to hurt and death sounds.
 - Within `replacePlayerSound`, try and fetch the player's sound table using their player type. If not found, stop the rest of the function from running by returning early.
 - To accurately reflect the utility of the function, `replacePlayerSound` can be renamed to `tryReplacePlayerSound`.
 
@@ -157,9 +157,9 @@ local PLAYER_SOUNDS = {
     --etc
 }
 
---Pass the player having their sound replaced and the old sound being replaced
+--Pass the player having their sound replaced and the old sound being replaced.
 local function tryReplacePlayerSound(player, oldSound)
-    --Get the player's sound table
+    --Get the player's sound table.
     local sound_table = PLAYER_SOUNDS[player:GetPlayerType()]
     --If it couldn't be found, stop the rest of the code.
     if not sound_table then return end
