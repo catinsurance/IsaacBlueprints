@@ -135,6 +135,7 @@ end
 ### Multiple characters
 
 If wishing to use this method for more than one character, you can optimize the code to look up if the character is listed within a table that maps their PlayerType to hurt and death sounds. This list can be expanded with ease to allow support for more characters. The following modifications should be made to accomplish this:
+
 - `replacePlayerSound` should now pass the player alongside the sound being replaced.
 - Remove `player:GetPlayerType() == MY_CHAR` from `ReplaceDeathSoundFromDeadBody`
 - Remove the `MY_CHAR` optional argument from the `MC_POST_PEFFECT_UPDATE` callback.
