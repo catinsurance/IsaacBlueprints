@@ -211,7 +211,7 @@ The process of adding the pocket active can be broken down into three easy steps
 ```Lua
 local mod = RegisterMod("Gabriel Character Mod", 1)
 
---MC_POST_PLAYER_INIT will provide the player as the first and only argument, so we define it here in our function.
+--MC_POST_PLAYER_INIT will provide the player as the first and only argument, so it's defined here in the function.
 function mod:OnPlayerInit(player)
 
 end
@@ -220,21 +220,21 @@ end
 --The extra `0` at the end is so that it only triggers for regular players, as a variant of 1 is for co-op babies.
 mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, mod.OnPlayerInit, 0)
 ```
-2. Getting the IDs needed to check that its our character and that we don't already have the item in our pocket slot.
+2. Getting the IDs needed to check that its your character and that they don't already have the item in their pocket slot.
 ```Lua
 local mod = RegisterMod("Gabriel Character Mod", 1)
 
 --Each character has a unique ID, refered to as "PlayerType".
---This function fetches our character's PlayerType. The `true` at the end is for if this is a tainted character. It's false by default for non-tainteds.
+--This function fetches your character's PlayerType. The `true` at the end is for if this is a tainted character. It's false by default for non-tainteds.
 local TAINTED_GABRIEL = Isaac.GetPlayerTypeByName("Gabriel", true)
 
---This function returns the ID for our item.
+--This function returns the ID for your item.
 local HOLY_OUTBURST = Isaac.GetItemIdByName("Holy Outburst")
 
 function mod:OnPlayerInit(player)
-	--EntityPlayer:GetPlayerType() returns the player's PlayerType. Check that it matches our character's PlayerType.
+	--EntityPlayer:GetPlayerType() returns the player's PlayerType. Check that it matches your character's PlayerType.
 	if player:GetPlayerType() == TAINTED_GABRIEL
-		--EntityPlayer:GetActiveItem() returns the item ID available in a specific active item slot. Check that it DOES NOT match our item's ID to trigger our code.
+		--EntityPlayer:GetActiveItem() returns the item ID available in a specific active item slot. Check that it DOES NOT match your item's ID to trigger your code.
 		and player:GetActiveItem(ActiveSlot.SLOT_POCKET) ~= HOLY_OUTBURST
 	then
 
@@ -249,7 +249,7 @@ local mod = RegisterMod("Gabriel Character Mod", 1)
 
 local TAINTED_GABRIEL = Isaac.GetPlayerTypeByName("Gabriel", true)
 local HOLY_OUTBURST = Isaac.GetItemIdByName("Holy Outburst")
---We only ever need to call this once, so we save it here for later.
+--Game() only ever needs to be called once, so it's saved here for later.
 local game = Game()
 
 function mod:TaintedGabrielInit(player)
@@ -257,10 +257,10 @@ function mod:TaintedGabrielInit(player)
 		and player:GetActiveItem(ActiveSlot.SLOT_POCKET) ~= HOLY_OUTBURST
 	then
 		--EntityPlayer:SetPocketActiveItem(CollectibleType ItemID, integer ActiveSlot, boolean KeepInPools)
-		--We would normally want to set KeepInPools to `false`, but due to a bug, doing so and exiting & continuing your run will crash the game.
+		--Normally you would want to set KeepInPools to `false`, but due to a bug, doing so and exiting & continuing your run will crash the game.
 		player:SetPocketActiveItem(HOLY_OUTBURST, ActiveSlot.SLOT_POCKET, true)
 
-		--Since we don't want the item to reappear inside any item pools, we remove it manually.
+		--Remove the pocket item from the item pool manually.
 		local itemPool = game:GetItemPool()
 		itemPool:RemoveCollectible(HOLY_OUTBURST)
 	end

@@ -122,7 +122,7 @@ The following XML files have an achievement variable available to utilize:
 	- `unlockachievement` will unlock the assigned achievement after the challenge is completed.
 	- `lockeddesc` can be used to show a special message while the achievement is locked instead of the default "LOCKED :("
 
-This `items.xml` code will prevent this custom item from appearing in item pools until our achievement is unlocked.
+This `items.xml` code will prevent this custom item from appearing in item pools until your achievement is unlocked.
 
 ```xml
 <items gfxroot="gfx/items/" version="1" deathanm2="gfx/death items.anm2">

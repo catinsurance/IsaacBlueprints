@@ -46,10 +46,10 @@ mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, function()
 end)
 ```
 
-In the above example, we check to see if our mod has save data when a run is started. If they do, we load that save data (stored as a `string`) and print it to the debug console. Otherwise, we create new save data with the value `"Test!"`.
+In the above example, it's checked if the mod has save data when a run is started. If it does, the save data is loaded (stored as a `string`) and printed to the debug console. Otherwise, new save data is created with the value `"Test!"`.
 
 ## Structuring save data with JSON
-We know how to save data, but how do we structure it? **Isaac has a built-in JSON library that we can use to convert our Lua tables into JSON that we can save.** We can store our mod's data in a table, then store it using the JSON library. There are caveats to this that will be covered later on, but observe the following example to see the most basic implementation of this:
+You now know how to save data for your mod, but how should it be structured? **Isaac has a built-in JSON library that can be used to convert Lua tables into JSON that can be saved.** Your mod's data can be stored in a table, then store it using the JSON library. There are caveats to this that will be covered later on, but observe the following example to see the most basic implementation of this:
 
 ```lua
 local mod = RegisterMod("My mod", 1)
@@ -72,9 +72,9 @@ mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, function()
 end)
 ```
 
-In the above example, we check to see if our mod has save data when a run has started. If they do, we **deserialize** the JSON string that is our save data. To "deserialize" is to convert data from a "serialized" format (such as a `string`) back into a data structure we can use (in this case, a table). `json.decode` takes a string and returns the decoded data, which in our case is a table with a few values in it.
+In the above example, it's checked to see if the mod has save data when a run has started. If it does, the JSON string is **deserialized**. That is your save data. To "deserialize" is to convert data from a "serialized" format (such as a `string`) back into a data structure that you can use (in this case, a table). `json.decode` takes a string and returns the decoded data, which in this case is a table with a few values in it.
 
-If we don't have save data for our mod, we'll create a table and **serialize** it. To **serialize** is to convert a data structure like our table here into a "serialized" format, such as a `string`. This table can have anything in it, ***but there are rules we must follow as to not break our save data.***
+If there isn't any save data for the mod, create a table and **serialize** it. To **serialize** is to convert a data structure like the table here into a "serialized" format, such as a `string`. This table can have anything in it, ***but there are rules that must be followed as to not break your save data.***
 
 ## Important caveats with the JSON library
 There are many things to look out for when it comes to the built-in JSON library that Isaac provides. Below is a comprehensive list of all issues that you may run into with encoding and decoding data with the JSON library.

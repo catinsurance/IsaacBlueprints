@@ -61,9 +61,9 @@ function mod:RedButtonUse(item, rng, player, useFlags, activeSlot)
 
 end
 
---Will call the mod:RedButtonUse function upon activating our active item.
---Our item's ID is inserted at the end of the AddCallback function, as this callback accepts an optional argument
---to specify which active item should trigger our code.
+--Will call the mod:RedButtonUse function upon activating your active item.
+--Your item's ID is inserted at the end of the AddCallback function, as this callback accepts an optional argument
+--to specify which active item should trigger your code.
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.RedButtonUse, BIG_RED_BUTTON)
 ```
 
@@ -131,7 +131,7 @@ local TEN_SECONDS = ONE_SECOND * 10
 local MAX_CHARGE = Isaac.GetItemConfig():GetCollectible(BIG_RED_BUTTON).MaxCharges
 
 function mod:ChargeActiveItem(player)
-	--Only run this code if we have our active item and that the game's timer has hit an interval of ten seconds.
+	--Only run this code if the player has your active item and that the game's timer has hit an interval of ten seconds.
 	if player:HasCollectible(BIG_RED_BUTTON) and game:GetFrameCount() % TEN_SECONDS == 0 then
 		--Will loop through the primary, secondary (from Schoolbag), and pocket item slot for active items.
 		for slot = ActiveSlot.SLOT_PRIMARY, ActiveSlot.SLOT_POCKET do
@@ -141,7 +141,7 @@ function mod:ChargeActiveItem(player)
 			if player:HasCollectible(CollectibleType.COLLECTIBLE_BATTERY) then
 				maxCharge = maxCharge * 2
 			end
-			--Check that it's our active item and it needs to be charged.
+			--Check that it's your active item and it needs to be charged.
 			--There is an EntityPlayer:NeedsCharge() function, but it will always return `false` for `special` chargetype actives.
 			if player:GetActiveItem(slot) == BIG_RED_BUTTON and player:GetActiveCharge(slot) < maxCharge then
 				--Will use the REPENTOGON-exclusive method of adding charges to the item, if available. Otherwise, uses the traditional method.

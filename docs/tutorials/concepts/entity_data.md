@@ -52,20 +52,20 @@ To get started, simply create a new Lua file:
 ```lua
 local dataHolder = {}
 
--- We will store the data within its own table in the data holder for easy access
+-- Store the data within its own table in the data holder for easy access.
 dataHolder.Data = {}
 
 function dataHolder:GetEntityData(entity)
-    -- We obtain the entity's pointer hash to easily reference it in a table
+    -- Obtain the entity's pointer hash to easily reference it in a table.
     local ptrHash = GetPtrHash(entity)
-    -- Here we instantiate the data if it doesn't exist
+    -- Instantiate the data if it doesn't exist
     if not dataHolder.Data[ptrHash] then
         dataHolder.Data[ptrHash] = {}
         local entityData = dataHolder.Data[ptrHash]
 
         --[[
-            We provide a default value of the entity's pointer to the data.
-            The pointer helps us later be able to check if the entity exists
+            Provide a default value of the entity's pointer to the data.
+            The pointer helps us later be able to check if the entity exists.
 
             For looping purposes, it may be inconvenient to store it here.
             If this is the case, making another table to store the pointer
@@ -73,13 +73,13 @@ function dataHolder:GetEntityData(entity)
         --]] 
         entityData.Pointer = EntityPtr(entity)
 
-        -- You may also add additional initialization steps here
+        -- You may also add additional initialization steps here.
         -- This may include defining default variables for your data:
 
         -- entityData.customValue = false
     end
 
-    -- Finally, we return the data itself
+    -- Finally, return the data itself.
     return dataHolder.Data[ptrHash]
 end
 
@@ -88,28 +88,28 @@ return dataHolder
 
 As it is just a holder, you may `require` this Lua file so that the data is persistent across the project. Using `include` would make the data local to the file you are including it in. See the ["Additional lua files"](./additional_lua_files.md) article for more information about the differences between the two.
 
-We use an [EntityPtr](https://wofsauge.github.io/IsaacDocs/rep/EntityPtr.html) object to keep track of the entity. Storing the entity directly can cause unexpected behavior, such as the variable pointing to a different entity when the initial one is removed. `EntityPtr` is much safer and also clears its `Ref` property automatically when the entity no longer exists. You can check for if `Ref` is `nil` to see if the entity still exists.
+Use an [EntityPtr](https://wofsauge.github.io/IsaacDocs/rep/EntityPtr.html) object to keep track of the entity. Storing the entity directly can cause unexpected behavior, such as the variable pointing to a different entity when the initial one is removed. `EntityPtr` is much safer and also clears its `Ref` property automatically when the entity no longer exists. You can check for if `Ref` is `nil` to see if the entity still exists.
 
 ### Clearing data in your holder
 
-Lastly, we will cover removing and clearing custom data. Additional callbacks should be registered to clear the information after specified events. Depending on the use case, this can range from clearing data when entities are removed directly in `MC_POST_ENTITY_REMOVE`, clearing data when the entity is fully dead in `MC_POST_NPC_DEATH`, or clearing entity data at the end of the room with `MC_POST_NEW_ROOM`.
+Lastly, to cover removing and clearing custom data. Additional callbacks should be registered to clear the information after specified events. Depending on the use case, this can range from clearing data when entities are removed directly in `MC_POST_ENTITY_REMOVE`, clearing data when the entity is fully dead in `MC_POST_NPC_DEATH`, or clearing entity data at the end of the room with `MC_POST_NEW_ROOM`.
 
 Below is an example of how to clear custom data on [`MC_POST_NEW_ROOM`](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_new_room):
 
 ```lua
--- Provide your data holder to be able to clear it
+-- Provide your data holder to be able to clear it.
 local dataHolder = require("path.to.data_holder")
 
--- For clearing custom data on MC_POST_NEW_ROOM
+-- For clearing custom data on MC_POST_NEW_ROOM.
 function MOD_REFERENCE:ClearCustomData()
-    -- Loop through the table of stored data
+    -- Loop through the table of stored data.
     for ptrHash, entityData in pairs(dataHolder.Data) do
-        -- Check if the entity's pointer exists
+        -- Check if the entity's pointer exists.
         local entityPointer = entityData.Pointer
 
-        -- If the pointer doesn't exist, or the entity's reference doesn't exist
+        -- If the pointer doesn't exist, or the entity's reference doesn't exist.
         if not (entityPointer and entityPointer.Ref) then
-            -- We know the entity doesn't exist anymore, therefore remove its data
+            -- The entity doesn't exist anymore, so remove its data.
             entityData.Data[ptrHash] = nil
         end
     end
@@ -120,17 +120,17 @@ MOD_REFERENCE:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, MOD_REFERENCE.ClearCust
 Similarly, the following code clears entity data on removal or death:
 
 ```lua
--- Provide your data holder to be able to clear it
+-- Provide your data holder to be able to clear it.
 local dataHolder = require("path.to.data_holder")
 
 function MOD_REFERENCE:ClearDataOnRemoveOrDeath(entity)
-    -- Get the pointer hash of the current entity
+    -- Get the pointer hash of the current entity.
     local ptrHash = GetPtrHash(entity)
-    -- Set the data to nil. This works even if it had no data prior
+    -- Set the data to nil. This works even if it had no data prior.
     dataHolder.Data[ptrHash] = nil
 end
 MOD_REFERENCE:AddCallback(ModCallbacks.MC_POST_ENTITY_REMOVE, MOD_REFERENCE.ClearDataOnRemoveOrDeath)
--- Alternatively clear it when the NPC_DEATH callback is run
+-- Alternatively clear it when the NPC_DEATH callback is run.
 -- MOD_REFERENCE:AddCallback(ModCallbacks.MC_POST_NPC_DEATH, MOD_REFERENCE.ClearDataOnRemoveOrDeath)
 ```
 

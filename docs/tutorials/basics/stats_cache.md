@@ -20,7 +20,7 @@ When loading into a run, the game calculates the value of each player stat by ev
 When the game detects that a specific stat might've gotten changed (e.g. picking up Sad Onion might change tears stat), it reruns the full calculation for this stat, and updates the cache with the new value.
 
 ???- ""Cache" Definition"
-    A **cache** in computer science is a temporary storage of data that is intended to be used later to avoid recomputing things that are costly to calculate. This can be something like a complicated math equation that takes a lot of time to complete. In our case, it's to avoid having to check and recalculate every stat given by items that the player has in their inventory.
+    A **cache** in computer science is a temporary storage of data that is intended to be used later to avoid recomputing things that are costly to calculate. This can be something like a complicated math equation that takes a lot of time to complete. In this case, it's to avoid having to check and recalculate every stat given by items that the player has in their inventory.
 
 ## Adding custom stat modifiers
 
@@ -101,7 +101,7 @@ The following examples showcase how to work with stat caches in practice. The mo
 <items gfxroot="gfx/items/" deathanm2="gfx/death_items.anm2" version="1">
     <passive id="1" name="Bone Charm" description="Skeletal Vigor" gfx="placeholder.png" quality="0" tags="summonable nolostbr"
         cache="speed luck" 
-	/> <!-- Specifying stats we want updated on item pickup or drop. -->
+	/> <!-- Specifying stats that should be updated on item pickup or drop. -->
 </items>
 ```
 
@@ -144,16 +144,16 @@ mod:AddCallback(ModCallbacks.MC_EVALUATE_CACHE, mod.BoneCharmEvaluateCache)
 --due to there not being callbacks for heart count changes.
 ---@param player EntityPlayer
 function mod:PostPeffectUpdate(player)
-    --Once again, we don't want to run this code without the item owned.
+    --Once again, don't want to run this code without the item owned.
     if not player:HasCollectible(BONE_CHARM_ID) then
         return
     end
 
-    --We'll be using GetData for storing previous bone heart count due to its simplicity.
+    --GetData is used for storing previous bone heart count due to its simplicity.
     local playerData = player:GetData()
     local currentBoneHearts = player:GetBoneHearts()
 
-    --We compare current bone heart count of the player with one from previous frame.
+    --Compare the current bone heart count of the player with one from previous frame.
     --If they are different, trigger cache evaluation, so the luck is updated to match new value.
     --Then save current value for use on the next update.
 
@@ -161,7 +161,7 @@ function mod:PostPeffectUpdate(player)
     --In this situation, it won't cause issues because of ~= (not equal to operator) working fine with nil.
     --However, it's a good idea to check if the value isn't nil when performing other operations.
     if playerData.BoneCharmPreviousBoneHearts ~= currentBoneHearts then
-        --Only luck scales with bone heart count, so we can skip refreshing speed here.
+        --Only luck scales with bone heart count, so skip refreshing speed here.
         player:AddCacheFlags(CacheFlag.CACHE_LUCK)
         player:EvaluateItems()
     end

@@ -77,14 +77,14 @@ While `wisps.xml` provides lots of customization, not everything can be made pos
 ### The basics
 Wisps are defined as familiar entities in the game's code, so any callbacks in the modding API that affect familiars will be useful for running code on wisps. Additionally, the wisp of a given item has its `Subtype` value equal to the associated item's `CollectibleType`.
 
-This example code snippet below will add behavior to a custom item's wisp, causing it to spawn a puddle of water every 3 seconds (assuming our custom item is called Isaac's Blueprint):
+This example code snippet below will add behavior to a custom item's wisp, causing it to spawn a puddle of water every 3 seconds (assuming the custom item is called Isaac's Blueprint):
 
 ```lua
 local mod = RegisterMod("WispExampleTutorial", 1)
 local ISAACS_BLUEPRINT = Isaac.GetItemIdByName("Isaac's Blueprint")
 
 function mod:IsaacsBlueprintWispFamiliarUpdate(familiar)
-    -- Early return out of the function if the wisp is not from our item.
+    -- Early return out of the function if the wisp is not from your item.
     if familiar.SubType ~= ISAACS_BLUEPRINT then return end
 
     -- This code will activate every 3 seconds the wisp has existed.
@@ -102,7 +102,7 @@ local mod = RegisterMod("WispExampleTutorial", 1)
 local ISAACS_BLUEPRINT = Isaac.GetItemIdByName("Isaac's Blueprint")
 
 function mod:IsaacsBlueprintWispFamiliarUpdate(familiar)
-    -- Early return out of the function if the wisp is not from our item.
+    -- Early return out of the function if the wisp is not from your item.
     if familiar.SubType ~= ISAACS_BLUEPRINT then return end
 
     -- This code will activate every 3 seconds the wisp has existed.
