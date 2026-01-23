@@ -168,8 +168,9 @@ The modding API does not naturally support adding custom announcer voicelines as
 The following code follows the steps described below:
 
 1. [Creating a sound](sound_effects.md).
-2. Checking the current [Options.AnnouncerVoiceMode](https://wofsauge.github.io/IsaacDocs/rep/Options.html#announcervoicemode) setting (:modding-repentogon: REPENTOGON includes an [AnnouncerVoiceMode](https://repentogon.com/enums/AnnouncerVoiceMode.html) enum for convenience). For the "sometimes" option, the `math.random` function, included naturally with the Lua library, can be used as opposed to an [RNG](https://wofsauge.github.io/IsaacDocs/rep/RNG.html) object as it is purely aesthetic and has no effect on gameplay.
-3. Creating a "scheduler" system for the announcer delay. This can be ignored if not applicable to your card.
+2. Checking the current `UseFlag` in place. We do not want to have it activate twice for Car Battery (`UseFlag.USE_CARBATTERY`), and to not activate at all if it disables use of the announcer (`UseFlag.USE_NOANNOUNCER`).
+3. Checking the current [Options.AnnouncerVoiceMode](https://wofsauge.github.io/IsaacDocs/rep/Options.html#announcervoicemode) setting (:modding-repentogon: REPENTOGON includes an [AnnouncerVoiceMode](https://repentogon.com/enums/AnnouncerVoiceMode.html) enum for convenience). For the "sometimes" option, the `math.random` function, included naturally with the Lua library, can be used as opposed to an [RNG](https://wofsauge.github.io/IsaacDocs/rep/RNG.html) object as it is purely aesthetic and has no effect on gameplay.
+4. Creating a "scheduler" system for the announcer delay. This can be ignored if not applicable to your card.
 
 ```Lua
 local mod = RegisterMod("My Mod", 1)
@@ -190,7 +191,12 @@ local announcerDelay = 0
 --Store SFXManager as we only need it once for playing the sound.
 local sfxman = SFXManager()
 
-local function tryPlayAnnouncer()
+local function tryPlayAnnouncer(useFlags)
+    if useFlags & UseFlag.USE_CARBATTERY ~= 0
+        or useFlags & UseFlag.USE_NOANNOUNCER ~= 0
+    then
+        return --Stop code from running twice in a row with Car Battery or if announcer is disabled by the item's UseFlags.
+    end
     local mode = Options.AnnouncerVoiceMode
     if mode == AnnouncerVoiceMode.NEVER then
         return --Stop code if it should never play
@@ -215,7 +221,7 @@ function mod:OnUseCard(card, player, useFlags)
     end
     player:AddHearts(addHearts)
     --Add the function for attempting to play the announcer voiceline.
-    tryPlayAnnouncer()
+    tryPlayAnnouncer(useFlags)
 end
 
 mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.OnUseCard, HEALING_CARD)
