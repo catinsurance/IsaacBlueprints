@@ -13,6 +13,9 @@ tags:
 
 Creating an item that gives a simple tears up or down is more complex than it may appear.
 
+???+ note ":modding-repentogon: Tears Up with REPENTOGON"
+	REPENTOGON makes modifying the tears stat much easier! See [this article](../repentogon/adding_stats.md) for more information.
+
 ## Explanation
 Making a simple item like Sad Onion is actually a bit complicated, because the tears stat as displayed in the FoundHud in Repentance(+) is not the same as what we change internally.
 

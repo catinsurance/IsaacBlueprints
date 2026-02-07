@@ -71,7 +71,7 @@ Both [Tears](https://bindingofisaacrebirth.wiki.gg/wiki/Tears#Tear_Delay_Calcula
 
 It might be desirable to make modded stat-ups be affected by those formulas (such as the 5.00 soft Tears cap), or to apply them before specific vanilla multipliers (such as the ["Soy Milk"](https://bindingofisaacrebirth.wiki.gg/wiki/Soy_Milk) downwards damage multiplier).
 
-Unfortunately, the API only allows interaction with stats after all vanilla calculations have been applied. This makes full consistency with vanilla impossible without completely recreating the stat system.
+Unfortunately, the vanilla API only allows interaction with stats after all vanilla calculations have been applied. This makes full consistency with vanilla impossible without completely recreating the stat system. :modding-repentogon: However, REPENTOGON does make this fully possible! See [this article](../repentogon/adding_stats.md) for more information.
 
 ## CacheFlag to Player variable
 
