@@ -12,13 +12,14 @@ tags:
     - REPENTOGON
 ---
 
+{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 {% include-markdown "hidden/repentogon_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 
 Adding stats to the player within the vanilla API has been restricted to a single method: `MC_EVALUATE_CACHE`. This tutorial will cover the expanded accessibility to adding and adjusting stats on the player.
 
 ## Introduction
 
-If a modder wishes to add stats to the player for any purpose without REPENTOGON, it would need to go through [MC_EVALUATE_CACHE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_evaluate_cache), after all vanilla calculations have been made. This includes character base stats and any damage and tears ups. Character stats are applied before all other stats, and damage and tears are split into three categories: Flat, regular, and multiplicative. [Damage](https://bindingofisaacrebirth.wiki.gg/wiki/Damage#Effective_Damage) and [tears](https://bindingofisaacrebirth.wiki.gg/wiki/Tears#Fire_Rate_Calculation) stats have unique formulas normally inaccessible in the modding API, and thus any modifications to those stats are impossible to be fully accurate to the vanilla game. REPENTOGON changes this with additions to both two XML files and Lua code.
+If a modder wishes to add stats to the player for any purpose without REPENTOGON, it would need to go through [MC_EVALUATE_CACHE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_evaluate_cache), after all vanilla calculations have been made. This includes character base stats and any damage and tears ups. Character stats are applied before all other stats, and damage and tears are split into three categories: Flat, regular, and multiplicative. [Damage](https://bindingofisaacrebirth.wiki.gg/wiki/Damage#Effective_Damage) and [tears](https://bindingofisaacrebirth.wiki.gg/wiki/Tears#Fire_Rate_Calculation) stats have unique formulas normally inaccessible in the modding API, and thus any modifications to those stats are impossible to be fully accurate to the vanilla game. REPENTOGON changes this with additions to the `players.xml`, `items.xml`, and Lua code.
 
 ## players.xml
 
@@ -27,12 +28,12 @@ First on the list of REPENTOGON's additions is the ability to set base stats to 
 ???+ info "`players.xml` stat variables"
 	| Variable Name | Value | Comment |
 	|:--|:--|:--|
-	|speedmodifier|float|An inherent offset to the speed stat the character should start with. Base this offset off of Isaac's stats.|
-	|firedelaymodifier|float|An inherent offset to the fire delay stat the character should start with. Base this offset off of Isaac's stats. The end result will not be *exactly* as expected due to various calculations done by the game, but as a baseline, `0.7` is equivalent to Sad Onion.|
-	|damagemodifier|float|An inherent offset to the damage stat the character should start with. Base this offset off of Isaac's stats.|
-	|rangemodifier|float|An inherent offset to the range stat the character should start with. Base this offset off of Isaac's stats.|
-	|shotspeedmodifier|float|An inherent offset to the shot speed stat the character should start with. Base this offset off of Isaac's stats.|
-	|luckmodifier|float|An inherent offset to the luck stat the character should start with. Base this offset off of Isaac's stats.|
+	|speedmodifier|float|An inherent offset to the speed stat the character should start with. Base this offset off of Isaac's stat of 1.00.|
+	|firedelaymodifier|float|An inherent offset to the fire delay stat the character should start with. Base this offset off of Isaac's stat of 2.73. The end result will not be *exactly* as expected due to various calculations done by the game, but as a baseline, `0.7` is equivalent to Sad Onion.|
+	|damagemodifier|float|An inherent offset to the damage stat the character should start with. Base this offset off of Isaac's stat of 3.50.|
+	|rangemodifier|float|An inherent offset to the range stat the character should start with. Base this offset off of Isaac's stat of 6.50. Unlike regular range additions where 40 units = +1 range, the value entered is 1:1, where 1 unit = +1 range.|
+	|shotspeedmodifier|float|An inherent offset to the shot speed stat the character should start with. Base this offset off of Isaac's stat of 1.00.|
+	|luckmodifier|float|An inherent offset to the luck stat the character should start with. Base this offset off of Isaac's stat of 0.00.|
 
 ???+ note "Adding negative tears stat"
 	The implementation for the players.xml stat additions was based off of how Eden gets their stats. For fire delay, if a negative number is set, it gets multiplied by `0.686655` as to not be too severe.
@@ -81,9 +82,9 @@ Example XML entry:
 
 ### Temporary Effects
 
-You can choose to have stats only added when their respective [temporary effect](../general/temporary_effects.md) is present in addition to being added passively. To add one, prepend any of the variables in the previous section with `effect` (e.g. `effecttears`). Active items add a temporary effect of themselves when used, and thus can also add stats on use. Otherwise, they will need to be added manually through Lua code.
+You can choose to have stats only added when their respective [temporary effect](../general/temporary_effects.md) is present. To add one, prepend any of the variables in the previous section with `effect` (e.g. `effecttears`). Active items add a temporary effect of themselves when used, and thus can also add stats on use. Otherwise, they will need to be added manually through Lua code.
 
-The following code will reduce Isaac's speed by 0.1 with each copy of the item and a permanent +1 luck for every bone heart collected.
+The following code will reduce Isaac's speed by -0.1 with each copy of the item and a permanent +1 luck for every bone heart collected.
 
 `items.xml`:
 
