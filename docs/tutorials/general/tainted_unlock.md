@@ -12,9 +12,11 @@ tags:
     - Lua
 ---
 
+{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
+
 ## Introduction
 
-Tainted characters are alternate, twisted versions of their regular variants. They are unlocked by finding them inside the Home floor's secret closet while playing as their regular variant. This article will cover setting up this unlock method for your own custom tainted character.
+Tainted characters are alternate, twisted versions of their regular variants that are unlocked by finding them inside the Home floor's secret closet while playing as said regular variant. This article will cover setting up this unlock method for your own custom tainted character.
 
 ![Home Closet](../assets/tainted_unlock/closet.png)
 
@@ -30,9 +32,9 @@ A `boolean` value should be saved to remember the state of the unlock, for wheth
 
 ## Locking access to the character
 
-Before the tainted character can be unlocked, it must be locked and unable to be played. :modding-repentogon: As mentioned previously, REPENTOGON makes this process simple by allowing you to attach an achievement to the character, which will stop your character from being selected on the character selection screen. Without it, there are no capabilities to lock the character inside the main menu. Instead, the character will need to be changed to a different character when being initialized.
+Before the tainted character can be unlocked, it must be locked and unable to be played. :modding-repentogon: As mentioned previously, REPENTOGON makes this process simple by allowing you to attach an achievement to the character, which will stop your character from being selected on the character selection menu. Without it, there are no capabilities to lock the character inside the main menu. Instead, the character will need to be changed to a different character when being initialized.
 
-[EntityPlayer:ChangePlayerType](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#changeplayertype) will be utilized in order to change from your tainted character to your regular character. Using this function within [MC_POST_PLAYER_INIT](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_player_init) right as the player spawns will also grant the character any items that they may have on them as defined in their `players.xml` file. Depending on how your character is setup, you may need to make some additional adjustments to ensure this alternate way of starting as your regular character isn't any different from starting as them from the character selection screen.
+[EntityPlayer:ChangePlayerType](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#changeplayertype) will be utilized in order to change from your tainted character to your regular character. Using this function within [MC_POST_PLAYER_INIT](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_player_init) right as the player spawns will also grant the character any items that they may have on them as defined in their `players.xml` file. Depending on how your character is setup, you may need to make some additional adjustments to ensure this alternate way of starting as your regular character isn't any different from starting as them from the character selection menu.
 
 ```Lua
 local mod = RegisterMod("My Mod", 1)
@@ -60,13 +62,13 @@ mod:AddCallback(ModCallback.MC_POST_PLAYER_INIT, mod.LockTaintedOnInit, PLAYER_V
 
 ## Spawn the player body
 
-The traditional method of unlocking a tainted character is by locating and touching their shaking body within the closet room of the Home floor. To start, check that you're entering the correct room with your character. The tainted character unlock method only looks at the first player with [Isaac.GetPlayer()](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getplayer).
+The traditional method of unlocking a tainted character is by locating and touching their shaking body within the closet room of the Home floor. To start, check that you're entering the correct room with your character. The tainted character unlock method only looks at the first player using [Isaac.GetPlayer()](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getplayer).
 
 You will be checking the first player's character multiple times throughout this tutorial. For convenience, create a function for it and return if the player is your character and has their tainted character locked.
 
 ```Lua
 local game = Game()
---The Home floor has a static layout, so it should remain unchanged.
+--The Home floor has a static layout, so the room index of the closet should remain unchanged.
 local CLOSET_ROOM_INDEX = 94
 
 local function isFirstPlayerTaintedLocked()
@@ -106,7 +108,7 @@ local function isFirstPlayerTaintedLocked()
 end
 ```
 
-Next, the room should be cleared of any extra entities and have the player body spawned. For all modded characters and for vanilla characters that have their tainted variants unlocked, Inner Child will spawn if it is unlocked, or otherwise, a shopkeeper. These entities will be removed first. For the player body, it is internally a slot machine (`EntityType.ENTITY_SLOT`) with a variant of `14`. :modding-repentogon: With REPENTOGON, there is a [SlotVariant](https://repentogon.com/enums/SlotVariant.html) enum with `14` being assigned to `SlotVariant.HOME_CLOSET_PLAYER`.
+Next, the room should be cleared of any extra entities and have the player body spawned. For all modded characters, tainted characters, and for vanilla characters that have their tainted variants unlocked, [Inner Child](https://bindingofisaacrebirth.wiki.gg/wiki/Inner_Child) will spawn if it is unlocked. If Inner Child is not unlocked, a shopkeeper will spawn instead. These are the only entities that need to be removed. For the player body, it is internally a slot machine (`EntityType.ENTITY_SLOT`) with a variant of `14`. :modding-repentogon: With REPENTOGON, there is a [SlotVariant](https://repentogon.com/enums/SlotVariant.html) enum with `14` being assigned to `SlotVariant.HOME_CLOSET_PLAYER`.
 
 ```Lua
 local game = Game()
@@ -144,11 +146,11 @@ mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.SpawnTaintedOnClosetEnter)
 
 ## Update the player body sprite
 
-The player body will attempt to take on the tainted appearance of the first player's current character. If no tainted is available, or when playing a modded character, it will spawn with the first player's own spritesheet. As such, we need to manually update the spritesheet to display the tainted spritesheet.
+The player body will attempt to take on the tainted appearance of the first player's current character. If no tainted is available, or when playing a modded character, it will spawn with the first player's own spritesheet. As such, the spritesheet must be manually updated to display the tainted's spritesheet.
 
 ### Non-REPENTOGON method
 
-Without REPENTOGON, there are no callbacks for slot machines, so they must be manually searched for after they are spawned in and upon re-entering the room. The spritesheet to use must also be manually typed out in a string.
+Without REPENTOGON, there are no callbacks for slot machines, so they must be manually searched for after they are spawned in and upon re-entering the room. The spritesheet to use must also be manually typed out as a string.
 
 ```Lua
 local myCharTaintedSpritePath = "gfx/characters/costumes/character_mychar_b.png"
@@ -239,7 +241,7 @@ mod:AddCallback(ModCallbacks.MC_POST_UPDATE, mod.UnlockTaintedOnPayPrize)
 
 ### :modding-repentogon: REPENTOGON method
 
-REPENTOGON's [MC_POST_SLOT_UPDATE](https://repentogon.com/enums/ModCallbacks.html#mc_post_slot_update) can be used for detecting the end of the "PayPrize" animation. The achievement for the tainted character can be unlocked here.
+REPENTOGON's [MC_POST_SLOT_UPDATE](https://repentogon.com/enums/ModCallbacks.html#mc_post_slot_update) will pass slot machines being updated, skipping the need for Isaac.FIndByType from the non-REPENTOGON method. You can unlock your registered achievement when the PayPrize animation finishes.
 
 ```Lua
 function mod:UnlockTaintedOnPayPrize(slot)
