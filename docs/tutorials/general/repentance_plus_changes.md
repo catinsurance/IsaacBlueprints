@@ -9,6 +9,8 @@ tags:
     - Lua
 ---
 
+{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
+
 With the addition of the Repentance+ DLC, there have been a few updates to the modding API compared to Repentance. This article will list all of the additions and changes that have been made in the process.
 
 ## [Entity](https://wofsauge.github.io/IsaacDocs/rep/Entity.html)
