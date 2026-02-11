@@ -114,7 +114,7 @@ Demonstration using `Game():Fadeout(0.025, 2, KColor(0.5, 0.5, 0.5, 1))`:
 
 ## HUD
 
-A new argument has been added to both overrides of [HUD:ShowItemText](https://wofsauge.github.io/IsaacDocs/rep/HUD.html?h=hud#showitemtext): `ClearStack`. In Repentance+, HUD item text now stacks, showing one HUD text below the last one if its still on screen. The argument is `true` by default, which will resort to the behaviour of Repentance HUD text of removing all existing HUD text on screen before displaying the new one.
+A new argument has been added to both overrides of [HUD:ShowItemText](https://wofsauge.github.io/IsaacDocs/rep/HUD.html?h=hud#showitemtext): `ClearStack`. In Repentance+, HUD item text now stacks, showing one HUD text below the last one if it's still on screen. The argument is `true` by default, which will resort to the behaviour of Repentance HUD text of removing all existing HUD text on screen before displaying the new one.
 
 Example:
 
@@ -136,9 +136,9 @@ Game():GetHUD():ShowItemText("foo", "bar", false, false)
 
 ## [ItemPool](https://wofsauge.github.io/IsaacDocs/rep/ItemPool.html)
 
-[ItemPool:GetCollectible](https://wofsauge.github.io/IsaacDocs/rep/ItemPool.html#getcollectible) has an additional argument: `BackupPoolType`. Accepts an [ItemPoolType] such that if the regular pool in `PoolType` is empty and `DefaultItem` is set to `CollectibleType.COLLECTIBLE_NULL`, it will draw from `BackupPoolType` instead of `ItemPoolType.POOL_TREASURE`.
+[ItemPool:GetCollectible](https://wofsauge.github.io/IsaacDocs/rep/ItemPool.html#getcollectible) has an additional argument: `BackupPoolType`. Accepts an `ItemPoolType` such that if the regular pool in `PoolType` is empty and `DefaultItem` is set to `CollectibleType.COLLECTIBLE_NULL`, it will draw from `BackupPoolType` instead of `ItemPoolType.POOL_TREASURE`.
 
-???+ info "Not available with REPENTOGON"
+???+ info ":modding-repentogon: Not available with REPENTOGON"
 	This addition was added in a later update to Repentance+ after v1.9.7.12, so it is not available to REPENTOGON users.
 
 Example:
@@ -155,8 +155,6 @@ However, defining `BackupPoolType` with `ItemPoolType.POOL_DEVIL` will return an
 Game():GetItemPool():GetCollectible(ItemPoolType.POOL_LIBRARY, true, nil, nil, ItemPoolType.POOL_DEVIL)
 ```
 
-(NOTE: Doesn't appear to work in REPENTOGON? Wonder if its a latest vanilla version addition.)
-
 ## [Room](https://wofsauge.github.io/IsaacDocs/rep/Room.html)
 
 - [Room:DamageGridWithSource](https://wofsauge.github.io/IsaacDocs/rep/Room.html#damagegridwithsource) is identical to [Room:DamageGrid](https://wofsauge.github.io/IsaacDocs/rep/Room.html#damagegrid), but you can define an [EntityRef](https://wofsauge.github.io/IsaacDocs/rep/EntityRef.html) as a source.
@@ -165,7 +163,7 @@ Game():GetItemPool():GetCollectible(ItemPoolType.POOL_LIBRARY, true, nil, nil, I
 
 ## [Sprite](https://wofsauge.github.io/IsaacDocs/rep/Sprite.html)
 
-- [Sprite:ReplaceSpritesheet](https://wofsauge.github.io/IsaacDocs/rep/Sprite.html#replacespritesheet) now returns a `boolean` instead of `nil`. It will return `true` if the spritesheet at the given layer id was successfully replaced *and* if the new spritesheet is not the same as the old one, otherwise returns `false`.
+- [Sprite:ReplaceSpritesheet](https://wofsauge.github.io/IsaacDocs/rep/Sprite.html#replacespritesheet) now returns a `boolean` instead of `nil`. It will return `true` if the spritesheet at the given layer id was successfully replaced *and* if the new spritesheet is not the same as the old one, otherwise returns `false`. It does *not* confirm whether the new spritesheet actually exists or not, so a non-existent spritesheet can still return `true`.
 
 ## [Options](https://wofsauge.github.io/IsaacDocs/rep/Options.html)
 
