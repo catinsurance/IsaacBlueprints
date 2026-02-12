@@ -12,6 +12,7 @@ tags:
     - Lua
 ---
 
+{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 {% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
 
 Pocket items are consumable one-time-use items that Isaac can collect and store in his pocket item slot on the bottom right of the HUD. This tutorial covers the essentials for how to create your own pocket item and making it into a card.
