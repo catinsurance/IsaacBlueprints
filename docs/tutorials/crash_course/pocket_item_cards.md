@@ -123,13 +123,13 @@ local mod = RegisterMod("My Mod", 1)
 --Fetch the ID of your card using the name assigned to `hud`, not `name`.
 local HEALING_CARD = Isaac.GetCardIdByName("Healing Card")
 
---MC_USE_ITEM passes 3 arguments: The card Id, the player using it, and UseFlags.
+--MC_USE_CARD passes 3 arguments: The card Id, the player using it, and UseFlags.
 function mod:OnUseCard(card, player, useFlags)
 
 end
 
---MC_USE_ITEM accepts an optional argument to only run for a specific card.
-mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.OnUseCard, HEALING_CARD)
+--MC_USE_CARD accepts an optional argument to only run for a specific card.
+mod:AddCallback(ModCallbacks.MC_USE_CARD, mod.OnUseCard, HEALING_CARD)
 ```
 
 For this card, the following effects will utilize all three arguments:
@@ -159,7 +159,7 @@ function mod:OnUseCard(card, player, useFlags)
     player:AddHearts(addHearts)
 end
 
-mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.OnUseCard, HEALING_CARD)
+mod:AddCallback(ModCallbacks.MC_USE_CARD, mod.OnUseCard, HEALING_CARD)
 ```
 
 ### Announcer Voiceline
@@ -225,7 +225,7 @@ function mod:OnUseCard(card, player, useFlags)
     tryPlayAnnouncer(useFlags)
 end
 
-mod:AddCallback(ModCallbacks.MC_USE_ITEM, mod.OnUseCard, HEALING_CARD)
+mod:AddCallback(ModCallbacks.MC_USE_CARD, mod.OnUseCard, HEALING_CARD)
 
 function mod:PlayAnnouncerOnDelay()
     --Delay needs to be above 0 to start running
