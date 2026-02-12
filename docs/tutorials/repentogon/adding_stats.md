@@ -59,6 +59,8 @@ Below are most of the available variables that can be added to any `items.xml` e
 ???+ info "`items.xml` stat variables"
 	???+ note "Automatic cache"
 		When adding any of these variables, the associated `cache` for the stat is automatically added to the item, so there's no need to add it yourself.
+	???+ note "Negative multipliers"
+		Negative values for `damagemult` and `tearsmult` do not work. It will need to be converted into a proper value below zero instead. For example, `-1.5` should instead be `0.5`.
 	| Variable Name | Value | Comment |
 	|:--|:--|:--|
 	|tears|float|Offset's Isaac's tears stat before flat and mult modifiers. `0.7` is equivalent to Sad Onion.|
