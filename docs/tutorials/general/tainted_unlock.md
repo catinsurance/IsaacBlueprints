@@ -68,30 +68,12 @@ You will be checking the first player's character multiple times throughout this
 
 ```Lua
 local game = Game()
---The Home floor has a static layout, so the room index of the closet should remain unchanged.
-local CLOSET_ROOM_INDEX = 94
 
 local function isFirstPlayerTaintedLocked()
 	local player = Isaac.GetPlayer()
 	local playerType = player:GetPlayerType()
 	return playerType == MY_CHAR and not isUnlocked
 end
-
-function mod:SpawnTaintedOnClosetEnter()
-	--Local variables for convenience.
-	local room = game:GetRoom()
-	local level = game:GetLevel()
-
-	if level:GetStage() == LevelStage.STAGE8 --Home floor
-		and level:GetCurrentRoomIndex() == CLOSET_ROOM_INDEX
-		and room:IsFirstVisit() --We only need to spawn the body once.
-		and isFirstPlayerTaintedLocked()
-	then
-
-	end
-end
-
-mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.SpawnTaintedOnClosetEnter)
 ```
 
 :modding-repentogon: If using REPENTOGON, the `isFirstPlayerTaintedLocked` check should specifically involve the achievement attached to your character. As such, the function should be adjusted like so:
@@ -108,40 +90,37 @@ local function isFirstPlayerTaintedLocked()
 end
 ```
 
-Next, the room should be cleared of any extra entities and have the player body spawned. For all modded characters, tainted characters, and for vanilla characters that have their tainted variants unlocked, [Inner Child](https://bindingofisaacrebirth.wiki.gg/wiki/Inner_Child) will spawn if it is unlocked. If Inner Child is not unlocked, a shopkeeper will spawn instead. These are the only entities that need to be removed. For the player body, it is internally a slot machine (`EntityType.ENTITY_SLOT`) with a variant of `14`. :modding-repentogon: With REPENTOGON, there is a [SlotVariant](https://repentogon.com/enums/SlotVariant.html) enum with `14` being assigned to `SlotVariant.HOME_CLOSET_PLAYER`.
+When entering the closet in Home, it will normally have the tainted character body as part of its room layout, but the game then morphs it into either [Inner Child](https://bindingofisaacrebirth.wiki.gg/wiki/Inner_Child) if unlocked, or a shopkeeper if not. The callback [MC_PRE_ROOM_ENTITY_SPAWN](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_pre_room_entity_spawn) will trigger when attempting to spawn entities as part of the room layout. You can also override it, which will stop the game from proceeding with any morphs/replacements that would happen otherwise. In this case, Inner Child or the shopkeeper.
+
+For the player body, it is internally a slot machine (`EntityType.ENTITY_SLOT`) with a variant of `14`. :modding-repentogon: With REPENTOGON, there is a [SlotVariant](https://repentogon.com/enums/SlotVariant.html) enum with `14` being assigned to `SlotVariant.HOME_CLOSET_PLAYER`. Inside `MC_PRE_ROOM_ENTITY_SPAWN`, check the following:
+
+1. You're on the Home floor
+2. You're in the closet room
+3. The entity attempting to be spawned is a "home closet player" slot
+4. Our `isFirstPlayerTaintedLocked` check from earlier
+
+After going through these checks, you can return the exact same entity type, variant, and subtype that was passed by the callback into a table so that the game doesn't attempt to morph it into anything else.
 
 ```Lua
 local game = Game()
+--The Home floor has a static layout, so the room index of the closet should remain unchanged.
 local CLOSET_ROOM_INDEX = 94
 local SLOT_HOME_CLOSET_PLAYER = 14
 
-function mod:SpawnTaintedOnClosetEnter()
-	local room = game:GetRoom()
+function mod:AllowHomeClosetPlayer(entType, variant, subtype, grid, seed)
 	local level = game:GetLevel()
-
-	if level:GetStage() == LevelStage.STAGE8
-		and level:GetCurrentRoomIndex() == CLOSET_ROOM_INDEX
-		and room:IsFirstVisit()
+	if level:GetStage() == LevelStage.STAGE8 --Home.
+		and level:GetCurrentRoomIndex() == CLOSET_ROOM_INDEX --Closet.
+		and entType == EntityType.ENTITY_SLOT
+		and variant == SLOT_HOME_CLOSET_PLAYER
 		and isFirstPlayerTaintedLocked()
 	then
-		--Locate the first instance of an Inner Child collectible and Shopkeeper
-		local innerChild = Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, CollectibleType.COLLECTIBLE_INNER_CHILD)[1]
-		local shopKeeper = Isaac.FindByType(EntityType.ENTITY_SHOPKEEPER)[1]
-
-		--Remove Inner Child if found.
-		if innerChild then
-			innerChild:Remove()
-		--A shopkeeper will only spawn if Inner Child isn't unlocked. If found, remove it.
-		elseif shopKeeper then
-			shopKeeper:Remove()
-		end
-
-		--Game():Spawn(EntityType, integer Variant, Vector Position, Vector Velocity, Entity SpawnerEntity, integer SubType, integer Seed)
-		game:Spawn(EntityType.ENTITY_SLOT, SLOT_HOME_CLOSET_PLAYER, room:GetCenterPos(), Vector.Zero, nil, 0, Random())
+		--Return its own entity type, variant, and subtype as to not turn into Inner Child or a shopkeeper by the game.
+		return {entType, variant, subtype}
 	end
 end
 
-mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.SpawnTaintedOnClosetEnter)
+Mod:AddCallback(ModCallbacks.MC_PRE_ROOM_ENTITY_SPAWN, mod.AllowHomeClosetPlayer)
 ```
 
 ## Update the player body sprite
@@ -150,18 +129,19 @@ The player body will attempt to take on the tainted appearance of the first play
 
 ### Non-REPENTOGON method
 
-Without REPENTOGON, there are no callbacks for slot machines, so they must be manually searched for after they are spawned in and upon re-entering the room. The spritesheet to use must also be manually typed out as a string.
+Without REPENTOGON, there are no callbacks for slot machines, so they must be manually searched for upon entering the room containing them. Use [MC_POST_NEW_ROOM](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_new_room) for entering the room, and [Isaac.FindByType](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#findbytype) to search for all "home closet player" slot machines in the room to update their spritesheet.
 
 ```Lua
 local myCharTaintedSpritePath = "gfx/characters/costumes/character_mychar_b.png"
 
-local function tryUpdateClosetIsaac()
+--We want to update the body's sprite no matter what room it's located in, so this will activate on every MC_POST_NEW_ROOM.
+function mod:TryUpdateClosetPlayer()
 	--We store this check before the FindByType loop as we only need to check it once.
 	local firstPlayerTaintedLocked = isFirstPlayerTaintedLocked()
 	--Search for all slot machines with the desired variant.
 	for _, ent in ipairs(Isaac.FindByType(EntityType.ENTITY_SLOT, SLOT_HOME_CLOSET_PLAYER)) do
 		--Check that it just spawned and we should update it for our character.
-		if ent.FrameCount == 0 and firstPlayerTaintedLocked then
+		if firstPlayerTaintedLocked then
 			local sprite = ent:GetSprite()
 			sprite:ReplaceSpritesheet(0, myCharTaintedSpritePath)
 			sprite:LoadGraphics()
@@ -169,16 +149,7 @@ local function tryUpdateClosetIsaac()
 	end
 end
 
---Continuing with the mod:SpawnTaintedOnClosetEnter() function from earlier:
-function mod:SpawnTaintedOnClosetEnter()
-	--Don't actually type this part out, its just for reference.
-	if ... then
-		--Removed Inner Child or Shopkeeper
-		--Spawned Closet player
-	end
-	--We want to update the body's sprite no matter what room it's located in, so this will activate on every MC_POST_NEW_ROOM.
-	tryUpdateClosetIsaac()
-end
+mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.TryUpdateClosetPlayer)
 ```
 
 ### :modding-repentogon: REPENTOGON method
@@ -280,7 +251,30 @@ local function isFirstPlayerTaintedLocked()
 	return playerType == MY_CHAR and not isUnlocked
 end
 
-local function tryUpdateClosetIsaac()
+function mod:LockTaintedOnInit(player)
+	if player:GetPlayerType() == MY_CHAR_TAINTED and not isUnlocked then
+		player:ChangePlayerType(MY_CHAR)
+	end
+end
+
+mod:AddCallback(ModCallback.MC_POST_PLAYER_INIT, mod.LockTaintedOnInit, PLAYER_VARIANT_NORMAL)
+
+function mod:AllowHomeClosetPlayer(entType, variant, subtype, grid, seed)
+	local level = game:GetLevel()
+	if level:GetStage() == LevelStage.STAGE8 --Home.
+		and level:GetCurrentRoomIndex() == CLOSET_ROOM_INDEX --Closet.
+		and entType == EntityType.ENTITY_SLOT
+		and variant == SLOT_HOME_CLOSET_PLAYER
+		and isFirstPlayerTaintedLocked()
+	then
+		--Return its own entity type, variant, and subtype as to not turn into Inner Child or a shopkeeper by the game.
+		return {entType, variant, subtype}
+	end
+end
+
+Mod:AddCallback(ModCallbacks.MC_PRE_ROOM_ENTITY_SPAWN, mod.AllowHomeClosetPlayer)
+
+function mod:TryUpdateClosetPlayer()
 	local firstPlayerTaintedLocked = isFirstPlayerTaintedLocked()
 	for _, ent in ipairs(Isaac.FindByType(EntityType.ENTITY_SLOT, SLOT_HOME_CLOSET_PLAYER)) do
 		if ent.FrameCount == 0 and firstPlayerTaintedLocked then
@@ -291,38 +285,7 @@ local function tryUpdateClosetIsaac()
 	end
 end
 
-function mod:LockTaintedOnInit(player)
-	if player:GetPlayerType() == MY_CHAR_TAINTED and not isUnlocked then
-		player:ChangePlayerType(MY_CHAR)
-	end
-end
-
-mod:AddCallback(ModCallback.MC_POST_PLAYER_INIT, mod.LockTaintedOnInit, PLAYER_VARIANT_NORMAL)
-
-function mod:SpawnTaintedOnClosetEnter()
-	local room = game:GetRoom()
-	local level = game:GetLevel()
-
-	if level:GetStage() == LevelStage.STAGE8
-		and level:GetCurrentRoomIndex() == CLOSET_ROOM_INDEX
-		and room:IsFirstVisit()
-		and isFirstPlayerTaintedLocked()
-	then
-		local innerChild = Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, CollectibleType.COLLECTIBLE_INNER_CHILD)[1]
-		local shopKeeper = Isaac.FindByType(EntityType.ENTITY_SHOPKEEPER)[1]
-
-		if innerChild then
-			innerChild:Remove()
-		elseif shopKeeper then
-			shopKeeper:Remove()
-		end
-
-		game:Spawn(EntityType.ENTITY_SLOT, SLOT_HOME_CLOSET_PLAYER, room:GetCenterPos(), Vector.Zero, nil, 0, Random())
-	end
-	tryUpdateClosetIsaac()
-end
-
-mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.SpawnTaintedOnClosetEnter)
+mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.TryUpdateClosetPlayer)
 
 function mod:UnlockTaintedOnPayPrize()
 	local firstPlayerTaintedLocked = isFirstPlayerTaintedLocked()
@@ -365,36 +328,25 @@ local function getTaintedSpritesheet(player)
 	return taintedConfig:GetSkinPath()
 end
 
-function mod:SpawnTaintedOnClosetEnter()
-	local room = game:GetRoom()
+function mod:AllowHomeClosetPlayer(entType, variant, subtype, grid, seed)
 	local level = game:GetLevel()
-
 	if level:GetStage() == LevelStage.STAGE8
 		and level:GetCurrentRoomIndex() == CLOSET_ROOM_INDEX
-		and room:IsFirstVisit()
+		and entType == EntityType.ENTITY_SLOT
+		and variant == SlotVariant.HOME_CLOSET_PLAYER
 		and isFirstPlayerTaintedLocked()
 	then
-		local innerChild = Isaac.FindByType(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_COLLECTIBLE, CollectibleType.COLLECTIBLE_INNER_CHILD)[1]
-		local shopKeeper = Isaac.FindByType(EntityType.ENTITY_SHOPKEEPER)[1]
-
-		if innerChild then
-			innerChild:Remove()
-		elseif shopKeeper then
-			shopKeeper:Remove()
-		end
-
-		game:Spawn(EntityType.ENTITY_SLOT, SlotVariant.HOME_CLOSET_PLAYER, room:GetCenterPos(), Vector.Zero, nil, 0, Random())
+		return {entType, variant, subtype}
 	end
 end
 
-mod:AddCallback(ModCallbacks.MC_POST_NEW_ROOM, mod.SpawnTaintedOnClosetEnter)
+Mod:AddCallback(ModCallbacks.MC_PRE_ROOM_ENTITY_SPAWN, mod.AllowHomeClosetPlayer)
 
 function mod:OnClosetIsaacInit(slot)
 	if isFirstPlayerTaintedLocked() then
 		local sprite = slot:GetSprite()
 		local player = Isaac.GetPlayer()
 		local spritesheet = getTaintedSpritesheet(player)
-		--Update the spritesheet. The last `true` here introduced by REPENTOGON will trigger `sprite:LoadGraphics()`.
 		sprite:ReplaceSpritesheet(0, spritesheet, true)
 	end
 end
