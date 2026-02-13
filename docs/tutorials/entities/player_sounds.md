@@ -63,7 +63,7 @@ The death sound effect plays when the "DeathSound" event is triggered. You can v
 
 ![Player Anm2 file](../assets/player_sounds/player_anm2.png)
 
-[MC_POST_PEFFECT_UPDATE](wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_peffect_update) will be used to constantly check when the `DeathSound` event triggers on the player's sprite in order to play the death sound effect. Both this callback and the game's logic run at 30 frames per second, as opposed to [MC_POST_PLAYER_UPDATE](wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_player_update) which runs at 60 frames per second. Since we only need to check once every game update, MC_POST_PEFFECT_UPDATE is preferrable.
+[MC_POST_PEFFECT_UPDATE](wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_peffect_update) will be used to constantly check when the `DeathSound` event triggers on the player's sprite in order to play the death sound effect. Both this callback and the game's logic run at 30 frames per second, as opposed to [MC_POST_PLAYER_UPDATE](wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_player_update) which runs at 60 frames per second. Since we only need to check once every game update, `MC_POST_PEFFECT_UPDATE` is preferrable.
 
 ```Lua
 function mod:ReplaceDeathSoundOnPeffectUpdate(player)
@@ -101,7 +101,7 @@ mod:AddCallback(ModCallbacks.MC_POST_EFFECT_UPDATE, mod.ReplaceDeathSoundFromDea
 
 ### Replacing the sounds
 
-Now that the code to detect when the sound should play for your character is operating, we must write the `replacePlayerSound` function from earlier. The `oldSound` argument will be used for both stopping the old sound and knowing what new sound to play. However, there are a few quirks to make note of:
+Now that the code to detect when the sound should play for your character is operating, it's time to fill the `replacePlayerSound` function from earlier. The `oldSound` argument will be used for both stopping the old sound and knowing what new sound to play. However, there are a few quirks to make note of:
 
 1. `MC_ENTITY_TAKE_DMG` runs before the entity sustains the damage, and thus the hurt sound effect has not played yet.
 2. The death sound effect for when the player dies (not for the Lost Curse) plays twice for an unknown reason, so stopping it once will not stop it fully.

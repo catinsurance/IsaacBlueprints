@@ -17,11 +17,13 @@ Creating an item that gives a simple tears up or down is more complex than it ma
 	REPENTOGON makes modifying the tears stat much easier! See [this article](../repentogon/adding_stats.md) for more information.
 
 ## Explanation
-Making a simple item like Sad Onion is actually a bit complicated, because the tears stat as displayed in the FoundHud in Repentance(+) is not the same as what we change internally.
+
+Making a simple item like Sad Onion is actually a bit complicated, because the tears stat as displayed in the FoundHud in Repentance(+) is not the same as what is changed internally.
 
 The game uses something called [MaxFireDelay](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#maxfiredelay), or tear delay, which is the minimum amount of game updates (30 game updates per second) before another tear can be fired. You can find more information about it [here, on the wiki](https://bindingofisaacrebirth.wiki.gg/wiki/Tears#Tear_Delay_Calculation).
 
 The in-game display of the tears stat is your **tears per second**, or your fire rate. To get the tears per second from the MaxFireDelay, use the following:
+
 ```lua
 local function toTearsPerSecond(maxFireDelay)
   return 30 / (maxFireDelay + 1)
@@ -29,6 +31,7 @@ end
 ```
 
 Conversely, you can get the MaxFireDelay from the tears per second using the following:
+
 ```lua
 local function toMaxFireDelay(tearsPerSecond)
   return (30 / tearsPerSecond) - 1
@@ -36,7 +39,9 @@ end
 ```
 
 ## Example
-Now we can put it all together. **The following is technically a "fire rate" up, since a "tears up" follows the soft cap of 5 (depending on the character you're playing).**
+
+Now put it all together. **The following is technically a "fire rate" up, since a "tears up" follows the soft cap of 5 (depending on the character you're playing).**
+
 ```lua
 local mod = RegisterMod("My Mod", 1)
 local HAPPY_ONION = Isaac.GetItemIdByName("Happy Onion")

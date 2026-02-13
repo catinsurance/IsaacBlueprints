@@ -55,9 +55,10 @@ For making your item's effect persistent or to add a cooldown, you will need to 
 ```
 
 ## Adding TemporaryEffects
-To add a TemporaryEffect to a player, first use `:GetEffects()` on an [`EntityPlayer`](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html) object. From here, you may use the `AddCollectibleEffect`, `AddTrinketEffect`, or `AddNullEffect` function. For this tutorial, we will be utilizing [AddCollectibleEffect](https://wofsauge.github.io/IsaacDocs/rep/TemporaryEffects.html#addcollectibleeffect).
+To add a TemporaryEffect to a player, first use `:GetEffects()` on an [`EntityPlayer`](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html) object. From here, you may use the `AddCollectibleEffect`, `AddTrinketEffect`, or `AddNullEffect` function. This tutorial will use [AddCollectibleEffect](https://wofsauge.github.io/IsaacDocs/rep/TemporaryEffects.html#addcollectibleeffect).
 
 This code will add "The Sad Onion" collectible effect on the first possible frame of the player spawning into the run.
+
 ```Lua
 local mod = RegisterMod("My Effects Mod", 1)
 local game = Game()
@@ -71,7 +72,7 @@ function mod:OnPeffectUpdate(player)
 end
 
 --MC_POST_PLAYER_INIT is one of the earliest callbacks that run when first starting or continuing a run, so lots of other processes run after it.
---The step of Isaac's code that removes non-persistent TemporaryEffects upon entering a new room is one of them, meaning we must add it afterwards.
+--The step of Isaac's code that removes non-persistent TemporaryEffects upon entering a new room is one of them, meaning it must be added afterwards.
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.OnPeffectUpdate)
 ```
 

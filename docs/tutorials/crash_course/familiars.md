@@ -131,7 +131,7 @@ local FAMILIAR_VARIANT = Isaac.GetEntityVariantByName("Friend Frankie")
 local RNG_SHIFT_INDEX = 35
 --Access the ItemConfig class.
 local itemConfig = Isaac.GetItemConfig()
---Obtain the ItemConfigItem object for our item.
+--Obtain the ItemConfigItem object for your item.
 local CONFIG_FRANKIE = itemConfig:GetCollectible(ITEM_ID)
 
 function mod:EvaluateCache(player)
@@ -215,7 +215,7 @@ function mod:FamiliarUpdate(familiar)
 		--:Shoot() will already have spawned the tear. Search for the tear with Isaac.FindByType to make modifications to it.
 		--MC_POST_TEAR_INIT isn't reliable as tear effects/damage are overridden afterwards.
 		for _, ent in ipairs(Isaac.FindByType(EntityType.ENTITY_TEAR, TearVariant.BLUE, 0)) do
-			--Check its only from our familiar by checking the Type and Variant of what spawned it.
+			--Check its only from your familiar by checking the Type and Variant of what spawned it.
 			if ent.SpawnerType == EntityType.ENTITY_FAMILIAR
 				and ent.SpawnerVariant == FAMILIAR_VARIANT
 				and tear.FrameCount == 0 --Check that it just spawned.
@@ -251,7 +251,7 @@ mod:AddCallback(ModCallbacks.MC_POST_FAMILIAR_FIRE_PROJECTILE, mod.FamiliarShoot
 As a final touch, :modding-repentogon: REPENTOGON also allows you to assign the priority of a familiar through [MC_GET_FOLLOWER_PRIORITY](https://repentogon.com/enums/ModCallbacks.html#mc_get_follower_priority). With [FollowerPriority.SHOOTER](https://repentogon.com/enums/FollowerPriority.html), the familiar is further back in the line, but is in front of any other familiars without an assigned priority. It also affects how the familiar is treated for Lilith and Tainted Lilith's birthright.
 
 ```Lua
---Don't need to do anything other than return the new priority as it only runs for our familiar.
+--Don't need to do anything other than return the new priority as it only runs for your familiar.
 function mod:FamilarPriority()
 	return FollowerPriority.SHOOTER
 end
