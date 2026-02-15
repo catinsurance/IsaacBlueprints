@@ -1,0 +1,1879 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../crash_course/challenges/">
+      
+      
+        <link rel="next" href="../stats_cache/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Creating item wisps - Isaac Blueprints</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.bcfcd587.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+    
+    <meta property="og:site_name" content="Isaac Blueprints"  />
+<meta property="og:image" content="https://isaacblueprints.com/tutorials/assets/isaacblueprints.png" />
+
+    <meta property="og:title" content="Creating item wisps" />
+    <meta property="og:description" content="Learn how to create custom Book of Virtues item wisps. More Binding of Isaac modding tutorials on numerous topics can be found on Isaac Blueprints." />
+
+<meta property="og:url" content="None" />
+<meta name="theme-color" content="#566c8a" />
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#registering-the-wisp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Isaac Blueprints" class="md-header__button md-logo" aria-label="Isaac Blueprints" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Isaac Blueprints
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Creating item wisps
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Isaac Blueprints" class="md-nav__button md-logo" aria-label="Isaac Blueprints" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    Isaac Blueprints
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contribution_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribution guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Crash course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Crash course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/creating_a_mod/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating a mod
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/uploading_a_mod/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Uploading a mod
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/passive_item/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Passive items
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/active_item/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Active items
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/item_pools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Item pools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/costumes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Costumes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/character/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Characters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/entity_basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entity Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/effects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Effects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/enemies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enemies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/familiars/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Familiars
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/sound_effects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/pocket_item_cards/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cards, Runes, and Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/pocket_item_pills/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pills
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/challenges/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Challenges
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Basics
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Creating item wisps
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Creating item wisps
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#registering-the-wisp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registering the wisp
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Registering the wisp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-color-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      The color tag
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-wisp-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      The wisp tag
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-wisp-effects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced wisp effects
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced wisp effects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      The basics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-spawning-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom spawning behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-movement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom movement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stats_cache/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Stats cache
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tears_up/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tears up
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trigger_on_item_pickup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trigger on item pickup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            General
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/controller_input/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controller input
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/internal_item_descriptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Internal item descriptions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/making_rooms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Making rooms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/repentance_plus_changes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repentance plus changes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/tainted_unlock/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tainted unlock
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/temporary_effects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Temporary effects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/additional_lua_files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Additional lua files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/entity_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entity data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/saving_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Saving data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/vector_math/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vector math
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Entities
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Entities
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/dirt_color/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirt color
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/light_layer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Light layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/player_sounds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Player sounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/taking_damage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Taking damage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/trails/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trails
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REPENTOGON
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            REPENTOGON
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repentogon/achievements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Achievements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repentogon/adding_stats/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adding stats
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#registering-the-wisp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registering the wisp
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Registering the wisp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-color-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      The color tag
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-wisp-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      The wisp tag
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-wisp-effects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced wisp effects
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced wisp effects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      The basics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-spawning-behavior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom spawning behavior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-movement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom movement
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+    <h1>Creating item wisps</h1>
+    <small>
+        Author(s): Aeronaut
+        <br/>
+        Tags: 
+<nav class="md-tags" >
+  
+    
+    
+    
+      <span class="md-tag">Tutorial</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Beginner friendly</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Repentance</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Repentance+</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">XML</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Lua</span>
+    
+  
+</nav>
+    </small>
+    <hr/>
+
+
+<p><strong>Wisps</strong> are a type of familiar introduced in the Repentance DLC which can be spawned by the <a href="https://bindingofisaacrebirth.wiki.gg/wiki/Book_of_Virtues">Book of Virtues</a> item. Nearly every active item has an associated wisp with custom effects reminiscent of the active item. Isaac's modding API has a robust system for adding custom wisps for your own modded active items.</p>
+<h2 id="registering-the-wisp">Registering the wisp<a class="headerlink" href="#registering-the-wisp" title="Permanent link">⚓︎</a></h2>
+<p>The first step to creating a custom wisp is to have it registered in a <code>wisps.xml</code> file present in your mod's <code>content</code> folder. The basic structure of a <code>wisps.xml</code> file looks like this:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;wisps</span><span class="w"> </span><span class="na">gfxroot=</span><span class="s">&quot;gfx/familiar/wisps/&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;flame_blue&quot;</span><span class="w"> </span><span class="na">r=</span><span class="s">&quot;152&quot;</span><span class="w"> </span><span class="na">g=</span><span class="s">&quot;330&quot;</span><span class="w"> </span><span class="na">b=</span><span class="s">&quot;458&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;core_blue&quot;</span><span class="w"> </span><span class="na">r=</span><span class="s">&quot;255&quot;</span><span class="w"> </span><span class="na">g=</span><span class="s">&quot;356&quot;</span><span class="w"> </span><span class="na">b=</span><span class="s">&quot;510&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;color</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;tear_blue&quot;</span><span class="w"> </span><span class="na">or=</span><span class="s">&quot;64&quot;</span><span class="w"> </span><span class="na">og=</span><span class="s">&quot;89&quot;</span><span class="w"> </span><span class="na">ob=</span><span class="s">&quot;128&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">    </span><span class="nt">&lt;wisp</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">hp=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">damage=</span><span class="s">&quot;3&quot;</span><span class="w"> </span><span class="na">layer=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">flameColor=</span><span class="s">&quot;flame_blue&quot;</span><span class="w"> </span><span class="na">coreColor=</span><span class="s">&quot;core_blue&quot;</span><span class="w"> </span><span class="na">tearColor=</span><span class="s">&quot;tear_blue&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/wisps&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>For every XML file, there is a tag that goes from the start of the file to the end of the file, and multiple "child tags" that act as the individual entries. In this instance, <code>wisps.xml</code> entries will start with <code>&lt;wisps&gt;</code> and end with <code>&lt;/wisps&gt;</code>. There are two main child tags in this file to keep note of: the <code>color</code> tag and <code>wisp</code> tag.</p>
+<h3 id="the-color-tag">The <code>color</code> tag<a class="headerlink" href="#the-color-tag" title="Permanent link">⚓︎</a></h3>
+<p>The <code>color</code> tag stores a color for use inside your <code>wisps.xml</code> file, with a given <code>name</code> and RGB color values. The RGB attributes that can be entered are <code>r</code>, <code>g</code>, <code>b</code>, <code>or</code>, <code>og</code>, <code>ob</code>, <code>cr</code>, <code>cg</code>, <code>cb</code>, and <code>ca</code>. Each of these attributes accept an integer value from 0 to 255.</p>
+<p>Similar to the <a href="https://wofsauge.github.io/IsaacDocs/rep/Color.html"><code>Color</code></a> class in the API, each of these attributes correspond to a member of the <code>Color</code> object. <code>r</code>, <code>g</code>, and <code>b</code> control the wisp's tint, <code>or</code>, <code>og</code>, and <code>ob</code> control the wisp's color offset, and <code>cr</code>, <code>cg</code>, <code>cb</code>, and <code>ca</code> control the wisp's colorize.</p>
+<p>Note that the color defined in xml will not affect the wisp entity's <code>Color</code> value in game. In this example, the wisp would have a blue color in game while having its <code>Color</code> equal to <code>Color.Default</code> (<code>Color(1, 1, 1, 1)</code>).</p>
+<details class="warning" open="open">
+<summary>Warning</summary>
+<p>If a wisp attempts to reference a color tag that has not been defined in the same file, it will instead default to a teal color. To avoid this from occurring on accident, and for ease of use, it's convenient to copy the <code>color</code> tags at the top of the game's <code>wisps.xml</code> file, present in the <code>resources</code> folder (<code>resources-dlc3</code> for Repentance users and <code>extracted_resources</code> for Repentance+ users).
+<img alt="A wisp with its color undefined" src="../../assets/item_wisps/invalid_wisp_color.png" /></p>
+</details>
+<h3 id="the-wisp-tag">The <code>wisp</code> tag<a class="headerlink" href="#the-wisp-tag" title="Permanent link">⚓︎</a></h3>
+<p>The <code>wisp</code> tag is where the appearance and behavior of a wisp is defined, and is how it is linked to your active item. The tag has several attributes to control these factors. A comprehensive list of the purpose for each attribute will be listed below.</p>
+<details class="- note">
+<summary><code>wisp</code> tag variables</summary>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Value Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Links the defined wisp to your item. The id value should be the same one the item has defined in its <code>items.xml</code> entry.</td>
+<td><code>id="1"</code></td>
+</tr>
+<tr>
+<td>flameColor</td>
+<td>string</td>
+<td>The color of the wisp's flame. Uses the name of a color tag defined earlier in the file.</td>
+<td><code>flameColor="flame_blue"</code></td>
+</tr>
+<tr>
+<td>coreColor</td>
+<td>string</td>
+<td>The color of the wisp's core. Uses the name of a color tag defined earlier in the file.</td>
+<td><code>coreColor="core_blue"</code></td>
+</tr>
+<tr>
+<td>tearColor</td>
+<td>string</td>
+<td>The color of the tears shot by the wisp. Uses the name of a color tag defined earlier in the file.</td>
+<td><code>tearColor="tear_blue"</code></td>
+</tr>
+<tr>
+<td>coreGfx</td>
+<td>string</td>
+<td>Changes the appearance of the wisp's core. Uses a file path to a .png that is relative to the location defined by the parent <code>wisps</code> tag's <code>gfxroot</code>.</td>
+<td><code>coreGfx="cross.png"</code></td>
+</tr>
+<tr>
+<td>hp</td>
+<td>float</td>
+<td>Defines the wisp's maximum hitpoints. Each projectile the wisp blocks causes it to lose 1 hp, while taking contact damage causes it to lose 2 hp. Default wisps have an hp value of 2. When deciding on an hp value for your wisp, keep in mind that vanilla active items with lower charge tend to have lower max hp, while higher charge or single use actives have higher max hp.</td>
+<td><code>hp="3"</code></td>
+</tr>
+<tr>
+<td>damage</td>
+<td>float</td>
+<td>Defines the damage the wisp's tears deal. Default is 3. This value does not affect the amount of damage wisps deal on contact with enemies.</td>
+<td><code>damage="5.5"</code></td>
+</tr>
+<tr>
+<td>layer</td>
+<td>integer (-1, 0, 1, or 2)</td>
+<td>Defines how close the wisp orbits the player. Default is 1. A layer value of 2 will cause it to orbit at a further distance, while a value of 0 will cause it to orbit closer. A layer value of -1 will instead cause the wisp to not follow or orbit the player. If a layer attribute isn't present, it will default to 1. <strong>Entering any other positive value will cause the game to crash when the wisp attempts to be spawned.</strong></td>
+<td><code>layer="0"</code></td>
+</tr>
+<tr>
+<td>count</td>
+<td>integer</td>
+<td>Defines the number of wisps that should be spawned when the associated active item is used. Default is 1.</td>
+<td><code>count="2"</code></td>
+</tr>
+<tr>
+<td>canShoot</td>
+<td>boolean</td>
+<td>Defines whether the wisp shoots tears or not. Default is <code>true</code>.</td>
+<td><code>canShoot="false"</code></td>
+</tr>
+<tr>
+<td>fireDelay</td>
+<td>integer</td>
+<td>Defines the cooldown in game ticks (30 ticks per second) before wisp can fire again after shooting a tear. This system works in a similar way to the player's <strong>MaxFireDelay</strong> stat, which is explained further in <a href="../tears_up/">this article</a>. Default is 30. Wisps with a <code>fireDelay</code> value less than 0 effectively act the same as ones with <code>canShoot="false"</code>.</td>
+<td><code>fireDelay="45"</code> (The wisp will shoot 1.5x slower compared to a default wisp.)</td>
+</tr>
+<tr>
+<td>shotSpeed</td>
+<td>float</td>
+<td>Defines the shot speed of the wisp's tears. The stat works similarly to the player's shot speed stat. Default is 1.</td>
+<td><code>shotSpeed="0.75"</code></td>
+</tr>
+<tr>
+<td>tearFlags</td>
+<td>integer</td>
+<td>Defines what tear effect(s) the wisp's tears will have. A full list of what number corresponds to what tear effect can be referenced off of the <a href="https://wofsauge.github.io/IsaacDocs/rep/enums/TearFlags.html"><code>TearFlags</code></a> page on the docs. Multiple numbers can be inputted in this field, with a space separating each effect.</td>
+<td><code>tearFlags="2 34"</code> (This wisp will shoot homing, shielded tears.)</td>
+</tr>
+<tr>
+<td>tearScale</td>
+<td>float</td>
+<td>Controls the size of the wisp's tears. Default is 0.7.</td>
+<td><code>tearScale="1.2"</code></td>
+</tr>
+<tr>
+<td>tearVariant</td>
+<td>integer</td>
+<td>Defines the appearance and behavior of the wisp's tears. A full list of what number corresponds to what tear variant can be referenced off of the <a href="https://wofsauge.github.io/IsaacDocs/rep/enums/TearVariant.html"><code>TearVariant</code></a> page on the docs.</td>
+<td><code>tearVariant="28"</code> (The wisp's tears will look like razors.)</td>
+</tr>
+<tr>
+<td>tearFlags2</td>
+<td>integer</td>
+<td>Operates identically to the <code>tearFlags</code> attribute, but the defined tear effect will only have a chance to be shot by the wisp, controlled by the <code>procChance</code> attribute.</td>
+<td><code>tearFlags2="4 22"</code> (This wisp will have a chance to shoot tears that apply poison and burn.)</td>
+</tr>
+<tr>
+<td>procChance</td>
+<td>float</td>
+<td>Controls the chance for tear effects defined by the <code>tearFlags2</code> attribute to be fired.</td>
+<td><code>procChance="0.25"</code> (The wisp will have a 25% chance to shoot a tear with <code>tearFlags2</code>'s effects.)</td>
+</tr>
+<tr>
+<td>tearColor2</td>
+<td>string</td>
+<td>Operates identically to the <code>tearColor</code> attribute, but only affects tears with the effects of the <code>tearFlags2</code> attribute. Uses the name of a color tag defined earlier in the file.</td>
+<td><code>tearColor2="tear_green"</code></td>
+</tr>
+<tr>
+<td>tearScale2</td>
+<td>float</td>
+<td>Operates identically to the <code>tearScale</code> attribute, but only affects tears with the effects of the <code>tearFlags2</code> attribute.</td>
+<td><code>tearScale2="0.5"</code></td>
+</tr>
+<tr>
+<td>damageMultiplier2</td>
+<td>float</td>
+<td>Multiplies the damage that a tear with the tear effects defined by the <code>tearFlags2</code> attribute will deal.</td>
+<td><code>damageMultiplier2="1.5"</code> (The wisp's tears with <code>tearFlags2</code>'s effects will also deal 1.5x damage.)</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>integer</td>
+<td>Controls the wisp's priority value. When wisps with the same layer are spawned by Book of Virtues while that layer has reached its cap of wisps, the newly spawned wisp will replace the oldest wisp. The priority attribute overrides this behavior, so that wisps with a priority of -1 are prioritized to be replaced instead, and wisps with a priority of 1 or more are replaced only after no wisps with a lower priority value can be replaced. Default is 0.</td>
+<td><code>priority="10"</code></td>
+</tr>
+</tbody>
+</table>
+</details>
+<h2 id="advanced-wisp-effects">Advanced wisp effects<a class="headerlink" href="#advanced-wisp-effects" title="Permanent link">⚓︎</a></h2>
+<p>While <code>wisps.xml</code> provides lots of customization, not everything can be made possible with the file, such as wisps that have an effect when they disappear, or ones with special movement behavior. For effects like these, Lua code will be required to create these wisps. This section will cover some methods that can be used as a jumping off point for creating wisps with more complex effects.</p>
+<h3 id="the-basics">The basics<a class="headerlink" href="#the-basics" title="Permanent link">⚓︎</a></h3>
+<p>Wisps are defined as familiar entities in the game's code, so any callbacks in the modding API that affect familiars will be useful for running code on wisps. Additionally, the wisp of a given item has its <code>Subtype</code> value equal to the associated item's <code>CollectibleType</code>.</p>
+<p>This example code snippet below will add behavior to a custom item's wisp, causing it to spawn a puddle of water every 3 seconds (assuming our custom item is called Isaac's Blueprint):</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">mod</span> <span class="o">=</span> <span class="n">RegisterMod</span><span class="p">(</span><span class="s2">&quot;WispExampleTutorial&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">ISAACS_BLUEPRINT</span> <span class="o">=</span> <span class="n">Isaac</span><span class="p">.</span><span class="n">GetItemIdByName</span><span class="p">(</span><span class="s2">&quot;Isaac&#39;s Blueprint&quot;</span><span class="p">)</span>
+
+<span class="kr">function</span> <span class="nc">mod</span><span class="p">:</span><span class="nf">IsaacsBlueprintWispFamiliarUpdate</span><span class="p">(</span><span class="n">familiar</span><span class="p">)</span>
+    <span class="c1">-- Early return out of the function if the wisp is not from our item.</span>
+    <span class="kr">if</span> <span class="n">familiar</span><span class="p">.</span><span class="n">SubType</span> <span class="o">~=</span> <span class="n">ISAACS_BLUEPRINT</span> <span class="kr">then</span> <span class="kr">return</span> <span class="kr">end</span>
+
+    <span class="c1">-- This code will activate every 3 seconds the wisp has existed.</span>
+    <span class="kr">if</span> <span class="n">familiar</span><span class="p">.</span><span class="n">FrameCount</span> <span class="o">%</span> <span class="mi">90</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span>
+        <span class="n">Isaac</span><span class="p">.</span><span class="n">Spawn</span><span class="p">(</span><span class="n">EntityType</span><span class="p">.</span><span class="n">ENTITY_EFFECT</span><span class="p">,</span> <span class="n">EffectVariant</span><span class="p">.</span><span class="n">PLAYER_CREEP_HOLYWATER_TRAIL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">familiar</span><span class="p">.</span><span class="n">Position</span><span class="p">,</span> <span class="n">Vector</span><span class="p">.</span><span class="n">Zero</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="n">mod</span><span class="p">:</span><span class="n">AddCallback</span><span class="p">(</span><span class="n">ModCallbacks</span><span class="p">.</span><span class="n">MC_FAMILIAR_UPDATE</span><span class="p">,</span> <span class="n">mod</span><span class="p">.</span><span class="n">IsaacsBlueprintWispFamiliarUpdate</span><span class="p">,</span> <span class="n">FamiliarVariant</span><span class="p">.</span><span class="n">WISP</span><span class="p">)</span> <span class="c1">-- Note the 3rd parameter here, which causes the function to only affect wisp familiars.</span>
+</code></pre></div></td></tr></table></div>
+<p>Another common effect design for wisps is to have an effect activate when it dies. Here's an extension of the code snippet to give the wisp a death effect:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">mod</span> <span class="o">=</span> <span class="n">RegisterMod</span><span class="p">(</span><span class="s2">&quot;WispExampleTutorial&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">ISAACS_BLUEPRINT</span> <span class="o">=</span> <span class="n">Isaac</span><span class="p">.</span><span class="n">GetItemIdByName</span><span class="p">(</span><span class="s2">&quot;Isaac&#39;s Blueprint&quot;</span><span class="p">)</span>
+
+<span class="kr">function</span> <span class="nc">mod</span><span class="p">:</span><span class="nf">IsaacsBlueprintWispFamiliarUpdate</span><span class="p">(</span><span class="n">familiar</span><span class="p">)</span>
+    <span class="c1">-- Early return out of the function if the wisp is not from our item.</span>
+    <span class="kr">if</span> <span class="n">familiar</span><span class="p">.</span><span class="n">SubType</span> <span class="o">~=</span> <span class="n">ISAACS_BLUEPRINT</span> <span class="kr">then</span> <span class="kr">return</span> <span class="kr">end</span>
+
+    <span class="c1">-- This code will activate every 3 seconds the wisp has existed.</span>
+    <span class="kr">if</span> <span class="n">familiar</span><span class="p">.</span><span class="n">FrameCount</span> <span class="o">%</span> <span class="mi">90</span> <span class="o">==</span> <span class="mi">0</span> <span class="kr">then</span>
+        <span class="n">Isaac</span><span class="p">.</span><span class="n">Spawn</span><span class="p">(</span><span class="n">EntityType</span><span class="p">.</span><span class="n">ENTITY_EFFECT</span><span class="p">,</span> <span class="n">EffectVariant</span><span class="p">.</span><span class="n">PLAYER_CREEP_HOLYWATER_TRAIL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">familiar</span><span class="p">.</span><span class="n">Position</span><span class="p">,</span> <span class="n">Vector</span><span class="p">.</span><span class="n">Zero</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+    <span class="kr">end</span>
+
+    <span class="c1">-- This code will activate when the wisp has died.</span>
+    <span class="kr">if</span> <span class="n">familiar</span><span class="p">:</span><span class="n">HasMortalDamage</span><span class="p">()</span> <span class="kr">then</span>
+        <span class="n">Isaac</span><span class="p">.</span><span class="n">Spawn</span><span class="p">(</span><span class="n">EntityType</span><span class="p">.</span><span class="n">ENTITY_PICKUP</span><span class="p">,</span> <span class="n">PickupVariant</span><span class="p">.</span><span class="n">PICKUP_HEART</span><span class="p">,</span> <span class="n">HeartSubType</span><span class="p">.</span><span class="n">HEART_HALF_SOUL</span><span class="p">,</span> <span class="n">familiar</span><span class="p">.</span><span class="n">Position</span><span class="p">,</span> <span class="n">Vector</span><span class="p">.</span><span class="n">Zero</span><span class="p">,</span> <span class="kc">nil</span><span class="p">)</span>
+    <span class="kr">end</span>
+<span class="kr">end</span>
+<span class="n">mod</span><span class="p">:</span><span class="n">AddCallback</span><span class="p">(</span><span class="n">ModCallbacks</span><span class="p">.</span><span class="n">MC_FAMILIAR_UPDATE</span><span class="p">,</span> <span class="n">mod</span><span class="p">.</span><span class="n">IsaacsBlueprintWispFamiliarUpdate</span><span class="p">,</span> <span class="n">FamiliarVariant</span><span class="p">.</span><span class="n">WISP</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="custom-spawning-behavior">Custom spawning behavior<a class="headerlink" href="#custom-spawning-behavior" title="Permanent link">⚓︎</a></h3>
+<p>Wisps can have their <code>count</code> defined as 0 if they have special behavior with how they are spawned, like an item spawning a random amount of them on use (ex. <a href="https://bindingofisaacrebirth.wiki.gg/wiki/Guppy%27s_Head#Synergies">Guppy's Head</a>). This behavior can be emulated in Lua via a callback registered when an item is used, checking if the player has the Book of Virtues item, and adding the wisp using either <a href="https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#addwisp"><code>player:AddWisp()</code></a> or <a href="https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#spawn"><code>Isaac.Spawn()</code></a>.</p>
+<h3 id="custom-movement">Custom movement<a class="headerlink" href="#custom-movement" title="Permanent link">⚓︎</a></h3>
+<p>A layer of -1 allows for custom movement behavior for wisps. Changing the wisp's <code>Position</code> and/or <code>Velocity</code> in a <a href="https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_familiar_update"><code>MC_FAMILIAR_UPDATE</code></a> callback can be used to code your own movement behavior for the wisp.</p>
+<hr/>
+<br/>
+
+<script src="https://giscus.app/client.js"
+        data-repo="catinsurance/IsaacBlueprints"
+        data-repo-id="R_kgDOOg-68w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOOg-6884Cpi3z"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

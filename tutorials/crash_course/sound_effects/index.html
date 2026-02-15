@@ -1,0 +1,1701 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../familiars/">
+      
+      
+        <link rel="next" href="../pocket_item_cards/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Sounds - Isaac Blueprints</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.bcfcd587.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+    
+    <meta property="og:site_name" content="Isaac Blueprints"  />
+<meta property="og:image" content="https://isaacblueprints.com/tutorials/assets/isaacblueprints.png" />
+
+    <meta property="og:title" content="Sounds" />
+    <meta property="og:description" content="Learn how to add sound effects. More Binding of Isaac modding tutorials on numerous topics can be found on Isaac Blueprints." />
+
+<meta property="og:url" content="None" />
+<meta name="theme-color" content="#566c8a" />
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#video-tutorial" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Isaac Blueprints" class="md-header__button md-logo" aria-label="Isaac Blueprints" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Isaac Blueprints
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sounds
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Isaac Blueprints" class="md-nav__button md-logo" aria-label="Isaac Blueprints" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    Isaac Blueprints
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contribution_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribution guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Crash course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Crash course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../creating_a_mod/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating a mod
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uploading_a_mod/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Uploading a mod
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../passive_item/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Passive items
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../active_item/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Active items
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../item_pools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Item pools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../costumes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Costumes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../character/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Characters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entity_basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entity Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../effects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Effects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../enemies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enemies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../familiars/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Familiars
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Sounds
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Sounds
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#video-tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Video tutorial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vanilla-sounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vanilla sounds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoding-custom-sounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Encoding custom sounds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-custom-sounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding custom sounds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playing-sounds-with-lua" class="md-nav__link">
+    <span class="md-ellipsis">
+      Playing sounds with Lua
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pocket_item_cards/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cards, Runes, and Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pocket_item_pills/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pills
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../challenges/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Challenges
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Basics
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/creating_item_wisps/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating item wisps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/stats_cache/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Stats cache
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/tears_up/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tears up
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/trigger_on_item_pickup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trigger on item pickup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            General
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/controller_input/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controller input
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/internal_item_descriptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Internal item descriptions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/making_rooms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Making rooms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/repentance_plus_changes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repentance plus changes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/tainted_unlock/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tainted unlock
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/temporary_effects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Temporary effects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/additional_lua_files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Additional lua files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/entity_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entity data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/saving_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Saving data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/vector_math/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vector math
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Entities
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Entities
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/dirt_color/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirt color
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/light_layer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Light layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/player_sounds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Player sounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/taking_damage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Taking damage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/trails/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trails
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REPENTOGON
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            REPENTOGON
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repentogon/achievements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Achievements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repentogon/adding_stats/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adding stats
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#video-tutorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Video tutorial
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vanilla-sounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vanilla sounds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#encoding-custom-sounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Encoding custom sounds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-custom-sounds" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding custom sounds
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#playing-sounds-with-lua" class="md-nav__link">
+    <span class="md-ellipsis">
+      Playing sounds with Lua
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+    <h1>Sounds</h1>
+    <small>
+        Author(s): catinsurance
+        <br/>
+        Tags: 
+<nav class="md-tags" >
+  
+    
+    
+    
+      <span class="md-tag">Tutorial</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Beginner friendly</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">XML</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Repentance</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Repentance+</span>
+    
+  
+</nav>
+    </small>
+    <hr/>
+
+
+<details class="- info">
+<summary>Crash course table of contents</summary>
+<p>The crash course is still a work in progress!</p>
+<ol>
+<li>Creating a mod.<ol>
+<li><a href="../creating_a_mod/">Creating the mod.</a></li>
+<li><a href="../uploading_a_mod/">Uploading a mod.</a></li>
+</ol>
+</li>
+<li><a href="../passive_item/">Creating a passive item.</a></li>
+<li><a href="../active_item/">Creating an active item.</a></li>
+<li><a href="../item_pools/">Adding to item pools.</a></li>
+<li><a href="../costumes/">Making costumes.</a></li>
+<li><a href="../character/">Creating a character.</a></li>
+<li>Creating entities.<ol>
+<li><a href="../entity_basics/">Entity basics.</a></li>
+<li><a href="../effects/">Creating effects.</a></li>
+<li><a href="../enemies/">Creating enemies.</a></li>
+<li><a href="../familiars/">Creating a familiar.</a></li>
+</ol>
+</li>
+<li><a href="./">Adding sounds.</a></li>
+<li>Adding music.</li>
+<li>Making pocket items.<ol>
+<li><a href="../pocket_item_cards/">Creating custom cards, runes, and objects.</a></li>
+<li><a href="../pocket_item_pills/">Creating custom pills.</a></li>
+</ol>
+</li>
+<li><a href="../challenges/">Creating challenges.</a></li>
+<li>Structuring your mod.</li>
+<li>Conclusion.</li>
+</ol>
+</details>
+<p>While the game has a massive catalog of sound effects to use, custom sound effects can be vital for adding the necessary feedback to actions and events.</p>
+<h2 id="video-tutorial">Video tutorial<a class="headerlink" href="#video-tutorial" title="Permanent link">⚓︎</a></h2>
+<p>(This tutorial covers both sounds and music)
+<a href="https://youtu.be/qJB74iaRCf8" title="Video tutorial"><img alt="Sound and Music | Youtube Tutorial" src="https://img.youtube.com/vi/qJB74iaRCf8/0.jpg" /></a></p>
+<h2 id="vanilla-sounds">Vanilla sounds<a class="headerlink" href="#vanilla-sounds" title="Permanent link">⚓︎</a></h2>
+<p>Isaac has a massive catalog of over 1000 sound effects as of Repentance+. All sounds have a numerical id, with the ids for vanilla sounds being found under the <a href="https://wofsauge.github.io/IsaacDocs/rep/enums/SoundEffect.html"><code>SoundEffect</code></a> enumerator. The docs page for this enumerator also allows you to quickly preview any sound. Sounds tend to be the largest contributor to file size in a mod, so make sure to look through the list of vanilla sounds before implementing your own.</p>
+<h2 id="encoding-custom-sounds">Encoding custom sounds<a class="headerlink" href="#encoding-custom-sounds" title="Permanent link">⚓︎</a></h2>
+<p>Before you add your sound to the game using XML, it's very important to ensure it is encoded correctly. The game expects all sounds to be in <code>.wav</code> format and encoded in 16-bit. <strong>Any sound that is incorrectly encoded will instead be a very loud, high-pitched static noise!</strong> There is no restriction on bitrate or audio channel options.</p>
+<p>There are many ways to encode a sound effect with the proper configuration:</p>
+<ul>
+<li><a href="https://www.audacityteam.org/download/">Audacity</a> is a free, open-source program with a suite of audio editing tools. It includes an option to export sound files in <code>.wav</code> format. <strong>You can choose the "Signed 16-bit PCM" encoding format during the export process for use in Isaac.</strong></li>
+<li>For an online alternative, <a href="https://convertio.co/mp3-wav/">convertio.co</a> lets you convert <code>.mp3</code> files to <code>.wav</code> with a multitude of codecs. <strong>You can choose "PCM_S16LE (Uncompressed)" from this list to encode sounds for use in Isaac.</strong></li>
+</ul>
+<h2 id="adding-custom-sounds">Adding custom sounds<a class="headerlink" href="#adding-custom-sounds" title="Permanent link">⚓︎</a></h2>
+<p>All custom sound effects are defined in a <a href="https://wofsauge.github.io/IsaacDocs/rep/xml/sounds.html"><code>sounds.xml</code></a> file, located in the <code>content</code> folder at the root of your mod folder. In this folder, there must be a root <code>sounds</code> tag. This tag has a <code>root</code> property, which should point to the root directory of where your sound effects are stored starting from your mod's <code>resources</code> folder, usually just <code>sfx</code>.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;sounds</span><span class="w"> </span><span class="na">root=</span><span class="s">&quot;sfx/&quot;</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;/sounds&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p>When defining a new sound, you use a <code>sound</code> tag with a <code>name</code> property declaring the name for your sound. You'll use the sound's name to grab its id later.</p>
+<p>Within a <code>sound</code> tag must be at least one <code>sample</code> tag, although there can be as many as desired. Samples are individual audio files to play when your sound is played. If multiple samples are provided, then the game will choose a random one from the list to play. Samples have a <code>weight</code> attribute that <strong>is required but never used by the game.</strong> Every sound in vanilla has this set to "1".</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;sounds</span><span class="w"> </span><span class="na">root=</span><span class="s">&quot;sfx/&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;sound</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;New Sound&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;sample</span><span class="w"> </span><span class="na">weight=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;my_sound_effect.wav&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/sound&gt;</span>
+
+<span class="w">    </span><span class="cm">&lt;!-- Chooses one sample at random to play when sound is played --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;sound</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;New Sound 2&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;sample</span><span class="w"> </span><span class="na">weight=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;my_other_effect1.wav&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;sample</span><span class="w"> </span><span class="na">weight=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;my_other_effect2.wav&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;sample</span><span class="w"> </span><span class="na">weight=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">path=</span><span class="s">&quot;my_other_effect3.wav&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/sound&gt;</span>
+<span class="nt">&lt;/sounds&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="playing-sounds-with-lua">Playing sounds with Lua<a class="headerlink" href="#playing-sounds-with-lua" title="Permanent link">⚓︎</a></h2>
+<p>To play sounds, you'll need to use the <a href="https://wofsauge.github.io/IsaacDocs/rep/SFXManager.html"><code>SFXManager</code></a> object, which you can instantiate with <code>SFXManager()</code>. Then use the <a href="https://wofsauge.github.io/IsaacDocs/rep/SFXManager.html#play"><code>Play</code></a> function.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">sfxManager</span> <span class="o">=</span> <span class="n">SFXManager</span><span class="p">()</span>
+
+<span class="n">sfxManager</span><span class="p">:</span><span class="n">Play</span><span class="p">(</span><span class="n">SoundEffect</span><span class="p">.</span><span class="n">SOUND_1UP</span><span class="p">)</span> <span class="c1">-- Id of 1</span>
+</code></pre></div></td></tr></table></div>
+<p>To play a custom sound, first get its id with <a href="https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getsoundidbyname"><code>Isaac.GetSoundIdByName</code></a>.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">sfxManager</span> <span class="o">=</span> <span class="n">SFXManager</span><span class="p">()</span>
+<span class="kd">local</span> <span class="n">soundId</span> <span class="o">=</span> <span class="n">Isaac</span><span class="p">.</span><span class="n">GetSoundIdByName</span><span class="p">(</span><span class="s2">&quot;New Sound&quot;</span><span class="p">)</span>
+
+<span class="n">sfxManager</span><span class="p">:</span><span class="n">Play</span><span class="p">(</span><span class="n">soundId</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Lastly, you can use the optional arguments of <code>Play</code> for more control over how the sound is played. The arguments are in the following order:</p>
+<ol>
+<li><code>integer</code> <strong>Sound id:</strong> The only required argument, this is id number of the sound.</li>
+<li><code>float</code> <strong>Volume:</strong> A multiplier determining how loud the sound is. Default is 1.</li>
+<li><code>int</code> <strong>FrameDelay:</strong> The global "cooldown" before the sound can be played again, in game ticks (30 ticks per second). Default is 2, meaning the sound cannot be played again for 2 game ticks.</li>
+<li><code>boolean</code> <strong>Loop:</strong> Determines if the sound is looped after its finished playing. Default is <code>false</code>.</li>
+<li><code>float</code> <strong>Pitch:</strong> A multiplier determining the pitch of the sound, or how high or low it is. Default is 1.</li>
+<li><code>float</code> <strong>Pan:</strong> A multiplier determining the pan of the sound, or how far to the left or right the sound plays in the player's speakers or headphones, with -1 being fully to the left and 1 being fully to the right. This is only respected when the <code>.wav</code> file played only has a single audio track (no non-mono audio files). Default is 0, which makes it play in the middle. </li>
+</ol>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">sfxManager</span> <span class="o">=</span> <span class="n">SFXManager</span><span class="p">()</span>
+<span class="kd">local</span> <span class="n">soundId</span> <span class="o">=</span> <span class="n">Isaac</span><span class="p">.</span><span class="n">GetSoundIdByName</span><span class="p">(</span><span class="s2">&quot;New Sound&quot;</span><span class="p">)</span>
+
+<span class="c1">-- All of these are the default values besides the first argument.</span>
+<span class="n">sfxManager</span><span class="p">:</span><span class="n">Play</span><span class="p">(</span>
+    <span class="n">soundId</span><span class="p">,</span> <span class="c1">-- Sound id (required)</span>
+    <span class="mi">1</span><span class="p">,</span>       <span class="c1">-- Volume</span>
+    <span class="mi">2</span><span class="p">,</span>       <span class="c1">-- Frame delay</span>
+    <span class="kc">false</span><span class="p">,</span>   <span class="c1">-- Loop</span>
+    <span class="mi">1</span><span class="p">,</span>       <span class="c1">-- Pitch</span>
+    <span class="mi">0</span>        <span class="c1">-- Pan</span>
+<span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<hr/>
+<br/>
+
+<script src="https://giscus.app/client.js"
+        data-repo="catinsurance/IsaacBlueprints"
+        data-repo-id="R_kgDOOg-68w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOOg-6884Cpi3z"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

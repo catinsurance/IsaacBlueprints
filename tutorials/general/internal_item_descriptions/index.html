@@ -1,0 +1,2476 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../controller_input/">
+      
+      
+        <link rel="next" href="../making_rooms/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Internal item descriptions - Isaac Blueprints</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.bcfcd587.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+    
+    <meta property="og:site_name" content="Isaac Blueprints"  />
+<meta property="og:image" content="https://isaacblueprints.com/tutorials/assets/isaacblueprints.png" />
+
+    <meta property="og:title" content="Internal Item Descriptions" />
+    <meta property="og:description" content="Learn how to make item descriptions for your items, trinkets, and more. More Binding of Isaac modding tutorials on numerous topics can be found on Isaac Blueprints." />
+
+<meta property="og:url" content="None" />
+<meta name="theme-color" content="#566c8a" />
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Isaac Blueprints" class="md-header__button md-logo" aria-label="Isaac Blueprints" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Isaac Blueprints
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Internal item descriptions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Isaac Blueprints" class="md-nav__button md-logo" aria-label="Isaac Blueprints" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    Isaac Blueprints
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contribution_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribution guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Crash course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Crash course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/creating_a_mod/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating a mod
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/uploading_a_mod/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Uploading a mod
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/passive_item/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Passive items
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/active_item/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Active items
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/item_pools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Item pools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/costumes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Costumes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/character/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Characters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/entity_basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entity Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/effects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Effects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/enemies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enemies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/familiars/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Familiars
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/sound_effects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/pocket_item_cards/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cards, Runes, and Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/pocket_item_pills/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pills
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/challenges/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Challenges
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Basics
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/creating_item_wisps/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating item wisps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/stats_cache/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Stats cache
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/tears_up/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tears up
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/trigger_on_item_pickup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trigger on item pickup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            General
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../controller_input/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controller input
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Internal item descriptions
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Internal item descriptions
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-custom-descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding custom descriptions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#info-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      info tag
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="info tag">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xml-modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      XML modifiers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#text-modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Text modifiers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Text modifiers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#player" class="md-nav__link">
+    <span class="md-ellipsis">
+      player
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pickup" class="md-nav__link">
+    <span class="md-ellipsis">
+      pickup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rooms" class="md-nav__link">
+    <span class="md-ellipsis">
+      rooms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collectible" class="md-nav__link">
+    <span class="md-ellipsis">
+      collectible
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color" class="md-nav__link">
+    <span class="md-ellipsis">
+      color
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    <span class="md-ellipsis">
+      size
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synergies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synergies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Synergies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collectible_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      collectible
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trinket" class="md-nav__link">
+    <span class="md-ellipsis">
+      trinket
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamic-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic stats
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../making_rooms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Making rooms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../repentance_plus_changes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repentance plus changes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tainted_unlock/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tainted unlock
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../temporary_effects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Temporary effects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/additional_lua_files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Additional lua files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/entity_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entity data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/saving_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Saving data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/vector_math/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vector math
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Entities
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Entities
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/dirt_color/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirt color
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/light_layer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Light layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/player_sounds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Player sounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/taking_damage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Taking damage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/trails/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trails
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REPENTOGON
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            REPENTOGON
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repentogon/achievements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Achievements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repentogon/adding_stats/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adding stats
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-custom-descriptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding custom descriptions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#info-tag" class="md-nav__link">
+    <span class="md-ellipsis">
+      info tag
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="info tag">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#xml-modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      XML modifiers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#text-modifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Text modifiers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Text modifiers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#player" class="md-nav__link">
+    <span class="md-ellipsis">
+      player
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pickup" class="md-nav__link">
+    <span class="md-ellipsis">
+      pickup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rooms" class="md-nav__link">
+    <span class="md-ellipsis">
+      rooms
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collectible" class="md-nav__link">
+    <span class="md-ellipsis">
+      collectible
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color" class="md-nav__link">
+    <span class="md-ellipsis">
+      color
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#size" class="md-nav__link">
+    <span class="md-ellipsis">
+      size
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synergies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synergies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Synergies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collectible_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      collectible
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trinket" class="md-nav__link">
+    <span class="md-ellipsis">
+      trinket
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dynamic-stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dynamic stats
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+    <h1>Internal Item Descriptions</h1>
+    <small>
+        Author(s): benevolusgoat, catinsurance
+        <br/>
+        Tags: 
+<nav class="md-tags" >
+  
+    
+    
+    
+      <span class="md-tag">Tutorial</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Beginner friendly</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Repentance+</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">No Lua</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">XML</span>
+    
+  
+</nav>
+    </small>
+    <hr/>
+
+
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">⚓︎</a></h2>
+<p>Internal Item Descriptions is the newest addition to Repentance+, being its own version of <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=836319872">External Item Descriptions</a>. It will display detailed information on collectibles, trinkets, pills, and cards when approaching them in a room or viewing them within the "My Stuff" menu. It allows for additional information that will only display based on custom conditions.</p>
+<p>Modding support for Internal Item Descriptions is limited, but can still be used.</p>
+<h2 id="adding-custom-descriptions">Adding custom descriptions<a class="headerlink" href="#adding-custom-descriptions" title="Permanent link">⚓︎</a></h2>
+<p>All custom item descriptions are defined in an <code>info_display.xml</code> file, located in the <code>content</code> folder at the root of your mod folder. Mods can create the <code>collectibles</code> tag and the <code>trinkets</code> tag.</p>
+<p>These tags have no properties, and are intended to be filled with their corresponding child tags <code>collectible</code> or <code>trinket</code> respectively. The only property these tags have is <code>id</code>, which must correspond to the <code>id</code> defined for your item in your mod's <code>items.xml</code>. These child tags have their own child tag, <code>info</code>, where you'll write your descriptions under the <code>text</code> property.</p>
+<details class="warning" open="open">
+<summary>No descriptions for cards and pills</summary>
+<p>The <code>id</code> variable inside <code>pocketitems.xml</code> currently does not supported modded content. As such, <strong>you cannot define custom descriptions for cards, runes, objects, or pills</strong>.</p>
+</details>
+<p><code>items.xml</code>:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;items</span><span class="w"> </span><span class="na">gfxroot=</span><span class="s">&quot;gfx/items/&quot;</span><span class="w"> </span><span class="na">version=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">deathanm2=</span><span class="s">&quot;gfx/death items.anm2&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;passive</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;The Placeholder&quot;</span><span class="w"> </span><span class="na">description=</span><span class="s">&quot;He placeholds!&quot;</span><span class="w"> </span><span class="na">gfx=</span><span class="s">&quot;placeholder.png&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/items&gt;</span>
+</code></pre></div></td></tr></table></div></p>
+<p><code>info_display.xml</code>:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectibles&gt;</span>
+<span class="w">    </span><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;Be cool and epic&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/collectible&gt;</span>
+<span class="nt">&lt;/collectibles&gt;</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Result:</p>
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/item_description_example.jpg" alt="Item description viewed from a pedestal" />
+</p>
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/item_description_mystuff.jpg" alt="Item description viewed from the My Stuff page" />
+</p>
+
+<details class="bug" open="open">
+<summary>"My Stuff" display bug</summary>
+<p>Any modded "death item" sprites will appear extremely offset up and to the left from its expected location in the My Stuff menu.
+<br><br>Trinkets will also appear in this menu if consumed via Smelter or similar methods, but there is no support for giving modded trinkets a death item sprite.</p>
+</details>
+<h2 id="info-tag"><code>info</code> tag<a class="headerlink" href="#info-tag" title="Permanent link">⚓︎</a></h2>
+<p>The info tag contains the text to display as a bullet point and can be set to display only under certain conditions.</p>
+<details class="- info">
+<summary><code>info</code> tag variables</summary>
+<details class="note" open="open">
+<summary>Note</summary>
+<p>All variables only accept vanilla IDs. Modded content is currently unsupported.</p>
+</details>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Variable Name</th>
+<th style="text-align: left;">Possible Values</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">text</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">The description for a single bullet point of text</td>
+</tr>
+<tr>
+<td style="text-align: left;">collectible</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;"><code>text</code> will only be visible if the player has the corresponding collectible.</td>
+</tr>
+<tr>
+<td style="text-align: left;">notcollectible</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;"><code>text</code> will only be visible if the player does NOT have the corresponding collectible.</td>
+</tr>
+<tr>
+<td style="text-align: left;">player</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">Comma-separated list of <a href="https://wofsauge.github.io/IsaacDocs/rep/enums/PlayerType.html">PlayerTypes</a>. <code>text</code> will only be visible if the first player is any of the listed PlayerTypes.</td>
+</tr>
+<tr>
+<td style="text-align: left;">notplayer</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">Comma-separated list of <a href="https://wofsauge.github.io/IsaacDocs/rep/enums/PlayerType.html">PlayerTypes</a>. <code>text</code> will only be visible if the first player is NOT any of the listed PlayerTypes.</td>
+</tr>
+<tr>
+<td style="text-align: left;">tag</td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">For use with trinkets and pills for golden trinkets and Horse Pills respectively. See <a href="./#synergies">Synergies</a> for more information.</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p>Below is an example of multiple lines of text for our item. The first line is always present, the second line requires you don't have Sad Onion, and the last line requires you do.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;+1 Epic Point&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">notcollectible=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;Enemies will cower before you&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">collectible=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;Enemies will be sympathetic towards you.&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/collectible&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/description_modifier.gif" alt="Description modifier in action" />
+</p>
+
+<h3 id="xml-modifiers">XML modifiers<a class="headerlink" href="#xml-modifiers" title="Permanent link">⚓︎</a></h3>
+<p>XML files use specific symbols for formatting its markup. To insert the characters into text without disrupting the XML format, the following series of characters can be used:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Character set</th>
+<th style="text-align: left;">Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Quotation</td>
+<td style="text-align: left;"><code>&amp;quot;</code></td>
+<td style="text-align: left;">"</td>
+</tr>
+<tr>
+<td style="text-align: left;">Apostrophe</td>
+<td style="text-align: left;"><code>&amp;apos;</code></td>
+<td style="text-align: left;">'</td>
+</tr>
+<tr>
+<td style="text-align: left;">Less than</td>
+<td style="text-align: left;"><code>&amp;lt;</code></td>
+<td style="text-align: left;">&lt;</td>
+</tr>
+<tr>
+<td style="text-align: left;">Greater than</td>
+<td style="text-align: left;"><code>&amp;gt;</code></td>
+<td style="text-align: left;">&gt;</td>
+</tr>
+<tr>
+<td style="text-align: left;">Ampersand</td>
+<td style="text-align: left;"><code>&amp;amp;</code></td>
+<td style="text-align: left;">&amp;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="text-modifiers">Text modifiers<a class="headerlink" href="#text-modifiers" title="Permanent link">⚓︎</a></h2>
+<p>Inside the <code>text</code> string in an <code>info</code> tag, you can insert a specific variable between <code>&amp;lt;</code> and <code>&amp;gt;</code> to create a special modification to the description.</p>
+<p>There are 6 modifiers:</p>
+<ul>
+<li><a href="#player"><code>player</code></a> for displaying player heads.</li>
+<li><a href="#pickup"><code>pickup</code></a> for displaying pickup icons.</li>
+<li><a href="#rooms"><code>rooms</code></a> for displaying room map icons.</li>
+<li><a href="#collectible"><code>collectible</code></a> for display vanilla item sprites.</li>
+<li><a href="#color"><code>color</code></a> for changing text color.</li>
+<li><a href="#size"><code>size</code></a> for changing text size.</li>
+</ul>
+<p><code>info_display.xml</code>:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectibles&gt;</span>
+<span class="w">    </span><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;player=0&amp;gt; I&#39;m Isaac!&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;pickup=bomb&amp;gt; I start with 1 bomb.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;rooms=9&amp;gt; I need to find the boss...&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;collectible=1&amp;gt; This is my pet onion.&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;It makes me very&amp;lt;color=0xFFf6ff00&amp;gt; happy!&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;size=0.25&amp;gt;okay bye&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/collectible&gt;</span>
+<span class="nt">&lt;/collectibles&gt;</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Result:</p>
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/text_modifiers.jpg" alt="Result of using every modifier" />
+</p>
+
+<h3 id="player">player<a class="headerlink" href="#player" title="Permanent link">⚓︎</a></h3>
+<p><code>player</code> is used for displaying vanilla character heads. The vanilla game doesn't use this at all, but mods can take advantage of it. The value used to choose what icon to display correlates to the frames inside <code>gfx/ui/text_icons.anm2</code> file under the "players" animation. The first frame is Isaac's head, so <code>player=0</code> will display Isaac's head inside of descriptions.</p>
+<p>Below is an example of our item displaying a multitude of player heads:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;This is Isaac: &amp;lt;player=0&amp;gt;&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;Here are his friends:&amp;lt;player=1&amp;gt;&amp;lt;player=5&amp;gt;&amp;lt;player=26&amp;gt;&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/collectible&gt;</span>
+</code></pre></div></td></tr></table></div></p>
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/player_icons.jpg" alt="Player icon example" />
+</p>
+
+<details class="- info">
+<summary>Player head values</summary>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Icon name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">Isaac</td>
+</tr>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Magdalene</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Cain</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Judas</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">??? (Blue Baby)</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Eve</td>
+</tr>
+<tr>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Samson</td>
+</tr>
+<tr>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">Azazel</td>
+</tr>
+<tr>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">Lazarus</td>
+</tr>
+<tr>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">Eden</td>
+</tr>
+<tr>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">The Lost</td>
+</tr>
+<tr>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">Lazarus (again)</td>
+</tr>
+<tr>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">Judas (again)</td>
+</tr>
+<tr>
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">Lilith</td>
+</tr>
+<tr>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">The Keeper</td>
+</tr>
+<tr>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">Apollyon</td>
+</tr>
+<tr>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">The Forgotten</td>
+</tr>
+<tr>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">The Forgotten (again)</td>
+</tr>
+<tr>
+<td style="text-align: left;">18</td>
+<td style="text-align: left;">Bethany</td>
+</tr>
+<tr>
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">Jacob (no Esau)</td>
+</tr>
+<tr>
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">Jacob (no Esau) (again)</td>
+</tr>
+<tr>
+<td style="text-align: left;">21</td>
+<td style="text-align: left;">Tainted Isaac</td>
+</tr>
+<tr>
+<td style="text-align: left;">22</td>
+<td style="text-align: left;">Tainted Magdalene</td>
+</tr>
+<tr>
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">Tainted Cain</td>
+</tr>
+<tr>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">Tainted Judas</td>
+</tr>
+<tr>
+<td style="text-align: left;">25</td>
+<td style="text-align: left;">Tainted ??? (Tainted Blue Baby)</td>
+</tr>
+<tr>
+<td style="text-align: left;">26</td>
+<td style="text-align: left;">Tainted Eve</td>
+</tr>
+<tr>
+<td style="text-align: left;">27</td>
+<td style="text-align: left;">Tainted Samson</td>
+</tr>
+<tr>
+<td style="text-align: left;">28</td>
+<td style="text-align: left;">Tainted Azazel</td>
+</tr>
+<tr>
+<td style="text-align: left;">29</td>
+<td style="text-align: left;">Tainted Lazarus</td>
+</tr>
+<tr>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">Tainted Eden</td>
+</tr>
+<tr>
+<td style="text-align: left;">31</td>
+<td style="text-align: left;">Tainted The Lost</td>
+</tr>
+<tr>
+<td style="text-align: left;">32</td>
+<td style="text-align: left;">Tainted Lilith</td>
+</tr>
+<tr>
+<td style="text-align: left;">33</td>
+<td style="text-align: left;">Tainted The Keeper</td>
+</tr>
+<tr>
+<td style="text-align: left;">34</td>
+<td style="text-align: left;">Tainted Apollyon</td>
+</tr>
+<tr>
+<td style="text-align: left;">35</td>
+<td style="text-align: left;">Tainted The Forgotten</td>
+</tr>
+<tr>
+<td style="text-align: left;">36</td>
+<td style="text-align: left;">Tainted Bethany</td>
+</tr>
+<tr>
+<td style="text-align: left;">37</td>
+<td style="text-align: left;">Tainted Jacob</td>
+</tr>
+<tr>
+<td style="text-align: left;">38</td>
+<td style="text-align: left;">Tainted Lazarus (again)</td>
+</tr>
+<tr>
+<td style="text-align: left;">39</td>
+<td style="text-align: left;">Tainted Jacob (again)</td>
+</tr>
+<tr>
+<td style="text-align: left;">40</td>
+<td style="text-align: left;">Tainted The Forgotten (again)</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h3 id="pickup">pickup<a class="headerlink" href="#pickup" title="Permanent link">⚓︎</a></h3>
+<p><code>pickup</code> is used for displaying pickup icons. The vanilla game doesn't use this at all, but mods can take advantage of it. While the pickups displayed are the frames inside the "pickups" animation within <code>gfx/ui/text_icons.anm2</code>, <code>pickup</code> expects one of 6 specific strings. Providing anything besides these strings displays the coin icon.</p>
+<p>Below is an example of our item displaying a multitude of pickup icons:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;pickup=bomb&amp;gt; Boom!&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;A few other pickups: &amp;lt;pickup=coin&amp;gt;&amp;lt;pickup=key&amp;gt;&amp;lt;pickup=blackheart&amp;gt;&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/collectible&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/pickup_icons.jpg" alt="Pickup icons example" />
+</p>
+
+<details class="- info">
+<summary>Pickup icon values</summary>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Icon name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">coin</td>
+<td style="text-align: left;">A penny</td>
+</tr>
+<tr>
+<td style="text-align: left;">key</td>
+<td style="text-align: left;">A key</td>
+</tr>
+<tr>
+<td style="text-align: left;">bomb</td>
+<td style="text-align: left;">A bomb</td>
+</tr>
+<tr>
+<td style="text-align: left;">redheart</td>
+<td style="text-align: left;">A full red heart</td>
+</tr>
+<tr>
+<td style="text-align: left;">soulheart</td>
+<td style="text-align: left;">A full soul heart</td>
+</tr>
+<tr>
+<td style="text-align: left;">blackheart</td>
+<td style="text-align: left;">A full black heart</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h3 id="rooms">rooms<a class="headerlink" href="#rooms" title="Permanent link">⚓︎</a></h3>
+<p><code>rooms</code> is used for displaying room icons. The vanilla game only uses this for <a href="https://bindingofisaacrebirth.wiki.gg/wiki/Teleport_2.0">Teleport 2.0</a>. The value used to choose what icon to display correlates to the frames inside <code>gfx/ui/text_icons.anm2</code> file under the "rooms" animation. The first frame is the shop icon, so <code>rooms=0</code> will display the shop icon inside of descriptions.</p>
+<p>Below is an example of our item displaying a multitude of room icons:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;This is a Shop Icon:&amp;lt;rooms=0&amp;gt;&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;This are several Treasure Room icons:&amp;lt;rooms=4&amp;gt;&amp;lt;rooms=19&amp;gt;&amp;lt;rooms=22&amp;gt;&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/collectible&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/room_icons.jpg" alt="Room icons example" />
+</p>
+
+<details class="- info">
+<summary>Room icon values</summary>
+<details class="note" open="open">
+<summary>Note</summary>
+<p>Frames 25-85 will appear much smaller than they should, and will cause all other icons in all other descriptions to appear the same shrunken size. This is in part due to the icons not being cropped properly inside the animation file.</p>
+</details>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Icon name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">Shop</td>
+</tr>
+<tr>
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Secret Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Super Secret Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Library</td>
+</tr>
+<tr>
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">Treasure Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">Angel Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">Devil Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">Dice Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">Mini-Boss Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">9</td>
+<td style="text-align: left;">Boss Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">Challenge Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">11</td>
+<td style="text-align: left;">Boss Challenge Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">12</td>
+<td style="text-align: left;">Curse Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">13</td>
+<td style="text-align: left;">Sacrifice Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">14</td>
+<td style="text-align: left;">Arcade</td>
+</tr>
+<tr>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">Vault</td>
+</tr>
+<tr>
+<td style="text-align: left;">16</td>
+<td style="text-align: left;">Isaac's Bedroom</td>
+</tr>
+<tr>
+<td style="text-align: left;">17</td>
+<td style="text-align: left;">Barren Bedroom</td>
+</tr>
+<tr>
+<td style="text-align: left;">18</td>
+<td style="text-align: left;">Locked Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">19</td>
+<td style="text-align: left;">Greed (Silver) Treasure Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">Planetarium</td>
+</tr>
+<tr>
+<td style="text-align: left;">21</td>
+<td style="text-align: left;">Teleporter Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">22</td>
+<td style="text-align: left;">Red Treasure Room (Devil's Crown)</td>
+</tr>
+<tr>
+<td style="text-align: left;">23</td>
+<td style="text-align: left;">Crawlspace</td>
+</tr>
+<tr>
+<td style="text-align: left;">24</td>
+<td style="text-align: left;">Heart</td>
+</tr>
+<tr>
+<td style="text-align: left;">86</td>
+<td style="text-align: left;">Default Room</td>
+</tr>
+<tr>
+<td style="text-align: left;">87</td>
+<td style="text-align: left;">Error Room</td>
+</tr>
+</tbody>
+</table>
+</details>
+<h3 id="collectible">collectible<a class="headerlink" href="#collectible" title="Permanent link">⚓︎</a></h3>
+<p><code>collectible</code> is used for displaying any vanilla item sprite. The vanilla game doesn't use this at all, but mods can take advantage of it. The value used represents the item's ID. Invalid item IDs will show no sprite.</p>
+<p>Note that while you can put in an ID that extends beyond vanilla's maximum item ID, and this ID can make the description show a modded item sprite, modded item IDs shift around depending on what mods are enabled, so this cannot be used to reliably show a modded item sprite.</p>
+<p>Below is an example of our item displaying a multitude of items:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;The iconic pet onion: &amp;lt;collectible=1&amp;gt;&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;Some other items:&amp;lt;collectible=14&amp;gt;&amp;lt;collectible=654&amp;gt;&amp;lt;collectible=571&amp;gt;&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/collectible&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/collectible_example.jpg" alt="Item sprites example" />
+</p>
+
+<h3 id="color">color<a class="headerlink" href="#color" title="Permanent link">⚓︎</a></h3>
+<p><code>color</code> will accept a hexadecimal (shortened as "hex") value to change the color of the text. <code>color</code> is commonly used for synergies/interactions with special items, such as <a href="https://bindingofisaacrebirth.wiki.gg/wiki/Abyss">Abyss</a> and <a href="https://bindingofisaacrebirth.wiki.gg/wiki/Book_of_Virtues">Book of Virtues</a>.</p>
+<p>The structure of the color hex code <span style="color: #f833ff">"0xFFf833ff" (pink)</span> is as follows:</p>
+<ul>
+<li><code>0x</code> (characters 1-2): The game is written in C++ and stores colors in hex. Hex is defined starting with <code>0x</code>.</li>
+<li><code>FF</code> (characters 3-4): This represents the alpha (transparency) of text. The RGB color format represents red, green, blue, and alpha values from 0 to 255. <code>FF</code> in hex translates to 255 in decimal (our standard numeral system).</li>
+<li><code>f8</code> (characters 5-6): This represents the "red" value. "f8" in hex is 170 in decimal.</li>
+<li><code>33</code> (characters 7-8): This represents the "blue" value. "33" in hex is also 33 in decimal.</li>
+<li><code>ff</code> (characters 9-10): This represents the "green" value. "ff" in hex is 255 in decimal</li>
+</ul>
+<p>Below is an example of a custom color, and of our item having a red text color modifier while Abyss is held.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectibles&gt;</span>
+<span class="w">    </span><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;+1 Epic Point&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;color=0x2545c1ff&amp;gt;You can barely see me!&quot;</span><span class="nt">/&gt;</span>
+<span class="w">        </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">collectible=</span><span class="s">&quot;706&quot;</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;color=0xFFc30404&amp;gt;x1 epic locust 1x Isaac&#39;s damage&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;collectible</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/collectibles&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/colors_example.jpg" alt="Colors example" />
+</p>
+
+<p>Below are all of the hex codes used in vanilla:</p>
+<ul>
+<li><code>0xFFc30404</code>: Abyss locusts/No effect.</li>
+<li><code>0xFF4bb3e4</code>: Book of Virtues wisps.</li>
+</ul>
+<h3 id="size">size<a class="headerlink" href="#size" title="Permanent link">⚓︎</a></h3>
+<p><code>size</code> accepts a float that changes the size of the text. The vanilla game doesn't use this at all, but mods can take advantage of it. <code>0.5</code> is the default size of text, so any number lower will make the text smaller and vice versa.</p>
+<p>Below is an example of our item with multiple lines of different font sizes:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;size=0.25&amp;gt;I&#39;m half the size!&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;size=0.5&amp;gt;I&#39;m normal...&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;size=1&amp;gt;I&#39;m twice the size!&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/collectible&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/size_example.jpg" alt="Font sizes example" />
+</p>
+
+<details class="- bug">
+<summary>Text overlapping</summary>
+<p>Larger font sizes can overlap with text on the next line.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;size=1&amp;gt;I&#39;m twice the size! Look at me!&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;size=0.5&amp;gt;I&#39;m being overlapped...&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/collectible&gt;</span>
+</code></pre></div></td></tr></table></div></p>
+<p><img alt="Text overlap example" src="../../assets/internal_item_descriptions/size_overlap.jpg" /></p>
+</details>
+<h2 id="synergies">Synergies<a class="headerlink" href="#synergies" title="Permanent link">⚓︎</a></h2>
+<p>For each type of item, there are specific important synergies that should be kept in mind. They should be included with the majority of descriptions of that type. Below is a list of synergies for each item type and how to implement them.</p>
+<h3 id="collectible_1">collectible<a class="headerlink" href="#collectible_1" title="Permanent link">⚓︎</a></h3>
+<p><a href="https://bindingofisaacrebirth.wiki.gg/wiki/Abyss"><strong>Abyss</strong></a></p>
+<p>The locust familiars that spawn when Abyss is used on the item.</p>
+<p>Description layout: "x[Amount of locusts spawned] [locust type, if any] locust, x[damage multiplier] Isaac's damage".</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;Bring me Abyss for a new line&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">collectible=</span><span class="s">&quot;706&quot;</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;color=0xFFc30404&amp;gt;x1 poison locust 1x Isaac&#39;s damage&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/collectible&gt;</span>
+</code></pre></div></td></tr></table></div>
+<p><a href="https://bindingofisaacrebirth.wiki.gg/wiki/Book_of_Virtues"><strong>Book of Virtues</strong></a></p>
+<p>The wisp familiars that spawn when Book of Virtues is used with the active item.</p>
+<p>Description layout: "x[Amount of wisps spawned] [wisp layer] wisp - [HP amount] hp - [Damage dealt] damage".</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;collectible</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;Bring me Book of Virtues for a new line&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">collectible=</span><span class="s">&quot;584&quot;</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;&amp;lt;color=0xFF4bb3e4&amp;gt;x1 middle wisp - 2 hp - 3 damage&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/collectible&gt;</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="trinket">trinket<a class="headerlink" href="#trinket" title="Permanent link">⚓︎</a></h3>
+<p><strong><a href="https://bindingofisaacrebirth.wiki.gg/wiki/Mom%27s_Box">Mom's Box</a>/<a href="https://bindingofisaacrebirth.wiki.gg/wiki/Golden_Trinket">Golden Trinket</a></strong></p>
+<p>The increased effect of a trinket when the player has Mom's Box, or is a golden variant of the trinket. Having multiple of the same trinket will also enact these effects, but is not used within vanilla descriptions. The <code>tag</code> variable can be used with trinkets, where setting it to <code>2</code> is a default description and <code>1</code> is a golden trinket description.</p>
+<p>There's a default description, two copies of the same description to display for Mom's Box or a golden trinket, and a final description for both:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nt">&lt;trinket</span><span class="w"> </span><span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">notcollectible=</span><span class="s">&quot;439&quot;</span><span class="w"> </span><span class="na">tag=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;Spawns a coin each time Isaac takes damage&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">notcollectible=</span><span class="s">&quot;439&quot;</span><span class="w"> </span><span class="na">tag=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;Spawns 2 coins each time Isaac takes damage&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">collectible=</span><span class="s">&quot;439&quot;</span><span class="w"> </span><span class="na">tag=</span><span class="s">&quot;2&quot;</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;Spawns 2 coins each time Isaac takes damage&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;info</span><span class="w"> </span><span class="na">collectible=</span><span class="s">&quot;439&quot;</span><span class="w"> </span><span class="na">tag=</span><span class="s">&quot;1&quot;</span><span class="w"> </span><span class="na">text=</span><span class="s">&quot;Spawns 3 coins each time Isaac takes damage&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/trinket&gt;</span>
+</code></pre></div></td></tr></table></div></p>
+<h2 id="dynamic-stats">Dynamic stats<a class="headerlink" href="#dynamic-stats" title="Permanent link">⚓︎</a></h2>
+<p>Descriptions automatically display any stats that your item grants upon pickup. It does this by calling the <code>EvaluateItems</code> function internally whenever you're close to the item, which in turn triggers <code>MC_EVALUATE_CACHE</code> multiple times per second.</p>
+<p>As long as your item or trinket has any entry in <code>info_display.xml</code>, the dynamic stats will be able to show up.</p>
+<hr/>
+<br/>
+
+<script src="https://giscus.app/client.js"
+        data-repo="catinsurance/IsaacBlueprints"
+        data-repo-id="R_kgDOOg-68w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOOg-6884Cpi3z"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>

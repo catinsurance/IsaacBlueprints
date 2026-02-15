@@ -1,0 +1,1843 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../saving_data/">
+      
+      
+        <link rel="next" href="../../entities/dirt_color/">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
+    
+    
+      
+        <title>Vector math - Isaac Blueprints</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.bcfcd587.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+    
+    <meta property="og:site_name" content="Isaac Blueprints"  />
+<meta property="og:image" content="https://isaacblueprints.com/tutorials/assets/isaacblueprints.png" />
+
+    <meta property="og:title" content="Vector math" />
+    <meta property="og:description" content="Learn how vector math works and how to use them in relation to Isaac modding. More Binding of Isaac modding tutorials on numerous topics can be found on Isaac Blueprints." />
+
+<meta property="og:url" content="None" />
+<meta name="theme-color" content="#566c8a" />
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#what-is-a-vector" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Isaac Blueprints" class="md-header__button md-logo" aria-label="Isaac Blueprints" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Isaac Blueprints
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Vector math
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Isaac Blueprints" class="md-nav__button md-logo" aria-label="Isaac Blueprints" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5Z"/></svg>
+
+    </a>
+    Isaac Blueprints
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contribution_guide/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribution guide
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Crash course
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Crash course
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/creating_a_mod/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating a mod
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/uploading_a_mod/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Uploading a mod
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/passive_item/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Passive items
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/active_item/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Active items
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/item_pools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Item pools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/costumes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Costumes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/character/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Characters
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/entity_basics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entity Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/effects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Effects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/enemies/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Enemies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/familiars/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Familiars
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/sound_effects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/pocket_item_cards/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cards, Runes, and Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/pocket_item_pills/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pills
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../crash_course/challenges/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Challenges
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Basics
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Basics
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/creating_item_wisps/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Creating item wisps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/stats_cache/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Stats cache
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/tears_up/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tears up
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../basics/trigger_on_item_pickup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trigger on item pickup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    General
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            General
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/controller_input/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Controller input
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/internal_item_descriptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Internal item descriptions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/making_rooms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Making rooms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/repentance_plus_changes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repentance plus changes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/tainted_unlock/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tainted unlock
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../general/temporary_effects/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Temporary effects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../additional_lua_files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Additional lua files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entity_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entity data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../saving_data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Saving data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Vector math
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Vector math
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is a vector?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is a vector?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unit vectors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-vectors-used-for-in-isaac" class="md-nav__link">
+    <span class="md-ellipsis">
+      What are vectors used for in Isaac?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coordinate-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coordinate systems
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manipulating-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manipulating vectors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-vector-manipulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced vector manipulation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced vector manipulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linear-interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linear interpolation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dot-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dot product
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Entities
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Entities
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/dirt_color/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dirt color
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/light_layer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Light layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/player_sounds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Player sounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/taking_damage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Taking damage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entities/trails/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Trails
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REPENTOGON
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            REPENTOGON
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repentogon/achievements/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Achievements
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../repentogon/adding_stats/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adding stats
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-vector" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is a vector?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is a vector?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unit-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unit vectors
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-are-vectors-used-for-in-isaac" class="md-nav__link">
+    <span class="md-ellipsis">
+      What are vectors used for in Isaac?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#coordinate-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coordinate systems
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#manipulating-vectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manipulating vectors
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#advanced-vector-manipulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advanced vector manipulation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Advanced vector manipulation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linear-interpolation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Linear interpolation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dot-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dot product
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+    <h1>Vector math</h1>
+    <small>
+        Author(s): catinsurance
+        <br/>
+        Tags: 
+<nav class="md-tags" >
+  
+    
+    
+    
+      <span class="md-tag">Tutorial</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Intermediate</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Repentance</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Repentance+</span>
+    
+  
+    
+    
+    
+      <span class="md-tag">Lua</span>
+    
+  
+</nav>
+    </small>
+    <hr/>
+
+
+<p>Vector math is an important fundamental concept to understand, especially when working with entities within Isaac.</p>
+<h2 id="what-is-a-vector">What is a vector?<a class="headerlink" href="#what-is-a-vector" title="Permanent link">⚓︎</a></h2>
+<p>In algebra, a vector can be described as having both <strong>magnitude</strong> and <strong>direction</strong>. This means that a vector can describe size, extents, and direction in 2D space.</p>
+<p><strong>In Isaac (and most 2D games), the origin point for coordinates is the at the top-left of the screen.</strong> This means that a positive X coordinate is pointing towards the right, a positive Y coordinate is pointing downwards, and vice versa.</p>
+<p><img alt="Blue line (6, 0) pointing right, and red line (3, 3) pointing down and to the right" src="../../assets/vector_math/directions.png" /></p>
+<p>In the above example, the blue arrow is pointing towards the right across 6 tiles. This would produce a vector of <code>(6, 0)</code>, which has a magnitude (or size) of 6.</p>
+<p>The red arrow is pointing downwards and towards the right across 4 tiles. This would produce a vector of <code>(4, 4)</code>, which represents both the direction and how far in that direction the vector is pointing.</p>
+<h3 id="unit-vectors">Unit vectors<a class="headerlink" href="#unit-vectors" title="Permanent link">⚓︎</a></h3>
+<p>A <strong>"unit vector"</strong> is a vector that is <strong>normalized</strong>, meaning it has a length of one. A unit vector is used for representing a direction with no size attached to it. You can find an interactive visualization for unit vectors on a unit circle (a circle with a radius of 1) by clicking <a href="https://www.mathsisfun.com/geometry/unit-circle.html">here</a> and scrolling down to the "Try it Yourself" section.</p>
+<p><img alt="A 45 degree angle visualized using the linked website" src="../../assets/vector_math/normalization.png" /></p>
+<h2 id="what-are-vectors-used-for-in-isaac">What are vectors used for in Isaac?<a class="headerlink" href="#what-are-vectors-used-for-in-isaac" title="Permanent link">⚓︎</a></h2>
+<p>Vectors in Isaac are used to determine many things, such as <strong>scale</strong>, <strong>position</strong>, and <strong>velocity</strong>.</p>
+<ul>
+<li><strong>Scale</strong> is multiplied by the base size of something in order to change how big it is. For example, a <a href="https://wofsauge.github.io/IsaacDocs/rep/Sprite.html"><code>Sprite</code></a> with a <code>Scale</code> of <code>Vector(1, 1)</code> is the same size as it is in the spritesheet. If you made that <code>Scale</code> equal to <code>Vector(2, 2)</code>, it would now be <strong>2 times as big</strong>. If you made it equal to <code>Vector(2, 1)</code>, it would be 2 times as <strong>wide</strong>, but <strong>the same height as normal</strong>.</li>
+<li><strong>Position</strong> is where something is located in 2D space. An <a href="https://wofsauge.github.io/IsaacDocs/rep/Entity.html"><code>Entity</code></a> with <code>Position</code> set to <code>Vector(20, 20)</code> would be located 20 units to the <strong>right</strong>, and 20 units <strong>downwards</strong> from the origin point of the room, which is the top-left. In Isaac, <strong>40 units is the length of a single tile.</strong></li>
+<li><strong>Velocity</strong> is how fast something is moving in a certain direction. An <code>Entity</code> with a <code>Velocity</code> of <code>Vector(0, -20)</code> would be moving <strong>upwards</strong> at a speed of 20 units.</li>
+</ul>
+<h2 id="coordinate-systems">Coordinate systems<a class="headerlink" href="#coordinate-systems" title="Permanent link">⚓︎</a></h2>
+<p>In Isaac, there are 3 different coordinate systems present, each with varying usages of a single unit.</p>
+<ul>
+<li><strong>World space</strong> represents the coordinate system used for things within the game world, such as entities.</li>
+<li><strong>Render space</strong> represents the coordinate system used for things within the rendering plane of the current room. This is independent of the window size.</li>
+<li><strong>Screen space</strong> represents the coordinate system used to determine the position of something on the screen. This is based on the window size. If the game is running at a resolution of 1920x1080, then the bottom-right of the screen will be <code>Vector(1920, 1080)</code>.</li>
+</ul>
+<p>You can convert from World coordinates to Render or Screen coordinates using functions found in the <a href="https://wofsauge.github.io/IsaacDocs/rep/Isaac.html"><code>Isaac</code></a> class.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">worldPosition</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1">-- To convert to screen space:</span>
+<span class="kd">local</span> <span class="n">screenPosition</span> <span class="o">=</span> <span class="n">Isaac</span><span class="p">.</span><span class="n">WorldToScreen</span><span class="p">(</span><span class="n">worldPosition</span><span class="p">)</span>
+
+<span class="c1">-- To convert to render space:</span>
+<span class="kd">local</span> <span class="n">renderPosition</span> <span class="o">=</span> <span class="n">Isaac</span><span class="p">.</span><span class="n">WorldToRenderPosition</span><span class="p">(</span><span class="n">worldPosition</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<h2 id="manipulating-vectors">Manipulating vectors<a class="headerlink" href="#manipulating-vectors" title="Permanent link">⚓︎</a></h2>
+<p>Now that we know what vectors are and how the game handles them, we can now start to manipulate them. In Isaac, there is a <a href="https://wofsauge.github.io/IsaacDocs/rep/Vector.html"><code>Vector</code></a> object which holds many useful functions for manipulating vectors.</p>
+<p>Let's start with basic arithmetic.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Arithmetic type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Addition</td>
+<td style="text-align: left;">Adding together two vectors will combine their X and Y values.</td>
+<td style="text-align: left;"><code>Vector(2, 2)</code> + <code>Vector(1, 1)</code> = <code>Vector(3, 3)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Subtraction</td>
+<td style="text-align: left;">Subtracting a vector with another vector will subtract the vector on the left's X and Y values with the vector on the right's.</td>
+<td style="text-align: left;"><code>Vector(2, 2)</code> - <code>Vector(1, 1)</code> = <code>Vector(1, 1)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Multiplication</td>
+<td style="text-align: left;">You can multiply a vector with another vector to multiple their X and Y values together, <strong>but you can also multiple a vector with a number.</strong> This is useful for increasing or decreasing the magnitude of a vector, especially unit vectors.</td>
+<td style="text-align: left;"><code>Vector(1, 1)</code> × <code>5</code> = <code>Vector(5, 5)</code> <strong>OR</strong> <code>Vector(1, 1)</code> × <code>Vector(5, 1)</code> = <code>Vector(5, 1)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Division</td>
+<td style="text-align: left;">Like with multiplication, you can divide a vector with another vector, or you can divide a vector with a number.</td>
+<td style="text-align: left;"><code>Vector(4, 4)</code> ÷ <code>2</code> = <code>Vector(2, 2)</code> <strong>OR</strong> <code>Vector(4, 4)</code> ÷ <code>Vector(1, 2)</code> = <code>Vector(4, 2)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;">Inversion</td>
+<td style="text-align: left;">You can invert a vector by adding a dash (-) behind it. This means that you can flip the sign of the X and Y values of a number to be negative to positive, or positive to negative.</td>
+<td style="text-align: left;"><code>-Vector(2, -2)</code> = <code>Vector(-2, 2)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Beyond basic arithmetic, sometimes it is necessary to want to <strong>resize</strong> or <strong>rotate</strong> vectors, among other common forms of vector manipulation. The modding API has many functions that you can use on <code>Vector</code> objects to avoid doing the math for this yourself. Below is a table going over all the basic vector manipulation functions.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Function</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>Distance</code></td>
+<td style="text-align: left;">This can tell you the distance between two vectors that represent a position in 2D space in units.</td>
+<td style="text-align: left;"><code>Vector(2, 0):Distance(Vector(4, 0))</code> = <code>2</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>DistanceSquared</code></td>
+<td style="text-align: left;">The same as <code>Distance</code>, but returns the distance in squared units. This is function has slightly less overhead than <code>Distance</code>, as the game doesn't need to calculate the square root.</td>
+<td style="text-align: left;"><code>Vector(2, 0):DistanceSquared(Vector(4, 0))</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>GetAngleDegrees</code></td>
+<td style="text-align: left;">Returns a number representing the direction a vector is pointing in, in degrees. <strong>This is relative towards the right</strong>, meaning that right is an angle of 0, down is an angle of -90, up is an angle of 90, and left is an angle of 180 or -180.</td>
+<td style="text-align: left;"><code>Vector(5, 0):GetAngleDegrees)</code> = <code>0</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Normalized</code></td>
+<td style="text-align: left;">Returns a vector normalized to be a unit vector, meaning it returns purely the direction the vector is pointing in and nothing else.</td>
+<td style="text-align: left;"><code>Vector(2, 2)</code> = <code>Vector(0.707, 0.707)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Resized</code></td>
+<td style="text-align: left;">Returns a vector normalized and then resized by a certain amount of units. This is useful over simply multiplying a vector, as it allows you to resize a vector of any length without needing to normalize it yourself first.</td>
+<td style="text-align: left;"><code>Vector(15, 0):Resized(3)</code> = <code>Vector(15, 0):Normalized() * 3</code> = <code>Vector(3, 0)</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>Rotated</code></td>
+<td style="text-align: left;">Returns a vector rotated by a certain amount of degrees. This will usually have some floating point imprecisions attached. This means that instead of exactly 0, you may receive a number like <code>-4.37114e-08</code>, which is <code>-0.0000000437114</code> in standard form.</td>
+<td style="text-align: left;"><code>Vector(1, 0):Rotated(90)</code> = <code>Vector(0, 1)</code> (excluding any floating point imprecisions)</td>
+</tr>
+</tbody>
+</table>
+<p><code>Normalized</code>, <code>Rotated</code>, <code>Resized</code> all have counterparts without the "d" at the end which alter the original vector itself instead of returning the result.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">vec</span><span class="p">:</span><span class="n">Rotate</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">vec</span><span class="p">)</span> <span class="c1">-- Vector(0, 2)</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Lastly, there's also a <strong>static function</strong> that's a part of the <code>Vector</code> class that lets you create a unit vector from a specific angle in degrees. The way you call this function works a little differently than normal. Observe the following example:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">angle</span> <span class="o">=</span> <span class="mi">90</span>
+<span class="kd">local</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">.</span><span class="n">FromAngle</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span> <span class="c1">-- Notice how we use a period (.) instead of a colon (:) here!</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span> <span class="c1">-- Vector(0, 1)</span>
+</code></pre></div></td></tr></table></div></p>
+<h2 id="advanced-vector-manipulation">Advanced vector manipulation<a class="headerlink" href="#advanced-vector-manipulation" title="Permanent link">⚓︎</a></h2>
+<p>While the most common forms of vector manipulation have already been covered, there are further forms of manipulation you can do with more advanced functions. Make sure you have a strong understanding of vectors before diving into these.</p>
+<h3 id="linear-interpolation">Linear interpolation<a class="headerlink" href="#linear-interpolation" title="Permanent link">⚓︎</a></h3>
+<p>Linear interpolation, or lerp for short, is used to calculate an "in-between" point between two numbers. In our case, it lets us get a position between two vectors.</p>
+<p>Before talking about linear interpolation with vectors, first it's important to understand how it applies with basic numbers. Observe the following example:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">function</span> <span class="nf">lerp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">percent</span><span class="p">)</span>
+    <span class="kr">return</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">percent</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">percent</span>
+<span class="kr">end</span>
+
+<span class="kd">local</span> <span class="n">halfWay</span> <span class="o">=</span> <span class="n">lerp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">halfWay</span><span class="p">)</span> <span class="c1">-- 1</span>
+</code></pre></div></td></tr></table></div></p>
+<p>With the above code, we have used the linear interpolation formula calculated with the <code>lerp()</code> function. This formula takes the starting number <code>a</code>, the ending number <code>b</code>, and a target percentage between the two numbers. Remember that percentages are represented with a decimal multiplied by 100, so 0.5 is the same as 50%. 50% of the way from 0 to 2 is 1, and that's what we got from the function.</p>
+<p><img alt="Number line from 0 to 2" src="../../assets/vector_math/number_line.png" /></p>
+<p>Linear interpolation is a very important concept to understand for lots of math in programming, but how do we apply it to vectors? The modding API provides a <code>Lerp()</code> function we can call on a vector. <strong>This changes the vector it's used on</strong> and does <em>not</em> provide a new, altered version of the vector.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">v1</span><span class="p">:</span><span class="n">Lerp</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="c1">-- v1 equals Vector(0.5, 0.5) now</span>
+</code></pre></div></td></tr></table></div></p>
+<p>If you don't want to alter the vector you're calling this function on (<code>v1</code> in this example), you should use the <code>lerp</code> function provided earlier.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kr">function</span> <span class="nf">lerp</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">percent</span><span class="p">)</span>
+    <span class="kr">return</span> <span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">percent</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">percent</span>
+<span class="kr">end</span>
+
+<span class="kd">local</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="kd">local</span> <span class="n">v3</span> <span class="o">=</span> <span class="n">lerp</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span> <span class="c1">-- v3 equals Vector(0.5, 0.5), while v1 and v2 are still the same</span>
+</code></pre></div></td></tr></table></div></p>
+<h3 id="dot-product">Dot product<a class="headerlink" href="#dot-product" title="Permanent link">⚓︎</a></h3>
+<p>The dot product between two vectors can be explained as the amount that the first vector is pointing in the same direction as the second vector. This is represented as a number between -1 and 1, with -1 meaning they're facing completely opposite directions, and 1 meaning they're facing the same direction.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">local</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="kd">local</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">Vector</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="kd">local</span> <span class="n">dotProduct</span> <span class="o">=</span> <span class="n">v1</span><span class="p">:</span><span class="n">Dot</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dotProduct</span><span class="p">)</span> <span class="c1">-- This returns</span>
+</code></pre></div></td></tr></table></div></p>
+<p><img alt="Dot product of a 90 degree angle is 0" src="../../assets/vector_math/dot.png" /></p>
+<hr/>
+<br/>
+
+<script src="https://giscus.app/client.js"
+        data-repo="catinsurance/IsaacBlueprints"
+        data-repo-id="R_kgDOOg-68w"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOOg-6884Cpi3z"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.1e8ae164.min.js"></script>
+      
+    
+  </body>
+</html>
