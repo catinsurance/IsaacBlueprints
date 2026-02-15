@@ -75,7 +75,9 @@ Cards and pills alike have two separate entries: As a pickup entity (`entities2.
 
 **If your card's backside is identical to an existing pickup**, set `pickup` to the subtype of the pickup. If you want to have a unique appearance, such as for any objects and soul stones, a new `entities2.xml` entry with a unique subtype should be defined.
 
-![XML sprite assignments](../assets/pocket_items_cards/xml_separation.png)
+<p align="center">
+  <img src="../../assets/pocket_items_cards/xml_separation.png" alt="XML sprite assignments" />
+</p>
 
 Below are all the subtype IDs of vanilla cards that share a backside sprite:
 
@@ -90,7 +92,7 @@ Below are all the subtype IDs of vanilla cards that share a backside sprite:
 
 ## entities2.xml
 
-A custom `entities2.xml` entry is only necessary if you wish to give the card a unique backside. For this, `id` must be set to `5` (EntityType.ENTITY_PICKUP), `variant` to `300` (PickupVariant.PICKUP_TAROTCARD), and `subtype` set to any integer betweet `35` and `4096` (inclusive). `34` is the last vanilla pickup entity, assigned to Soul of Jacob and Esau, and `4096` is the maximum allowed integer.
+A custom `entities2.xml` entry is only necessary if you wish to give the card a unique backside. For this, `id` must be set to `5` (EntityType.ENTITY_PICKUP), `variant` to `300` (`PickupVariant.PICKUP_TAROTCARD`), and `subtype` set to any integer betweet `35` and `4096` (inclusive). `34` is the last vanilla pickup entity, assigned to Soul of Jacob and Esau, and `4096` is the maximum allowed integer.
 
 ???+ warning
     The game does not properly handle conflicting subtypes with card entities across different mods. In this scenario, it will increase the `variant` by 1 until a non-conflicting type-variant-subtype combination is found, likely landing on variant `301`. This new pickup entity will have no functionality. Your card can still be spawned, but it will take on the appearance from the mod that loaded the subtype first.

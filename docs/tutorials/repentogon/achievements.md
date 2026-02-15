@@ -55,8 +55,13 @@ With your achievement added, you can manage whether your achievement is locked o
 
 For the debug console, there's two commands: `achievement` and `lockachievement`. `achievement` will unlock any achievement in the game, while `lockachievement` locks it.
 
-![Debug console unlock](../assets/achievements/debug_console.jpg)
-![Debug console lock](../assets/achievements/debug_console_2.jpg)
+<p align="center">
+  <img src="../../assets/achievements/debug_console.jpg" alt="Debug console unlock" />
+</p>
+
+<p align="center">
+  <img src="../../assets/achievements/debug_console_2.jpg" alt="Debug console lock" />
+</p>
 
 ### Lua
 

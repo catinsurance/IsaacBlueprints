@@ -42,8 +42,13 @@ These tags have no properties, and are intended to be filled with their correspo
 
 Result:
 
-![Item description viewed from a pedestal](../assets/internal_item_descriptions/item_description_example.jpg)
-![Item description viewed from the My Stuff page](../assets/internal_item_descriptions/item_description_mystuff.jpg)
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/item_description_example.jpg" alt="Item description viewed from a pedestal" />
+</p>
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/item_description_mystuff.jpg" alt="Item description viewed from the My Stuff page" />
+</p>
+
 ???+ bug ""My Stuff" display bug"
 	Any modded "death item" sprites will appear extremely offset up and to the left from its expected location in the My Stuff menu.
 	<br><br>Trinkets will also appear in this menu if consumed via Smelter or similar methods, but there is no support for giving modded trinkets a death item sprite.
@@ -65,6 +70,7 @@ The info tag contains the text to display as a bullet point and can be set to di
 	|tag|int|For use with trinkets and pills for golden trinkets and Horse Pills respectively. See [Synergies](internal_item_descriptions.md#synergies) for more information.|
 
 Below is an example of multiple lines of text for our item. The first line is always present, the second line requires you don't have Sad Onion, and the last line requires you do.
+
 ```xml
 <collectible id="0">
 	<info text="+1 Epic Point"/>
@@ -72,7 +78,10 @@ Below is an example of multiple lines of text for our item. The first line is al
 	<info collectible="1" text="Enemies will be sympathetic towards you."/>
 </collectible>
 ```
-![Description modifier in action](../assets/internal_item_descriptions/description_modifier.gif)
+
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/description_modifier.gif" alt="Description modifier in action" />
+</p>
 
 ### XML modifiers
 XML files use specific symbols for formatting its markup. To insert the characters into text without disrupting the XML format, the following series of characters can be used:
@@ -114,7 +123,9 @@ There are 6 modifiers:
 
 Result:
 
-![Result of using every modifier](../assets/internal_item_descriptions/text_modifiers.jpg)
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/text_modifiers.jpg" alt="Result of using every modifier" />
+</p>
 
 ### player
 
@@ -127,7 +138,10 @@ Below is an example of our item displaying a multitude of player heads:
 	<info text="Here are his friends:&lt;player=1&gt;&lt;player=5&gt;&lt;player=26&gt;"/>
 </collectible>
 ```
-![Player icon example](../assets/internal_item_descriptions/player_icons.jpg)
+
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/player_icons.jpg" alt="Player icon example" />
+</p>
 
 ???- info "Player head values"
 	| Value | Icon name |
@@ -179,13 +193,17 @@ Below is an example of our item displaying a multitude of player heads:
 `pickup` is used for displaying pickup icons. The vanilla game doesn't use this at all, but mods can take advantage of it. While the pickups displayed are the frames inside the "pickups" animation within `gfx/ui/text_icons.anm2`, `pickup` expects one of 6 specific strings. Providing anything besides these strings displays the coin icon.
 
 Below is an example of our item displaying a multitude of pickup icons:
+
 ```xml
 <collectible id="0">
         <info text="&lt;pickup=bomb&gt; Boom!"/>
         <info text="A few other pickups: &lt;pickup=coin&gt;&lt;pickup=key&gt;&lt;pickup=blackheart&gt;"/>
 </collectible>
 ```
-![Room icon example](../assets/internal_item_descriptions/pickup_icons.jpg)
+
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/pickup_icons.jpg" alt="Pickup icons example" />
+</p>
 
 ???- info "Pickup icon values"
 	| Value | Icon name |
@@ -202,13 +220,17 @@ Below is an example of our item displaying a multitude of pickup icons:
 `rooms` is used for displaying room icons. The vanilla game only uses this for [Teleport 2.0](https://bindingofisaacrebirth.wiki.gg/wiki/Teleport_2.0). The value used to choose what icon to display correlates to the frames inside `gfx/ui/text_icons.anm2` file under the "rooms" animation. The first frame is the shop icon, so `rooms=0` will display the shop icon inside of descriptions.
 
 Below is an example of our item displaying a multitude of room icons:
+
 ```xml
 <collectible id="0">
 	<info text="This is a Shop Icon:&lt;rooms=0&gt;"/>
 	<info text="This are several Treasure Room icons:&lt;rooms=4&gt;&lt;rooms=19&gt;&lt;rooms=22&gt;"/>
 </collectible>
 ```
-![Room icon example](../assets/internal_item_descriptions/room_icons.jpg)
+
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/room_icons.jpg" alt="Room icons example" />
+</p>
 
 ???- info "Room icon values"
 	???+ note "Note"
@@ -251,13 +273,17 @@ Below is an example of our item displaying a multitude of room icons:
 Note that while you can put in an ID that extends beyond vanilla's maximum item ID, and this ID can make the description show a modded item sprite, modded item IDs shift around depending on what mods are enabled, so this cannot be used to reliably show a modded item sprite.
 
 Below is an example of our item displaying a multitude of items:
+
 ```xml
 <collectible id="0">
 	<info text="The iconic pet onion: &lt;collectible=1&gt;"/>
 	<info text="Some other items:&lt;collectible=14&gt;&lt;collectible=654&gt;&lt;collectible=571&gt;"/>
 </collectible>
 ```
-![Item sprites example](../assets/internal_item_descriptions/collectible_example.jpg)
+
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/collectible_example.jpg" alt="Item sprites example" />
+</p>
 
 ### color
 
@@ -272,6 +298,7 @@ The structure of the color hex code <span style="color: #f833ff">"0xFFf833ff" (p
 - `ff` (characters 9-10): This represents the "green" value. "ff" in hex is 255 in decimal
 
 Below is an example of a custom color, and of our item having a red text color modifier while Abyss is held.
+
 ```xml
 <collectibles>
 	<collectible id="0">
@@ -281,7 +308,10 @@ Below is an example of a custom color, and of our item having a red text color m
 	<collectible />
 </collectibles>
 ```
-![Colors example](../assets/internal_item_descriptions/colors_example.jpg)
+
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/colors_example.jpg" alt="Colors example" />
+</p>
 
 Below are all of the hex codes used in vanilla:
 
@@ -293,6 +323,7 @@ Below are all of the hex codes used in vanilla:
 `size` accepts a float that changes the size of the text. The vanilla game doesn't use this at all, but mods can take advantage of it. `0.5` is the default size of text, so any number lower will make the text smaller and vice versa.
 
 Below is an example of our item with multiple lines of different font sizes:
+
 ```xml
 <collectible id="0">
 	<info text="&lt;size=0.25&gt;I'm half the size!"/>
@@ -300,7 +331,10 @@ Below is an example of our item with multiple lines of different font sizes:
 	<info text="&lt;size=1&gt;I'm twice the size!"/>
 </collectible>
 ```
-![Font sizes example](../assets/internal_item_descriptions/size_example.jpg)
+
+<p align="center">
+  <img src="../../assets/internal_item_descriptions/size_example.jpg" alt="Font sizes example" />
+</p>
 
 ???- bug "Text overlapping"
 	Larger font sizes can overlap with text on the next line.

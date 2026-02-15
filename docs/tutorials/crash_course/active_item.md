@@ -23,7 +23,7 @@ Active items are items held in the active slot and usually require charge to be 
 
 ## Creating your active item
 
-The process of creating an active item is identical to that of a passive item, replacing the `passive` tag with `active`. However, there are a few unique attributes exclusive to active items.
+The process of creating an active item is identical to that of a [passive item](passive_item.md#creating-your-item), replacing the `passive` tag with `active`. However, there are a few unique attributes exclusive to active items.
 
 ```XML
 <items gfxroot="gfx/items/" version="1">
@@ -43,9 +43,18 @@ The process of creating an active item is identical to that of a passive item, r
 ## Explaining charge types
 There are three charge types an active item can have that affect its charging behavior.
 
-- `normal`: The standard, default method of charging. Charges through room clears, battery pickups, and other conventional methods. Vanilla only uses max charges of [`0`, `1`, `2`, `3`, `4`, `6`, `8`, `12`], but there is support for any number from 0 to 12.<br>![normal active](../assets/active_item/active_normal.gif)
-- `timed`: Can charge all the same ways `normal` charge type items do. Will automatically fill its chargebar over time.<br>![timed active](../assets/active_item/active_timed.gif)
-- `special`: Cannot be charged through any conventional means, and must be charged manually with Lua code.<br>![special active](../assets/active_item/active_special.gif)
+- `normal`: The standard, default method of charging. Charges through room clears, battery pickups, and other conventional methods. Vanilla only uses max charges of [`0`, `1`, `2`, `3`, `4`, `6`, `8`, `12`], but there is support for any number from 0 to 12.<br>
+<p align="center">
+  <img src="../../assets/active_item/active_normal.gif" alt="normal active" />
+</p>
+- `timed`: Can charge all the same ways `normal` charge type items do. Will automatically fill its chargebar over time.<br>
+<p align="center">
+  <img src="../../assets/active_item/active_timed.gif" alt="timed active" />
+</p>
+- `special`: Cannot be charged through any conventional means, and must be charged manually with Lua code.<br>
+<p align="center">
+  <img src="../../assets/active_item/active_special.gif" alt="special active" />
+</p>
 
 ## Coding the active item
 The active item now exists, but does not do anything on its own upon activation. This will require Lua code in order to give it an effect when used. The crucial callback for active items is [ModCallbacks.MC_USE_ITEM](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_use_item).

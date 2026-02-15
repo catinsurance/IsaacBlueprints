@@ -124,13 +124,17 @@ To start, let's go over the necessary spritesheets for your character inside a r
 
 1. Character spritesheet, located in `gfx/characters/costumes/`. How your character is displayed while playing as them in a run.<br>
 ![Character spritesheet breakdown](../assets/characters/character_spritesheet_breakdown.png)
-2. Name image. Located in gfx/characters/boss/. The name displayed for your character in the vs. screen.<br>
-![Gabriel's character name](../assets/characters/playername_gabriel.png)
+2. Name image. Located in gfx/characters/boss/. The name displayed for your character in the vs. screen.<br><p align="center"><img src="../../assets/characters/playername_gabriel.png" alt="Gabriel's character name" /></p>
 3. Portrait image, located in `gfx/characters/stage/`. The potrait displayed for your character in the vs. screen and the stage transition screen.<br>
-![Gabriel's portrait](../assets/characters/playerportrait_gabriel.png)
+<p align="center">
+  <img src="../../assets/characters/playerportrait_gabriel.png" alt="Gabriel's portrait" />
+</p>
 
-Optionally, you may add a costume to your character. This is a separate spriteheet that will display on top of your character, useful if the costume you wish to add to your character's head or body is too big for the original spritesheet. See the [Costumes](costumes.md) tutorial for more information.<br>
-![Gabriel's hair](../assets/characters/gabriel_hair.png)
+Optionally, you may add a costume to your character. This is a separate spriteheet that will display on top of your character, useful if the costume you wish to add to your character's head or body is too big for the original spritesheet. See the [Costumes](costumes.md) tutorial for more information.
+
+<p align="center">
+  <img src="../../assets/characters/gabriel_hair.png" alt="Gabriel's hair" />
+</p>
 
 ### UI sprites
 Next are UI sprites for your character. These involve the character selection screen and few other sprites. Unlike the first set of sprites, these will require you create and edit .anm2 files in order to be visible in-game. **All of these sprites are located within `content/gfx/`**.
@@ -143,8 +147,7 @@ Next are UI sprites for your character. These involve the character selection sc
 2. Character name and other attributes. Uses `charactermenu.anm2`. This covers the character's starting health, speed, damage, starting items, and their name on the character selection screen.<br>
 ![Gabriel menu](../assets/characters/character_menu.jpg)
 ![Gabriel selection](../assets/characters/character_selection.jpg)
-3. Co-op menu icon. Uses `coop menu.anm2`. The small icon that will appear when a second player joins your run and is prompted to select a character to join in as.<br>
-![Co-op icon](../assets/characters/coop_icon.png)
+3. Co-op menu icon. Uses `coop menu.anm2`. The small icon that will appear when a second player joins your run and is prompted to select a character to join in as.<br><p align="center"><img src="../../assets/characters/coop_icon.png" alt="Co-op icon"/></p>
 4. Death name. Uses `death screen.anm2`. The name of your character as it appears on "Isaac's Last Will" when your character dies.
 ![Isaac's Last Will with Gabriel death name](../assets/characters/character_death.jpg)
 

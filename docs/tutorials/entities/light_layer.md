@@ -16,7 +16,9 @@ Certain entities make light in the darkness. This is most visible in Mines dark 
 ## Creating a light layer
 To create a light layer in an entity's `.anm2`, create a new layer. Make sure you **tick the "Null" box,** and make sure that **the layer name starts with an asterisk (`*`).**
 
-![Creating a null layer](../assets/light_layer/properties.png)
+<p align="center">
+  <img src="../../assets/light_layer/properties.png" alt="Creating a null layer" />
+</p>
 
 - Edit the `Scale X` and `Scale Y` properties to change the size of the light.
 - Edit the `R`, `G`, and `B` properties under `Tint RGB` to edit the color the light.
@@ -30,6 +32,6 @@ You can make a normal sprite layer (orange in the editor) only visible in the da
 Note that this does not affect surrounding lighting and only makes the layer visible in the dark.
 
 <p style="vertical-align: middle;">
-<img align="left" src="../../assets/light_layer/one_tooth_anm2.jpg" alt="The anm2 file of a One Tooth" />
-<img align="right" src="../../assets/light_layer/one_tooth.jpg" alt="The eyes of a One Tooth are visible in the dark" />
+	<img align="left" src="../../assets/light_layer/one_tooth_anm2.jpg" alt="The anm2 file of a One Tooth" />
+	<img align="right" src="../../assets/light_layer/one_tooth.jpg" alt="The eyes of a One Tooth are visible in the dark" />
 </p>

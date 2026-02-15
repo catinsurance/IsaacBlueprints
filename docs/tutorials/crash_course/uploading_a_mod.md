@@ -22,7 +22,9 @@ To upload to the Steam Workshop, you must use the mod uploader tool bundled in w
 ## Using the mod uploader
 The mod uploader is a program located in the `tools` folder in the game's directory. If you don't see this folder, **make sure you've extracted the game's resources** by following the [previous tutorial](./creating_a_mod.md) in the crash course. Within the `tools` folder, you'll see `ModUploader.exe`, which is the executable you'll need to launch. The program launched will be titled "The Binding of Isaac: Afterbirth+ Mod Uploader", but this uploader is still functional for Repentance and Repentance+.
 
-![Mod uploader file path](../assets/uploading_a_mod/uploader_folder.png)
+<p align="center">
+  <img src="../../assets//uploading_a_mod/uploader_folder.png" alt="Mod uploader file path" />
+</p>
 
 ???- note "Linux info"
     Linux users may notice a "Linux" folder with a file you can run in the terminal. If you're having issues with this version of the mod uploader, try adding the Windows version as an non-Steam game on Steam, then run it with Proton.
@@ -38,7 +40,9 @@ To get started, navigate to your mod folder after clicking "Choose Mod...", then
 ## Editing your mod's metadata
 Within the mod uploader, you can edit your mod's metadata, which is the data that shows on the Steam Workshop.
 
-![A key to the mod uploader](../assets/uploading_a_mod/tools_layout.png)
+<p align="center">
+  <img src="../../assets//uploading_a_mod/tools_layout.png" alt="A key to the mod uploader" />
+</p>
 
 - **<span style="color: #5f20ff;">1:</span>** This area holds the "Upload Mod" and "View Mod" buttons. "Upload Mod" will upload it to the Steam Workshop with all of your settings, while "View Mod" let's you open the Workshop page in your browser.
 - **<span style="color: #3cf23c;">2:</span>** This allows you to edit the change notes for your release. You can edit this field for both uploads and updates.

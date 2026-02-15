@@ -36,9 +36,12 @@ The code below is an entities2.xml entry for an effect named "Sad Rain Cloud". E
 
 Once in-game, you can spawn your effect using the debug console. Type `spawn rain cloud` and, so long as its the first option available, press ENTER to spawn it in the middle of the room. Alternatively, type `1000.2096` to spawn it using its ID and variant.
 
-![Debug console](../assets/effects/raincloud_console.png)
-
-![Rain Cloud spawned into the room](../assets/effects/raincloud_spawn.png)
+<p align="center">
+  <img src="../../assets/effects/raincloud_console.png" alt="Debug console" />
+</p>
+<p align="center">
+  <img src="../../assets/effects/raincloud_spawn.png" alt="Rain Cloud spawned into the room" />
+</p>
 
 ## Lua code
 

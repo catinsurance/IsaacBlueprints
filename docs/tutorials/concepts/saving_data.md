@@ -18,7 +18,9 @@ Let's start with the most basic concept, which is saving and loading.
 
 Save data for mods are stored in the `data` folder in your game's directory. This is so that mod save data is not deleted when your mod is uninstalled. The save data for your mod is located within a folder in `data` that is named after your mod's folder name.
 
-![Data folder with Sheriff as the example mod](../assets/saving_data/data_folder.png)
+<p align="center">
+  <img src="../../assets/saving_data/data_folder.png" alt="Data folder with Sheriff as the example mod" />
+</p>
 
 Notice that there are 3 files in here. **Each file in here corresponds to a save file in game.** So `save1.dat` corresponds to the left-most save file, `save2.dat` is the middle save file, and `save3.dat` is the right-most one. Save data is stored in plain text, so you can open these up in a text editor if you'd like.
 

@@ -24,6 +24,7 @@ print(player.ControllerIndex)
 Controllers *can* be detected by [`Input.IsButtonTriggered()`](https://wofsauge.github.io/IsaacDocs/rep/Input.html#isbuttontriggered) and [`Input.IsButtonPressed()`](https://wofsauge.github.io/IsaacDocs/rep/Input.html#isbuttonpressed), but not without some caveats.
 
 Firstly, controller inputs don't have a value in the [`Keyboard`](https://wofsauge.github.io/IsaacDocs/rep/enums/Keyboard.html) enum, but they do have a number which corresponds to what button you're pressing.
+
 ```lua
 local controllerButtons = {
     DPAD_LEFT = 0,
@@ -47,7 +48,9 @@ local controllerButtons = {
 
 Secondly, **controllers trigger multiple values at once.** Pressing a button on the controller will trigger 4 different values in the `Keyboard` enumerator. This can cause complications for detecting keyboard input, because a controller can trigger a value that you're not expecting.
 
-![A controller triggering multiple values at once](../assets/controller_input/controller_input.png)
+<p align="center">
+  <img src="../../assets/controller_input/controller_input.png" alt="A controller triggering multiple values at once"/>
+</p>
 
 ???- info "Reproduction code"
     ```lua

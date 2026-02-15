@@ -18,7 +18,9 @@ tags:
 
 Tainted characters are alternate, twisted versions of their regular variants that are unlocked by finding them inside the Home floor's secret closet while playing as said regular variant. This article will cover setting up this unlock method for your own custom tainted character.
 
-![Home Closet](../assets/tainted_unlock/closet.png)
+<p align="center">
+  <img src="../../assets/tainted_unlock/closet.png" alt="Home Closet" />
+</p>
 
 ## Requirements
 

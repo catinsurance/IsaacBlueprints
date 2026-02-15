@@ -28,7 +28,9 @@ Inside of your `mods` folder, create a new folder. You can name this anything. L
 
 The mods list is sorted by load order, and the load order is determined by the placement of your mod alphabetically. So mods with symbols at the beginning of their name will be placed at the top of the list, and therefore are loaded first.
 
-![The metadata.xml of your mod](../assets/creating_a_mod/metadata_xml.png)
+<p align="center">
+  <img src="../../assets/creating_a_mod/metadata_xml.png" alt="The metadata.xml of your mod" />
+</p>
 
 You can change the text within the `name` tag here. The description can be set when you upload the mod to the Steam Workshop. Additionally, other tags may appear in this file after uploading the mod.
 
@@ -39,7 +41,9 @@ To replace a sprite (or any asset in the game), you must place a file in your mo
 
 Open the game's directory as we did before, and open the `tools` folder. Within the `tools` folder, open the `ResourceExtractor` folder. Double-clicking `ResourceExtractor.exe` will run the resource extraction program. This may take a while, so wait for it to complete its process.
 
-![The resource extractor](../assets/creating_a_mod/resource_extractor.png)
+<p align="center">
+  <img src="../../assets/creating_a_mod/resource_extractor.png" alt="The resource extractor" />
+</p>
 
 The place the game's files will extract to depend on what DLC of the game you have enabled.
 
@@ -58,6 +62,8 @@ Now we must mimic this same file structure within our mod. Go back to your mod's
 ???+ warning "Warning"
     When replacing images, you must make sure your image is encoded in 32-bit, and is a PNG. [Aseprite](https://www.aseprite.org/) handles this by default. Otherwise, you must find out how to configure this in the art progarm of your choice.
 
-![The file path we place our sprite in](../assets/creating_a_mod/sprite_replacement.gif)
+<p align="center">
+  <img src="../../assets/creating_a_mod/sprite_replacement.gif" alt="The file path we place our sprite in" />
+</p>
 
 After adding new resources to your mod, make sure you restart your game to see the changes.

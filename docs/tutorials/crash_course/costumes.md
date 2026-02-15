@@ -137,7 +137,9 @@ Inside your costumes folder (usually `resources/gfx/characters/`), you can creat
 
 Within your costume suffix folder, place your alternate `.png` file with the exact same name as the spritesheet you wish to replace. The game will automatically use this spritesheet instead of the default one.
 
-![Alternate spritesheets for costumes](../assets/costumes/alternates.png)
+<p align="center">
+  <img src="../../assets/costumes/alternates.png" alt="Alternate spritesheets for costumes" />
+</p>
 
 ## Adding a character-specific costume
 Custom characters use a costume in order to have a different default appearance than Isaac. For example, Cain has a costume for his eyepatch. There are 3 ways to add a costume such that it will only appear on your own custom character.
