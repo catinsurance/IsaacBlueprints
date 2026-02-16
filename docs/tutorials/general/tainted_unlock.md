@@ -12,11 +12,9 @@ tags:
     - Lua
 ---
 
-{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
-
 ## Introduction
 
-Tainted characters are alternate, twisted versions of their regular variants that are unlocked by finding them inside the Home floor's secret closet while playing as said regular variant. This article will cover setting up this unlock method for your own custom tainted character.
+Tainted characters are alternate, twisted versions of their regular variants that are unlocked by finding them inside the Home floor's secret closet while playing as their regular variant. This article will cover setting up this unlock method for your own custommkdo tainted character.
 
 <p align="center">
   <img src="../../assets/tainted_unlock/closet.png" alt="Home Closet" />
@@ -30,11 +28,15 @@ For this tutorial, you will need:
 2. [A tainted variant of the character](../crash_course/character.md#creating-a-tainted-character).
 3. Save data to to remember the state of the unlock.
 
-A `boolean` value should be saved to remember the state of the unlock, for whether the tainted character is unlocked or not. :modding-repentogon: With REPENTOGON, you can create an [achievement](../repentogon/achievements.md) and attach it to your tainted character directily in the [players.xml](https://repentogon.com/xml/players.html) file. Without REPENTOGON, you will need to learn how to manually handle [save data](../concepts/saving_data.md).
+A `boolean` value should be saved to remember the state of the unlock, for whether the tainted character is unlocked or not. With :modding-repentogon: REPENTOGON, you can create an [achievement](../repentogon/achievements.md) and attach it to your tainted character directily in the [players.xml](https://repentogon.com/xml/players.html) file. Without REPENTOGON, you will need to learn how to manually handle [save data](../concepts/saving_data.md).
 
 ## Locking access to the character
 
-Before the tainted character can be unlocked, it must be locked and unable to be played. :modding-repentogon: As mentioned previously, REPENTOGON makes this process simple by allowing you to attach an achievement to the character, which will stop your character from being selected on the character selection menu. Without it, there are no capabilities to lock the character inside the main menu. Instead, the character will need to be changed to a different character when being initialized.
+Before the tainted character can be unlocked, it must be locked and unable to be played.
+
+:modding-repentogon: As mentioned previously, REPENTOGON makes this process simple by allowing you to attach an achievement to the character, which will stop your character from being selected on the character selection menu.
+
+Without REPENTOGON, there are no capabilities to lock the character inside the main menu. Instead, the character will need to be changed to a different character when being initialized.
 
 [EntityPlayer:ChangePlayerType](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#changeplayertype) will be utilized in order to change from your tainted character to your regular character. Using this function within [MC_POST_PLAYER_INIT](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_player_init) right as the player spawns will also grant the character any items that they may have on them as defined in their `players.xml` file. Depending on how your character is setup, you may need to make some additional adjustments to ensure this alternate way of starting as your regular character isn't any different from starting as them from the character selection menu.
 
@@ -83,23 +85,27 @@ end
 ```Lua
 --This is the achievement defined in achievements.xml and attached to your tainted character in players.xml
 local TAINTED_ACHIEVEMENT = Isaac.GetAchievementIdByName("Tainted MyChar")
-local persistGameData = Isaac.GetPersistentGameData()
 
 local function isFirstPlayerTaintedLocked()
+	local persistGameData = Isaac.GetPersistentGameData()
 	local player = Isaac.GetPlayer()
 	local playerType = player:GetPlayerType()
 	return playerType == MY_CHAR and not persistGameData:Unlocked(TAINTED_ACHIEVEMENT)
 end
 ```
 
-When entering the closet in Home, it will normally have the tainted character body as part of its room layout, but the game then morphs it into either [Inner Child](https://bindingofisaacrebirth.wiki.gg/wiki/Inner_Child) if unlocked, or a shopkeeper if not. The callback [MC_PRE_ROOM_ENTITY_SPAWN](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_pre_room_entity_spawn) will trigger when attempting to spawn entities as part of the room layout. You can also override it, which will stop the game from proceeding with any morphs/replacements that would happen otherwise. In this case, Inner Child or the shopkeeper.
+When entering the closet in Home, the tainted character's body is spawned as part of its room layout if not unlocked. If unlocked, the game will morph it into either [Inner Child](https://bindingofisaacrebirth.wiki.gg/wiki/Inner_Child) if that item is unlocked, or a Shopkeeper if not.
 
-For the player body, it is internally a slot machine (`EntityType.ENTITY_SLOT`) with a variant of `14`. :modding-repentogon: With REPENTOGON, there is a [SlotVariant](https://repentogon.com/enums/SlotVariant.html) enum with `14` being assigned to `SlotVariant.HOME_CLOSET_PLAYER`. Inside `MC_PRE_ROOM_ENTITY_SPAWN`, check the following:
+The callback [MC_PRE_ROOM_ENTITY_SPAWN](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_pre_room_entity_spawn) will trigger when attempting to spawn entities as part of the room layout. Choosing to override it will stop the game from proceeding with any morphs/replacements that would happen otherwise, such as the Inner Child or Shopkeeper.
 
-1. You're on the Home floor
-2. You're in the closet room
-3. The entity attempting to be spawned is a "home closet player" slot
-4. Our `isFirstPlayerTaintedLocked` check from earlier
+For the player body, it is internally a slot machine (`EntityType.ENTITY_SLOT`) with a variant of `14`. :modding-repentogon: With REPENTOGON, there is a [SlotVariant](https://repentogon.com/enums/SlotVariant.html) enum with `14` being assigned to `SlotVariant.HOME_CLOSET_PLAYER`.
+
+Inside `MC_PRE_ROOM_ENTITY_SPAWN`, check the following:
+
+1. You're on the Home floor.
+2. You're in the closet room.
+3. The entity attempting to be spawned is a "home closet player" slot.
+4. Our `isFirstPlayerTaintedLocked` check from earlier.
 
 After going through these checks, you can return the exact same entity type, variant, and subtype that was passed by the callback into a table so that the game doesn't attempt to morph it into anything else.
 
@@ -193,7 +199,7 @@ When the player touches the player body, it will start playing the "PayPrize" an
 
 ### Non-REPENTOGON method
 
-The same method of finding the player body last time will be used here once more. This time, [MC_POST_UPDATE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_update) is used as the animation must be constantly checked for when it finishes. If you wish to show an achievement paper, that must be handled manually and is unable to be covered in this tutorial. Otherwise, you can use something such as [HUD:ShowItemText](https://wofsauge.github.io/IsaacDocs/rep/HUD.html#showitemtext) to communicate to the player that the character was unlocked.
+The same method of finding the player body last time will be used here once more. This time [MC_POST_UPDATE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_update) is used, as the animation must be constantly checked for when it finishes. If you wish to show an achievement paper, that must be handled manually and won't be covered in this tutorial. Otherwise, you can use something such as [HUD:ShowItemText](https://wofsauge.github.io/IsaacDocs/rep/HUD.html#showitemtext) to communicate to the player that the character was unlocked.
 
 ```Lua
 function mod:UnlockTaintedOnPayPrize()
@@ -214,13 +220,14 @@ mod:AddCallback(ModCallbacks.MC_POST_UPDATE, mod.UnlockTaintedOnPayPrize)
 
 ### :modding-repentogon: REPENTOGON method
 
-REPENTOGON's [MC_POST_SLOT_UPDATE](https://repentogon.com/enums/ModCallbacks.html#mc_post_slot_update) will pass slot machines being updated, skipping the need for Isaac.FIndByType from the non-REPENTOGON method. You can unlock your registered achievement when the PayPrize animation finishes.
+REPENTOGON's [MC_POST_SLOT_UPDATE](https://repentogon.com/enums/ModCallbacks.html#mc_post_slot_update) will pass slot machines being updated, skipping the need for Isaac.FindByType from the non-REPENTOGON method. You can unlock your registered achievement when the PayPrize animation finishes.
 
 ```Lua
 function mod:UnlockTaintedOnPayPrize(slot)
 	if isFirstPlayerTaintedLocked() then
 		local sprite = slot:GetSprite()
 		if sprite:IsFinished("PayPrize") then
+			local persistGameData = Isaac.GetPersistentGameData()
 			persistGameData:TryUnlock(TAINTED_ACHIEVEMENT)
 		end
 	end
@@ -313,9 +320,9 @@ local MY_CHAR = Isaac.GetPlayerTypeByName("My Character", false)
 local TAINTED_ACHIEVEMENT = Isaac.GetAchievementIdByName("Tainted MyChar")
 local CLOSET_ROOM_INDEX = 94
 local game = Game()
-local persistGameData = Isaac.GetPersistentGameData()
 
 local function isFirstPlayerTaintedLocked()
+	local persistGameData = Isaac.GetPersistentGameData()
 	local player = Isaac.GetPlayer()
 	local playerType = player:GetPlayerType()
 	return playerType == MY_CHAR and not persistGameData:Unlocked(TAINTED_ACHIEVEMENT)
@@ -359,6 +366,7 @@ function mod:UnlockTaintedOnPayPrize(slot)
 	if isFirstPlayerTaintedLocked() then
 		local sprite = slot:GetSprite()
 		if sprite:IsFinished("PayPrize") then
+			local persistGameData = Isaac.GetPersistentGameData()
 			persistGameData:TryUnlock(TAINTED_ACHIEVEMENT)
 		end
 	end
