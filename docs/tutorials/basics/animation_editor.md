@@ -296,9 +296,19 @@ The tabs at the top of the editor that serve various miscellaneous purposes.
 ???+ bug "2x Playback Speed"
 	The generated gif plays the animation at roughly double the original speed. To get around this, you can change the "Fps" located at the bottom of the `Timeline` window.
 
+### Playback
+
+- Always Loop: Toggle whether or not an animation loops or not regardless of the "Loop" toggle in the [Timeline](animation_editor.md#timeline). When disabled, animations with "Loop" disabled will stop playing at the end of their animation.
+
+### Window
+
+The first eight options available in this tab represent each window described in this tutorial. If they are ever closed out with the "X" button on their window, clicking on the respective option inside this tab will restore the window at its original location in the editor.
+
+- Allow Undock: Allows windows to be dragged outside of the editor and become their own individual window.
+
 ### Settings
 
--  Associate .anm2 files with Editor: Automatically associates the Isaac Animation Editor with .anm2 files on your system, such that double-clicking on them will automatically open the editor with the selected ANM2 loaded onto it.
+- Associate .anm2 files with Editor: Automatically associates the Isaac Animation Editor with .anm2 files on your system, such that double-clicking on them will automatically open the editor with the selected ANM2 loaded onto it.
 - Remove .anm2 file association: Removes the aforemention association from your system.
 
 ### Help
