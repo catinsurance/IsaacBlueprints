@@ -131,6 +131,7 @@ Inside your costumes folder (usually `resources/gfx/characters/`), you can creat
 - lilith
 - keeper
 - apollyon
+- bluebaby
 - forgotten
 - forgottensoul
 - lilithb
