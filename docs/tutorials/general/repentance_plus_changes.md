@@ -178,7 +178,7 @@ The following new enums have been added:
 The following enums have been updated with new entries:
 
 - [BackdropType](https://wofsauge.github.io/IsaacDocs/rep/enums/BackdropType.html): New additions are `DEATHMATCH` and `LIL_PORTAL`. `NUM_BACKDROPS` has been updated to reflect this.
-- [ButtonAction](https://wofsauge.github.io/IsaacDocs/rep/enums/ButtonAction.html): Many pre-existing enumerations have been switched around with new values. New additions are `ACTION_JOINMULTIPLAYER`, `ACTION_MENUX`, and `ACTION_EMOTES`.
+- [ButtonAction](https://wofsauge.github.io/IsaacDocs/rep/enums/ButtonAction.html): Many pre-existing enumerations have been switched around with new values. New additions are `ACTION_MENULB`, `ACTION_MENURB`, `ACTION_MENUEX`, and `ACTION_EMOTES`.
 - [EffectVariant](https://wofsauge.github.io/IsaacDocs/rep/enums/EffectVariant.html): `BULLET_POOF_STATIC` and `UMBILICAL_CORD_HELPER` were added, but were existing Repentance entities previously without enumerations. New additions are `MEGA_BEAN_EXPLOSION`, `SPAWN_PENTAGRAM`, and `PLAYER_CREEP_YELLOW`.
 - [GameStateFlag](https://wofsauge.github.io/IsaacDocs/rep/enums/GameStateFlag.html): New additions are `STATE_MEGA_SATAN_DOOR_OPENED`, `STATE_URIEL_KILLED`, `STATE_GABRIEL_KILLED`, and `STATE_MOTHER_HEART_DOOR_OPENED`. `NUM_STATE_FLAGS` has been updated to reflect this.
 - [GridRooms](https://wofsauge.github.io/IsaacDocs/rep/enums/GridRooms.html): New additions are `ROOM_DEATHMATCH_IDX` and `ROOM_LIL_PORTAL_IDX`. `NUM_OFF_GRID_ROOMS` has been updated to reflect this.
