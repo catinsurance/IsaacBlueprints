@@ -1,7 +1,7 @@
 ---
 article: Players and entities taking damage
 authors: benevolusgoat
-blurb: Learn how to use the "MC_ENTITY_TAKE_DMG" callback to respond to player or entity damage.
+blurb: Learn how to use the MC_ENTITY_TAKE_DMG callback to respond to player or entity damage.
 comments: true
 tags:
     - Tutorial
