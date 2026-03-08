@@ -1,15 +1,13 @@
 ---
 article: Modding changes in Repentance+
-authors: benevolus
-blurb: Learn all the new additions and changes to the modding api in Repentance+
+authors: benevolusgoat
+blurb: Learn all the new additions and changes to the modding api in Repentance+.
 comments: true
 tags:
     - Intermediate
     - Repentance+
     - Lua
 ---
-
-{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 
 With the addition of the Repentance+ DLC, there have been a few updates to the modding API compared to Repentance. This article will list all of the additions and changes that have been made in the process.
 
@@ -42,7 +40,7 @@ Below is an example render of each size of font, first rendered with their regul
 
 ![Team Meat fonts with EX versions](../assets/repentance_plus_changes/teammeatex.png)
 
-- A new override to the [Font:DrawString](https://wofsauge.github.io/IsaacDocs/rep/Font.html#drawstring) function has been added that allows you to pass different sizes similarly to [Font:DrawStringScaled](https://wofsauge.github.io/IsaacDocs/rep/Font.html#drawstringscaled) as well as a brand new game object named [FontRenderSettings](https://wofsauge.github.io/IsaacDocs/rep/FontRenderSettings.html), allowing more precise control over how the font is rendered.
+- A new override to the [Font:DrawString](https://wofsauge.github.io/IsaacDocs/rep/Font.html#drawstring) function has been added that allows you to pass different sizes similarly to [Font:DrawStringScaled](https://wofsauge.github.io/IsaacDocs/rep/Font.html#drawstringscaled), as well as a brand new game object named [FontRenderSettings](https://wofsauge.github.io/IsaacDocs/rep/FontRenderSettings.html), allowing more precise control over how the font is rendered.
 
 Below are 5 different examples of text being rendered in different locations under different font settings:
 
@@ -112,9 +110,9 @@ Demonstration using `Game():Fadeout(0.025, 2, KColor(0.5, 0.5, 0.5, 1))`:
 - [GridEntity:DestroyWithSource](https://wofsauge.github.io/IsaacDocs/rep/GridEntity.html#destroywithsource) is identical to [GridEntity:Destroy](https://wofsauge.github.io/IsaacDocs/rep/GridEntity.html#destroy), but you can define an [EntityRef](https://wofsauge.github.io/IsaacDocs/rep/EntityRef.html) as a source.
 - [GridEntity:HurtWithSource](https://wofsauge.github.io/IsaacDocs/rep/GridEntity.html#hurtwithsource) is identical to [GridEntity:Hurt](https://wofsauge.github.io/IsaacDocs/rep/GridEntity.html#hurt), but you can define an [EntityRef](https://wofsauge.github.io/IsaacDocs/rep/EntityRef.html) as a source.
 
-## HUD
+## [HUD](https://wofsauge.github.io/IsaacDocs/rep/HUD.html)
 
-A new argument has been added to both overrides of [HUD:ShowItemText](https://wofsauge.github.io/IsaacDocs/rep/HUD.html?h=hud#showitemtext): `ClearStack`. In Repentance+, HUD item text now stacks, showing one HUD text below the last one if it's still on screen. The argument is `true` by default, which will resort to the behaviour of Repentance HUD text of removing all existing HUD text on screen before displaying the new one.
+A new argument has been added to both overrides of [HUD:ShowItemText](https://wofsauge.github.io/IsaacDocs/rep/HUD.html?h=hud#showitemtext): `ClearStack`. In Repentance+, item text now stacks, showing one text below the last one if it's still on screen. The argument is `true` by default, which will resort to the behaviour of Repentance text of removing all existing text on screen before displaying the new one.
 
 Example:
 
