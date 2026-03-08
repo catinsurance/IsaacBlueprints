@@ -12,14 +12,15 @@ tags:
     - Lua
 ---
 
-{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 {% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
 
-Pocket items are consumable one-time-use items that Isaac can collect and store in his pocket item slot on the bottom right of the HUD. This tutorial covers the essentials for how to create your own pocket item and making it into a card.
+Pocket items are consumable one-time use items that Isaac can collect and store in his pocket item slot on the bottom right of the HUD. This tutorial covers the essentials for how to create your own pocket item and making it into a card.
 
 ## Introduction
 
-When boiling pocket items down to their base essentials and how they are coded within the game, there are only truly two categories of pocket items: pills and cards. "Cards" make up everything that isn't a pill, notably anything that visually looks like a card, runes, and miscellaneous objects. This tutorial will cover the essentials to creating a card, which can be applied to runes and objects as well. If you wish to create a pill, see the [next article](pocket_item_pills.md) in the crash course.
+When boiling pocket items down to their base essentials and how they are coded within the game, there are only truly two categories of pocket items: pills and cards. "Cards" make up anything that isn't a pill, such as anything that visually looks like a card, runes, and miscellaneous objects.
+
+This tutorial will cover the essentials to creating a card, which can be applied to runes and objects as well. If you wish to create a pill, see the [next article](pocket_item_pills.md) in the crash course.
 
 ## pocketitems.xml
 
@@ -38,7 +39,7 @@ To start, create a [pocketitems.xml](https://wofsauge.github.io/IsaacDocs/rep/xm
     |name|string|The display name of the card.|
     |description|string|The description of the card as it appears when collected by Isaac or when holding the card and holding the "TAB" key.|
     |hud|string|Used as the identifier for your card. Also used for the card's front animation in `content/gfx/ui_cardfronts.anm2`.|
-    |type|string|Possible values: [`tarot`, `tarot_reverse`, `suit`, `special`, `rune`, `object`]. All types other than `object` and `rune` can be mimicked with [Blank Card](https://bindingofisaacrebirth.wiki.gg/wiki/Blank_Card), while cards of type `rune` can be mimicked with [Clear Rune](https://bindingofisaacrebirth.wiki.gg/wiki/Clear_Rune). The type also affects the spawn chance of the card which is handled by the game automatically. More information can be found on the Official Isaac Wiki [here](https://bindingofisaacrebirth.wiki.gg/wiki/Cards_and_Runes#Probabilities).|
+    |type|string|Possible values: [`tarot`, `tarot_reverse`, `suit`, `special`, `rune`, `object`]. All types other than `object` and `rune` can be mimicked with [Blank Card](https://bindingofisaacrebirth.wiki.gg/wiki/Blank_Card), while cards of type `rune` can be mimicked with [Clear Rune](https://bindingofisaacrebirth.wiki.gg/wiki/Clear_Rune). The type also affects the spawn chance of the card which is handled by the game automatically. More information can be found on the official Isaac wiki [here](https://bindingofisaacrebirth.wiki.gg/wiki/Cards_and_Runes#Probabilities).|
     |mimiccharge|int|The amount of charge the card should take to mimic with [Blank Card](https://bindingofisaacrebirth.wiki.gg/wiki/Blank_Card) / [Clear Rune](https://bindingofisaacrebirth.wiki.gg/wiki/Clear_Rune).|
     |pickup|int|The entities2.xml subtype corresponding to this card's pickup.|
     |announcer|int|The sound ID to play when the card is used.|
@@ -53,7 +54,7 @@ To start, create a [pocketitems.xml](https://wofsauge.github.io/IsaacDocs/rep/xm
 	|:--|:--|:--|
     |hidden|string|Prevents the card from being randomly chosen by the game or when using the [ItemPool:GetCard](https://wofsauge.github.io/IsaacDocs/rep/ItemPool.html#getcard) and [ItemPool:GetCardEx](https://repentogon.com/ItemPool.html#getcardex) functions. Default = `false`|
     |weight|string|Relative "likelihood" for this card to be chosen over others of the same card type pool. Does not alter the chance for the specific card type pool to be chosen. Default = `1.0`|
-    |achievement|int or string|Ties the card to be unlocked by an achievement. For modded ones, use the provided achievement name xml attribute(define one if it doesn't have one already).|
+    |achievement|int or string|Ties the card to be unlocked by an achievement. For modded ones, use the provided achievement name xml attribute (define one if it doesn't have one already).|
 
 Below is an example of a basic card entry:
 
@@ -65,7 +66,7 @@ Below is an example of a basic card entry:
 
 ### ui_cardfronts.anm2
 
-Inside your mod's `content/gfx/` folder create an anm2 file named `ui_cardfronts.anm2`. Inside this anm2 file will contain the front-facing UI sprite for every single one of your pocket items that appears when Isaac holds them in their primary pocket slot.
+Inside your mod's `content/gfx/` folder, create an anm2 file named `ui_cardfronts.anm2`. Inside this anm2 file will contain the front-facing UI sprite for every single one of your pocket items that appears when Isaac holds them in their primary pocket slot.
 
 ![ui_cardfronts.anm2](../assets/pocket_items_cards/ui_cardfronts.png)
 
@@ -109,9 +110,9 @@ Below is an example of a custom card entity. Detailed information on creating en
 
 ### Anm2 file
 
-The animation file of a pocket item must have the "HUDSmall" animation alongside general pickups animations "Collect", "Appear", "Idle", and "Sparkle". Vanilla card anm2 files have the "HUD" animation, but is unused for modded card in favor of the [ui_cardfronts.anm2](pocket_item_cards.md#ui_cardfrontsanm2) file.
+The animation file of a pocket item must have the "HUDSmall" animation alongside general pickups animations "Collect", "Appear", "Idle", and "Sparkle". Vanilla card anm2 files have the "HUD" animation, but is unused for modded cards in favor of the [ui_cardfronts.anm2](pocket_item_cards.md#ui_cardfrontsanm2) file.
 
-It is recommended to copy an existing pocket item anm2 file and edit it to use your own spritesheets. You can grab `005.301_tarot card.anm2` for a card or `005.303_rune1.anm2` for a rune, for example, from the game's [extracted resources](creating_a_mod.md#extracting-the-games-resources).
+It is recommended to copy an existing pocket item anm2 file and edit it to use your own spritesheets. You can grab `005.301_tarot card.anm2` for a card or `005.303_rune1.anm2` for a rune from the game's [extracted resources](creating_a_mod.md#extracting-the-games-resources).
 
 ## Lua code
 
@@ -172,7 +173,7 @@ The following code follows the steps described below:
 
 1. [Creating a sound](sound_effects.md).
 2. Checking the current `UseFlag` in place. We do not want to have it activate twice for Car Battery (`UseFlag.USE_CARBATTERY`), and to not activate at all if it disables use of the announcer (`UseFlag.USE_NOANNOUNCER`).
-3. Checking the current [Options.AnnouncerVoiceMode](https://wofsauge.github.io/IsaacDocs/rep/Options.html#announcervoicemode) setting (:modding-repentogon: REPENTOGON includes an [AnnouncerVoiceMode](https://repentogon.com/enums/AnnouncerVoiceMode.html) enum for convenience). For the "sometimes" option, the `math.random` function, included naturally with the Lua library, can be used as opposed to an [RNG](https://wofsauge.github.io/IsaacDocs/rep/RNG.html) object as it is purely aesthetic and has no effect on gameplay.
+3. Checking the current [Options.AnnouncerVoiceMode](https://wofsauge.github.io/IsaacDocs/rep/Options.html#announcervoicemode) setting (:modding-repentogon: REPENTOGON includes an [AnnouncerVoiceMode](https://repentogon.com/enums/AnnouncerVoiceMode.html) enum for convenience). For the "sometimes" option, the `math.random` function, included naturally with the Lua library, could be used as opposed to an [RNG](https://wofsauge.github.io/IsaacDocs/rep/RNG.html) object as it is purely aesthetic and has no effect on gameplay.
 4. Creating a "scheduler" system for the announcer delay. This can be ignored if not applicable to your card.
 
 ```Lua

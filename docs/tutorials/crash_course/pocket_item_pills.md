@@ -1,7 +1,7 @@
 ---
 article: Pocket Items - Pill Effects
 authors: benevolusgoat
-blurb: Learn how to create cusom pill effects.
+blurb: Learn how to create custom pill effects.
 comments: true
 tags:
     - Tutorial
@@ -12,7 +12,6 @@ tags:
     - Lua
 ---
 
-{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 {% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
 
 ## Introduction
@@ -32,14 +31,14 @@ Pill effects are created in the same way as cards; through the [pocketitems.xml]
 	| Variable-Name | Possible Values | Description |
 	|:--|:--|:--|
 	|name|string|Name of the pill effect.|
-	|description|string|Description of the pill effect (optional, used in I found pills).|
+	|description|string|Description of the pill effect (optional, used in "I found pills").|
 	|class|string|Possible values: [`3-`, `2-`, `1-`, `0`, `1+`, `2+`, `3+`]. Number indicates a Joke (`0`), Minor (`1`), Medium (`2`), or Major (`3`) effect. A `+` or `-` can be appended to note whether the pill is positive or negative, or excluded to denote neutral pills. Default = `0`.|
 	|mimiccharge|int|Amount of charge the pill should take to mimic with [Placebo](https://bindingofisaacrebirth.wiki.gg/wiki/Placebo). Default = `4`|
 	|announcer|int|Sound ID to play when the pill is used.|
 	|announcer2|int|Sound ID to play when the pill is used as a horse pill.|
 	|announcerdelay|int|Delay in frames between pill use and the sound provided being played.|
 	|achievement|int|Ties the pill effect to a vanilla achievement.|
-	|greedmode|bool|Is the pocketitem available in greedmode. Default = `true`.|
+	|greedmode|bool|Is the pill available in greedmode. Default = `true`.|
 
 :modding-repentogon: REPENTOGON expands `pocketitems.xml` with the following variables for pill effects:
 
@@ -58,7 +57,7 @@ Below is an example of a basic pill effect entry:
 
 ## Lua code
 
-With the pill effect created, only a short amount of Lua code is required to give it an effect. Create a `main.lua` file. Register your mod, use [Isaac.GetPillEffectByName](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getpilleffectbyname) to fetch the ID of your pill, and create a single function attached to the [MC_USE_PILL](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_use_pill) callback.
+With the pill effect created, only a small amount of Lua code is required to give it an effect. Create a `main.lua` file, register your mod, use [Isaac.GetPillEffectByName](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getpilleffectbyname) to fetch the ID of your pill, and create a single function attached to the [MC_USE_PILL](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_use_pill) callback.
 
 The following code will have the pill spawn an enemy fly:
 
@@ -198,7 +197,9 @@ mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.TrackPillColor)
 
 ### Positive/Negative Effect Counterparts
 
-With items like [PHD](https://bindingofisaacrebirth.wiki.gg/wiki/PHD) and [False PHD](https://bindingofisaacrebirth.wiki.gg/wiki/False_PHD), pill effects may have an assigned counterpart and be forced to turn into said counterparts. For example, False PHD will turn a Tears Up Pill into a Tears Down Pill, while PHD will do the opposite. To achieve this with custom pills, [MC_GET_PILL_EFFECT](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_get_pill_effect) can be used. The player will need to be checked if they meet the requirements for positive or negative pills. REPENTOGON adds a third argument to the callback that passes the player holding the pill effect. Without REPENTOGON, the callback does not pass the player, meaning the only option is to check **all players** to affect what to change the pill effect into.
+With items like [PHD](https://bindingofisaacrebirth.wiki.gg/wiki/PHD) and [False PHD](https://bindingofisaacrebirth.wiki.gg/wiki/False_PHD), pill effects may have an assigned counterpart and be forced to turn into said counterparts. For example, False PHD will turn a Tears Up Pill into a Tears Down Pill, while PHD will do the opposite.
+
+To achieve this with custom pills, [MC_GET_PILL_EFFECT](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_get_pill_effect) can be used. The player will need to be checked if they meet the requirements for positive or negative pills. REPENTOGON adds a third argument to the callback that passes the player holding the pill effect. Without REPENTOGON, the callback does not pass the player, meaning the only option is to check **all players** to affect what to change the pill effect into.
 
 For this example, two new pill effects will be created: `Balls of Obsidian` and `Balls of Paper`, which grant and remove black hearts respectively using [EntityPlayer:AddBlackHearts](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#addblackhearts). Define the new pill effects and new callbacks to give them functionality:
 
@@ -233,7 +234,7 @@ mod:AddCallback(ModCallbacks.MC_USE_PILL, mod.OnPillUse, BALLS_OF_PAPER)
 
 Next, setup a function that will return if the player has positive or negative pill effects forced.
 
-The Non-REPENTOGON method involves looping through all players with [Isaac.FindByType](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#findbytype):
+The non-REPENTOGON method involves looping through all players with [Isaac.FindByType](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#findbytype):
 
 ```Lua
 --Define an enum for readability
