@@ -115,7 +115,7 @@ Without REPENTOGON, special checks will need to be implemeneted. The following c
 2. The current floor is the very first floor. Can check [Level:GetStage](https://wofsauge.github.io/IsaacDocs/rep/Level.html#getstage) against [LevelStage](https://wofsauge.github.io/IsaacDocs/rep/enums/LevelStage.html).
 3. The player is inside the starting room. Can check  [Level:GetCurrentRoomIndex](https://wofsauge.github.io/IsaacDocs/rep/Level.html#getcurrentroomindex) against [Level:GetStartingRoomIndex](https://wofsauge.github.io/IsaacDocs/rep/Level.html#getstartingroomindex).
 
-It is also important to note that some things may need to be reapplied when using Genesis, such as re-adding items that were removed from the player. This can be a separate check to inact different behavior.
+It is also important to note that some things may need to be reapplied when using Genesis, such as re-adding items that were removed from the player. This can be a separate check to enact different behavior.
 
 This snippet of code will transform the current character into a new custom character "[Gabriel](character.md)" with a new item "[Damage Potion](passive_item.md)".
 ```Lua
