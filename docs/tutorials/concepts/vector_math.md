@@ -117,7 +117,7 @@ local halfWay = lerp(0, 2, 0.5)
 print(halfWay) -- 1
 ```
 
-The above code stores the linear interpolation formula within the `lerp()` function, which is then called upon to caluclate a result. This formula takes the starting number `a`, the ending number `b`, and a target percentage between the two numbers. Remember that percentages are represented with a decimal multiplied by 100, so 0.5 is the same as 50%. 50% of the way from 0 to 2 is 1, and that's what was returned by the function.
+The above code stores the linear interpolation formula within the `lerp()` function, which is then called upon to calculate a result. This formula takes the starting number `a`, the ending number `b`, and a target percentage between the two numbers. Remember that percentages are represented with a decimal multiplied by 100, so 0.5 is the same as 50%. 50% of the way from 0 to 2 is 1, and that's what was returned by the function.
 
 ![Number line from 0 to 2](../assets/vector_math/number_line.png)
 

@@ -37,7 +37,7 @@ end
 
 ## Example
 
-Now put it all together. **The following is technically a "fire rate" up, since a "tears up" follows the soft cap of 5 (depending on the character you're playing).**
+Now the two functions can be put together to change the tears stat. **The following is technically a "fire rate" up, since a "tears up" follows the soft cap of 5 (depending on the character you're playing).**
 
 ```lua
 local mod = RegisterMod("My Mod", 1)

@@ -72,7 +72,7 @@ mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, function()
 end)
 ```
 
-In the above example, it's checked to see if the mod has save data when a run has started. If it does, the JSON string is **deserialized**. That is your save data. To "deserialize" is to convert data from a "serialized" format (such as a `string`) back into a data structure that you can use (in this case, a table). `json.decode` takes a string and returns the decoded data, which in this case is a table with a few values in it.
+In the above example, it's first checked to see if the mod has save data when a run has started. If it does, the JSON string is **deserialized**. That is your save data. To "deserialize" is to convert data from a "serialized" format (such as a `string`) back into a data structure that you can use (in this case, a table). `json.decode` takes a string and returns the decoded data, which in this case is a table with a few values in it.
 
 If there isn't any save data for the mod, create a table and **serialize** it. To **serialize** is to convert a data structure like the table here into a "serialized" format, such as a `string`. This table can have anything in it, ***but there are rules that must be followed as to not break your save data.***
 

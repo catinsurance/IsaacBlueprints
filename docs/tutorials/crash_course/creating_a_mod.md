@@ -56,7 +56,7 @@ First, find where the D6's sprite is located in the game's file structure. It ca
 Now mimic this same file structure within our mod. Go back to your mod's folder and create a folder named `resources`. Within this folder, create a folder name `gfx`, then within that a folder named `items`, then `collectibles`, then finally place the sprite in there with the exact same name as the sprite you're replacing (in this case, `collectibles_105_dice.png`). **Keep in mind that this is cAsE-sEnSiTiVe!**
 
 ???+ warning "Warning"
-    When replacing images, make sure your image is encoded in 32-bit, and is a PNG. [Aseprite](https://www.aseprite.org/) handles this by default. Otherwise, you must find out how to configure this in the art progarm of your choice.
+    When replacing images, make sure your image is a PNG encoded in 32-bit. [Aseprite](https://www.aseprite.org/) handles this by default. Otherwise, you must find out how to configure this in your art program of choice.
 
 ![The file path you place your sprite in](../assets/creating_a_mod/sprite_replacement.gif)
 
