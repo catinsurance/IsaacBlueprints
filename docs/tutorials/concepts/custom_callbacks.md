@@ -13,7 +13,7 @@ tags:
 
 ## Introduction
 
-Isaac's modding API has a [callback](https://en.wikipedia.org/wiki/Callback_(computer_programming)) system meant for mods. A function can be a assigned to a particular callback ID, which will then called upon later when that callback triggers. For example, the very first callback ID is [MC_NPC_UPDATE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_npc_update). Any functions assigned to it will be run for every "NPC" entity in a room, every game update, so 30 frames a second.
+Isaac's modding API has a [callback](https://en.wikipedia.org/wiki/Callback_(computer_programming)) system meant for mods. A function can be a assigned to a particular callback ID, which will then called upon later when that callback triggers. For example, the very first callback ID is 1, which under the ModCallbacks enumeration is assigned to [MC_NPC_UPDATE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_npc_update). Any functions assigned to it will be run for every "NPC" entity in a room, every game update, so 30 frames a second.
 
 This tutorial covers how to create your own custom callbacks using Isaac's own callback system.
 
