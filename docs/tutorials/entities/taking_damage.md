@@ -72,7 +72,7 @@ function mod:OnEntityTakeDmg(ent, amount, flags, source, countdown)
 		--Triggers MC_ENTITY_TAKE_DMG again with the same parameters, but reducing all damage taken to 1, like The Wafer.
 		--Make sure to add the DAMAGE_CLONES flag to the bitfield of flags.
 		player:TakeDamage(1, flags | DamageFlag.DAMAGE_CLONES, source, countdown)
-		--Cancel the original damage, otherwise we'd be stacking damage taken!
+		--Cancel the original damage, otherwise you'll be stacking damage taken!
 		return false
 	end
 end

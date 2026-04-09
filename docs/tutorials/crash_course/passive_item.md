@@ -82,7 +82,7 @@ Below is an example of an `items.xml` file containing a single item named "Damag
 ```
 
 ## Obtaining your item through the debug console
-Your item now exists in the game, but is unobtainable through any legitimate means. You must give yourself the item through the debug console, either by granting it to Isaac directly or spawning a pedestal. We will cover how to do both methods.
+Your item now exists in the game, but is unobtainable through any legitimate means. You must give yourself the item through the debug console, either by granting it to Isaac directly or spawning a pedestal. Both methods will be covered in this tutorial.
 
 ### Non-REPENTOGON
 The debug console is not enabled by default without REPENTOGON.

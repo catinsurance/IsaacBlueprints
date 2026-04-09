@@ -245,7 +245,7 @@ function mod:FamiliarUpdate(familiar)
 		--:Shoot() will already have spawned the tear. Search for the tear with Isaac.FindByType to make modifications to it.
 		--MC_POST_TEAR_INIT isn't reliable as tear effects/damage are overridden afterwards.
 		for _, ent in ipairs(Isaac.FindByType(EntityType.ENTITY_TEAR, TearVariant.BLUE, 0)) do
-			--Check its only from our familiar by checking the Type and Variant of what spawned it.
+			--Check its only from your familiar by checking the Type and Variant of what spawned it.
 			if ent.SpawnerType == EntityType.ENTITY_FAMILIAR
 				and ent.SpawnerVariant == FRIEND_FRANKIE_FAMILIAR
 				and tear.FrameCount == 0 --Check that it just spawned.
