@@ -58,7 +58,7 @@ The editor will not allow you to interact with its windows until you either crea
 
 To create a new anm2, select `File` on the top left of the editor and select `Create new`. The editor will prompt you for where to save the file.
 
-By instead clicking `Open` or simply dragging an ANM2 file into the editor, you can load an existing ANM2 file instead. The remainder of this tutorial will have `001.000_player.anm2` loaded for showcasing all of the editor's features.
+By clicking `Open` or simply dragging an ANM2 file into the editor, you can instead load an existing ANM2 file. The remainder of this tutorial will have `001.000_player.anm2` loaded for showcasing all of the editor's features.
 
 ![Animation editor breakdown](../assets/animation_editor/editor_layout.png)
 
@@ -92,7 +92,7 @@ Preview the currently selected animation.  **All attributes are purely for previ
 </p>
 
 - **Info**: Displays the X and Y coordinates of the mouse cursor relative to the previewer's origin point.
-- **Center** View: Pans the preview such that the origin point aligns with the center of the window.
+- **Center View**: Pans the preview such that the origin point aligns with the center of the window.
 
 ## Spritesheet Editor
 
@@ -324,3 +324,7 @@ The first eight options available in this tab represent each window described in
 <p align="center">
   <img src="../../assets/animation_editor/about_window.png" alt="About window" />
 </p>
+
+## Amn2ed
+
+Whether you already have extensive experience with the Isaac Animation Editor or know you plan on using it often, it would be worth checking out [Anm2ed](https://github.com/ShweetsStuff/anm2ed): A reimplementation of the editor that aims to be much less clunky and much more stable to use. It comes with many additional quality of life features and all the same tools that the official editor does. It does have some slight differences that would require some getting used to, but is an easy recommendation for long-term use.
