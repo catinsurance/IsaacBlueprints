@@ -13,7 +13,6 @@ tags:
 ---
 
 {% include-markdown "hidden/crash_course_toc.md" start="<!-- start -->" end="<!-- end -->" %}
-{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 
 Familiars are small companions Isaac obtains, normally through passive items, that follow and assist Isaac. This tutorial will cover the basics of creating a familiar that can shoot tears.
 
@@ -51,7 +50,9 @@ This `entities2.xml` entry will add a familiar entity, aptly named "Friend Frank
 For the variant, it can be any arbitrary value not taken up by an existing vanilla familiar. Available variants are `131`-`199`, `244`-`899`, and `901`-`4095`. You can also omit the variant entirely to have the game auto-assign an available variant.
 
 ???+ note "Auto-assigning variant"
-	If your familiar variant is automatically assigned by having it omitted from your entry, and your familiar is the first to load before other mods that do the same, it will be assigned a variant of `0` as there is no vanilla familiar with that variant. When the game attempts to spawn an entity with an invalid variant, it will try to spawn it with a variant of `0`. If no entity of that variant exists, the game will crash. Other mods that may attempt to spawn an invalid familiar will spawn your familiar instead of causing a game crash, which may lead to unwanted bug reports, but there is no technical downside to this method.
+	If your familiar variant is automatically assigned by omitting it from your entry, and your familiar is the first to load before other mods that do the same, it will be assigned a variant of `0` as there is no vanilla familiar with that variant. When the game attempts to spawn an entity with an invalid variant, it will try to spawn it with a variant of `0`. If no entity of that variant exists, the game will crash.
+
+	Other mods that may attempt to spawn an invalid familiar will spawn your familiar instead of causing a game crash, which may lead to unwanted bug reports, but there is no technical downside to this method.
 
 ```XML
 <entities anm2root="gfx/" version="5">
@@ -60,7 +61,7 @@ For the variant, it can be any arbitrary value not taken up by an existing vanil
 </entities>
 ```
 
-### familiar-relevant tags
+### Familiar relevant tags
 
 The `tags` variable has several options available that are exclusive to or relevant for familiars.
 
@@ -113,7 +114,7 @@ Checking what familiars should spawn, adding familiars, or removing them is all 
 4. An [ItemConfigItem](https://wofsauge.github.io/IsaacDocs/rep/ItemConfig_Item.html) object for linking an item to the spawned familiar. This is necessary for [Sacrifical Altar](https://bindingofisaacrebirth.wiki.gg/wiki/Sacrificial_Altar) to function properly, but is technically optional.
 5. An integer to spawn a specific `SubType` of familiar. This is optional, and by default spawns familiars with a subtype of `0`.
 
-The familiar variant is already stored earlier in the lua file. For the number of familiars to spawn, this can be any number you'd like, but the most common example is how many copies of the item Isaac has combined with the number of [TemporaryEffects](../general/temporary_effects.md) of the item. The purpose of the latter is for items such as Box of Friends, where it will add a `TemporaryEffect` of your familiar item to spawn a copy of your familiar without needing to own the item.
+The familiar variant is already stored earlier in the lua file. For the number of familiars to spawn, this can be any number you'd like, but the most common example is how many copies of the item Isaac has combined with the number of [TemporaryEffects](../general/temporary_effects.md) of the item. The purpose of the latter is for items such as [Box of Friends](https://bindingofisaacrebirth.wiki.gg/wiki/Box_of_Friends), where it will add a `TemporaryEffect` of your familiar item to spawn a copy of your familiar without needing to own the item.
 
 ???+ bug "CheckFamiliar and RNG"
 	The `RNG` object passed into `CheckFamiliar` is used for the familiar's `InitSeed`, which is often used by modders as a unique identifier for each individual familiar.
@@ -188,7 +189,21 @@ end
 mod:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, mod.FamiliarUpdate, FRIEND_FRANKIE_FAMILIAR)
 ```
 
-Many followers are shooter familiars, which is a follower that fires tears alongside Isaac with varying attributes, such as damage, tear effects, and more. This involves managing shooting the tear, fire delay, synergies, shooting animations, and more, but thankfully there is an extremely simple function that will handle the vast majority of work involved: [EntityFamiliar:Shoot](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html#shoot).
+:modding-repentogon: REPENTOGON also allows you to assign the priority of a familiar through [MC_GET_FOLLOWER_PRIORITY](https://repentogon.com/enums/ModCallbacks.html#mc_get_follower_priority). With [FollowerPriority.SHOOTER](https://repentogon.com/enums/FollowerPriority.html), the familiar is further back in the line, but is in front of any other familiars without an assigned priority. It also affects how the familiar is treated for Lilith and Tainted Lilith's Birthright.
+
+```Lua
+--Don't need to do anything other than return the new priority as it only runs for our familiar.
+function mod:FamilarPriority()
+	return FollowerPriority.SHOOTER
+end
+
+--Callback accepts an optional argument to only run for your familiar variant.
+mod:AddCallback(ModCallbacks.MC_GET_FOLLOWER_PRIORITY, mod.FamiliarPriority, FAMILIAR_VARIANT)
+```
+
+### Basic shooting familiar
+
+The rest of this article will focus on creating a simple familiar like [Brother Bobby](https://bindingofisaacrebirth.wiki.gg/wiki/Brother_Bobby). There is a simple function that will handle the vast majority of work involved: [EntityFamiliar:Shoot()](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html#shoot).
 
 ```Lua
 function mod:FamiliarUpdate(familiar)
@@ -199,13 +214,15 @@ end
 mod:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, mod.FamiliarUpdate, FRIEND_FRANKIE_FAMILIAR)
 ```
 
-This function, when ran on `MC_FAMILIAR_UPDATE`, will make your familiar fire regular tears 1.36 times a second dealing 3.5 damage per shot. It will automatically synergize with shooter familiar modifiers such as Baby-Bender, BFFS!, and Forgotten Lullaby, and firing direction overrides like King Baby and Marked. It will also automatically handle playing the appropriate animations for a shooter familiar. You can view `003.001_brother bobby.anm2` inside the game's [extracted resources](creating_a_mod.md#extracting-the-games-resources) for reference.
+This function, when ran on `MC_FAMILIAR_UPDATE`, will make your familiar fire regular tears 1.36 times a second dealing 3.5 damage per shot. It will automatically synergize with familiar modifiers such as [Baby-Bender](https://bindingofisaacrebirth.wiki.gg/wiki/Baby-Bender), [BFFS!](https://bindingofisaacrebirth.wiki.gg/wiki/BFFS!), and [Forgotten Lullaby](https://bindingofisaacrebirth.wiki.gg/wiki/Forgotten_Lullaby), and firing direction overrides like [King Baby](https://bindingofisaacrebirth.wiki.gg/wiki/King_Baby) and [Marked](https://bindingofisaacrebirth.wiki.gg/wiki/Marked).
 
-If you wish to modify the firing speed and attributes of the tear, there are methods for doing so. Without REPENTOGON, you will need to some manual checks inside `MC_FAMILIAR_UPDATE`. This code will alter the firerate of the familiar so that it fires 1 tear per second, do double the normal damage, and slow enemies.
+It will also automatically play certain animations in your familiar's anm2 file. You can view `003.001_brother bobby.anm2` inside the game's [extracted resources](creating_a_mod.md#extracting-the-games-resources) for reference.
+
+It is possible to modify the firing speed and attributes of the tear. Without REPENTOGON, you will need to some manual checks inside `MC_FAMILIAR_UPDATE`. This code will alter the fire rate of the familiar so that it fires 1 tear per second, does double the normal damage, and slows enemies.
 
 ```Lua
 --Define the desired FireCooldown for the familiar.
---30 is equivalent to 1 second.
+--30 is equivalent to 1 second in an update callback.
 local NEW_COOLDOWN = 30
 --By default, FireCooldown is set to 22 when firing a tear.
 local DEFAULT_COOLDOWN = 22
@@ -250,7 +267,7 @@ end
 mod:AddCallback(ModCallbacks.MC_FAMILIAR_UPDATE, mod.FamiliarUpdate, FRIEND_FRANKIE_FAMILIAR)
 ```
 
-If using :modding-repentogon: REPENTOGON, you can instead use a callback named [MC_POST_FAMILIAR_FIRE_PROJECTILE](https://repentogon.com/enums/ModCallbacks.html#mc_post_familiar_fire_projectile) that triggers when `EntityFamiliar:Shoot` is called and a tear is fired. You can adjust properties of the tear there yourself. Note that modifications to FireCooldown will still need to be done within `MC_FAMILIAR_UPDATE`
+If using :modding-repentogon: REPENTOGON, you can instead use a callback named [MC_POST_FAMILIAR_FIRE_PROJECTILE](https://repentogon.com/enums/ModCallbacks.html#mc_post_familiar_fire_projectile) that triggers when `EntityFamiliar:Shoot` is called and a tear is fired. You can then adjust the properties of the tear. Note that modifications to FireCooldown will still need to be done within `MC_FAMILIAR_UPDATE`.
 
 ```Lua
 --Callback only passes the fired tear
