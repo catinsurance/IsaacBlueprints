@@ -11,25 +11,30 @@ tags:
     - Lua
 ---
 
-{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
-
 ## Introduction
 
-Isaac's modding API has a [callback](https://en.wikipedia.org/wiki/Callback_(computer_programming)) system meant for mods. A function can be a assigned to a particular callback ID, which will then called upon later when that callback triggers. For example, the very first callback ID is [MC_NPC_UPDATE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_npc_update). Any functions assigned to it will be run for every "NPC" entity in a room, every game update, so 30 frames a second. This tutorial covers how to create your own custom callbacks using Isaac's own callback system.
+Isaac's modding API has a [callback](https://en.wikipedia.org/wiki/Callback_(computer_programming)) system meant for mods. A function can be a assigned to a particular callback ID, which will then called upon later when that callback triggers. For example, the very first callback ID is [MC_NPC_UPDATE](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_npc_update). Any functions assigned to it will be run for every "NPC" entity in a room, every game update, so 30 frames a second.
+
+This tutorial covers how to create your own custom callbacks using Isaac's own callback system.
 
 ## Basic callback setup
 
-Instead of numeric IDs for callbacks, any mod can assign a string instead. This will serve as a unique identifier for your callback and will work right out the gate. Name the string something unique so it doesn't incidentally conflict with other mods, preferably prefixed with a name unique to your mod, such as `"EPIPHANY_TEST_CALLBACK"`. Use [ModRef:AddCallback](https://wofsauge.github.io/IsaacDocs/rep/ModReference.html#addcallback) (or `ModRef:AddPriorityCallback`) to add a function to your callback, then [Isaac.RunCallback](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#runcallback) to run your callback, passing as many arguments as desired.
+Instead of numeric IDs for callbacks, any mod can assign a string instead. This will serve as a unique identifier for your callback and will work right out the gate.
+
+Make sure the string is something unique so that it doesn't conflict with other mods. A good way of preventing conflicts is prefixing it with a name unique to your mod, such as `"EPIPHANY_TEST_CALLBACK"`.
+
+Use [ModRef:AddCallback](https://wofsauge.github.io/IsaacDocs/rep/ModReference.html#addcallback) (or `ModRef:AddPriorityCallback`) to add a function to your callback, then [Isaac.RunCallback](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#runcallback) to run your callback, passing as many arguments as desired.
 
 ```Lua
 local mod = RegisterMod("TestMod", 1)
 local MY_CALLBACK = "TESTMOD_MY_CALLBACK"
 
-mod:AddCallback(MY_CALLBACK, function(modRef, arg1, arg2, arg3)
+function mod:TestCallback(arg1, arg2, arg3)
 	print(arg1, arg2, arg3)
-end)
+end
+mod:AddCallback(MY_CALLBACK, mod.TestCallback)
 
-Isaac.RunCallback("hello", "world", 1) --result will be the console printing "hello world 1"
+Isaac.RunCallback(MY_CALLBACK, "hello", "world", 1) -- Result will be the console printing "hello world 1"
 ```
 
 ## Returned values
@@ -54,7 +59,7 @@ print(returnValue) --Will always print "foo", as it was added earlier than the o
 
 ## Optional argument
 
-[Isaac.RunCallbackWithParam](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#runcallbackwithparam) will only run callbacks with a specified argument. This can be any value, but the most common use-case is number, such as an entity type or variant.
+[Isaac.RunCallbackWithParam](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#runcallbackwithparam) will only run callbacks with a specified argument. This can be a value of any type.
 
 ```Lua
 local mod = RegisterMod("TestMod", 1)
@@ -85,7 +90,7 @@ Isaac.RunCallbackWithParam(MY_CALLBACK, EntityType.ENTITY_TEAR) --prints "test1"
 
 ## Mod compatibility
 
-Custom callbacks only require it be added through `Mod:AddCallback` and ran through `Isaac.RunCallback`. Due to this simple setup, it's easy for other mods to add the same string to use your mod's callback. The following example has Mod 1 return a custom value if Mod 2's passes Mod 1's custom character
+Custom callbacks are especially advantageous for allowing other mods to interact with your code. The following example has Mod 1 return a custom value if Mod 2 passes Mod 1's custom character.
 
 Mod 1's main.lua:
 
@@ -121,11 +126,13 @@ mod:AddCallback(ModCallbacks.MC_POST_PLAYER_INIT, mod.GetAFunnyNumber)
 
 ## Custom run behaviour
 
-The default behaviour for all callbacks are breaking after the first value returned, meaning the remaining functions for that callback run will be skipped. To setup different behaviour, you need to handle the behaviour manually via [Isaac.GetCallbacks](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getcallbacks). It will return a table if `Mod:AddCallback` had been used for the desired callback. If not, you can pass `true` as the second argument to `Isaac.GetCallbacks`, which will create a table if missing. The table itself contains further tables with the following variables:
+The default behaviour for all callbacks are breaking after the first value returned, meaning the remaining functions for that callback run will be skipped. To setup different behaviour, you need to handle running the callbacks manually via [Isaac.GetCallbacks](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getcallbacks).
+
+This will return the array the game holds with the information for every callback added with the provided identifier. The returned array contains further tables with the following variables:
 
 ```
 {
-    Mod = <mod table>,
+    Mod = <mod reference>,
     Function = function(mod, callback args),
     Priority = integer (default 0),
     Param = entity id / other param (default -1),
@@ -163,9 +170,7 @@ print(number) --prints "6", as the callbacks did 1 + 2 = 3, then 3 * 2 = 6.
 
 ### Advanced parameters
 
-Manually handling return behaviour also means handling the optional arguments. Check that no optional argument was set, that it matches your expected value (if any), or something completely custom.
-
-The following result will print "real gaming" from the second callback due to its optional arguments matching:
+Manually handling return behaviour also means manually handling the optional arguments. The following result will print "real gaming" from the second callback due to its optional arguments matching:
 
 ```Lua
 local mod = RegisterMod("TestMod", 1)
