@@ -12,7 +12,7 @@ tags:
     - REPENTOGON
 ---
 
-Repentance introduced a new effect named `SPRITE_TRAIL (166)`. This effect is used by the eyeballs shout out by [Maze Roamers](https://bindingofisaacrebirth.wiki.gg/wiki/Bony#Maze_Roamer). This trail can be applied to any entity.
+Repentance introduced a new effect named `SPRITE_TRAIL (166)`. This effect is used by the eyeballs shot by [Maze Roamers](https://bindingofisaacrebirth.wiki.gg/wiki/Bony#Maze_Roamer). This trail can be applied to any entity.
 
 ## Applying the trail
 
