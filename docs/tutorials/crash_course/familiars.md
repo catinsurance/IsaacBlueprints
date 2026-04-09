@@ -165,7 +165,7 @@ Your familiar exists, but at the current moment will do nothing when spawned in.
   <img src="../../assets/familiars/follower_spawn.png" alt="The familiar as seen in-game" />
 </p>
 
-### Creating a shooting follower familiar
+### Creating a follower familiar
 
 This code will automatically make the familiar a "follower" familiar, being inserted into the familiar line and following the player/the familiar in front of them in line.
 
@@ -201,9 +201,7 @@ end
 mod:AddCallback(ModCallbacks.MC_GET_FOLLOWER_PRIORITY, mod.FamiliarPriority, FAMILIAR_VARIANT)
 ```
 
-### Basic shooting familiar
-
-The rest of this article will focus on creating a simple familiar like [Brother Bobby](https://bindingofisaacrebirth.wiki.gg/wiki/Brother_Bobby). There is a simple function that will handle the vast majority of work involved: [EntityFamiliar:Shoot()](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html#shoot).
+The rest of this section will focus on creating a simple familiar like [Brother Bobby](https://bindingofisaacrebirth.wiki.gg/wiki/Brother_Bobby). There is a simple function that will handle the vast majority of work involved: [EntityFamiliar:Shoot()](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html#shoot).
 
 ```Lua
 function mod:FamiliarUpdate(familiar)
@@ -280,18 +278,6 @@ end
 mod:AddCallback(ModCallbacks.MC_POST_FAMILIAR_FIRE_PROJECTILE, mod.FamiliarShoot, FRIEND_FRANKIE_FAMILIAR)
 ```
 
-As a final touch, :modding-repentogon: REPENTOGON also allows you to assign the priority of a familiar through [MC_GET_FOLLOWER_PRIORITY](https://repentogon.com/enums/ModCallbacks.html#mc_get_follower_priority). With [FollowerPriority.SHOOTER](https://repentogon.com/enums/FollowerPriority.html), the familiar is further back in the line, but is in front of any other familiars without an assigned priority. It also affects how the familiar is treated for Lilith and Tainted Lilith's birthright.
-
-```Lua
---Don't need to do anything other than return the new priority as it only runs for our familiar.
-function mod:FamilarPriority()
-	return FollowerPriority.SHOOTER
-end
-
---Callback accepts an optional argument to only run for your familiar variant.
-mod:AddCallback(ModCallbacks.MC_GET_FOLLOWER_PRIORITY, mod.FamiliarPriority, FRIEND_FRANKIE_FAMILIAR)
-```
-
 With that, your follower is complete!
 
 <p align="center">
@@ -300,9 +286,9 @@ With that, your follower is complete!
 
 ### Creating an orbital familiar
 
-An orbital familiar will orbit around the player, circling around them at a set distance. For this orbital, we will create an orbital similarly to Cube of Meat, which will orbit around the player, block projectiles, and deal damage.
+An orbital familiar will orbit around the player, circling around them at a set distance. We will create an orbital similarly to [Cube of Meat](https://bindingofisaacrebirth.wiki.gg/wiki/Cube_of_Meat), which will orbit around the player, block projectiles, and deal damage.
 
-First, handling the basics of an orbital familiar. You will need to choose which layer to add your orbital to, which affects its distance, speed, and will change position based no how many familiars are on the same layer.
+Firstly, you must choose which layer to add your orbital to. This affects its distance from the player, orbiting speed, and its position based on how many familiars are on the same layer.
 
 ???- info "Orbital layer information"
 	???+ note "Undefined layers"
@@ -322,9 +308,9 @@ First, handling the basics of an orbital familiar. You will need to choose which
 	|9|[Lemegeton Wisps](https://bindingofisaacrebirth.wiki.gg/wiki/Lemegeton) (Layer 3)|0.019|X: 64, Y: 50|
 	|10|[Swarm Fly](https://bindingofisaacrebirth.wiki.gg/wiki/The_Swarm)|0.019|X: 40, Y: 36|
 
-Speed determines how fast the orbital travels in its orbit each game tick, as well as the direction. A positive speed indicates counter-clockwise, while a negative speed makes the orbital travel clockwise.
+Speed determines how fast the orbital revolves each game tick, as well as the direction. A negative speed will cause the orbital to move clockwise, with a positive speed moving counter-clockwise.
 
-Distance is determined by a Vector, where X is the farthest left/right position and Y is the highest/lowest point of the orbit. Below is a visualization using Angelic Prism:
+Distance is determined by a Vector, where X is the widest left/right point and Y is the lengthiest up/down point of the orbit. Below is a visualization using Angelic Prism:
 
 <p align="center">
   <img src="../../assets/familiars/orbital_distance.png" alt="Visual representation of orbit distance" />
@@ -369,8 +355,7 @@ Next, contact damage. This is trivial to create, as you just need your [entities
 
 For blocking projectiles, there are different methods depending on usage of REPENTOGON.
 
-With :modding-repentogon: REPENTOGON, create a [customtags](https://repentogon.com/xml/entities.html#customtags) variable and add `familiarblockprojectiles`, like so:
-
+With :modding-repentogon: REPENTOGON, create a [customtags](https://repentogon.com/xml/entities.html#customtags) variable and add `familiarblockprojectiles`.
 ```XML
 <entities anm2root="gfx/" version="5">
     <entity name="Friend Frankie" id="3" variant="508" anm2path="familiar_friend_frankie.anm2"
@@ -400,7 +385,12 @@ With that, your orbital is finished!
 
 ### Creating a delayed familiar
 
-Delayed familiars are familiars that follow the player's exact movements on a specific delay. Adding one is fairly simple: Call [EntityFamiliar:AddToDelayed](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html#addtodelayed) on `MC_FAMILIAR_INIT` and [EntityFamiliar:MoveDelayed](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html#movedelayed) on `MC_FAMILIAR_UPDATE` with the number of frames the movement should be delayed relative to its parent. The first familiar will delay its movements relative to the player's movements, while extra familiars will delay it relative to the last familiar's movements.
+Delayed familiars are familiars that follow the player's exact movements on a specific delay.
+
+Adding one can be done in two steps.
+
+1. Call [EntityFamiliar:AddToDelayed](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html#addtodelayed) on `MC_FAMILIAR_INIT`.
+2. Call [EntityFamiliar:MoveDelayed](https://wofsauge.github.io/IsaacDocs/rep/EntityFamiliar.html#movedelayed) on `MC_FAMILIAR_UPDATE` with the number of game frames the movement should be delayed by relative to its parent. The first familiar will delay its movements relative to the player's movements, while extra familiars will delay it relative to the last familiar's movements.
 
 ```Lua
 local NUM_DELAY_FRAMES = 30
