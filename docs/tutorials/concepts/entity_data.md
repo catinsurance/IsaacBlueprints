@@ -86,7 +86,7 @@ end
 return dataHolder
 ```
 
-As it is just a holder, you may `require` this Lua file so that the data is persistent across the project. Using `include` would make the data local to the file you are including it in. See the ["Additional lua files"](./additional_lua_files.md) article for more information about the differences between the two.
+As it is just a holder, you may `require` this Lua file so that the data is persistent across the project. Using `include` would make the data local to the file you are including it in. See the ["Structuring your mod"](../crash_course/structuring_your_mod.md) article for more information about the differences between the two.
 
 Use an [EntityPtr](https://wofsauge.github.io/IsaacDocs/rep/EntityPtr.html) object to keep track of the entity. Storing the entity directly can cause unexpected behavior, such as the variable pointing to a different entity when the initial one is removed. `EntityPtr` is much safer and also clears its `Ref` property automatically when the entity no longer exists. You can check for if `Ref` is `nil` to see if the entity still exists.
 

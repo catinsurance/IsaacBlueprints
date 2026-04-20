@@ -21,6 +21,7 @@ search:
     - [Cards, Runes, and Objects](./tutorials/crash_course/pocket_item_cards.md)
     - [Pills](./tutorials/crash_course/pocket_item_pills.md)
     - [Challenges](./tutorials/crash_course/challenges.md)
+	- [Structuring your mod](./tutorials/crash_course/structuring_your_mod.md)
 - Basics
     - ./tutorials/basics/*
 - General
