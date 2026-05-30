@@ -64,7 +64,7 @@ For such situations, the API allows triggering stat evaluations at any moment us
     Repentogon adds an optional argument to [AddCacheFlags](https://repentogon.com/EntityPlayer.html#addcacheflags) which will automatically trigger `EvaluateItems` for you.
 
 ## Applying stat modifiers outside of the `MC_EVALUATE_CACHE` callback
-As mentioned before, stats are reset completely when evaluated. This means that stat changes done outside of the `MC_CACHE_EVALUATE` callback may be overwritten at any time. Any conditional stat change should be done by storing the state of that change (e.g. using [`CollectibleEffects`](https://wofsauge.github.io/IsaacDocs/rep/TemporaryEffects.html) or [`GetData`](../concepts/entity_data.md)) and then triggering a stat evaluation to apply it, with the stat modification itself being hooked into an `MC_EVALUATE_CACHE` callback.
+As mentioned before, stats are reset completely when evaluated. This means that stat changes done outside of the `MC_EVALUATE_CACHE` callback may be overwritten at any time. Any conditional stat change should be done by storing the state of that change (e.g. using [`CollectibleEffects`](https://wofsauge.github.io/IsaacDocs/rep/TemporaryEffects.html) or [`GetData`](../concepts/entity_data.md)) and then triggering a stat evaluation to apply it, with the stat modification itself being hooked into a `MC_EVALUATE_CACHE` callback.
 
 ## Advanced stat calculations
 Both [Tears](https://bindingofisaacrebirth.wiki.gg/wiki/Tears#Tear_Delay_Calculation) and [Damage](https://bindingofisaacrebirth.wiki.gg/wiki/Damage#Effective_Damage) use a more elaborate, multi-step formula to calculate their values.
@@ -78,6 +78,7 @@ Unfortunately, the vanilla API only allows interaction with stats after all vani
 Each cache flag is typically associated with a specific variable in the `EntityPlayer` class that's expected to be changed within the `MC_EVALUATE_CACHE` callback. Below is a list of cache flags and their associated player variables:
 
 ???+ info "CacheFlag to Player variable"
+	| CacheFlag | Variable name |
 	|:--|:--|
 	|CACHE_DAMAGE|[EntityPlayer.Damage](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#damage)|
 	|CACHE_FIREDELAY| [EntityPlayer.MaxFireDelay](https://wofsauge.github.io/IsaacDocs/rep/EntityPlayer.html#maxfiredelay)|
