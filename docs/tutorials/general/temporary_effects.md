@@ -92,11 +92,18 @@ end
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.OnPeffectUpdate)
 ```
 
+It is worth noting that active items automatically add their TemporaryEffect to the player on use.
+
+Whenever a TemporaryEffect is added or removed by any means, it will trigger a [stat cache reevaluation](../basics/stats_cache.md) for any cache flags assigned to its item in `items.xml`.
+
 ### :modding-repentogon: REPENTOGON additions
 
 REPENTOGON adds [AddCollectibleEffect](https://repentogon.com/EntityPlayer.html#addcollectibleeffect), [AddNullItemEffect](https://repentogon.com/EntityPlayer.html#addnullitemeffect) and [AddTrinketEffect](https://repentogon.com/EntityPlayer.html#addtrinketeffect) directly to the EntityPlayer class as a shortcut for their respective functions under `TemporaryEffects`.
 
 It also adds the ability to access the `TemporaryEffects` object tied to rooms. It can be accessed through `Game():GetRoom():GetEffects()`.
+
+???- bug "Persistent TemporaryEffects bug"
+    Room's persistent TemporaryEffects are not properly stored upon quitting, and are thus lost after resuming a run.
 
 ## Utilizing TemporaryEffects
 
@@ -106,3 +113,14 @@ There are several ways to interact with TemporaryEffects using the various funct
 - `GetCollectibleEffectNum`, `GetTrinketEffectNum`, and `GetNullEffectNum` return an integer on how many stacks of the effect are active.
 - `RemoveCollectibleEffect`, `RemoveTrinketEffect`, and `RemoveNullEffect` will remove 1 or more of the specified effect. Inputting `-1` will remove all instances of the effect.
 - `GetCollectibleEffect`, `GetTrinketEffect`, and `GetNullEffect` are separate from their "Num" counterparts, returning a [TemporaryEffect](https://wofsauge.github.io/IsaacDocs/rep/TemporaryEffect.html) object. You can access three variables: `Cooldown`, `Count`, and `Item`. `Cooldown` returns an integer of the effect's cooldown (`0` if no cooldown is active), `Count` returns the same as `GetCollectibleEffectNum` and their other variants, and `Item` returns the `ItemConfigItem` object associated with the TemporaryEffect.
+
+### :modding-repentogon: REPENTOGON additions
+
+REPENTOGON adds callbacks that allow modders to easily detect whenever a TemporaryEffect is added/removed:
+
+- [MC_POST_PLAYER_ADD_EFFECT](https://repentogon.com/enums/ModCallbacks.html#mc_post_player_add_effect)
+- [MC_POST_ROOM_ADD_EFFECT](https://repentogon.com/enums/ModCallbacks.html#mc_post_room_add_effect)
+- [MC_POST_PLAYER_TRIGGER_EFFECT_REMOVED](https://repentogon.com/enums/ModCallbacks.html#mc_post_player_trigger_effect_removed)
+- [MC_POST_ROOM_TRIGGER_EFFECT_REMOVED](https://repentogon.com/enums/ModCallbacks.html#mc_post_room_trigger_effect_removed)
+
+REPENTOGON also allows [attaching stats to TemporaryEffects through `items.xml`](../repentogon/adding_stats.md#temporary-effects).
