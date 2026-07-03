@@ -92,9 +92,9 @@ end
 mod:AddCallback(ModCallbacks.MC_POST_PEFFECT_UPDATE, mod.OnPeffectUpdate)
 ```
 
-It is worth noting, that active items automatically add their TemporaryEffect to player on use.
+It is worth noting that active items automatically add their TemporaryEffect to the player on use.
 
-Whenever a TemporaryEffect is added or removed by any means, it will trigger [stat cache reevaluation](../basics/stats_cache.md) for any cache flags assigned to its item in items.xml.
+Whenever a TemporaryEffect is added or removed by any means, it will trigger a [stat cache reevaluation](../basics/stats_cache.md) for any cache flags assigned to its item in `items.xml`.
 
 ### :modding-repentogon: REPENTOGON additions
 
@@ -116,11 +116,11 @@ There are several ways to interact with TemporaryEffects using the various funct
 
 ### :modding-repentogon: REPENTOGON additions
 
-REPENTOGON adds callbacks that allow to easily detect whenever a TemporaryEffect is added/removed:
+REPENTOGON adds callbacks that allow modders to easily detect whenever a TemporaryEffect is added/removed:
 
 - [MC_POST_PLAYER_ADD_EFFECT](https://repentogon.com/enums/ModCallbacks.html#mc_post_player_add_effect)
 - [MC_POST_ROOM_ADD_EFFECT](https://repentogon.com/enums/ModCallbacks.html#mc_post_room_add_effect)
 - [MC_POST_PLAYER_TRIGGER_EFFECT_REMOVED](https://repentogon.com/enums/ModCallbacks.html#mc_post_player_trigger_effect_removed)
 - [MC_POST_ROOM_TRIGGER_EFFECT_REMOVED](https://repentogon.com/enums/ModCallbacks.html#mc_post_room_trigger_effect_removed)
 
-Another of REPENTOGON's features is ability to [attach stats to TemporaryEffects through items.xml](../repentogon/adding_stats.md#temporary-effects).
+REPENTOGON also allows [attaching stats to TemporaryEffects through `items.xml`](../repentogon/adding_stats.md#temporary-effects).
