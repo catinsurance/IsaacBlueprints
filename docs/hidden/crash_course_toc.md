@@ -20,7 +20,7 @@ search:
         3. [Creating enemies.](../tutorials/crash_course/enemies.md)
         4. [Creating a familiar.](../tutorials/crash_course/familiars.md)
     9. [Adding sounds.](../tutorials/crash_course/sound_effects.md)
-    10. Adding music.
+    10. [Adding music.](../tutorials/crash_course/music.md)
     11. Making pocket items.
         1. [Creating custom cards, runes, and objects.](../tutorials/crash_course/pocket_item_cards.md)
         2. [Creating custom pills.](../tutorials/crash_course/pocket_item_pills.md)
