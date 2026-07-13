@@ -62,19 +62,39 @@ Within a `sound` tag must be at least one `sample` tag, although there can be as
 ## Playing sounds with Lua
 To play sounds, you'll need to use the [`SFXManager`](https://wofsauge.github.io/IsaacDocs/rep/SFXManager.html) object, which you can instantiate with `SFXManager()`. Then use the [`Play`](https://wofsauge.github.io/IsaacDocs/rep/SFXManager.html#play) function.
 
-```lua
-local sfxManager = SFXManager()
+As a simple method of testing the sound, we'll be using [`Input.IsButtonTriggered`](https://wofsauge.github.io/IsaacDocs/rep/Input.html#isbuttontriggered) to detect a specific keyboard input.
 
-sfxManager:Play(SoundEffect.SOUND_1UP) -- Id of 1
+```lua
+local mod = RegisterMod("My Mod", 1)
+--You only need to call SFXManager() once
+local sfx = SFXManager()
+
+function mod:PlaySoundsOnHotkey()
+	--Detects if the T key is pressed, and will only trigger upon initially pressing the button.
+	if Input.IsButtonTriggered(Keyboard.KEY_T, 0) then
+		--Play the sound
+		sfx:Play(SoundEffect.SOUND_1UP) -- Id of 1
+	end
+end
+
+--Inputs are best detected at 60 FPS, so MC_POST_RENDER is used.
+mod:AddCallback(ModCallbacks.MC_POST_RENDER, mod.PlaySoundsOnHotkey)
 ```
 
 To play a custom sound, first get its id with [`Isaac.GetSoundIdByName`](https://wofsauge.github.io/IsaacDocs/rep/Isaac.html#getsoundidbyname).
 
 ```lua
-local sfxManager = SFXManager()
+local mod = RegisterMod("My Mod", 1)
+local sfx = SFXManager()
 local soundId = Isaac.GetSoundIdByName("New Sound")
 
-sfxManager:Play(soundId)
+function mod:PlaySoundsOnHotkey()
+	if Input.IsButtonTriggered(Keyboard.KEY_T, 0) then
+		sfx:Play(soundId)
+	end
+end
+
+mod:AddCallback(ModCallbacks.MC_POST_RENDER, mod.PlaySoundsOnHotkey)
 ```
 
 Lastly, you can use the optional arguments of `Play` for more control over how the sound is played. The arguments are in the following order:
@@ -87,11 +107,8 @@ Lastly, you can use the optional arguments of `Play` for more control over how t
 6. `float` **Pan:** A multiplier determining the pan of the sound, or how far to the left or right the sound plays in the player's speakers or headphones, with -1 being fully to the left and 1 being fully to the right. This is only respected when the `.wav` file played only has a single audio track (no non-mono audio files). Default is 0, which makes it play in the middle. 
 
 ```lua
-local sfxManager = SFXManager()
-local soundId = Isaac.GetSoundIdByName("New Sound")
-
 -- All of these are the default values besides the first argument.
-sfxManager:Play(
+sfx:Play(
     soundId, -- Sound id (required)
     1,       -- Volume
     2,       -- Frame delay
