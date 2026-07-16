@@ -19,7 +19,11 @@ This tutorial will extensively cover how to utilize the editor to create and mod
 
 ## Using the editor
 
-The animation editor is a program located in the `tools` folder in the game's directory. If you don't see this folder, **make sure you've extracted the game's resources** by following [this tutorial](./creating_a_mod.md) in the crash course. Within the `tools` folder, you'll see `IsaacAnimationEditor.exe`, which is the executable you'll need to launch.
+The animation editor is present within the game tools folder under `The Binding of Isaac Rebirth/tools/IsaacAnimationEditor/IsaacAnimationEditor.exe`:
+
+<p align="center">
+  <img src="../../assets/creating_a_mod/browse_local_files.png" alt="Animation editor file path" />
+</p>
 
 <p align="center">
   <img src="../../assets/animation_editor/editor_folder.jpg" alt="Animation editor file path" />
