@@ -26,5 +26,5 @@ search:
         2. [Creating custom pills.](../tutorials/crash_course/pocket_item_pills.md)
     12. [Creating challenges.](../tutorials/crash_course/challenges.md)
     13. [Structuring your mod.](../tutorials/crash_course/structuring_your_mod.md)
-    14. Conclusion.
+    14. [Resources.](../resources.md)
 <!-- end -->
