@@ -53,11 +53,14 @@ It is recommended to host the docs locally before creating a pull request with y
 1. Make sure you have Python downloaded. If on Windows, make sure it was added to PATH. Python does this automatically upon downloading it, as long as you ticked the box.
 2. Navigate to repository's directory on your PC with command prompt, and type the follow in order to automatically download all necessary packages.
 ```
-py -m pip install ./requirements.txt
+py -m pip install -r ./requirements.txt
 ```
-![Gif of installing python packages from the requirements.txt file](./tutorials/assets/contribution_guide/pip.gif)
-3. While still in the directory in command prompt, type `mkdocs serve` to host the site.
+3. While still in the directory in command prompt, type `properdocs serve` to host the site.
 4. Visit `localhost:8000` in your browser to see the site!
+
+<video controls autoplay loop muted>
+    <source src="../tutorials/assets/contribution_guide/setup.mp4" type="video/mp4">
+</video>
 
 
 ## Article guidelines
