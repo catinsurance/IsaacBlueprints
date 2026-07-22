@@ -4,8 +4,6 @@ search:
 ---
 <!-- start -->
 ???- info "Crash course table of contents"
-    The crash course is still a work in progress!
-
     1. Creating a mod.
         1. [Creating the mod.](../tutorials/crash_course/creating_a_mod.md)
         2. [Uploading a mod.](../tutorials/crash_course/uploading_a_mod.md)
