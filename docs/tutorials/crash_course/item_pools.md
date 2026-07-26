@@ -70,7 +70,7 @@ There is a pre-defined list of item pools you can add your items to. You cannot 
 	|batteryBum|Battery Bum Pool for all modes|
 	|momsChest|Mom's Chest Pool for the unique chest located in Home|
 	|greedTreasure|Treasure Room Pool for Greed/Greedier Mode|
-	|greedBoss|Boss Room Pool for Greed/Greedier Mode|
+	|greedBoss|Boss Room Pool for Greed/Greedier Mode, better known as the pool used for the Silver Treasure Room|
 	|greedShop|Shop Pool for Greed/Greedier Mode|
 	|greedCurse|Curse Room Pool for Greed/Greedier Mode|
 	|greedDevil|Devil Deal Pool for Greed/Greedier Mode|
