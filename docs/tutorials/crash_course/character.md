@@ -201,7 +201,7 @@ Inside `content/gfx`, when making a tainted character, you will need to copy and
 |Original ANM2 name|Tainted ANM2 name|
 |:--|:--|
 |charactermenu.anm2|charactermenualt.anm2|
-|characterportrait.anm2|characterportraitalt.anm2|
+|characterportraits.anm2|characterportraitsalt.anm2|
 |controls.anm2|controls alt.anm2|
 |coop menu.anm2|coop menu alt.anm2|
 |death screen.anm2|death screen alt.anm2|
