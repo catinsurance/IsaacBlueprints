@@ -12,7 +12,6 @@ tags:
     - REPENTOGON
 ---
 
-{% include-markdown "hidden/unfinished_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 {% include-markdown "hidden/repentogon_notice.md" start="<!-- start -->" end="<!-- end -->" %}
 
 Adding stats to the player within the vanilla API has been restricted to a single method: `MC_EVALUATE_CACHE`. This tutorial will cover the expanded accessibility to adding and adjusting stats on the player.
