@@ -77,7 +77,7 @@ Creating a challenge requires a [challenges.xml](https://wofsauge.github.io/Isaa
 This creates a new challenge called "My challenge" in the custom challenges tab, which ends after Mom's heart/It Lives. The player starts with Breakfast, Dead Cat and Little Steven, but cant shoot. Treasure rooms and Curse of Darkness are disabled.
 ```XML
 <challenges version="1">
-    <challenge playertype="0" name="My challenge" endstage="8" startingitems="25,81,100" roomfilter="1" cursefilter="1" canshoot="false" />
+    <challenge playertype="0" name="My new challenge" endstage="8" startingitems="25,81,100" roomfilter="1" cursefilter="1" canshoot="false" />
 </challenges>
 ```
 
@@ -109,13 +109,13 @@ mod:AddCallback(ModCallbacks.MC_POST_GAME_STARTED, mod.OnGameStart)
 You may want to include modded content in your challenge on the player when they first spawn in your challenge. You will need to account for multiple players, doing it only when starting the challenge as opposed to continuing it, and potentially running this code again when using the Genesis collectible.
 
 ### Non-REPENTOGON
-Without REPENTOGON, special checks will need to be implemeneted. The following criteria must be met so that this will only trigger **once** per player when appropriate.
+Without REPENTOGON, you can actually get away with performing certain functions on [MC_POST_PLAYER_INIT](https://wofsauge.github.io/IsaacDocs/rep/enums/ModCallbacks.html#mc_post_player_init) that will run on Run Start/Genesis but not on continue. You can view this list by clicking on the callback link. In this case, all you need to do is check for your challenge as seen in the previous snippet. However, if your challenge requires running a function that is not listed, such as changing into a modded character, special checks will need to be implemeneted. The following criteria must be met so that this will only trigger **once** per player when appropriate.
 
-1. The room has only been visited once. Checked with [Room:IsFirstVisit](https://wofsauge.github.io/IsaacDocs/rep/Room.html#isfirstvisit).
-2. The current floor is the very first floor. Can check [Level:GetStage](https://wofsauge.github.io/IsaacDocs/rep/Level.html#getstage) against [LevelStage](https://wofsauge.github.io/IsaacDocs/rep/enums/LevelStage.html).
-3. The player is inside the starting room. Can check  [Level:GetCurrentRoomIndex](https://wofsauge.github.io/IsaacDocs/rep/Level.html#getcurrentroomindex) against [Level:GetStartingRoomIndex](https://wofsauge.github.io/IsaacDocs/rep/Level.html#getstartingroomindex).
-
-It is also important to note that some things may need to be reapplied when using Genesis, such as re-adding items that were removed from the player. This can be a separate check to enact different behavior.
+1. For the first player only, check that [Game:GetFrameCount](https://wofsauge.github.io/IsaacDocs/rep/Game.html#getframecount) is equal to 0, as stage checks will fail otherwise. The proceeding checks are for
+2. The room has only been visited once. Checked with [Room:IsFirstVisit](https://wofsauge.github.io/IsaacDocs/rep/Room.html#isfirstvisit).
+3. The current floor is the very first floor. Can check [Level:GetStage](https://wofsauge.github.io/IsaacDocs/rep/Level.html#getstage) against [LevelStage.STAGE1_1](https://wofsauge.github.io/IsaacDocs/rep/enums/LevelStage.html).
+4. The player is inside the starting room. Can check [Level:GetCurrentRoomIndex](https://wofsauge.github.io/IsaacDocs/rep/Level.html#getcurrentroomindex) against [Level:GetStartingRoomIndex](https://wofsauge.github.io/IsaacDocs/rep/Level.html#getstartingroomindex).
+5. If the starting room and floor checks fail, see if the player is inside the Genesis room. Can check Level:GetCurrentRoomIndex against [GridRooms.ROOM_GENESIS_IDX](https://wofsauge.github.io/IsaacDocs/rep/enums/GridRooms.html)
 
 This snippet of code will transform the current character into a new custom character "[Gabriel](character.md)" with a new item "[Damage Potion](passive_item.md)".
 ```Lua
@@ -136,19 +136,24 @@ function mod:OnPlayerInit(player)
 	local inGenesisRoom = curIndex == GridRooms.ROOM_GENESIS_IDX
 
 	if challenge == MY_CHALLENGE
-		--First visit to the room
-		and room:IsFirstVisit()
 		and (
-			--Is the player in Floor 1, and they're in the starting room?
-			(level:GetStage() == LevelStage.STAGE1_1 and curIndex == level:GetStartingRoomIndex())
-			--Or did the player enter the Genesis room?
-			or inGenesisRoom
+			--Acceptable check for first player init. Other checks are for co-op/Genesis.
+			game:GetFrameCount() == 0
+			--First visit to the room
+			or room:IsFirstVisit()
+			and (
+				--Is the player in Floor 1, and they're in the starting room?
+				(level:GetStage() == LevelStage.STAGE1_1 and curIndex == level:GetStartingRoomIndex())
+				--Or did the player enter the Genesis room?
+				or inGenesisRoom
+			)
 		)
 	then
 		--Genesis' default behavior does not enforce the starting character
 		if not inGenesisRoom then
 			player:ChangePlayerType(PLAYER_GABRIEL)
 		end
+		--Is added here just to be paired with ChangePlayerType. You can get away with ONLY checking the challenge if you're only adding items or some other specific player functions!
 		player:AddCollectible(DAMAGE_POTION)
 	end
 end
@@ -181,7 +186,7 @@ function mod:OnPlayerInit(player)
 	if challenge == MY_CHALLENGE then
 		local room = game:GetRoom()
 		local pos = room:FindFreePickupSpawnPosition(player.Position, 40)
-		Isaac.Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, HeartSubType.HEART_FULL, pos, Vector.Zero, player)
+		game:Spawn(EntityType.ENTITY_PICKUP, PickupVariant.PICKUP_HEART, pos, Vector.Zero, player, HeartSubType.HEART_FULL, math.max(1, Random()))
 	end
 end
 
