@@ -47,14 +47,8 @@ Once opened, the window should look something like this:
 Its possible when opening the editor for the first time that some specific windows may be missing, caused by an abnormality of the sizes of the windows inside the editor. To fix this, follow the steps below:
 
 1. Go to the `Window` tab at the top of the editor and click `Allow Undock`.<p align="center"><img src="../../assets/animation_editor/window_undocking_1.jpg" alt="The Entity Palette" /></p>
-2. Resize the editor window so that there is space outside of the window. Click on the grey dotted header on any of the windows inside the editor and drag it outside of the editor.
-![Move the window out](../assets/animation_editor/window_undocking_2.gif)
-3. Repeat this for every window until only one remains inside the editor. Now, drag the windows back in. There are small previews that show how the window will be placed back into the editor, however it can be finnicky to get the exact desired result. If the preview or result doesn't look as desired, simply drag the window back out and try again. The layout displayed below is one way you can reorganize the editor's windows, however you are free to customize the placement however you wish.
-![Move windows back in](../assets/animation_editor/window_undocking_3.gif)
-4. The windows will automatically resize themselves and other windows when placed back in the editor to have an evenly distributed size. To fix this, hold your mouse cursor between two windows; it will turn into a two-sided arrow. Click and drag with the mouse to resize the windows.
-![Resize windows](../assets/animation_editor/window_undocking_4.gif)
-
-If you ever accidentally hit "X" on any windows, it can be brought back by selecting the same `Window` tab as before and selecting the appropriate window to restore.
+2. Select the top of any of the animation windows (the grey line with a dotted pattern) and move it anywhere within the editor window. This will cause all animation windows in the same row to be evenly sized to fit within the editor window. By extension, this will also reveal any other windows that might've been outside the dimensions of the animation window.
+3. Reposition and resize the windows however you like. You can follow the base layout of the editor seen above, or some other way better works for you.
 
 ## Create or load an ANM2 file
 
@@ -146,6 +140,11 @@ There are four types of animation layers: **<span style="color: #FFFE96;">Sprite
 - The **<span style="color: #FF96D4;">Triggers</span>** layer is responsible for inserting **Events**. Frame duration is restricted to one frame and has no other properties that can be edited other than what Event is assigned to the frame. Used for detecting when to trigger a specific event using [Sprite:IsEventTriggered](https://wofsauge.github.io/IsaacDocs/rep/Sprite.html#iseventtriggered) or [Sprite:WasEventTriggered](https://wofsauge.github.io/IsaacDocs/rep/Sprite.html#waseventtriggered), such as when to play Isaac's death sound effect.
 - The **<span style="color: #B8B8C4;">Timeline</span>** displays frame numbers and holds the Timeline Marker. Animations always start at frame **0**, and each frame is marked with an indent, with every **5** frames being additionally marked with its frame number.
 - The **<span style="color: #64C896;">Timeline Marker</span>** represents which frame is being previewed on the Animation Preview. It can be held and dragged with the mouse to scroll through the animation's frames.
+
+???+ note "Root frames"
+	Root frames will only affect frames immediately below and ahead of it. If a root frame extends past the last frame of any other layer, then it will *not* apply its transformations to that layer past that last frame. The Animation Previewer will erroneously show otherwise, so keep this in mind when working with root frames.
+
+	![Root frame example](../assets/animation_editor/root_frames.png)
 
 Double-click a layer to edit its properties. Click the eye on a layer to hide it, which will affect its visibility in-game.
 
