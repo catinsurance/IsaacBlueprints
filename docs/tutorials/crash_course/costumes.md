@@ -35,7 +35,7 @@ All of the game's costumes work via **layers**. A costume can occupy one or more
 ???- info "Layer render priority"
 	| Layer name | Description |
 	|:--|:--|
-	|glow|Rendered behind the head. Used for glowing auras, such as with items like Mysterious Liquid|
+	|glow|Rendered behind the body. Used for glowing auras, such as with items like Mysterious Liquid|
 	|body|Directly replaces Isaac's body|
 	|body0|Rendered over the body|
 	|body1|Rendered over the body|
