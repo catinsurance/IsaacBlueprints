@@ -304,7 +304,7 @@ Firstly, you must choose which layer to add your orbital to. This affects its di
 	|5|[Big Fan](https://bindingofisaacrebirth.wiki.gg/wiki/Big_Fan), [Bloodshot Eye](https://bindingofisaacrebirth.wiki.gg/wiki/Bloodshot_Eye), [Guillotine](https://bindingofisaacrebirth.wiki.gg/wiki/Guillotine), [Leprosy](https://bindingofisaacrebirth.wiki.gg/wiki/Leprosy), [Mom's Razor](https://bindingofisaacrebirth.wiki.gg/wiki/Mom%27s_Razor), [Book of the Dead's bone orbitals](https://bindingofisaacrebirth.wiki.gg/wiki/Book_of_the_Dead)|0.045|X: 35, Y: 30|
 	|6|[Psy Fly](https://bindingofisaacrebirth.wiki.gg/wiki/Psy_Fly), [Tinytoma](https://bindingofisaacrebirth.wiki.gg/wiki/Tinytoma)|0.029|X: 50, Y: 42|
 	|7|[Lemegeton Wisps](https://bindingofisaacrebirth.wiki.gg/wiki/Lemegeton) (Layer 1)|0.039|X: 28, Y: 21|
-	|8|[Lemegeton Wisps](https://bindingofisaacrebirth.wiki.gg/wiki/Lemegeton) (Layer 2)|-0.029|c|
+	|8|[Lemegeton Wisps](https://bindingofisaacrebirth.wiki.gg/wiki/Lemegeton) (Layer 2)|-0.029|X: 40, Y: 30|
 	|9|[Lemegeton Wisps](https://bindingofisaacrebirth.wiki.gg/wiki/Lemegeton) (Layer 3)|0.019|X: 64, Y: 50|
 	|10|[Swarm Fly](https://bindingofisaacrebirth.wiki.gg/wiki/The_Swarm)|0.019|X: 40, Y: 36|
 
