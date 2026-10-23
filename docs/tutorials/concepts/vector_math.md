@@ -142,13 +142,15 @@ local v3 = lerp(v1, v2, 0.5) -- v3 equals Vector(0.5, 0.5), while v1 and v2 are 
 
 ### Dot product
 
-The dot product between two vectors can be explained as the amount that the first vector is pointing in the same direction as the second vector. This is represented as a number between -1 and 1, with -1 meaning they're facing completely opposite directions, and 1 meaning they're facing the same direction.
+The dot product represents the projection of one vector onto another as a scalar, which is just a number. A projection is how far one vector goes in the direction of another.
+
+The dot product of two unit vectors can be used to tell how far one vector is pointing in the direction of the other. This will be returned as a number between -1 and 1, where -1 means they're pointing in opposite directions.
+
+
 ```lua
-local v1 = Vector(1, 0)
-local v2 = Vector(0, 1)
+local v1 = Vector(-1, 0)
+local v2 = Vector(1, 0)
 
 local dotProduct = v1:Dot(v2)
-print(dotProduct) -- This returns
+print(dotProduct) -- This returns -1
 ```
-
-![Dot product of a 90 degree angle is 0](../assets/vector_math/dot.png)
