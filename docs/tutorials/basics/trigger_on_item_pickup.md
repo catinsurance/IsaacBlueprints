@@ -110,6 +110,7 @@ function mod:OnPeffectUpdate(player)
 	if heldItem
 		and heldItem.ID == MY_ITEM
 		and heldItem:IsCollectible()
+		and not heldItem.Touched
 		and not data.QueueMyItemPickup
 	then
 		data.QueueMyItemPickup = numItem
